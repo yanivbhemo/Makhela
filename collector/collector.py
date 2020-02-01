@@ -18,7 +18,7 @@ from pprint import pprint
 
 ## DB Connection ##
 ###DONT FORGET TO REMOVE PASSWORD###
-client = pymongo.MongoClient("mongodb+srv://yaniv:120120@makhela-qvsh8.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://yaniv:<password>@makhela-qvsh8.mongodb.net/test?retryWrites=true&w=majority")
 db = client.search_stock
 
 
@@ -26,10 +26,10 @@ db = client.search_stock
 
 
 ## Twitter connection ##
-consumer_key = "47CFKoeTZrRdgQHY0ekYssOW4"
-consumer_secret = "MCJzt3WFJ1pWBiU0Ig2cjHz0KHkNZjK1bMi1kTrj3CoF3SGORa"
-access_token = "1129677660274286592-LL8fR1X9a94AGOY6FOQwwFFI6oTPie"
-access_token_secret = "kYg9f68bQgBJnctrymcQQcDE282wvPn0EBEWH5DDzZNvN"
+consumer_key = 
+consumer_secret = 
+access_token = 
+access_token_secret = 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
