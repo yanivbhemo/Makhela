@@ -1,1 +1,5 @@
-yaniv:Azaz123123
+db_user:yaniv:Azaz123123
+twitter:consumer_key:47CFKoeTZrRdgQHY0ekYssOW4
+twitter:consumer_secret:MCJzt3WFJ1pWBiU0Ig2cjHz0KHkNZjK1bMi1kTrj3CoF3SGORa
+twitter:access_token:1129677660274286592-CUNgzmnUId3Yyj4QigiFt2RUTmZoIY
+twitter:access_token_secret:qrK0HoInYDT9l3u6Ad6ciLDaLX2tI4o2Bv8jSVhwaXDuo

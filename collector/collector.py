@@ -1,100 +1,45 @@
-from pymongo import MongoClient
 import csv
+from pymongo import MongoClient
 
-def Connect_To_db():
-    # connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
-    client = MongoClient(
-        "mongodb+srv://" + username + ":" + password + "@makhela-qvsh8.mongodb.net/Makhela?retryWrites=true&w=majority")
-    db = client.Makhela
-    return db
 
-def init():
-    db = Connect_To_db()
-    #Checks if the collection is empty
-    if(db.opinion_leaders.count_documents({})==0):
-        init_opinion_leaders_names={
-            "Ariane M. Tabatabai",
-            "Suzanne Maloney",
-            "Mehdi Khalaji",
-            "Alireza Nader",
-            "Dalia Dassa Kaye",
-            "Karim Sadjadpour",
-            "Richard (Dick) Sokolsky",
-            "George Perkovich",
-            "Mark Hibbs",
-            "Suzanne DiMaggio",
-            "Mark Dubowitz",
-            "Reuel Mark Gerecht",
-            "Richard Goldberg",
-            "Olli Heinonen",
-            "Pierre Goldschmidt",
-            "David Albright",
-            "Emanuele Ottolenghi",
-            "Juan Zarate",
-            "David Albright",
-            "Robert Einhorn",
-            "Djavad Salehi-Isfahani",
-            "Norman T. Roule",
-            "Dennis B. Ross",
-            "Colin Kahl",
-            "Jon B. Wolfstahl",
-            "Gary Samore",
-            "Jeffrey Lewis",
-            "Ray Takeyh",
-            "Vali Nasr",
-            "Graham Allison",
-            "Michael Eisenstadt",
-            "Barbara A. Leaf",
-            "Patrick Clawson",
-            "Anthony Cordesman",
-            "Barbara Slavin",
-            "Trita Parsi",
-            "Mohammad Ali Shabani",
-            "Ellie Geranmayeh ",
-            "Esfandyar Batmanghelidj",
-            "Ali Vaez",
-            "Shahram Chubin",
-            "Michael Eisenstadt",
-            "Ali Alfoneh",
-            "Matthew Kroenig",
-            "Barbara Slavin",
-            "Holly Dagres",
-            "Jerrold D. Green",
-            "John Calabrese",
-            "William Yong",
-            "Ahmad Majidyar",
-            "Afshon Ostovar",
-            "Mark Fitzpatrick",
-            "Kenneth M. Pollack",
-            "Michael Elleman",
-            "Raz  Zimmt",
-            "Tal Inbar",
-            "Uzi Rubin",
-            "Sima Schein",
-            "Amos Yadlin",
-            "Emily Landau",
-            "Ephraim Asculai",
-            "Ariel (Eli) Levite",
-            "Yaniv Ben Hamo"
-        }
-        for leader in init_opinion_leaders_names:
-            print("Handling: " + leader)
-            record = {
-                "full_name": leader
-            }
-            # Checks if the leader already exist, if not add him/her
-            result = db.opinion_leaders.find_one(record)
-            if(result==None):
-                result = db.opinion_leaders.insert_one(record)
-                print('Record {0} created'.format(result.inserted_id))
+class Collector:
+    info_source = "Twitter"
+    leaders = []
+    keywords = []
+    db = ""
+    source_handler = ""
 
-###################################################################################
-# get user creds from config file
-with open(".config.txt", newline='') as config_file:
-    users_list = csv.reader(config_file, delimiter=':')
-    for user in users_list:
-        username = user[0]
-        password = user[1]
-        break
-init()
-exit(0)
+    def __init__(self, source):
+        self.db = self.connect_collector_to_db()
+        for leader in self.db.opinion_leaders.find():
+            self.leaders.append(leader['full_name'])
+        for keyword in self.db.keywords.find():
+            self.keywords.append(keyword['word'])
+        self.source_handler = source
+        print("- Collector created")
+
+    @staticmethod
+    def connect_collector_to_db():
+        # get user creds from config file
+        with open(".config.txt", newline='') as config_file:
+            config_list = csv.reader(config_file, delimiter=':')
+            for row in config_list:
+                if (row[0] == "db_user"):
+                    db_username = row[1]
+                    db_password = row[2]
+                    break
+        client = MongoClient(
+            "mongodb+srv://" + db_username + ":" + db_password + "@makhela-qvsh8.mongodb.net/Makhela?retryWrites=true&w=majority")
+        return client.Makhela
+
+    def refresh_collector_input(self):
+        leaders_new = []
+        keywords_new = []
+        for leader in self.db.opinion_leaders.find():
+            leaders_new.append(leader['full_name'])
+        for keyword in self.db.keywords.find():
+            keywords_new.append(keyword['word'])
+        self.leaders = leaders_new
+        self.keywords = keywords_new
+        print("- Collector refreshed input data")
+        print(self.leaders)
