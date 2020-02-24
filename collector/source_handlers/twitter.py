@@ -3,11 +3,13 @@ import tweepy
 import os.path
 
 
+
 class Twitter_handler:
     consumer_key = ""
     consumer_secret = ""
     access_token = ""
     access_token_secret = ""
+    api = ""
 
     def __init__(self):
         self.insert_creds()
@@ -31,3 +33,14 @@ class Twitter_handler:
     def auth_with_twitter(self):
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_token_secret)
+        self.api = tweepy.API(auth)
+
+    def search_twitter_name(self, name):
+        try:
+            result = self.api.search_users(q=name, count=2)
+        except tweepy.TweepError as e:
+            pprint(e)
+        if(len(result) > 1):
+            return False
+        else:
+            return result
