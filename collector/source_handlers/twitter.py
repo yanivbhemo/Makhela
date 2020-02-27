@@ -1,7 +1,7 @@
 import csv
 import tweepy
 import os.path
-
+from pprint import pprint
 
 
 class Twitter_handler:
@@ -37,10 +37,11 @@ class Twitter_handler:
 
     def search_twitter_name(self, name):
         try:
-            result = self.api.search_users(q=name, count=2)
+
+            result = self.api.search_users(q=name)
+            pprint(result)
+            exit(1)
+            return result
         except tweepy.TweepError as e:
             pprint(e)
-        if(len(result) > 1):
             return False
-        else:
-            return result
