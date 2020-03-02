@@ -5,6 +5,7 @@ from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
 
+
 class Twitter_handler:
     consumer_key = ""
     consumer_secret = ""
@@ -38,7 +39,7 @@ class Twitter_handler:
 
     def search_twitter_name(self, name):
         try:
-            filtered_name = name.split(' ')[0] + " " + name.split(' ')[len(name.split(' '))-1]
+            filtered_name = name.split(' ')[0] + " " + name.split(' ')[len(name.split(' ')) - 1]
             result = self.api.search_users(q=filtered_name)
             if len(result) == 0:
                 url = "https://twitter.com/search?q=" + name.split(' ')[0] + "%20" + name.split(' ')[
@@ -79,3 +80,7 @@ class Twitter_handler:
         for item in soup.find_all('div', class_='ProfileCard-actions'):
             list = str(item.get_text()).replace('\n', '').split(' ')
             return self.api.search_users(q=list[len(list) - 1])
+
+    def get_tweets(self, user_id):
+        result = self.api.user_timeline(id=user_id, tweet_mode="extended", count=2)
+        return result

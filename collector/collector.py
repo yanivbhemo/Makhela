@@ -19,8 +19,6 @@ class Collector:
             self.keywords.append(keyword['word'].lower())
         self.source_handler = source
         print("- Collector created")
-        print("- Start collecting")
-        self.collect()
 
     @staticmethod
     def connect_collector_to_db():
@@ -49,18 +47,19 @@ class Collector:
         print(self.leaders)
 
     def collect(self):
+        print("- Start collecting")
         for leader in self.db.opinion_leaders.find():
             print("\n- Handles: {0}".format(leader['full_name']))
-            try:
-                if (leader['new_leader'] == False):
-                    print("- Not a new leader, continue")
+            if leader['new_leader'] == False:
+                print("- Not a new leader")
+                if leader['level_of_certainty'] > 0:
+                    print("- Continue to collect only posts/tweets")
+                    self.collect_and_save_tweets(leader['_id'], leader['twitter_id'])
                 else:
-                    print("- New leader. Collecting init details")
-                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
-            except:
+                    print("- Low level of certainty. Continue to next leader")
+            else:
                 print("- New leader. Collecting init details")
                 self.collect_leader_init_details(leader['_id'], leader['full_name'])
-        exit(-1)
 
     def collect_leader_init_details(self, leader_db_id, leader_fullName):
         leader_info = self.source_handler.search_twitter_name(leader_fullName)
@@ -89,7 +88,8 @@ class Collector:
                         'twitter_statuses_count': leader_twitter_statuses_count,
                         'new_leader': new_leader,
                         'level_of_certainty': 10,
-                        'twitter_profile_image': leader_twitter_profile_image_url
+                        'twitter_profile_image': leader_twitter_profile_image_url,
+                        'posts': ''
                     }
                 }
                 self.db.opinion_leaders.update_one({'_id': leader_db_id}, query)
@@ -108,6 +108,13 @@ class Collector:
             required_id = self.resolve_search_leader_multiple_results(leader_info, leader_fullName)
             if required_id[0]['id'] == 0:
                 print("- Issue found while resolving the conflict. error 100")
+                query = {
+                    '$set': {
+                        'level_of_certainty': 0,
+                        'new_leader': False,
+                    }
+                }
+                self.db.opinion_leaders.update_one({'_id': leader_db_id}, query)
             else:
                 for details in leader_info:
                     if details.id == required_id[0]["id"]:
@@ -134,7 +141,8 @@ class Collector:
                                 'twitter_statuses_count': leader_twitter_statuses_count,
                                 'new_leader': new_leader,
                                 'level_of_certainty': level_of_certainty,
-                                'twitter_profile_image': leader_twitter_profile_image_url
+                                'twitter_profile_image': leader_twitter_profile_image_url,
+                                'posts': ''
                             }
                         }
                         self.db.opinion_leaders.update_one({'_id': leader_db_id}, query)
@@ -162,3 +170,47 @@ class Collector:
                 max_level = id["level_of_certainty"]
                 returned_id = id
         return returned_id
+
+    def collect_and_save_tweets(self, leader_db_id, leader_twitter_id):
+        result = self.source_handler.get_tweets(leader_twitter_id)
+        for post in result:
+            post_date = post.created_at
+            post_id = post.id
+            if not self.check_if_post_exists_in_db(leader_db_id, post_id):
+                post_text = post.full_text
+                if post_text[0] + post_text[1] == "RT":
+                    """ Handles retweets """
+                    print("retweet")
+                else:
+                    """ Handles regular tweet """
+                    query = {
+                        '$push': {
+                            "posts": {
+                                "post": {
+                                    "date": post_date,
+                                    "post_id": post_id,
+                                    "text": post_text
+                                }
+                            }
+                        }
+                    }
+                    self.db.opinion_leaders.update_one({'_id': leader_db_id}, query)
+            else:
+                print("- Post already exist. ignore")
+        exit(2)
+
+    def check_if_post_exists_in_db(self, leader_id, tweet_id):
+        #leader = self.db.opinion_leaders.find({'_id': leader_id})
+        #result = self.db.opinion_leaders.find({"_id": leader_id, "posts.post": {"$exists": True}}).limit(1)
+        result = self.db.opinion_leaders.find({"_id": leader_id, "posts": {"$exists": {"post": {"$exists": True}}}})
+        if result.count() == 0:
+            return False
+        else:
+            """ Check within this leader document if post exist """
+            leader = self.db.opinion_leaders.find({"_id": leader_id}).limit(1)
+            for item in leader:
+                for post in item['posts']:
+                    print(post)
+                # if item["post_id"] == tweet_id:
+                #     return True
+            return False
