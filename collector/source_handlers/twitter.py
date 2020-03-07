@@ -82,5 +82,5 @@ class Twitter_handler:
             return self.api.search_users(q=list[len(list) - 1])
 
     def get_tweets(self, user_id):
-        result = self.api.user_timeline(id=user_id, tweet_mode="extended", count=2)
+        result = self.api.user_timeline(id=user_id, tweet_mode="extended")
         return result
