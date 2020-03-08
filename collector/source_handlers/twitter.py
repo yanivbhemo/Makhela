@@ -84,3 +84,6 @@ class Twitter_handler:
     def get_tweets(self, user_id):
         result = self.api.user_timeline(id=user_id, tweet_mode="extended")
         return result
+
+    def get_specific_tweet(self, status_id):
+        return self.api.get_status(id=status_id)

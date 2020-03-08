@@ -1,5 +1,6 @@
 import csv
 from pymongo import MongoClient
+import os.path
 
 
 class DataBaseHandler:
@@ -22,7 +23,7 @@ class DataBaseHandler:
 
     def insert_creds(self):
         # get user creds from config file
-        with open(".config.txt", newline='') as config_file:
+        with open(os.path.dirname(__file__) + "/../.config.txt", newline='') as config_file:
             config_list = csv.reader(config_file, delimiter=':')
             for row in config_list:
                 if (row[0] == "db_user"):
@@ -81,6 +82,25 @@ class DataBaseHandler:
             "text": post_text,
             "retweet_count": retweet_count,
             "likes": likes
+        }
+        col = self.db[collection]
+        col.insert_one(query)
+
+    def insert_postV2(self, collection, leader_twitter_id, post_id, full_text, date_created, in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id):
+        query = {
+            "leader_twitter_id": leader_twitter_id,
+            "post_id": post_id,
+            "full_text": full_text,
+            "date_created": date_created,
+            "in_reply_to_status_id": in_reply_to_status_id,
+            "in_reply_to_status_text": in_reply_to_status_text,
+            "in_reply_to_status_user_id": in_reply_to_status_user_id,
+            "quoted_status_id": quoted_status_id,
+            "quoted_status_text": quoted_status_text,
+            "quoted_status_user_id": quoted_status_user_id,
+            "retweeted_status_id": retweeted_status_id,
+            "retweeted_status_text": retweeted_status_text,
+            "retweeted_status_user_id": retweeted_status_user_id
         }
         col = self.db[collection]
         col.insert_one(query)
