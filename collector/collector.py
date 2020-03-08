@@ -42,7 +42,7 @@ class Collector:
                 print("- Not a new leader")
                 if leader['level_of_certainty'] > 0:
                     print("- Continue to collect only posts/tweets")
-                    self.collect_and_save_tweetsV2(leader['_id'], leader['twitter_id'])
+                    self.collect_and_save_tweets(leader['twitter_id'])
                 else:
                     print("- Low level of certainty. Continue to next leader")
             else:
@@ -112,38 +112,7 @@ class Collector:
                 returned_id = id
         return returned_id
 
-    def collect_and_save_tweets(self, leader_db_id, leader_twitter_id):
-        result = self.source_handler.get_tweets(leader_twitter_id)
-
-        for post in result:
-            post_date = post.created_at
-            post_id = post.id
-            print(post)
-            print(post.full_text)
-            if not self.check_if_post_exists_in_db(leader_db_id, post_id):
-                post_text = post.full_text
-                if post_text[0] + post_text[1] == "RT":
-                    """ Handles retweets with RT in the beginning """
-                    post_text = post_text[0:post_text.find(':') + 2]
-                    post_text += post.retweeted_status.full_text
-                    self.db.insert_post("posts", leader_twitter_id, post_date, post_id, post_text, post.retweet_count,
-                                        post.retweeted_status.favorite_count)
-                else:
-                    try:
-                        quoted_status_id = post.quoted_status_id
-                        print(quoted_status_id)
-                    except:
-                        """ If not quoted """
-                        print("test")
-                """ Handles regular tweet """
-                self.db.insert_post("posts", leader_twitter_id, post_date, post_id, post_text, post.retweet_count,
-                                    post.favorite_count)
-
-            else:
-                print("- Post " + str(post_id) + " already exist. ignore")
-        exit(2)
-
-    def collect_and_save_tweetsV2(self, leader_db_id, leader_twitter_id):
+    def collect_and_save_tweets(self, leader_twitter_id):
         print("- Collecting posts")
         results = self.source_handler.get_tweets(leader_twitter_id)
         for post in results:
@@ -169,8 +138,13 @@ class Collector:
 
                 try:
                     quoted_status_id = post.quoted_status_id
-                    quoted_status_text = post.quoted_status.full_text
-                    quoted_status_user_id = post.quoted_status.user.screen_name
+                    if post_text[0:2] == "RT":
+                        tweet = self.source_handler.get_specific_tweet(quoted_status_id)
+                        quoted_status_text = tweet.text
+                        quoted_status_user_id = tweet.screen_name
+                    else:
+                        quoted_status_text = post.quoted_status.full_text
+                        quoted_status_user_id = post.quoted_status.user.screen_name
                 except Exception as e:
                     pass
 
@@ -184,6 +158,7 @@ class Collector:
                     pass
                 self.db.insert_postV2("posts", leader_twitter_id, post_id, post_text, date_created, in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id)
                 print("- New post found and collected")
+            exit(1)
 
     def check_if_post_exists_in_db(self, tweet_id):
         query = {"post_id": tweet_id}
