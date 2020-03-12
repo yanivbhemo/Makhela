@@ -59,6 +59,7 @@ class DataBaseHandler:
                 'new_leader': new_leader,
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
+                'lock': False
             }
         }
         col = self.db[collection]
@@ -70,6 +71,7 @@ class DataBaseHandler:
             '$set': {
                 'level_of_certainty': 0,
                 'new_leader': False,
+                'lock': False
             }
         }
         col.update_one({'_id': id_to_update}, query)
@@ -104,3 +106,31 @@ class DataBaseHandler:
         }
         col = self.db[collection]
         col.insert_one(query)
+
+    def insert_connections(self, collection, leader_twitter_id, connection_arr):
+        col = self.db[collection]
+        query = {
+            '$set': {
+                'community_following': connection_arr
+            }
+        }
+        col.update_one({'twitter_id': leader_twitter_id}, query)
+
+    def lock_opinion_leader(self, leader_db_id):
+        query = {
+            '$set': {
+                'lock': True
+            }
+        }
+        self.db['opinion_leaders'].update_one({'_id': leader_db_id}, query)
+
+    def unlock_opinion_leader(self, leader_db_id):
+        query = {
+            '$set': {
+                'lock': False
+            }
+        }
+        self.db['opinion_leaders'].update_one({'_id': leader_db_id}, query)
+
+    def unlock_all_opinion_leaders(self):
+        self.db['opinion_leaders'].update_many({}, {'$set': {'lock': False}})

@@ -1,9 +1,11 @@
 import csv
+import time
 import tweepy
 import os.path
 from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
+import logger
 
 
 class Twitter_handler:
@@ -87,3 +89,13 @@ class Twitter_handler:
 
     def get_specific_tweet(self, status_id):
         return self.api.get_status(id=status_id)
+
+    def get_following_list(self, status_id):
+        try:
+            result = self.api.friends_ids(id=status_id)
+            return result
+        except tweepy.RateLimitError as e:
+            logger.send_message_to_slack("- Rate limit. sleep for 15 minutes")
+            logger.send_message_to_slack("- Twitter Error: \n" + str(e))
+            time.sleep(15 * 60)
+            return self.get_following_list(status_id)
