@@ -1,6 +1,4 @@
 import datetime
-import time
-import concurrent.futures
 from source_handlers import twitter
 import collector as clt
 from db_handlers import mongodb
@@ -17,5 +15,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    logger.send_message_to_slack("test")
     exit(0)
