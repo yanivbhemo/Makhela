@@ -20,6 +20,7 @@ class DataBaseHandler:
         except:
             print("- Error: can't connect to the DB (error 101)")
             self.db = False
+            exit(101)
 
     def insert_creds(self):
         # get user creds from config file

@@ -10,11 +10,10 @@ def main():
     db_handler = mongodb.DataBaseHandler()
     logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle started")
     collector = clt.Collector(twitter_handler, db_handler)
-    collector.collect()
+    #collector.collect()
     logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle finished")
 
 
 if __name__ == "__main__":
-    #main()
-    logger.send_message_to_slack("test")
+    main()
     exit(0)
