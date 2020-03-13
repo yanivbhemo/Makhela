@@ -5,3 +5,4 @@ desktop.ini
 .config
 .idea/
 .config.txt
+__pycache__/
