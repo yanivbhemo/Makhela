@@ -1,5 +1,6 @@
 import datetime
-import thread
+import time
+import concurrent.futures
 from source_handlers import twitter
 import collector as clt
 from db_handlers import mongodb
@@ -14,6 +15,7 @@ def main():
     collector.collect()
     logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle finished")
 
+
 if __name__ == "__main__":
-    #main()
+    main()
     exit(0)

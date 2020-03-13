@@ -52,6 +52,8 @@ class Collector:
                     print("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
                 self.db.unlock_opinion_leader(leader['_id'])
+            else:
+                print("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
 
     def collect_leader_init_details(self, leader_db_id, leader_fullName):
         leader_info = self.source_handler.search_twitter_name(leader_fullName)
