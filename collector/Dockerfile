@@ -11,7 +11,7 @@ RUN apt update -y && \
         pip install pymongo && \
         pip install dnspython
 
-CMD cd /tmp && \
+CMD /bin/bash && \
+        cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
-        cd /tmp/Makhela/ && \
-        /bin/bash
+        cd /tmp/Makhela/
