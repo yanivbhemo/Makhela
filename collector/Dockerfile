@@ -6,4 +6,5 @@ RUN apk update && \
 
 RUN cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
-        cd Makhela/collector
+        cd /tmp/Makhela/ && \
+        git pull

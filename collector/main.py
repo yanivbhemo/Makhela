@@ -8,7 +8,7 @@ import logger
 def main():
     twitter_handler = twitter.Twitter_handler()
     db_handler = mongodb.DataBaseHandler()
-    logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle started from containers")
+    logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle started from containers!")
     collector = clt.Collector(twitter_handler, db_handler)
     #collector.collect()
     logger.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle finished")
