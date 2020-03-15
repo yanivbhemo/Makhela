@@ -1,10 +1,10 @@
 FROM python:3.7.7-slim-buster
 
-RUN echo "Asia/Jerusalem" > /etc/timezone && \
-    dpkg-reconfigure --frontend noninteractive tzdata 2>/dev/null
+RUN ln -fs /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata 2>/dev/null
 
 RUN apt update -y && \
-        apt install git && \
+        apt install git -y && \
         pip install tweepy && \
         pip install bs4 && \
         pip install numpy && \
