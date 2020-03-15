@@ -17,8 +17,9 @@ class DataBaseHandler:
                 "mongodb+srv://" + self.db_username + ":" + self.db_password + "@makhela-qvsh8.mongodb.net/Makhela?retryWrites=true&w=majority")
             self.db = client.Makhela
             print("- DB Handler created")
-        except:
+        except Exception as e:
             print("- Error: can't connect to the DB (error 101)")
+            print(e)
             self.db = False
             exit(101)
 
