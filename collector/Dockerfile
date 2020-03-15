@@ -1,7 +1,7 @@
 FROM python:3.7.7-slim-buster
 
 RUN /bin/sh && \
-    echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
+    echo "Asia/Jerusalem" | tee /etc/timezone && \
     dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN apt update && \
