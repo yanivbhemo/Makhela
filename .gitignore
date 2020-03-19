@@ -1,4 +1,4 @@
-desktop.ini 
+desktop.ini
 ._*
 *Icon*
 *"*"
@@ -6,3 +6,5 @@ desktop.ini
 .idea/
 .config.txt
 __pycache__/
+.gitsecret/keys/random_seed
+.gitsecret
