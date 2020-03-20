@@ -90,7 +90,7 @@ def init():
 
 ###################################################################################
 # get user creds from config file
-with open(".config.txt", newline='') as config_file:
+with open(".config", newline='') as config_file:
     config_list = csv.reader(config_file, delimiter=':')
     for row in config_list:
         if(row[0]=="db_user"):

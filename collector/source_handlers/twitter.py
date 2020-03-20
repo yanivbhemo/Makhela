@@ -21,7 +21,7 @@ class Twitter_handler:
         print("- Twitter handler created")
 
     def insert_creds(self):
-        with open(os.path.dirname(__file__) + "/../.config.txt", newline='') as config_file:
+        with open(os.path.dirname(__file__) + "/../.config", newline='') as config_file:
             config_list = csv.reader(config_file, delimiter=':')
             for row in config_list:
                 if row[0] == "twitter":
