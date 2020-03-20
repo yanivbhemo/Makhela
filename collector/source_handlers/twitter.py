@@ -93,6 +93,7 @@ class Twitter_handler:
     def get_following_list(self, status_id):
         try:
             result = self.api.friends_ids(id=status_id)
+            print(result)
             return result
         except tweepy.RateLimitError as e:
             logger.send_message_to_slack("- Rate limit. sleep for 15 minutes")
