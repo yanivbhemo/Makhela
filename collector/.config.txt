@@ -1,0 +1,5 @@
+db_user:yaniv:Azaz123123
+twitter:consumer_key:uPVsXcMAIZLfYtOdJ6J3aapIG
+twitter:consumer_secret:fAWhsif5q0Ik9JN9ecC3nrt4QoqA97Sp3lRb4HUfneFWBqRnns
+twitter:access_token:1231936499211436033-pQMSATHOb59HIoTXjokGuHHcFeQM6Q
+twitter:access_token_secret:pihXjLyc60oFfGXWenB48a3gg3ltt4TA3554inElnVUEY
