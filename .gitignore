@@ -3,6 +3,7 @@ desktop.ini
 *Icon*
 *"*"
 .config
+.config.txt
 .idea/
 __pycache__/
 .gitsecret/keys/random_seed
