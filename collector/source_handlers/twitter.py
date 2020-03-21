@@ -5,7 +5,6 @@ import os.path
 from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
-import logger
 
 
 class Twitter_handler:
@@ -14,11 +13,13 @@ class Twitter_handler:
     access_token = ""
     access_token_secret = ""
     api = ""
+    logger = ""
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.insert_creds()
         self.auth_with_twitter()
-        print("- Twitter handler created")
+        self.logger.send_message_to_logfile("- Twitter handler created")
 
     def insert_creds(self):
         with open(os.path.dirname(__file__) + "/../.config", newline='') as config_file:
@@ -54,7 +55,7 @@ class Twitter_handler:
             else:
                 return result
         except tweepy.TweepError as e:
-            pprint(e)
+            pself.logger.send_message_to_logfile(e)
             return []
 
     # This method is used to check if there is absolutly no results when try to find someone using web scraping methods
@@ -92,11 +93,10 @@ class Twitter_handler:
 
     def get_following_list(self, status_id):
         try:
-            print("test1")
             result = self.api.friends_ids(id=status_id)
             return result
         except tweepy.RateLimitError as e:
-            logger.send_message_to_slack("- Rate limit. sleep for 15 minutes")
-            logger.send_message_to_slack("- Twitter Error: \n" + str(e))
+            self.logger.send_message_to_slack("- Rate limit. sleep for 15 minutes")
+            self.logger.send_message_to_slack("- Twitter Error: \n" + str(e))
             time.sleep(15 * 60)
             return self.get_following_list(status_id)

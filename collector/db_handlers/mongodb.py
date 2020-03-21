@@ -7,19 +7,21 @@ class DataBaseHandler:
     db_username = ""
     db_password = ""
     db = ""
+    logger = ""
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         if not self.insert_creds():
-            print("- Error with db creds. Exit. (error 102)")
+            self.logger.send_message_to_logfile("- Error with db creds. Exit. (error 102)")
             exit(102)
         try:
             client = MongoClient(
                 "mongodb+srv://" + self.db_username + ":" + self.db_password + "@makhela-qvsh8.mongodb.net/Makhela?retryWrites=true&w=majority")
             self.db = client.Makhela
-            print("- DB Handler created")
+            self.logger.send_message_to_logfile("- DB Handler created")
         except Exception as e:
-            print("- Error: can't connect to the DB (error 101)")
-            print(e)
+            self.logger.send_message_to_logfile("- Error: can't connect to the DB (error 101)")
+            self.logger.send_message_to_logfile(e)
             self.db = False
             exit(101)
 
