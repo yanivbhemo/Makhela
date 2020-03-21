@@ -13,7 +13,7 @@ class Suggestion_Collector:
     def collect(self):
         posts = self.db.get_collection("posts", 10)
         for post in posts:
-            if post['in_reply_to_status_user_id'] != "None":
+            if post['in_reply_to_status_user_id'] != None:
                 self.leaders_to_check.append(post['in_reply_to_status_user_id'])
             elif post['quoted_status_user_id'] != "None":
                 self.leaders_to_check.append(post['quoted_status_user_id'])
