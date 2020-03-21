@@ -166,8 +166,9 @@ class Collector:
                 date_created = post.created_at
                 try:
                     in_reply_to_status_id = post.in_reply_to_status_id
-                    in_reply_to_status_text = self.source_handler.get_specific_tweet(in_reply_to_status_id).text
-                    in_reply_to_status_user_id = post.in_reply_to_screen_name
+                    if in_reply_to_status_id != None:
+                        in_reply_to_status_text = self.source_handler.get_specific_tweet(in_reply_to_status_id).text
+                        in_reply_to_status_user_id = post.in_reply_to_screen_name
                 except Exception as e:
                     pass
 
@@ -191,6 +192,7 @@ class Collector:
                     retweeted_status_user_id = post.retweeted_status.user.screen_name
                 except Exception as e:
                     pass
+
                 self.db.insert_postV2("posts", leader_twitter_id, post_id, post_text, date_created,
                                       in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id,
                                       quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id,

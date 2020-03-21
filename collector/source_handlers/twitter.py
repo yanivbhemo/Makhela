@@ -94,15 +94,18 @@ class Twitter_handler:
         try:
             result = self.api.user_timeline(id=user_id, tweet_mode="extended")
         except Exception as e:
+            self.logger.send_message_to_logAndSlack("- Error in function: 'get_tweets'")
+            self.logger.send_message_to_logAndSlack("- user_id = " + str(user_id))
             self.logger.send_message_to_logAndSlack(e)
-        print(result)
         return result
 
     def get_specific_tweet(self, status_id):
         try:
-            result = self.api.get_status(id=status_id)
+            result = self.api.get_status(id=status_id, tweet_mode="extended")
             return result
         except Exception as e:
+            self.logger.send_message_to_logAndSlack("- Error in function: 'get_specific_tweet'")
+            self.logger.send_message_to_logAndSlack("- status_id = " + str(status_id))
             self.logger.send_message_to_logAndSlack(e)
 
     def get_following_list(self, status_id):
