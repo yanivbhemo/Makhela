@@ -36,7 +36,7 @@ class Collector:
         self.keywords = keywords_new
         self.logger.send_message_to_logfile("- Collector refreshed input data")
 
-    def collect(self):
+    def collect_tweets(self):
         self.logger.send_message_to_slack("- Start collecting")
         for leader in self.leaders:
             if leader['lock'] == False:
@@ -46,6 +46,24 @@ class Collector:
                     self.logger.send_message_to_logfile("- Not a new leader")
                     if leader['level_of_certainty'] > 0:
                         self.collect_and_save_tweets(leader['twitter_id'])
+                    else:
+                        self.logger.send_message_to_logfile("- Low level of certainty. Continue to next leader")
+                else:
+                    self.logger.send_message_to_logfile("- New leader. Collecting init details")
+                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                self.db.unlock_opinion_leader(leader['_id'])
+            else:
+                self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+
+    def collect_connections(self):
+        self.logger.send_message_to_slack("- Start collecting")
+        for leader in self.leaders:
+            if leader['lock'] == False:
+                self.db.lock_opinion_leader(leader['_id'])
+                self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
+                if leader['new_leader'] == False:
+                    self.logger.send_message_to_logfile("- Not a new leader")
+                    if leader['level_of_certainty'] > 0:
                         self.collect_and_save_connections(leader['twitter_id'])
                     else:
                         self.logger.send_message_to_logfile("- Low level of certainty. Continue to next leader")

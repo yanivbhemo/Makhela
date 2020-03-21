@@ -2,7 +2,6 @@ import csv
 import time
 import tweepy
 import os.path
-from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
 
@@ -38,7 +37,10 @@ class Twitter_handler:
     def auth_with_twitter(self):
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_token_secret)
-        self.api = tweepy.API(auth)
+        try:
+            self.api = tweepy.API(auth)
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack(e)
 
     def search_twitter_name(self, name):
         try:
@@ -54,8 +56,8 @@ class Twitter_handler:
                     return result
             else:
                 return result
-        except tweepy.TweepError as e:
-            pself.logger.send_message_to_logfile(e)
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack(e)
             return []
 
     # This method is used to check if there is absolutly no results when try to find someone using web scraping methods
@@ -82,21 +84,36 @@ class Twitter_handler:
 
         for item in soup.find_all('div', class_='ProfileCard-actions'):
             list = str(item.get_text()).replace('\n', '').split(' ')
-            return self.api.search_users(q=list[len(list) - 1])
+            try:
+                return self.api.search_users(q=list[len(list) - 1])
+            except Exception as e:
+                self.logger.send_message_to_logAndSlack(e)
 
     def get_tweets(self, user_id):
-        result = self.api.user_timeline(id=user_id, tweet_mode="extended")
+        result = ""
+        try:
+            result = self.api.user_timeline(id=user_id, tweet_mode="extended")
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack(e)
+        print(result)
         return result
 
     def get_specific_tweet(self, status_id):
-        return self.api.get_status(id=status_id)
+        try:
+            result = self.api.get_status(id=status_id)
+            return result
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack(e)
 
     def get_following_list(self, status_id):
-        try:
-            result = self.api.friends_ids(id=status_id)
-            return result
-        except tweepy.RateLimitError as e:
-            self.logger.send_message_to_slack("- Rate limit. sleep for 15 minutes")
-            self.logger.send_message_to_slack("- Twitter Error: \n" + str(e))
-            time.sleep(15 * 60)
-            return self.get_following_list(status_id)
+        flag = False
+        result = ""
+        while not flag:
+            try:
+                result = self.api.friends_ids(id=status_id)
+                flag = True
+            except tweepy.RateLimitError as e:
+                self.logger.send_message_to_logAndSlack("- Rate limit. sleep for 15 minutes")
+                self.logger.send_message_to_logAndSlack("- Twitter Error: \n" + str(e))
+                time.sleep(15 * 60)
+        return result

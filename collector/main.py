@@ -9,9 +9,10 @@ def main():
     log_handler = logger.logger_handler()
     twitter_handler = twitter.Twitter_handler(log_handler)
     db_handler = mongodb.DataBaseHandler(log_handler)
+    db_handler.unlock_all_opinion_leaders()
     log_handler.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle started from a container")
     collector = clt.Collector(log_handler, twitter_handler, db_handler)
-    collector.collect()
+    collector.collect_tweets()
     log_handler.send_message_to_slack(str(datetime.datetime.now()) + " - Collection cycle finished")
     log_handler.close_logfile()
 

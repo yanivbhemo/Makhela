@@ -20,3 +20,15 @@ class Suggestion_Collector:
             elif post['retweeted_status_user_id'] != "None":
                 self.leaders_to_check.append(post['retweeted_status_user_id'])
         self.logger.send_message_to_logfile(self.leaders_to_check)
+
+    def check_if_person_in_blacklist(self, twitter_id):
+        pass
+
+    def check_if_person_in_community(self, twitter_id):
+        pass
+
+    def check_level_of_certainty(self, twitter_id):
+        pass
+
+    def conver_twitter_screenname_to_id(self, screenname):
+        pass
