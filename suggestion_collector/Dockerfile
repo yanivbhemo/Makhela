@@ -4,15 +4,12 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata 2>/dev/null
 
 RUN apt update -y && \
-        apt install git -y && \
-        pip install tweepy && \
-        pip install bs4 && \
-        pip install numpy && \
-        pip install pymongo && \
-        pip install dnspython
+        apt install git -y
 
 CMD /bin/bash && \
         cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
         cd /tmp/Makhela/ && \
-        git secret reveal
+        git secret reveal && \
+        cd suggestion_collector && \
+        pip install -r python_requirements.txt
