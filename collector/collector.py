@@ -2,7 +2,6 @@ import numpy as np
 import re
 import requests
 from bs4 import BeautifulSoup
-import logger
 
 
 class Collector:
@@ -10,8 +9,10 @@ class Collector:
     keywords = []
     db = ""
     source_handler = ""
+    logger = ""
 
-    def __init__(self, source, db):
+    def __init__(self, logger, source, db):
+        self.logger = logger
         self.db = db
         leaders = self.db.get_collection("opinion_leaders")
         for leader in leaders:
@@ -20,7 +21,7 @@ class Collector:
         for keyword in keywords:
             self.keywords.append(keyword['word'].lower())
         self.source_handler = source
-        logger.send_message_to_slack("- Collector created")
+        self.logger.send_message_to_slack("- Collector created")
 
     def refresh_collector_input(self):
         leaders_new = []
@@ -33,27 +34,45 @@ class Collector:
             keywords_new.append(keyword['word'].lower())
         self.leaders = leaders_new
         self.keywords = keywords_new
-        print("- Collector refreshed input data")
+        self.logger.send_message_to_logfile("- Collector refreshed input data")
 
-    def collect(self):
-        logger.send_message_to_slack("- Start collecting")
+    def collect_tweets(self):
+        self.logger.send_message_to_slack("- Start collecting")
         for leader in self.leaders:
             if leader['lock'] == False:
                 self.db.lock_opinion_leader(leader['_id'])
-                print("\n- Handles: {0}".format(leader['full_name']))
+                self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
                 if leader['new_leader'] == False:
-                    print("- Not a new leader")
+                    self.logger.send_message_to_logfile("- Not a new leader")
                     if leader['level_of_certainty'] > 0:
                         self.collect_and_save_tweets(leader['twitter_id'])
-                        self.collect_and_save_connections(leader['twitter_id'])
                     else:
-                        print("- Low level of certainty. Continue to next leader")
+                        self.logger.send_message_to_logfile("- Low level of certainty. Continue to next leader")
                 else:
-                    print("- New leader. Collecting init details")
+                    self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
-                print("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+                self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+
+    def collect_connections(self):
+        self.logger.send_message_to_slack("- Start collecting")
+        for leader in self.leaders:
+            if leader['lock'] == False:
+                self.db.lock_opinion_leader(leader['_id'])
+                self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
+                if leader['new_leader'] == False:
+                    self.logger.send_message_to_logfile("- Not a new leader")
+                    if leader['level_of_certainty'] > 0:
+                        self.collect_and_save_connections(leader['twitter_id'])
+                    else:
+                        self.logger.send_message_to_logfile("- Low level of certainty. Continue to next leader")
+                else:
+                    self.logger.send_message_to_logfile("- New leader. Collecting init details")
+                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                self.db.unlock_opinion_leader(leader['_id'])
+            else:
+                self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
 
     def collect_leader_init_details(self, leader_db_id, leader_fullName):
         leader_info = self.source_handler.search_twitter_name(leader_fullName)
@@ -70,18 +89,18 @@ class Collector:
                                                       details.friends_count, details.created_at, details.statuses_count,
                                                       False, 10, profile_image)
         elif len(leader_info) == 0:
-            print("- Collector did not find any person with that name")
+            self.logger.send_message_to_logfile("- Collector did not find any person with that name")
             self.db.update_leader_details_empty("opinion_leaders", leader_db_id)
         elif len(leader_info) > 1:
-            print("- Search for screen name came up with more than 1 result".format(
+            self.logger.send_message_to_logfile("- Search for screen name came up with more than 1 result".format(
                 leader_fullName))
             required_id = self.resolve_search_leader_multiple_results(leader_info, leader_fullName)
             try:
                 if required_id['id'] == 0:
-                    print("- Issue found while resolving the conflict. error 100")
+                    self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
                     self.db.update_leader_details_empty("opinion_leaders", leader_db_id)
             except:
-                print("- Issue found while resolving the conflict. error 100")
+                self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
                 self.db.update_leader_details_empty("opinion_leaders", leader_db_id)
             else:
                 for details in leader_info:
@@ -100,8 +119,8 @@ class Collector:
 
     def refresh_leaders_init_details(self):
         for leader in self.leaders:
-            print("- Handles: {0}".format(leader['full_name']))
-            print("- Refresh leader init details")
+            self.logger.send_message_to_logfile("- Handles: {0}".format(leader['full_name']))
+            self.logger.send_message_to_logfile("- Refresh leader init details")
             self.collect_leader_init_details(leader['_id'], leader['full_name'])
 
     def resolve_search_leader_multiple_results(self, leaders_info, fullName_to_search):
@@ -129,7 +148,7 @@ class Collector:
         return returned_id
 
     def collect_and_save_tweets(self, leader_twitter_id):
-        print("- Collecting posts")
+        self.logger.send_message_to_logfile("- Collecting posts")
         results = self.source_handler.get_tweets(leader_twitter_id)
         for post in results:
             if not self.check_if_post_exists_in_db(post.id):
@@ -147,8 +166,9 @@ class Collector:
                 date_created = post.created_at
                 try:
                     in_reply_to_status_id = post.in_reply_to_status_id
-                    in_reply_to_status_text = self.source_handler.get_specific_tweet(in_reply_to_status_id).text
-                    in_reply_to_status_user_id = post.in_reply_to_screen_name
+                    if in_reply_to_status_id != None:
+                        in_reply_to_status_text = self.source_handler.get_specific_tweet(in_reply_to_status_id).text
+                        in_reply_to_status_user_id = post.in_reply_to_screen_name
                 except Exception as e:
                     pass
 
@@ -172,11 +192,12 @@ class Collector:
                     retweeted_status_user_id = post.retweeted_status.user.screen_name
                 except Exception as e:
                     pass
+
                 self.db.insert_postV2("posts", leader_twitter_id, post_id, post_text, date_created,
                                       in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id,
                                       quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id,
                                       retweeted_status_text, retweeted_status_user_id)
-                print("- New post found and collected")
+                self.logger.send_message_to_logfile("- New post found and collected")
 
     def check_if_post_exists_in_db(self, tweet_id):
         query = {"post_id": tweet_id}
@@ -191,14 +212,14 @@ class Collector:
         page = requests.get(url)
         soup = BeautifulSoup(page.text, 'html.parser')
         for item in soup.find_all('title'):
-            print(item.get_text())
+            self.logger.send_message_to_logfile(item.get_text())
 
     def collect_and_save_connections(self, leader_twitter_id):
         """
         Search in every opinion leader's twitter account
         for followers from the rest of the opinion leaders in the DB
         """
-        print("- Search for connection to another opinion leaders")
+        self.logger.send_message_to_logfile("- Search for connection to another opinion leaders")
         followers_array = self.source_handler.get_following_list(leader_twitter_id)
         connection_arr = []
         for follower in followers_array:
