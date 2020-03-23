@@ -1,7 +1,7 @@
 import csv
 from pymongo import MongoClient
 import os.path
-
+import json
 
 class DataBaseHandler:
     db_username = ""
@@ -45,14 +45,19 @@ class DataBaseHandler:
         else:
             return col.find()
 
-    def get_collection_with_filter(self, collection, filter):
+    def get_collection_with_filter(self, collection, filter, limit_num):
         col = self.db[collection]
-        return col.find(filter)
+        if limit_num > 0:
+            return col.find(filter).limit(limit_num)
+        else:
+            return col.find(filter)
 
     def update_leader_details_regular(self, collection, id_to_update, leader_twitter_id, leader_twitter_screen_name,
-                              leader_twitter_location, leader_twitter_description, leader_twitter_followers_count,
-                              leader_twitter_friends_count, leader_twitter_created_at, leader_twitter_statuses_count,
-                              new_leader, level_of_certainty, leader_twitter_profile_image_url):
+                                      leader_twitter_location, leader_twitter_description,
+                                      leader_twitter_followers_count,
+                                      leader_twitter_friends_count, leader_twitter_created_at,
+                                      leader_twitter_statuses_count,
+                                      new_leader, level_of_certainty, leader_twitter_profile_image_url):
         query = {
             '$set': {
                 'twitter_id': leader_twitter_id,
@@ -95,7 +100,9 @@ class DataBaseHandler:
         col = self.db[collection]
         col.insert_one(query)
 
-    def insert_postV2(self, collection, leader_twitter_id, post_id, full_text, date_created, in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id):
+    def insert_postV2(self, collection, leader_twitter_id, post_id, full_text, date_created, in_reply_to_status_id,
+                      in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text,
+                      quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id):
         query = {
             "leader_twitter_id": leader_twitter_id,
             "post_id": post_id,
@@ -141,3 +148,11 @@ class DataBaseHandler:
 
     def unlock_all_opinion_leaders(self):
         self.db['opinion_leaders'].update_many({}, {'$set': {'lock': False}})
+
+    def bulk_update_suggestion_posts(self, post_arr):
+        """ Update retrieved posts with 'checked_for_suggestions' - True """
+        col = self.db["posts"]
+        bulk = col.initialize_unordered_bulk_op()
+        for i in range(0, len(post_arr)):
+            bulk.find({'_id': post_arr[i]}).update({'$set': {"checked_for_suggestions": False}})
+        #print(bulk.execute())

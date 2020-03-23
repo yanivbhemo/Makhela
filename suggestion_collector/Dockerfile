@@ -12,4 +12,4 @@ CMD /bin/bash && \
         cd /tmp/Makhela/ && \
         git secret reveal && \
         cd suggestion_collector && \
-        pip install -r python_requirements.txt
+        pip3 install -rq python_requirements.txt
