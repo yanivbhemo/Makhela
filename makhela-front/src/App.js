@@ -3,7 +3,7 @@ import makhelogo from './logo-rtl.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import MoDSpecialist from './components/MoDSpecialist'
-import SuggestedLeader from './components/SuggestedLeader'
+// import SuggestedLeader from './components/SuggestedLeader'
 
 import './App.css';
 
@@ -20,7 +20,7 @@ function App() {
         <Button>Head of Intelligence</Button>
       </header> */}
       <body>
-        <SuggestedLeader/>
+        <MoDSpecialist/>
       </body>
     </div>
   );

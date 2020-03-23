@@ -8,3 +8,4 @@ desktop.ini
 __pycache__/
 .gitsecret/keys/random_seed
 analyzer/password.txt
+Makhela-end/node_modules
