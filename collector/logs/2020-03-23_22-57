@@ -4,10 +4,12 @@
 - Handles: Dalia Dassa Kaye
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Mark Fitzpatrick
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Richard (Dick) Sokolsky
 - Not a new leader
@@ -26,8 +28,8 @@
 - Collecting posts
 
 - Handles: Anthony Cordesman
-- Not a new leader
-- Low level of certainty. Continue to next leader
+- New leader. Collecting init details
+- Collector did not find any person with that name
 
 - Handles: Michael Elleman
 - Not a new leader
@@ -36,10 +38,12 @@
 - Handles: Suzanne Maloney
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Barbara A. Leaf
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Ephraim Asculai
 - Not a new leader
@@ -48,6 +52,7 @@
 - Handles: Juan Zarate
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Graham Allison
 - Not a new leader
@@ -60,6 +65,14 @@
 - Handles: Richard Goldberg
 - Not a new leader
 - Collecting posts
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Esfandyar Batmanghelidj
 - Not a new leader
@@ -72,6 +85,13 @@
 - Handles: Alireza Nader
 - Not a new leader
 - Collecting posts
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Patrick Clawson
 - Not a new leader
@@ -96,9 +116,12 @@
 - Handles: Jon B. Wolfstahl
 - Not a new leader
 - Collecting posts
+- New post found and collected
+- New post found and collected
 - Error in function: 'get_specific_tweet'
-- status_id = 1241354409482821632
-[{'code': 179, 'message': 'Sorry, you are not authorized to see this status.'}]
+- status_id = 1241700872016576514
+[{'code': 144, 'message': 'No status found with that ID.'}]
+- New post found and collected
 - New post found and collected
 - New post found and collected
 - New post found and collected
@@ -106,18 +129,16 @@
 - Handles: Mehdi Khalaji
 - Not a new leader
 - Collecting posts
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Norman T. Roule
 - Not a new leader
 - Collecting posts
-- New post found and collected
-- New post found and collected
-- New post found and collected
-- New post found and collected
-- New post found and collected
-- New post found and collected
-- New post found and collected
-- New post found and collected
 
 - Handles: Shahram Chubin
 - Not a new leader
@@ -126,6 +147,7 @@
 - Handles: Vali Nasr
 - Not a new leader
 - Collecting posts
+- New post found and collected
 - New post found and collected
 - New post found and collected
 - New post found and collected
@@ -168,6 +190,11 @@
 - Not a new leader
 - Collecting posts
 - New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Uzi Rubin
 - Not a new leader
@@ -197,11 +224,14 @@
 - New post found and collected
 - New post found and collected
 - New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Ariane M. Tabatabai
 - Not a new leader
 - Collecting posts
-- New post found and collected
 
 - Handles: Mark Dubowitz
 - Not a new leader
@@ -210,7 +240,6 @@
 - Handles: Matthew Kroenig
 - Not a new leader
 - Collecting posts
-- New post found and collected
 
 - Handles: Kenneth M. Pollack
 - Not a new leader
@@ -219,13 +248,10 @@
 - Handles: Afshon Ostovar
 - Not a new leader
 - Collecting posts
-- New post found and collected
 
 - Handles: Ali Alfoneh
 - Not a new leader
 - Collecting posts
-- New post found and collected
-- New post found and collected
 
 - Handles: Gary Samore
 - Not a new leader
@@ -234,10 +260,23 @@
 - Handles: Barbara Slavin
 - Not a new leader
 - Collecting posts
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
+- New post found and collected
 
 - Handles: Tal Inbar
 - Not a new leader
 - Collecting posts
+- New post found and collected
 
 - Handles: Dennis B. Ross
 - Not a new leader
@@ -247,8 +286,6 @@
 - Not a new leader
 - Collecting posts
 - New post found and collected
-- New post found and collected
-- New post found and collected
 
 - Handles: Yaniv Ben Hamo
 - Not a new leader
@@ -257,8 +294,6 @@
 - Handles: Jeffrey Lewis
 - Not a new leader
 - Collecting posts
-- New post found and collected
-- New post found and collected
 - New post found and collected
 - New post found and collected
 - New post found and collected

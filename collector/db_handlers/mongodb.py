@@ -69,6 +69,28 @@ class DataBaseHandler:
         col = self.db[collection]
         col.update_one({'_id': id_to_update}, query)
 
+    def insert_leader_details_regular(self, collection, leader_twitter_id, leader_twitter_screen_name,leader_fullname,
+                              leader_twitter_location, leader_twitter_description, leader_twitter_followers_count,
+                              leader_twitter_friends_count, leader_twitter_created_at, leader_twitter_statuses_count,
+                              new_leader, level_of_certainty, leader_twitter_profile_image_url):
+        query = {
+                'twitter_id': leader_twitter_id,
+                'full_name': leader_fullname,
+                'twitter_screen_name': leader_twitter_screen_name,
+                'twitter_location': leader_twitter_location,
+                'twitter_description': leader_twitter_description,
+                'twitter_followers_count': leader_twitter_followers_count,
+                'twitter_friends_count': leader_twitter_friends_count,
+                'twitter_created_at': leader_twitter_created_at,
+                'twitter_statuses_count': leader_twitter_statuses_count,
+                'new_leader': new_leader,
+                'level_of_certainty': level_of_certainty,
+                'twitter_profile_image': leader_twitter_profile_image_url,
+                'lock': False
+        }
+        col = self.db[collection]
+        col.insert_one(query)
+
     def update_leader_details_empty(self, collection, id_to_update):
         col = self.db[collection]
         query = {
@@ -80,6 +102,14 @@ class DataBaseHandler:
         }
         col.update_one({'_id': id_to_update}, query)
 
+    def insert_leader_details_empty(self, collection, fullname):
+        col = self.db[collection]
+        query = {
+                'full_name': fullname,
+                'level_of_certainty': 0,
+                'lock': False
+        }
+        col.insert_one(query)
     def insert_post(self, collection, leader_twitter_id, post_date, post_id, post_text, retweet_count, likes):
         query = {
             "profile_id": leader_twitter_id,

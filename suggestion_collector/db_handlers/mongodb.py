@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import os.path
 import json
 
+
 class DataBaseHandler:
     db_username = ""
     db_password = ""
@@ -155,4 +156,32 @@ class DataBaseHandler:
         bulk = col.initialize_unordered_bulk_op()
         for i in range(0, len(post_arr)):
             bulk.find({'_id': post_arr[i]}).update({'$set': {"checked_for_suggestions": False}})
-        #print(bulk.execute())
+        # print(bulk.execute())
+
+    def insertMany(self, collection, items):
+        col = self.db[collection]
+        bulk = col.initialize_unordered_bulk_op()
+        for i in range(0, items.count()):
+            bulk.insert({
+                'twitter_id': items[i]['twitter_id'],
+                'full_name': items[i]['full_name'],
+                'twitter_screen_name': items[i]['twitter_screen_name'],
+                'twitter_location': items[i]['twitter_location'],
+                'twitter_description': items[i]['twitter_description'],
+                'twitter_followers_count': items[i]['twitter_followers_count'],
+                'twitter_friends_count': items[i]['twitter_friends_count'],
+                'twitter_created_at': items[i]['twitter_created_at'],
+                'twitter_statuses_count': items[i]['twitter_statuses_count'],
+                'new_leader': False,
+                'level_of_certainty': 10,
+                'twitter_profile_image': items[i]['twitter_id'],
+                'lock': False
+            })
+        bulk.execute()
+
+    def deleteMany(self, collection, items):
+        col = self.db[collection]
+        bulk = col.initialize_unordered_bulk_op()
+        for i in range(0, items.count()):
+            col.delete_one({'_id': items[i]['_id']})
+        #bulk.execute()

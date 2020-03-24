@@ -5,15 +5,17 @@ from db_handlers import mongodb
 import logger
 
 
+
 def main():
     log_handler = logger.logger_handler()
     twitter_handler = twitter.Twitter_handler(log_handler)
     db_handler = mongodb.DataBaseHandler(log_handler)
     collector = clt.Suggestion_Collector(log_handler, twitter_handler, db_handler)
-    collector.collect()
+    #collector.collect()
     log_handler.close_logfile()
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+
     exit(0)

@@ -1,14 +1,20 @@
-import json
+import re
+
+import numpy as np
 
 
 class Suggestion_Collector:
     leaders_to_check = []
     logger = ""
+    keywords = []
 
     def __init__(self, logger, source, db):
         self.logger = logger
         self.db = db
         self.source_handler = source
+        keywords = self.db.get_collection("keywords", 0)
+        for keyword in keywords:
+            self.keywords.append(keyword['word'].lower())
 
     def collect(self):
         filter_query = {"checked_for_suggestions": False}
@@ -27,6 +33,7 @@ class Suggestion_Collector:
                 print("- Handles: " + leader_to_check)
                 if not self.check_if_person_in_blacklist(leader_to_check):
                     if not self.check_if_person_in_community(leader_to_check):
+                        self.check_level_of_certainty(leader_to_check)
                         self.leaders_to_check.append(leader_to_check)
                         post_arr.append(post['_id'])
                     else:
@@ -61,4 +68,30 @@ class Suggestion_Collector:
             return False
 
     def check_level_of_certainty(self, twitter_id):
+        np_kw_array = np.array(self.keywords)
+        proposed_id = twitter_id
+        level_of_certainty = 0
+        person_twitter_profile = self.source_handler.get_specific_user(twitter_id)
+        print(self.keywords)
+        """ First Check: If person's description has one of our keywords """
+        proposed_description = person_twitter_profile.description.lower()
+        proposed_description = re.sub(r"[^a-zA-Z0-9]+", ' ', proposed_description)
+        np_description_array = np.array(proposed_description.split(' '))
+        if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
+            level_of_certainty += 5
+        exit(222)
         pass
+
+    def add_certain_level_of_certainty_to_community(self, minimum_level):
+        """ This function shifts leaders from suggestion collection
+            With minimum level of certainty to the community
+        """
+        query_filter = {
+            "level_of_certainty": {
+                "$gte": minimum_level
+            }
+        }
+        suggestions = self.db.get_collection_with_filter("suggestions", query_filter, 0)
+        if suggestions.count() > 0:
+            self.db.insertMany("opinion_leaders", suggestions)
+            self.db.deleteMany("suggestions", suggestions)

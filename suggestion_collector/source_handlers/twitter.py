@@ -118,3 +118,10 @@ class Twitter_handler:
                 self.logger.send_message_to_logAndSlack("- Twitter Error: \n" + str(e))
                 time.sleep(15 * 60)
         return result
+
+    def get_specific_user(self, twitter_id):
+        try:
+            result = self.api.get_user(id=twitter_id)
+            return result
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack(e)

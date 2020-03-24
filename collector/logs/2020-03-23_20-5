@@ -1,0 +1,98 @@
+- Twitter handler created
+- DB Handler created
+
+- Handles: Dalia Dassa Kaye
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Mark Fitzpatrick
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Richard (Dick) Sokolsky
+- Not a new leader
+- Collecting posts
+
+- Handles: Mark Hibbs
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: David Albright
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Karim Sadjadpour
+- Not a new leader
+- Collecting posts
+
+- Handles: Anthony Cordesman
+- Not a new leader
+- Low level of certainty. Continue to next leader
+
+- Handles: Michael Elleman
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Suzanne Maloney
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Barbara A. Leaf
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Ephraim Asculai
+- Not a new leader
+- Low level of certainty. Continue to next leader
+
+- Handles: Juan Zarate
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Graham Allison
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Raz Zimmt
+- Not a new leader
+- Collecting posts
+
+- Handles: Richard Goldberg
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Esfandyar Batmanghelidj
+- Not a new leader
+- Collecting posts
+
+- Handles: Robert Einhorn
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Alireza Nader
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Patrick Clawson
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Emily Landau
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: William Yong
+- New leader. Collecting init details
+- Search for screen name came up with more than 1 result
+
+- Handles: Ahmad Majidyar
+- Not a new leader
+- Collecting posts
+
+- Handles: Sima Schein
+- Not a new leader
+- Low level of certainty. Continue to next leader
+
+- Handles: Jon B. Wolfstahl
+- New leader. Collecting init details
+Failed to send request: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/users/search.json?q=%40JBWolfsthal (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x0000018B7FD365C0>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'))
