@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import re
 import requests
@@ -10,6 +11,11 @@ class Collector:
     db = ""
     source_handler = ""
     logger = ""
+    MAX_LEVEL_OF_CERTAINTY = ""
+    AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY = ""
+    AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY = ""
+    AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY = ""
+    MIN_LEVEL_OF_CERTAINTY = ""
 
     def __init__(self, logger, source, db, collection):
         self.logger = logger
@@ -21,7 +27,11 @@ class Collector:
         for keyword in keywords:
             self.keywords.append(keyword['word'].lower())
         self.source_handler = source
-        self.logger.send_message_to_logfile("- Collector created")
+        self.MAX_LEVEL_OF_CERTAINTY = int(os.getenv('MAX_LEVEL_OF_CERTAINTY'))
+        self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY = int(os.getenv('AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY'))
+        self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY = int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY'))
+        self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY = int(os.getenv('AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY'))
+        self.MIN_LEVEL_OF_CERTAINTY = int(os.getenv('MIN_LEVEL_OF_CERTAINTY'))
 
     def refresh_collector_input(self):
         leaders_new = []
@@ -44,7 +54,7 @@ class Collector:
                 self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    if leader['level_of_certainty'] > 0:
+                    if leader['level_of_certainty'] > self.MIN_LEVEL_OF_CERTAINTY:
                         self.collect_and_save_tweets(leader['twitter_id'])
                     else:
                         self.logger.send_message_to_logfile("- Low level of certainty. Move to black list")
@@ -64,7 +74,7 @@ class Collector:
                 self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    if leader['level_of_certainty'] > 0:
+                    if leader['level_of_certainty'] > self.MIN_LEVEL_OF_CERTAINTY:
                         self.collect_and_save_connections(leader['twitter_id'])
                     else:
                         self.logger.send_message_to_logfile("- Low level of certainty. Move the leader to black list")
@@ -108,19 +118,17 @@ class Collector:
                 for details in leader_info:
                     if details.id == required_id["id"]:
                         profile_image = details.profile_image_url[0:details.profile_image_url.find(
-                            '_normal')] + "_400x400" + details.profile_image_url[
-                                                       details.profile_image_url.find('.jpeg'):len(
-                                                           details.profile_image_url)]
-                        if required_id["level_of_certainty"] < 7:
-                            self.db.insert_leader_details_regular("suggestions", details.id,
+                            '_normal')] + "_400x400" + details.profile_image_url[details.profile_image_url.rfind('.'):len(details.profile_image_url)]
+                        if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY:
+                            self.db.update_leader_details_regular("suggestions", leader_db_id, details.id,
                                                                   details.screen_name,
-                                                                  leader_fullName,
                                                                   details.location, details.description,
                                                                   details.followers_count,
                                                                   details.friends_count, details.created_at,
                                                                   details.statuses_count,
                                                                   False, required_id["level_of_certainty"],
                                                                   profile_image)
+
                         else:
                             self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id,
                                                               details.screen_name,
@@ -140,16 +148,31 @@ class Collector:
         np_kw_array = np.array(self.keywords)
         proposed_id = []
         level_of_certainty = 0  # scale of 0 to 10
+
+        # First check: If leader description contains one or more internal keywords
+        # If it is it receives 'AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY' points
+        # Second check: If leader's name is the same as written in the DB
+        # If it is it receives 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
         for leader in leaders_info:
             proposed_description = leader.description.lower()
             proposed_description = re.sub(r"[^a-zA-Z0-9]+", ' ', proposed_description)
             np_description_array = np.array(proposed_description.split(' '))
             if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
-                level_of_certainty += 5
+                level_of_certainty += self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY
             if leader.name == fullName_to_search:
-                level_of_certainty += 2
-            proposed_id.append({"id": leader.id, "level_of_certainty": level_of_certainty})
+                level_of_certainty += self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY
+            proposed_id.append({"id": leader.id, "level_of_certainty": level_of_certainty, "followers": leader.followers_count})
             level_of_certainty = 0
+
+        # Third check: The person with the highest value of followers
+        # Will receive 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
+        max_num = 0
+        max_index = 0
+        for i in range(len(proposed_id)):
+            if proposed_id[i]['followers'] > max_num:
+                max_num = proposed_id[i]['followers']
+                max_index = i
+        proposed_id[max_index]['level_of_certainty'] += self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY
 
         # Check for the maximum level of certainty
         max_level = 0
@@ -180,8 +203,15 @@ class Collector:
                 try:
                     in_reply_to_status_id = post.in_reply_to_status_id
                     if in_reply_to_status_id != None:
-                        in_reply_to_status_text = self.source_handler.get_specific_tweet(in_reply_to_status_id).text
-                        in_reply_to_status_user_id = post.in_reply_to_screen_name
+                        post2 = self.source_handler.get_specific_tweet(in_reply_to_status_id)
+                        try:
+                            in_reply_to_status_text = post2.text
+                        except:
+                            in_reply_to_status_text = post2.full_text
+                        try:
+                            in_reply_to_status_user_id = post.in_reply_to_screen_name
+                        except:
+                            in_reply_to_status_user_id = post2.user.name
                 except Exception as e:
                     pass
 
@@ -189,7 +219,10 @@ class Collector:
                     quoted_status_id = post.quoted_status_id
                     if post_text[0:2] == "RT":
                         tweet = self.source_handler.get_specific_tweet(quoted_status_id)
-                        quoted_status_text = tweet.text
+                        try:
+                            quoted_status_text = tweet.text
+                        except:
+                            quoted_status_text = tweet.full_text
                         quoted_status_user_id = tweet.screen_name
                     else:
                         quoted_status_text = post.quoted_status.full_text
@@ -210,7 +243,7 @@ class Collector:
                                       in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id,
                                       quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id,
                                       retweeted_status_text, retweeted_status_user_id)
-                self.logger.send_message_to_logfile("- New post found and collected")
+                self.logger.send_message_to_logfile("- New post found and collected: " + str(post_id))
 
     def check_if_post_exists_in_db(self, tweet_id):
         query = {"post_id": tweet_id}
@@ -243,3 +276,6 @@ class Collector:
                 except:
                     pass
         self.db.insert_connections("opinion_leaders", leader_twitter_id, connection_arr)
+
+    def check_for_posts_without_text(self):
+        pass

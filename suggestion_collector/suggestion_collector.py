@@ -72,14 +72,14 @@ class Suggestion_Collector:
         proposed_id = twitter_id
         level_of_certainty = 0
         person_twitter_profile = self.source_handler.get_specific_user(twitter_id)
-        print(self.keywords)
+
         """ First Check: If person's description has one of our keywords """
         proposed_description = person_twitter_profile.description.lower()
         proposed_description = re.sub(r"[^a-zA-Z0-9]+", ' ', proposed_description)
         np_description_array = np.array(proposed_description.split(' '))
         if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
             level_of_certainty += 5
-        exit(222)
+
         pass
 
     def add_certain_level_of_certainty_to_community(self, minimum_level):

@@ -3,6 +3,7 @@ from source_handlers import twitter
 import collector as clt
 from db_handlers import mongodb
 import logger
+import collection_config
 
 
 def main():
@@ -18,5 +19,6 @@ def main():
 
 
 if __name__ == "__main__":
+    collection_config.load_env_variables()
     main()
     exit(0)
