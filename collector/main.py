@@ -12,8 +12,8 @@ def main():
     db_handler = mongodb.DataBaseHandler(log_handler)
     db_handler.unlock_all_opinion_leaders()
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle started from a container")
-    collector = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
-    collector.collect_tweets()
+    collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
+    collector_opinion_leaders.collect_tweets()
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle finished")
     log_handler.close_logfile()
 

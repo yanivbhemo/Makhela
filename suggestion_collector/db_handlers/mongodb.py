@@ -155,8 +155,9 @@ class DataBaseHandler:
         col = self.db["posts"]
         bulk = col.initialize_unordered_bulk_op()
         for i in range(0, len(post_arr)):
-            bulk.find({'_id': post_arr[i]}).update({'$set': {"checked_for_suggestions": False}})
-        # print(bulk.execute())
+            self.logger.send_message_to_logfile("- Update the post: " + str(post_arr[i]))
+            bulk.find({'_id': post_arr[i]}).update({'$set': {"checked_for_suggestions": True}})
+        print(bulk.execute())
 
     def insertMany(self, collection, items):
         col = self.db[collection]
@@ -185,3 +186,25 @@ class DataBaseHandler:
         for i in range(0, items.count()):
             col.delete_one({'_id': items[i]['_id']})
         #bulk.execute()
+
+    def insert_leader_details_regular(self, collection, leader_twitter_id, leader_twitter_screen_name,leader_fullname,
+                              leader_twitter_location, leader_twitter_description, leader_twitter_followers_count,
+                              leader_twitter_friends_count, leader_twitter_created_at, leader_twitter_statuses_count,
+                              new_leader, level_of_certainty, leader_twitter_profile_image_url):
+        query = {
+                'twitter_id': leader_twitter_id,
+                'full_name': leader_fullname,
+                'twitter_screen_name': leader_twitter_screen_name,
+                'twitter_location': leader_twitter_location,
+                'twitter_description': leader_twitter_description,
+                'twitter_followers_count': leader_twitter_followers_count,
+                'twitter_friends_count': leader_twitter_friends_count,
+                'twitter_created_at': leader_twitter_created_at,
+                'twitter_statuses_count': leader_twitter_statuses_count,
+                'new_leader': new_leader,
+                'level_of_certainty': level_of_certainty,
+                'twitter_profile_image': leader_twitter_profile_image_url,
+                'lock': False
+        }
+        col = self.db[collection]
+        col.insert_one(query)

@@ -1,4 +1,3 @@
-import datetime
 from source_handlers import twitter
 import suggestion_collector as clt
 from db_handlers import mongodb

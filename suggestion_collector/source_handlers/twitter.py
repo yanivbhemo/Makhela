@@ -110,7 +110,6 @@ class Twitter_handler:
         result = ""
         while not flag:
             try:
-                self.logger.send_message_to_logfile("test1")
                 result = self.api.friends_ids(id=status_id)
                 flag = True
             except tweepy.RateLimitError as e:

@@ -51,20 +51,23 @@ class Collector:
         for leader in self.leaders:
             if leader['lock'] == False:
                 self.db.lock_opinion_leader(leader['_id'])
-                self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
+                try:
+                    self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
+                except:
+                    self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['twitter_screen_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    if leader['level_of_certainty'] > self.MIN_LEVEL_OF_CERTAINTY:
-                        self.collect_and_save_tweets(leader['twitter_id'])
-                    else:
-                        self.logger.send_message_to_logfile("- Low level of certainty. Move to black list")
-                        self.db.insert_leader_details_empty("blacklist", leader['full_name'])
+                    self.collect_and_save_tweets(leader['twitter_id'])
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
-                self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+                try:
+                    self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+                except:
+                    self.logger.send_message_to_logfile(
+                        "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
     def collect_connections(self):
         self.logger.send_message_to_slack("- Start collecting")
@@ -74,11 +77,7 @@ class Collector:
                 self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    if leader['level_of_certainty'] > self.MIN_LEVEL_OF_CERTAINTY:
-                        self.collect_and_save_connections(leader['twitter_id'])
-                    else:
-                        self.logger.send_message_to_logfile("- Low level of certainty. Move the leader to black list")
-                        self.db.insert_leader_details_empty("blacklist", leader['full_name'])
+                    self.collect_and_save_connections(leader['twitter_id'])
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
@@ -91,11 +90,9 @@ class Collector:
         # Checks of more than 1 name came up
         if len(leader_info) == 1:
             for details in leader_info:
-                profile_image = details.profile_image_url[
-                                0:details.profile_image_url.find('_normal')] + "_400x400" + details.profile_image_url[
-                                                                                            details.profile_image_url.find(
-                                                                                                '.jpeg'):len(
-                                                                                                details.profile_image_url)]
+                profile_image = details.profile_image_url[0:details.profile_image_url.find(
+                    '_normal')] + "_400x400" + details.profile_image_url[
+                                               details.profile_image_url.rfind('.'):len(details.profile_image_url)]
                 self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id, details.screen_name,
                                                       details.location, details.description, details.followers_count,
                                                       details.friends_count, details.created_at, details.statuses_count,
@@ -128,7 +125,6 @@ class Collector:
                                                                   details.statuses_count,
                                                                   False, required_id["level_of_certainty"],
                                                                   profile_image)
-
                         else:
                             self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id,
                                                               details.screen_name,
@@ -136,7 +132,7 @@ class Collector:
                                                               details.followers_count,
                                                               details.friends_count, details.created_at,
                                                               details.statuses_count,
-                                                              False, required_id["level_of_certainty"], profile_image)
+                                                              False, 10, profile_image)
 
     def refresh_leaders_init_details(self):
         for leader in self.leaders:
