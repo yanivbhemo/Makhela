@@ -4,12 +4,13 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata 2>/dev/null
 
 RUN apt update -y && \
-        apt install git -y
+        apt install git -y && \
+        apt-get install git-secret -y
 
-CMD /bin/bash && \
-        cd /tmp && \
+CMD cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
         cd /tmp/Makhela/ && \
         git secret reveal && \
         cd collector && \
-        pip3 install -rq python_requirements.txt
+        pip3 install -rq python_requirements.txt && \
+        /bin/bash
