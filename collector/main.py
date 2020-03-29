@@ -4,6 +4,7 @@ import collector as clt
 from db_handlers import mongodb
 import logger
 import collection_config
+import sys
 
 
 def main():
@@ -13,8 +14,10 @@ def main():
     db_handler.unlock_all_opinion_leaders()
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle started from a container")
     collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
-    collector_opinion_leaders.collect_tweets()
-    #collector_opinion_leaders.collect_connections()
+    if sys.argv[1] == "tweets":
+        collector_opinion_leaders.collect_tweets()
+    if sys.argv[1] == "connections":
+        collector_opinion_leaders.collect_connections()
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle finished")
     log_handler.close_logfile()
 
