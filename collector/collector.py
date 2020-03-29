@@ -70,6 +70,12 @@ class Collector:
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
     def collect_connections(self):
+        """ First cycle only for the new members in the community """
+        temp = self.leaders
+        self.leaders = []
+        leaders = self.db.get_collection_with_filter("opinion_leaders",{"community_following": None})
+        for leader in leaders:
+            self.leaders.append(leader)
         self.logger.send_message_to_slack("- Start collecting")
         for leader in self.leaders:
             if leader['lock'] == False:
@@ -84,6 +90,23 @@ class Collector:
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
                 self.logger.send_message_to_logfile("\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
+
+        """ Second cycle for the rest of the community """
+        self.leaders = temp
+        for leader in self.leaders:
+            if leader['lock'] == False:
+                self.db.lock_opinion_leader(leader['_id'])
+                self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['full_name']))
+                if leader['new_leader'] == False:
+                    self.logger.send_message_to_logfile("- Not a new leader")
+                    self.collect_and_save_connections(leader['twitter_id'])
+                else:
+                    self.logger.send_message_to_logfile("- New leader. Collecting init details")
+                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                self.db.unlock_opinion_leader(leader['_id'])
+            else:
+                self.logger.send_message_to_logfile(
+                    "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['full_name']))
 
     def collect_leader_init_details(self, leader_db_id, leader_fullName):
         leader_info = self.source_handler.search_twitter_name(leader_fullName)
