@@ -11,5 +11,5 @@ CMD cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
         cd /tmp/Makhela/ && \
         cd suggestion_collector && \
-        pip3 install -q -r python_requirements.txt && \
+        pip3 install -r python_requirements.txt && \
         python3 main.py

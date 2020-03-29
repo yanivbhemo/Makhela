@@ -14,5 +14,5 @@ CMD cd /tmp && \
         latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
         git checkout $latestTag && \
         cd /tmp/Makhela/collector && \
-        pip3 install -q -r python_requirements.txt && \
+        pip3 install -r python_requirements.txt && \
         python3 main.py $RUN_TYPE
