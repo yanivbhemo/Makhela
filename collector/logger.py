@@ -1,8 +1,8 @@
 import datetime
 import csv
-import os.path
 from urllib import request
 import json
+import os
 
 
 class logger_handler:
@@ -16,12 +16,7 @@ class logger_handler:
         self.fileptr = open(os.path.dirname(__file__) + "/logs/" + curr_date, "a")
 
     def insert_slack_url(self):
-        with open(".config", newline='') as config_file:
-            config_list = csv.reader(config_file, delimiter=' ')
-            for row in config_list:
-                if row[0] == "slack_url":
-                    self.slack_url = row[1]
-        config_file.close()
+        self.slack_url = os.getenv('slack_url')
 
     # Posting to a Slack channel
     def send_message_to_slack(self, text):

@@ -1,6 +1,6 @@
 import csv
 from pymongo import MongoClient
-import os.path
+import os
 
 
 class DataBaseHandler:
@@ -26,17 +26,9 @@ class DataBaseHandler:
             exit(101)
 
     def insert_creds(self):
-        # get user creds from config file
-        with open(os.path.dirname(__file__) + "/../.config", newline='') as config_file:
-            config_list = csv.reader(config_file, delimiter=':')
-            for row in config_list:
-                if (row[0] == "db_user"):
-                    self.db_username = row[1]
-                    self.db_password = row[2]
-                    config_file.close()
-                    return True
-        config_file.close()
-        return False
+        self.db_username = os.getenv('db_username')
+        self.db_password = os.getenv('db_password')
+        return True
 
     def get_collection(self, collection):
         col = self.db[collection]

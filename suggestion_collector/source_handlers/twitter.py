@@ -22,18 +22,10 @@ class Twitter_handler:
         self.logger.send_message_to_logfile("- Twitter handler created")
 
     def insert_creds(self):
-        with open(os.path.dirname(__file__) + "/../.config", newline='') as config_file:
-            config_list = csv.reader(config_file, delimiter=':')
-            for row in config_list:
-                if row[0] == "twitter":
-                    if row[1] == "consumer_key":
-                        self.consumer_key = row[2]
-                    if row[1] == "consumer_secret":
-                        self.consumer_secret = row[2]
-                    if row[1] == "access_token":
-                        self.access_token = row[2]
-                    if row[1] == "access_token_secret":
-                        self.access_token_secret = row[2]
+        self.consumer_key = os.getenv('consumer_key')
+        self.consumer_secret = os.getenv('consumer_secret')
+        self.access_token = os.getenv('access_token')
+        self.access_token_secret = os.getenv('access_token_secret')
 
     def auth_with_twitter(self):
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)

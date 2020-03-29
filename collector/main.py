@@ -14,6 +14,7 @@ def main():
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle started from a container")
     collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
     collector_opinion_leaders.collect_tweets()
+    #collector_opinion_leaders.collect_connections()
     log_handler.send_message_to_logfile(str(datetime.datetime.now()) + " - Collection cycle finished")
     log_handler.close_logfile()
 

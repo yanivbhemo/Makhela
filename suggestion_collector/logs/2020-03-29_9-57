@@ -1,0 +1,337 @@
+- Twitter handler created
+- DB Handler created
+- Level of certainty = 0. Ignore
+- Level of certainty = 0. Ignore
+- Level of certainty = 0. Ignore
+- Level of certainty = 0. Ignore
+- Level of certainty = 0. Ignore
+	+ 'm2matthijs' Inserted into 'suggestions' collection
+	+ 'NPR' Inserted into 'suggestions' collection
+	+ 'LizSly' Inserted into 'suggestions' collection
+	+ 'JarrettBlanc' Inserted into 'opinion_leaders' collection
+	+ 'JeffreyGoldberg' Inserted into 'suggestions' collection
+	+ 'saadmohseni' Inserted into 'suggestions' collection
+	+ 'peterson__scott' Inserted into 'opinion_leaders' collection
+	+ 'YadlinAmos' Inserted into 'opinion_leaders' collection
+	+ 'INSS_Hebrew' Inserted into 'suggestions' collection
+	+ 'INSSIsrael' Inserted into 'opinion_leaders' collection
+	+ 'TimesofIsrael' Inserted into 'suggestions' collection
+	+ 'bluenoterecords' Inserted into 'suggestions' collection
+	+ 'suzannedimaggio' Inserted into 'opinion_leaders' collection
+	+ 'QuincyInst' Inserted into 'suggestions' collection
+	+ 'BulletinAtomic' Inserted into 'opinion_leaders' collection
+	+ 'motokorich' Inserted into 'suggestions' collection
+	+ 'ChrisMurphyCT' Inserted into 'suggestions' collection
+	+ 'ColinKahl' Inserted into 'suggestions' collection
+	+ 'robsatloff' Inserted into 'suggestions' collection
+	+ 'antoinehasday' Inserted into 'suggestions' collection
+	+ 'WashInstitute' Inserted into 'suggestions' collection
+	+ 'Levitt_Matt' Inserted into 'suggestions' collection
+	+ 'MichaelSinghDC' Inserted into 'suggestions' collection
+	+ 'Mikeknightsiraq' Inserted into 'suggestions' collection
+	+ 'cspanwj' Inserted into 'suggestions' collection
+	+ 'kennwhite' Inserted into 'suggestions' collection
+	+ 'PhillipSmyth' Inserted into 'suggestions' collection
+	+ 'evanbmontgomery' Inserted into 'suggestions' collection
+	+ 'AbasAslani' Inserted into 'suggestions' collection
+	+ 'JosepBorrellF' Inserted into 'suggestions' collection
+	+ 'Max_Fisher' Inserted into 'suggestions' collection
+	+ 'vali_nasr' Inserted into 'suggestions' collection
+	+ 'MarkTFitz' Inserted into 'opinion_leaders' collection
+	+ 'golnarM' Inserted into 'opinion_leaders' collection
+	+ 'DanielKRad' Inserted into 'opinion_leaders' collection
+	+ 'Cinzia_Bianco' Inserted into 'suggestions' collection
+	+ 'EllieGeranmayeh' Inserted into 'opinion_leaders' collection
+	+ 'DEsfandiary' Inserted into 'suggestions' collection
+	+ 'HadiNili' Inserted into 'suggestions' collection
+	+ 'GeraldoRivera' Inserted into 'suggestions' collection
+	+ 'bbcpersian' Inserted into 'suggestions' collection
+	+ 'BrewerEricM' Inserted into 'suggestions' collection
+	+ 'borzou' Inserted into 'suggestions' collection
+	+ 'CNN' Inserted into 'suggestions' collection
+	+ 'AmbJohnBolton' Inserted into 'suggestions' collection
+	+ 'MAliKadivar' Inserted into 'suggestions' collection
+	+ 'm_bizar' Inserted into 'opinion_leaders' collection
+	+ 'GEsfandiari' Inserted into 'opinion_leaders' collection
+	+ 'nargesbajoghli' Inserted into 'opinion_leaders' collection
+	+ 'h0d3r_fa' Inserted into 'suggestions' collection
+	+ 'thekarami' Inserted into 'suggestions' collection
+	+ 'mehdirhasan' Inserted into 'suggestions' collection
+	+ 'AlistairBurtUK' Inserted into 'suggestions' collection
+	+ 'BBCFarnaz' Inserted into 'suggestions' collection
+	+ 'BijanKK' Inserted into 'suggestions' collection
+	+ 'RabiiRamin' Inserted into 'suggestions' collection
+	+ 'FazelHawramy' Inserted into 'suggestions' collection
+	+ 'ReutersIran' Inserted into 'opinion_leaders' collection
+	+ 'ezraklein' Inserted into 'suggestions' collection
+	+ 'CrisisGroup' Inserted into 'suggestions' collection
+	+ 'AliVaez' Inserted into 'opinion_leaders' collection
+	+ 'Nick_L_Miller' Inserted into 'opinion_leaders' collection
+	+ 'JBWolfsthal' Inserted into 'opinion_leaders' collection
+	+ 'AzadehMoaveni' Inserted into 'suggestions' collection
+	+ 'farnazfassihi' Inserted into 'opinion_leaders' collection
+	+ 'Rob_Malley' Inserted into 'suggestions' collection
+	+ 'nytimes' Inserted into 'suggestions' collection
+	+ 'CSISMidEast' Inserted into 'suggestions' collection
+	+ 'antwier' Inserted into 'suggestions' collection
+	+ 'FreeTheNamazis' Inserted into 'suggestions' collection
+	+ 'BrankoMilan' Inserted into 'opinion_leaders' collection
+	+ 'MilesPomper' Inserted into 'suggestions' collection
+	+ 'NarangVipin' Inserted into 'opinion_leaders' collection
+	+ 'AngrierWHStaff' Inserted into 'opinion_leaders' collection
+	+ 'ArmsControlWonk' Inserted into 'suggestions' collection
+	+ 'ForeignAffairs' Inserted into 'suggestions' collection
+	+ 'PerkovichG' Inserted into 'opinion_leaders' collection
+	+ 'ninadsheth' Inserted into 'suggestions' collection
+	+ 'syedalizia1992' Inserted into 'suggestions' collection
+	+ 'Amb_Ulyanov' Inserted into 'suggestions' collection
+	+ 'TheGoodISIS' Inserted into 'opinion_leaders' collection
+	+ 'RussianEmbassy' Inserted into 'suggestions' collection
+	+ 'laurnorman' Inserted into 'suggestions' collection
+	+ 'TMCountryman' Inserted into 'suggestions' collection
+	+ 'stephenWalt' Inserted into 'suggestions' collection
+	+ 'maryamdkhm' Inserted into 'suggestions' collection
+	+ 'jasmineelgamal' Inserted into 'suggestions' collection
+	+ 'lcmporter' Inserted into 'suggestions' collection
+	+ 'maasalan' Inserted into 'suggestions' collection
+	+ 'GissouNia' Inserted into 'suggestions' collection
+	+ 'ArianeTabatabai' Inserted into 'suggestions' collection
+	+ 'hdagres' Inserted into 'opinion_leaders' collection
+	+ 'Khaaasteh' Inserted into 'suggestions' collection
+	+ 'CBSEveningNews' Inserted into 'suggestions' collection
+	+ 'vicecanada' Inserted into 'suggestions' collection
+	+ 'NaomiAKlein' Inserted into 'suggestions' collection
+	+ 'stephenwertheim' Inserted into 'suggestions' collection
+	+ 'mattduss' Inserted into 'suggestions' collection
+	+ 'lmlauramarsh' Inserted into 'suggestions' collection
+	+ 'rafaelshimunov' Inserted into 'suggestions' collection
+	+ 'JordanUhl' Inserted into 'suggestions' collection
+	+ 'alexkotch' Inserted into 'suggestions' collection
+	+ 'sarahleah1' Inserted into 'suggestions' collection
+	+ 'kenklippenstein' Inserted into 'suggestions' collection
+	+ 'EliClifton' Inserted into 'opinion_leaders' collection
+	+ 'hrome2' Inserted into 'opinion_leaders' collection
+	+ 'nahaltoosi' Inserted into 'suggestions' collection
+	+ 'glcarlstrom' Inserted into 'suggestions' collection
+	+ 'PadDolat' Inserted into 'suggestions' collection
+	+ 'Ali_H_Soufan' Inserted into 'suggestions' collection
+- Update the post: 5e6408cb124e74ea22f2aa31
+- Update the post: 5e6408cb124e74ea22f2aa32
+- Update the post: 5e6408cc124e74ea22f2aa33
+- Update the post: 5e6408cc124e74ea22f2aa34
+- Update the post: 5e6408cd124e74ea22f2aa35
+- Update the post: 5e6408cd124e74ea22f2aa36
+- Update the post: 5e6408ce124e74ea22f2aa37
+- Update the post: 5e6408ce124e74ea22f2aa38
+- Update the post: 5e6408cf124e74ea22f2aa39
+- Update the post: 5e6408cf124e74ea22f2aa3a
+- Update the post: 5e6408d0124e74ea22f2aa3b
+- Update the post: 5e6408d1124e74ea22f2aa3c
+- Update the post: 5e6408d1124e74ea22f2aa3d
+- Update the post: 5e6408d2124e74ea22f2aa3e
+- Update the post: 5e6408d2124e74ea22f2aa3f
+- Update the post: 5e6408d3124e74ea22f2aa40
+- Update the post: 5e6408d3124e74ea22f2aa41
+- Update the post: 5e6408d4124e74ea22f2aa42
+- Update the post: 5e6408d4124e74ea22f2aa43
+- Update the post: 5e6408d5124e74ea22f2aa44
+- Update the post: 5e6408d5124e74ea22f2aa45
+- Update the post: 5e6408d6124e74ea22f2aa46
+- Update the post: 5e6408d6124e74ea22f2aa47
+- Update the post: 5e6408d7124e74ea22f2aa48
+- Update the post: 5e6408d7124e74ea22f2aa49
+- Update the post: 5e6408d8124e74ea22f2aa4a
+- Update the post: 5e6408d8124e74ea22f2aa4b
+- Update the post: 5e6408d9124e74ea22f2aa4c
+- Update the post: 5e6408d9124e74ea22f2aa4d
+- Update the post: 5e6408da124e74ea22f2aa4e
+- Update the post: 5e6408dc124e74ea22f2aa4f
+- Update the post: 5e6408dc124e74ea22f2aa50
+- Update the post: 5e6408dd124e74ea22f2aa51
+- Update the post: 5e6408dd124e74ea22f2aa52
+- Update the post: 5e6408de124e74ea22f2aa53
+- Update the post: 5e6408de124e74ea22f2aa54
+- Update the post: 5e6408df124e74ea22f2aa55
+- Update the post: 5e6408df124e74ea22f2aa56
+- Update the post: 5e6408e0124e74ea22f2aa57
+- Update the post: 5e6408e0124e74ea22f2aa58
+- Update the post: 5e6408e1124e74ea22f2aa59
+- Update the post: 5e6408e1124e74ea22f2aa5a
+- Update the post: 5e6408e1124e74ea22f2aa5b
+- Update the post: 5e6408e2124e74ea22f2aa5c
+- Update the post: 5e6408e2124e74ea22f2aa5d
+- Update the post: 5e6408e3124e74ea22f2aa5e
+- Update the post: 5e6408e3124e74ea22f2aa5f
+- Update the post: 5e6408e4124e74ea22f2aa60
+- Update the post: 5e6408e4124e74ea22f2aa61
+- Update the post: 5e6408e5124e74ea22f2aa62
+- Update the post: 5e6408e6124e74ea22f2aa63
+- Update the post: 5e6408e7124e74ea22f2aa64
+- Update the post: 5e6408e7124e74ea22f2aa65
+- Update the post: 5e6408e8124e74ea22f2aa66
+- Update the post: 5e6408e8124e74ea22f2aa67
+- Update the post: 5e6408e9124e74ea22f2aa68
+- Update the post: 5e6408e9124e74ea22f2aa69
+- Update the post: 5e6408ea124e74ea22f2aa6a
+- Update the post: 5e6408ea124e74ea22f2aa6b
+- Update the post: 5e6408eb124e74ea22f2aa6c
+- Update the post: 5e6408eb124e74ea22f2aa6d
+- Update the post: 5e6408ec124e74ea22f2aa6e
+- Update the post: 5e6408ec124e74ea22f2aa6f
+- Update the post: 5e6408ed124e74ea22f2aa70
+- Update the post: 5e6408ed124e74ea22f2aa71
+- Update the post: 5e6408ee124e74ea22f2aa72
+- Update the post: 5e6408ee124e74ea22f2aa73
+- Update the post: 5e6408ef124e74ea22f2aa74
+- Update the post: 5e6408ef124e74ea22f2aa75
+- Update the post: 5e6408f0124e74ea22f2aa76
+- Update the post: 5e6408f1124e74ea22f2aa77
+- Update the post: 5e6408f2124e74ea22f2aa78
+- Update the post: 5e6408f2124e74ea22f2aa79
+- Update the post: 5e6408f3124e74ea22f2aa7a
+- Update the post: 5e6408f3124e74ea22f2aa7b
+- Update the post: 5e6408f4124e74ea22f2aa7c
+- Update the post: 5e6408f4124e74ea22f2aa7d
+- Update the post: 5e6408f5124e74ea22f2aa7e
+- Update the post: 5e6408f5124e74ea22f2aa7f
+- Update the post: 5e6408f6124e74ea22f2aa80
+- Update the post: 5e6408f6124e74ea22f2aa81
+- Update the post: 5e6408f7124e74ea22f2aa82
+- Update the post: 5e6408f7124e74ea22f2aa83
+- Update the post: 5e6408f8124e74ea22f2aa84
+- Update the post: 5e6408f8124e74ea22f2aa85
+- Update the post: 5e6408f9124e74ea22f2aa86
+- Update the post: 5e6408f9124e74ea22f2aa87
+- Update the post: 5e6408fa124e74ea22f2aa88
+- Update the post: 5e6408fa124e74ea22f2aa89
+- Update the post: 5e6408fb124e74ea22f2aa8a
+- Update the post: 5e6408fd124e74ea22f2aa8b
+- Update the post: 5e6408fd124e74ea22f2aa8c
+- Update the post: 5e6408fe124e74ea22f2aa8d
+- Update the post: 5e6408fe124e74ea22f2aa8e
+- Update the post: 5e6408ff124e74ea22f2aa8f
+- Update the post: 5e6408ff124e74ea22f2aa90
+- Update the post: 5e640900124e74ea22f2aa91
+- Update the post: 5e640900124e74ea22f2aa92
+- Update the post: 5e640901124e74ea22f2aa93
+- Update the post: 5e640901124e74ea22f2aa94
+- Update the post: 5e640902124e74ea22f2aa95
+- Update the post: 5e640902124e74ea22f2aa96
+- Update the post: 5e640903124e74ea22f2aa97
+- Update the post: 5e640903124e74ea22f2aa98
+- Update the post: 5e640904124e74ea22f2aa99
+- Update the post: 5e640904124e74ea22f2aa9a
+- Update the post: 5e640905124e74ea22f2aa9b
+- Update the post: 5e640905124e74ea22f2aa9c
+- Update the post: 5e640906124e74ea22f2aa9d
+- Update the post: 5e640906124e74ea22f2aa9e
+- Update the post: 5e640907124e74ea22f2aa9f
+- Update the post: 5e640908124e74ea22f2aaa0
+- Update the post: 5e640908124e74ea22f2aaa1
+- Update the post: 5e640909124e74ea22f2aaa2
+- Update the post: 5e640909124e74ea22f2aaa3
+- Update the post: 5e64090a124e74ea22f2aaa4
+- Update the post: 5e64090a124e74ea22f2aaa5
+- Update the post: 5e64090b124e74ea22f2aaa6
+- Update the post: 5e64090b124e74ea22f2aaa7
+- Update the post: 5e64090c124e74ea22f2aaa8
+- Update the post: 5e64090c124e74ea22f2aaa9
+- Update the post: 5e64090d124e74ea22f2aaaa
+- Update the post: 5e64090d124e74ea22f2aaab
+- Update the post: 5e64090e124e74ea22f2aaac
+- Update the post: 5e64090e124e74ea22f2aaad
+- Update the post: 5e64090f124e74ea22f2aaae
+- Update the post: 5e64090f124e74ea22f2aaaf
+- Update the post: 5e640910124e74ea22f2aab0
+- Update the post: 5e640910124e74ea22f2aab1
+- Update the post: 5e640911124e74ea22f2aab2
+- Update the post: 5e640913124e74ea22f2aab3
+- Update the post: 5e640913124e74ea22f2aab4
+- Update the post: 5e640913124e74ea22f2aab5
+- Update the post: 5e640914124e74ea22f2aab6
+- Update the post: 5e640914124e74ea22f2aab7
+- Update the post: 5e640915124e74ea22f2aab8
+- Update the post: 5e640915124e74ea22f2aab9
+- Update the post: 5e640916124e74ea22f2aaba
+- Update the post: 5e640916124e74ea22f2aabb
+- Update the post: 5e640917124e74ea22f2aabc
+- Update the post: 5e640917124e74ea22f2aabd
+- Update the post: 5e640918124e74ea22f2aabe
+- Update the post: 5e640918124e74ea22f2aabf
+- Update the post: 5e640919124e74ea22f2aac0
+- Update the post: 5e640919124e74ea22f2aac1
+- Update the post: 5e64091a124e74ea22f2aac2
+- Update the post: 5e64091a124e74ea22f2aac3
+- Update the post: 5e64091b124e74ea22f2aac4
+- Update the post: 5e64091c124e74ea22f2aac5
+- Update the post: 5e64091c124e74ea22f2aac6
+- Update the post: 5e64091d124e74ea22f2aac7
+- Update the post: 5e64091e124e74ea22f2aac8
+- Update the post: 5e64091e124e74ea22f2aac9
+- Update the post: 5e64091f124e74ea22f2aaca
+- Update the post: 5e64091f124e74ea22f2aacb
+- Update the post: 5e640920124e74ea22f2aacc
+- Update the post: 5e640920124e74ea22f2aacd
+- Update the post: 5e640921124e74ea22f2aace
+- Update the post: 5e640921124e74ea22f2aacf
+- Update the post: 5e640922124e74ea22f2aad0
+- Update the post: 5e640922124e74ea22f2aad1
+- Update the post: 5e640923124e74ea22f2aad2
+- Update the post: 5e640923124e74ea22f2aad3
+- Update the post: 5e640924124e74ea22f2aad4
+- Update the post: 5e640924124e74ea22f2aad5
+- Update the post: 5e640925124e74ea22f2aad6
+- Update the post: 5e640925124e74ea22f2aad7
+- Update the post: 5e640926124e74ea22f2aad8
+- Update the post: 5e640926124e74ea22f2aad9
+- Update the post: 5e640927124e74ea22f2aada
+- Update the post: 5e640928124e74ea22f2aadb
+- Update the post: 5e640929124e74ea22f2aadc
+- Update the post: 5e640929124e74ea22f2aadd
+- Update the post: 5e64092a124e74ea22f2aade
+- Update the post: 5e64092a124e74ea22f2aadf
+- Update the post: 5e64092b124e74ea22f2aae0
+- Update the post: 5e64092b124e74ea22f2aae1
+- Update the post: 5e64092c124e74ea22f2aae2
+- Update the post: 5e64092c124e74ea22f2aae3
+- Update the post: 5e64092d124e74ea22f2aae4
+- Update the post: 5e64092d124e74ea22f2aae5
+- Update the post: 5e64092e124e74ea22f2aae6
+- Update the post: 5e64092e124e74ea22f2aae7
+- Update the post: 5e64092f124e74ea22f2aae8
+- Update the post: 5e64092f124e74ea22f2aae9
+- Update the post: 5e640930124e74ea22f2aaea
+- Update the post: 5e640930124e74ea22f2aaeb
+- Update the post: 5e640931124e74ea22f2aaec
+- Update the post: 5e640931124e74ea22f2aaed
+- Update the post: 5e640932124e74ea22f2aaee
+- Update the post: 5e640933124e74ea22f2aaef
+- Update the post: 5e640934124e74ea22f2aaf0
+- Update the post: 5e640934124e74ea22f2aaf1
+- Update the post: 5e640934124e74ea22f2aaf2
+- Update the post: 5e640935124e74ea22f2aaf3
+- Update the post: 5e640935124e74ea22f2aaf4
+- Update the post: 5e640936124e74ea22f2aaf5
+- Update the post: 5e640936124e74ea22f2aaf6
+- Update the post: 5e640937124e74ea22f2aaf7
+- Update the post: 5e640937124e74ea22f2aaf8
+- Update the post: 5e640938124e74ea22f2aaf9
+- Update the post: 5e640938124e74ea22f2aafa
+- Update the post: 5e640939124e74ea22f2aafb
+- Update the post: 5e640939124e74ea22f2aafc
+- Update the post: 5e64093a124e74ea22f2aafd
+- Update the post: 5e64093a124e74ea22f2aafe
+- Update the post: 5e64093b124e74ea22f2aaff
+- Update the post: 5e64093b124e74ea22f2ab00
+- Update the post: 5e64093c124e74ea22f2ab01
+- Update the post: 5e64093c124e74ea22f2ab02
+- Update the post: 5e64093e124e74ea22f2ab03
+- Update the post: 5e64093e124e74ea22f2ab04
+- Update the post: 5e64093f124e74ea22f2ab05
+- Update the post: 5e64093f124e74ea22f2ab06
+- Update the post: 5e64093f124e74ea22f2ab07
+- Update the post: 5e640940124e74ea22f2ab08
+- Update the post: 5e640941124e74ea22f2ab09
+- Update the post: 5e640941124e74ea22f2ab0a
+- Update the post: 5e640941124e74ea22f2ab0b
+- Update the post: 5e640942124e74ea22f2ab0c
