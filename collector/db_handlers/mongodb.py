@@ -160,3 +160,19 @@ class DataBaseHandler:
 
     def unlock_all_opinion_leaders(self):
         self.db['opinion_leaders'].update_many({}, {'$set': {'lock': False}})
+
+    def delete_ununique_documents(self):
+        leaders = []
+        count = 0
+        result = self.get_collection("opinion_leaders")
+        result2 = self.get_collection("opinion_leaders")
+        for leader_to_check in result:
+            result2 = self.db['opinion_leaders'].find({'_id': {'$ne': leader_to_check['_id']}})
+            for leader in result2:
+                if leader_to_check['full_name'] == leader['full_name']:
+                    #print(leader_to_check)
+                    #print(leader)
+                    if self.db['opinion_leaders'].find({'full_name':leader_to_check['full_name']}).count() > 1:
+                        #print("Delete: " + str(leader['_id']))
+                        #self.db['sugguestions'].delete_one({'_id': leader['_id']})
+                        print("db.opinion_leaders.deleteOne({'_id': ObjectId('" + str(leader['_id']) + "')})")

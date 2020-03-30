@@ -78,7 +78,9 @@ class Suggestion_Collector:
         }
         result = self.db.get_collection_with_filter("opinion_leaders", query, 1)
         result2 = self.db.get_collection_with_filter("suggestions", query, 1)
-        if result.count() > 0 and result2.count() > 0:
+        print(result.count())
+        print(result2.count())
+        if result.count() > 0 or result2.count() > 0:
             """ Leader is in community """
             return True
         else:

@@ -12,6 +12,8 @@ def main():
     twitter_handler = twitter.Twitter_handler(log_handler)
     db_handler = mongodb.DataBaseHandler(log_handler)
     db_handler.unlock_all_opinion_leaders()
+    # db_handler.delete_ununique_documents()
+    # exit(1111)
     log_handler.send_message_to_logAndSlack(str(datetime.datetime.now()) + " - Collection cycle of type: " + sys.argv[1] + " started from a container")
     collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
     if sys.argv[1] == "tweets":

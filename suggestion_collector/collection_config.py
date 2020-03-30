@@ -15,7 +15,7 @@ def load_env_variables():
 
     # For authentication purposes
     # ---------------------------------
-    headers = {"X-Vault-Token": "s.V4pJ3Hu95qp42NPBVvh9eH14"}
+    headers = {"X-Vault-Token": os.getenv('vault_ro_token')}
     r = requests.get("https://collector02.makhela.live:8200/v1/kv/slack", headers=headers).json()
     os.environ['slack_url'] = r['data']['slack_url']
     r = requests.get("https://collector02.makhela.live:8200/v1/kv/db_auth", headers=headers).json()
