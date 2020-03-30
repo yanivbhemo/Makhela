@@ -302,13 +302,28 @@ class Collector:
         followers_array = self.source_handler.get_following_list(leader_twitter_id)
         connection_arr = []
         for follower in followers_array:
-            for leader in self.leaders:
-                try:
-                    if follower == leader['twitter_id']:
-                        connection_arr.append(follower)
-                except:
-                    pass
-        self.db.insert_connections("opinion_leaders", leader_twitter_id, connection_arr)
+            if self.check_follower(follower, leader_twitter_id):
+                connection_arr.append(follower)
+        self.logger.send_message_to_logfile("- Connections found:")
+        self.logger.send_message_to_logfile(connection_arr)
+        if len(connection_arr) > 0:
+            self.db.insert_connections("opinion_leaders", leader_twitter_id, connection_arr)
+        return
 
-    def check_for_posts_without_text(self):
-        pass
+    def check_follower(self, follower, leader_twitter_id):
+        flag = False
+        for leader in self.leaders:
+            if follower == leader['twitter_id']:
+                flag = True
+        if not flag:
+            return False
+        for i in range(len(self.leaders)):
+            if self.leaders[i]['twitter_id'] == leader_twitter_id:
+                try:
+                    for item in self.leaders[i]['community_following']:
+                        if item == follower:
+                            return False
+                except:
+                    return True
+                break
+        return True
