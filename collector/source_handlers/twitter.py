@@ -100,6 +100,15 @@ class Twitter_handler:
             self.logger.send_message_to_logAndSlack("- status_id = " + str(status_id))
             self.logger.send_message_to_logAndSlack(e)
 
+    def get_specific_profile(self, twitter_id):
+        try:
+            result = self.api.get_user(id=twitter_id)
+            return result
+        except Exception as e:
+            self.logger.send_message_to_logAndSlack("- Error in function: 'get_specific_profile'")
+            self.logger.send_message_to_logAndSlack("- twitter_id = " + str(twitter_id))
+            self.logger.send_message_to_logAndSlack(e)
+            return False
     def get_following_list(self, status_id):
         flag = False
         result = ""

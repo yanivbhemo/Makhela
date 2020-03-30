@@ -9,7 +9,10 @@ RUN apt update -y && \
 
 CMD cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
-        cd /tmp/Makhela/ && \
+        cd Makhela && \
+        git fetch --tags && \
+        latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
+        git checkout $latestTag && \
         cd suggestion_collector && \
         pip3 install -r python_requirements.txt && \
         python3 main.py

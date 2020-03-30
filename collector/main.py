@@ -18,8 +18,10 @@ def main():
     collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
     if sys.argv[1] == "tweets":
         collector_opinion_leaders.collect_tweets()
-    if sys.argv[1] == "connections":
+    elif sys.argv[1] == "connections":
         collector_opinion_leaders.collect_connections()
+    elif sys.argv[1] == "refresh_init_details":
+        collector_opinion_leaders.update_opinion_leaders_information()
     log_handler.send_message_to_logAndSlack(str(datetime.datetime.now()) + " - Collection cycle finished")
     log_handler.close_logfile()
 

@@ -11,6 +11,7 @@ class Collector:
     db = ""
     source_handler = ""
     logger = ""
+    collection = ""
     MAX_LEVEL_OF_CERTAINTY = ""
     AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY = ""
     AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY = ""
@@ -32,6 +33,7 @@ class Collector:
         self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY = int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY'))
         self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY = int(os.getenv('AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY'))
         self.MIN_LEVEL_OF_CERTAINTY = int(os.getenv('MIN_LEVEL_OF_CERTAINTY'))
+        self.collection = collection
 
     def refresh_collector_input(self):
         leaders_new = []
@@ -327,3 +329,22 @@ class Collector:
                     return True
                 break
         return True
+
+    def update_opinion_leaders_information(self):
+        for leader in self.leaders:
+            details = self.source_handler.get_specific_profile(leader['twitter_id'])
+            if details:
+                print(leader['full_name'])
+                profile_image = details.profile_image_url[0:details.profile_image_url.find(
+                    '_normal')] + "_400x400" + details.profile_image_url[
+                                               details.profile_image_url.rfind('.'):len(details.profile_image_url)]
+                self.db.update_leader_details_regular(self.collection, leader['_id'], details.id,
+                                                      details.screen_name,
+                                                      details.location, details.description,
+                                                      details.followers_count,
+                                                      details.friends_count, details.created_at,
+                                                      details.statuses_count,
+                                                      False, leader['level_of_certainty'], profile_image)
+            else:
+                self.logger.send_message_to_logfile("Error! leader_info came back empty. exit(3)")
+                exit(3)
