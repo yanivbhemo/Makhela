@@ -4,15 +4,16 @@ import registerServiceWorker from "./registerServiceWorker";
 import App from "./components/App";
 import "./typography.css";
 // import "./index.css"
-import ReactRouter from './router'
+import MyRouter from "./router";
 import { Router } from 'react-router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+ReactDOM.render(
+    <BrowserRouter>
+        <MyRouter />
+    </BrowserRouter>, 
+    document.getElementById('root')
+)
 
-// ReactDOM.render(
-//     <Router>
-//         <ReactRouter/>
-//     </Router>, document.getElementById('root'));
-
-
-ReactDOM.render(<App />, document.getElementById("root"));
+// ReactDOM.render(<MyRouter />, document.getElementById("root"));
 registerServiceWorker();

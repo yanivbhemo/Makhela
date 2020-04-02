@@ -1,23 +1,26 @@
-import React from 'react'
-import {Route} from 'react-router-dom'
+import React, { Component } from "react";
+import NetworkGraph from './components/NetworkGraph'
 import MoDSpecialist from './components/SuggestedLeader'
-// import GroupList from '../Components/GroupList'
-// import MyGroups from '../Components/MyGroups'
-// import UpdateScore from '../Components/UpdateScore'
-// import ScoreAndWins from '../Components/ScoreAndWins'
-// import Header from '../Header'
+// import SuggestedLeader from './Leader'
+import { Button } from 'react-bootstrap'
+import Header from './Header'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './components/App.css'
+// import './App.css'
 
-const ReactRouter = () => {
-    return(
-        <React.Fragment>
-            {/* <Header/> */}
-            <Route path="/" component={MoDSpecialist}/>
-            {/* <Route path="/MyGroups" component={MyGroups}/>
-            <Route path="/UpdateScore" component={UpdateScore}/>
-            <Route path="/ScoreAndWins" component={ScoreAndWins}/> */}
+const MyRouter = () => {
+    return (
+      <div className="App" style={{ fontFamily: "Quicksand" }}>
+      <Header/>
+      <Route path="/NetworkGraph" component={NetworkGraph}/>
+      <Route path="/MoDSpecialist" component={MoDSpecialist}/>
+      {/* <Route path="/UpdateScore" component={UpdateScore}/> */}
+     
 
-        </React.Fragment>
-    )
-}
+  </div>
+    );
+  }
 
-export default ReactRouter
+
+export default MyRouter;
