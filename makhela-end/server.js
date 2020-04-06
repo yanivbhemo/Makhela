@@ -1,5 +1,6 @@
 const express = require('express');
 const suggestions = require('./controllers/suggestions')
+const posts = require('./controllers/posts')
 const app  = express(),
       port = process.env.PORT || 3000;
 
@@ -14,7 +15,9 @@ app.use(
     });
 
 
-app.all('*', suggestions.getData);
+app.all('/allsuggestions', suggestions.getData);
+app.all('/allposts', posts.getData);
+
 
 
 app.listen(port,

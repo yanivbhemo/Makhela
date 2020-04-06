@@ -9,3 +9,5 @@ __pycache__/
 .gitsecret/keys/random_seed
 analyzer/password.txt
 Makhela-end/node_modules
+Makhela-end/consts.js
+

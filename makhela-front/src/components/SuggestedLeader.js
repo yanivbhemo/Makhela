@@ -1,84 +1,122 @@
 import React from 'react';
 import { UserCard } from 'react-ui-cards';
-import { ListGroup, Card } from 'react-bootstrap';
+import SuggestedLeader from './Leader' 
 
-class SuggestedLeader extends React.Component {
+class MoDSpecialist extends React.Component {
   constructor() {
     super();
       this.state = {
-        avatar: 'https://i.imgur.com/uDYejhJ.jpg',
-        name: "Sveta",
-        following: 50,
-        followers: 200,
-        posts: 20
+          chosen: '',
+          leaders: [],
+          listMode : true
       };
-    // this.showChart = this.showChart.bind(this);
+    this.eachSuggested = this.eachSuggested.bind(this);
+    this.add = this.add.bind(this)
+    this.nextID = this.nextID.bind(this)
+    this.renderList = this.renderList.bind(this)
+    // this.renderData = this.renderData.bind(this)
+    this.nehandleClickxtID = this.handleClick.bind(this)
   }
+  
  
- 
- 
-// componentDidMount() {
-//     const url = 'https://women-in-media-back.herokuapp.com/';
-//     fetch(url)
-//         .then(res => res.json())
-//         .then(data => {
-//           let dataNew = {
-//             female: data.female,
-//             flag: data.flag,
-//             mako: data.mako,
-//             words: data.words
-//           }
-//           this.setState(dataNew);
-//         })
-//         .catch(err => console.error(err));
-// }
+  handleClick(i) {
+    this.setState({listMode: false , chosen: this.state.leaders[i]})
+    // // e.preventDefault();
+    // console.log(this.state.leaders[i]);
+    // console.log('The link was clicked.');
+  }
 
-  render() {
+ 
+
+  eachSuggested(leader, i) {
+    console.log()
     return (
-      <React.Fragment>
-        <UserCard
+        <UserCard key={`suggestedLeader${i}`} index={i}
+        onClick={() => this.handleClick(i)}
           float
-          avatar={this.state.avatar}
-          name={this.state.name}
-        //   positionName='Software Developer'
+          avatar={leader.avatar}
+          name={leader.name}
+          // positionName={leader.description}
           stats={[
             {
               name: 'followers',
-              value: this.state.followers
+              value: leader.followers
             },
             {
               name: 'following',
-              value: this.state.following
+              value: leader.following
             },
             {
               name: 'posts',
-              value: this.state.posts
-            },
-            // {
-            //   name: 'topics',
-            //   value: 'Nuecleer'
-            // },
-            // {
-            //   name: 'location',
-            //   value: 'Israel'
-            // }
+              value: leader.posts
+            }
           ]}
-        />
-        
-      <ListGroup>
-        <ListGroup.Item>Post 1</ListGroup.Item>
-        <ListGroup.Item>Post 2</ListGroup.Item>
-        <ListGroup.Item>Post 3</ListGroup.Item>
-        <ListGroup.Item>Post 4</ListGroup.Item>
-        <ListGroup.Item>Post 5</ListGroup.Item>
-        <ListGroup.Item>Post 6</ListGroup.Item>
-        <ListGroup.Item>Post 7</ListGroup.Item>
-        <ListGroup.Item>Post 8</ListGroup.Item>
-      </ListGroup>
-  
-      </React.Fragment>
+        />)
+    }
+
+    add({ event = null, id = null, name = 'default', followers = 'default', following = 'default', posts = 'default', avatar = 'default', description = 'default', twitterId = null}) {
+      this.setState(prevState => ({
+        leaders: [
+          ...prevState.leaders, {
+            id: id !== null ? id : this.nextID(prevState.leaders),
+            name: name,
+            followers: followers,
+            following: following,
+            posts: posts,
+            avatar: avatar,
+            description: description,
+            twitterId: twitterId
+          }]
+      }))
+  }
+
+  nextID(leaders = []) {
+      let max = leaders.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id , 0)
+      return ++max
+    } 
+
+
+  componentDidMount() {
+    const url = 'http://localhost:3000/allsuggestions';
+    fetch(url)
+        .then(res => res.json())
+        .then(data => data.map(item =>
+            this.add({
+              name: item.full_name,
+              followers: item.twitter_followers_count,
+              following: item.twitter_friends_count,
+              posts: item.twitter_statuses_count,
+              avatar: item.twitter_profile_image,
+              description: item.twitter_description,
+              twitterId: item.twitter_id
+            })))
+        .catch(err => console.error(err));
+  }
+
+  renderList() {
+    return (
+      <div>
+        {/* <React.Fragment> */}
+            <h1>MOD SPECIALIST</h1>
+            <h2>Suggested community members</h2>
+            {this.state.leaders.map(this.eachSuggested)}
+            {/* {this.state.leaders.filter(this.highCertainty)} */}
+        {/* </React.Fragment> */}
+        </div>
     )
+  }
+
+  renderData() {
+    return (
+      <div>
+       <SuggestedLeader leader = {this.state.chosen}/>
+        </div>
+    )
+  }
+
+  render() {
+    return this.state.listMode ? this.renderList() : this.renderData()
   }
 }
 
-export default SuggestedLeader
+export default MoDSpecialist
