@@ -1,0 +1,8 @@
+.d-block {
+    display: block;
+}
+
+#health-check-dashboard-tbody {
+    /* color:black; */
+    text-align: left;
+}
