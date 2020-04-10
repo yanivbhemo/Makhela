@@ -15,7 +15,7 @@ def main():
     # db_handler.delete_ununique_documents()
     # exit(1111)
     log_handler.send_message_to_logAndSlack(str(datetime.datetime.now()) + " - Collection cycle of type: " + sys.argv[1] + " started from a container")
-    collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, "opinion_leaders")
+    collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, sys.argv[2])
     if sys.argv[1] == "tweets":
         collector_opinion_leaders.collect_tweets()
     elif sys.argv[1] == "connections":
