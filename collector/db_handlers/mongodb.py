@@ -1,7 +1,7 @@
 import csv
 from pymongo import MongoClient
 import os
-
+import datetime
 
 class DataBaseHandler:
     db_username = ""
@@ -55,7 +55,7 @@ class DataBaseHandler:
                 'new_leader': new_leader,
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
-                'lock': False
+                'lock': False,
             }
         }
         col = self.db[collection]
@@ -78,7 +78,8 @@ class DataBaseHandler:
                 'new_leader': new_leader,
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
-                'lock': False
+                'lock': False,
+                'internal_create_date': datetime.datetime.now()
         }
         col = self.db[collection]
         col.insert_one(query)
@@ -89,7 +90,8 @@ class DataBaseHandler:
             '$set': {
                 'level_of_certainty': 0,
                 'new_leader': False,
-                'lock': False
+                'lock': False,
+                'internal_create_date': datetime.datetime.now()
             }
         }
         col.update_one({'_id': id_to_update}, query)
@@ -99,7 +101,8 @@ class DataBaseHandler:
         query = {
                 'full_name': fullname,
                 'level_of_certainty': 0,
-                'lock': False
+                'lock': False,
+                'internal_create_date': datetime.datetime.now()
         }
         col.insert_one(query)
     def insert_post(self, collection, leader_twitter_id, post_date, post_id, post_text, retweet_count, likes):
@@ -109,7 +112,8 @@ class DataBaseHandler:
             "post_id": post_id,
             "text": post_text,
             "retweet_count": retweet_count,
-            "likes": likes
+            "likes": likes,
+            "internal_create_date": datetime.datetime.now()
         }
         col = self.db[collection]
         col.insert_one(query)
@@ -128,7 +132,8 @@ class DataBaseHandler:
             "quoted_status_user_id": quoted_status_user_id,
             "retweeted_status_id": retweeted_status_id,
             "retweeted_status_text": retweeted_status_text,
-            "retweeted_status_user_id": retweeted_status_user_id
+            "retweeted_status_user_id": retweeted_status_user_id,
+            "internal_create_date": datetime.datetime.now()
         }
         col = self.db[collection]
         col.insert_one(query)
