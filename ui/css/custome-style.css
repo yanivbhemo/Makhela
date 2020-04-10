@@ -26,3 +26,12 @@
 .profile-text h6 {
     color:#888888;
 }
+
+#contact {
+    padding: 0;
+}
+
+#map {
+    height: auto;
+    width:100%;
+}
