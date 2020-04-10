@@ -15,4 +15,4 @@ CMD cd /tmp && \
         git checkout $latestTag && \
         cd /tmp/Makhela/collector && \
         pip3 install -r python_requirements.txt && \
-        python3 main.py $RUN_TYPE
+        python3 main.py $RUN_TYPE $COLLECTION
