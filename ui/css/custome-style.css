@@ -8,7 +8,12 @@
 }
 
 .pn {
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pn-auto {
     height:auto;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .suggestions-links {
@@ -42,4 +47,29 @@
 
 .task-title-sp {
     padding-left: 10px;
+}
+
+#nohover:hover  {
+    background: none;
+}
+
+.tasks-widget .task-list  li a {
+    color: #e4ff00;
+    font-weight: bolder;
+}
+.label-makhela{
+    background-color: #7731c3;
+}
+
+#no-border-bottom {
+    border-bottom: none;
+}
+
+.pb-0 {
+    padding-bottom: 0;
+}
+
+#profile-page-row {
+    margin-right: 0;
+    margin-left: 0;
 }

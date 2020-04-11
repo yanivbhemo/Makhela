@@ -244,7 +244,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile.html"><img src="img/unknown.jpeg" class="img-circle" width="80"></a></p>
           <h5 class="centered">Sam Soffes</h5>
           <li class="mt">
             <a href="index.html">
@@ -297,9 +297,19 @@
                   <ul class="task-list">
                     <li>
                       <div class="task-title">
+                        <span class="task-title-sp">root</span>
+                        <div class="pull-left hidden-phone">
+                          <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUserModal"><i class="fa fa-pencil"></i></button>                        </div>
+                        <div class="pull-right">
+                          <b>root</b>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
                         <span class="task-title-sp">Yaniv Ben Hamo</span>
                         <div class="pull-left hidden-phone">
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUserModal"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                         </div>
                         <div class="pull-right">
@@ -310,7 +320,9 @@
                   </ul>
                 </div>
                 <div class=" add-task-row">
-                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New User</a>
+                  <button class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#myModal">
+                    Add New User
+                  </button>
                 </div>
               </div>
             </section>
@@ -391,6 +403,115 @@
               </div>
             </section>
           </div>
+        
+          <!--/col-md-12 -->
+        </div>
+        <div class="row mt mb">
+          <div class="col-md-12">
+            <section class="task-panel tasks-widget">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  <h5><i class="fa fa-tasks"></i> Rank new suggestions Thresholds</h5>
+                </div>
+                <br>
+              </div>
+              <div class="panel-body">
+                <div class="task-content">
+                  <ul class="task-list">
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MIN_AMOUNT_OF_FOLLOWERS</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MID_AMOUNT_OF_FOLLOWERS</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MAX_AMOUNT_OF_FOLLOWERS</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MIN_AMOUNT_OF_STATUSES</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!--/col-md-12 -->
+        </div>
+        <div class="row mt mb">
+          <div class="col-md-12">
+            <section class="task-panel tasks-widget">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  <h5><i class="fa fa-tasks"></i> Keywords To Search For</h5>
+                </div>
+                <br>
+              </div>
+              <div class="panel-body pb-0">
+                <div class="task-content">
+                  <ul class="task-list">
+                    <li id="nohover">
+                      <div class="task-title">
+                        <span class="task-title-sp">
+                          <span class="label label-makhela">Primary <a href="#">X</a></span>
+                        </span>
+                      </div>
+                    </li>
+                    <li id="nohover">
+                      <div class="task-title">
+                        <span class="task-title-sp">
+                          <form class="form-horizontal style-form" method="get">
+                            <div class="form-group last" id="no-border-bottom">
+                              <label class="col-sm-2 col-sm-2 control-label">New keyword</label>
+                              <div class="col-md-2">
+                                <div class="input-group bootstrap-timepicker">
+                                  <input type="text" class="form-control timepicker-default">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button"><i class="fa fa-check"></i></button>
+                                    </span>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
           <!--/col-md-12 -->
         </div>
         <!-- /row -->
@@ -421,6 +542,125 @@
     </footer>
     <!--footer end-->
   </section>
+
+  <!-- Add new user model -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel">Add new user</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" class="form-horizontal style-form">
+            <div class="form-group has-success">
+              <label class="col-lg-2 control-label">Full Name</label>
+              <div class="col-lg-10">
+                <input type="text" placeholder="" id="f-name" class="form-control">
+                <p class="help-block">Successfully done</p>
+              </div>
+            </div>
+            <div class="form-group has-error">
+              <label class="col-lg-2 control-label">Email</label>
+              <div class="col-lg-10">
+                <input type="email" placeholder="" id="l-name" class="form-control">
+                <p class="help-block">Aha you gave a wrong info</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Username</label>
+              <div class="col-lg-10">
+                <input type="email" placeholder="" id="email2" class="form-control">
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+                <input type="password" placeholder="" id="email2" class="form-control">
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Role</label>
+              <div class="col-lg-10">
+                <select class="form-control">
+                  <option>Admin</option>
+                  <option>Analyst</option>
+                  <option>Reasercher</option>
+                </select>
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Add</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit user model -->
+  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel">Edit user: yanivbh</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" class="form-horizontal style-form">
+            <div class="form-group has-success">
+              <label class="col-lg-2 control-label">Full Name</label>
+              <div class="col-lg-10">
+                <input type="text" placeholder="" id="f-name" class="form-control">
+                <p class="help-block">Successfully done</p>
+              </div>
+            </div>
+            <div class="form-group has-error">
+              <label class="col-lg-2 control-label">Email</label>
+              <div class="col-lg-10">
+                <input type="email" placeholder="" id="l-name" class="form-control">
+                <p class="help-block">Aha you gave a wrong info</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Username</label>
+              <div class="col-lg-10">
+                <input type="email" placeholder="" id="email2" class="form-control">
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+                <input type="password" placeholder="" id="email2" class="form-control">
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+            <div class="form-group has-warning">
+              <label class="col-lg-2 control-label">Role</label>
+              <div class="col-lg-10">
+                <select class="form-control">
+                  <option>Admin</option>
+                  <option>Analyst</option>
+                  <option>Reasercher</option>
+                </select>
+                <p class="help-block">Something went wrong</p>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Add</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
