@@ -11,6 +11,7 @@ def main():
     log_handler = logger.logger_handler()
     twitter_handler = twitter.Twitter_handler(log_handler)
     db_handler = mongodb.DataBaseHandler(log_handler)
+    collection_config.load_thresholds(db_handler)
     db_handler.unlock_all_opinion_leaders()
     log_handler.send_message_to_logAndSlack(str(datetime.datetime.now()) + " - Collection cycle of type: " + sys.argv[1] + " started from a container")
     collector_opinion_leaders = clt.Collector(log_handler, twitter_handler, db_handler, sys.argv[2])

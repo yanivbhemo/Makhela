@@ -1,8 +1,7 @@
-import csv
+import datetime
+
 from pymongo import MongoClient
 import os.path
-import json
-
 
 class DataBaseHandler:
     db_username = ""
@@ -109,7 +108,10 @@ class DataBaseHandler:
             "quoted_status_user_id": quoted_status_user_id,
             "retweeted_status_id": retweeted_status_id,
             "retweeted_status_text": retweeted_status_text,
-            "retweeted_status_user_id": retweeted_status_user_id
+            "retweeted_status_user_id": retweeted_status_user_id,
+            "checked_for_suggestions": False,
+            "internal_create_date": datetime.datetime.now()
+
         }
         col = self.db[collection]
         col.insert_one(query)
@@ -200,3 +202,12 @@ class DataBaseHandler:
         }
         col = self.db[collection]
         col.insert_one(query)
+
+    def get_system_settings(self, attribute):
+        result = self.db['settings'].find({'attribute':attribute})
+        if result.count() > 0:
+            return result[0]['value']
+        else:
+            print("- Error in mongodb.py -> def get_system_settings(self, attribute)")
+            print("exit 446")
+            exit(446)

@@ -133,6 +133,7 @@ class DataBaseHandler:
             "retweeted_status_id": retweeted_status_id,
             "retweeted_status_text": retweeted_status_text,
             "retweeted_status_user_id": retweeted_status_user_id,
+            "checked_for_suggestions": False,
             "internal_create_date": datetime.datetime.now()
         }
         col = self.db[collection]
@@ -181,3 +182,12 @@ class DataBaseHandler:
                         #print("Delete: " + str(leader['_id']))
                         #self.db['sugguestions'].delete_one({'_id': leader['_id']})
                         print("db.opinion_leaders.deleteOne({'_id': ObjectId('" + str(leader['_id']) + "')})")
+
+    def get_system_settings(self, attribute):
+        result = self.db['settings'].find({'attribute':attribute})
+        if result.count() > 0:
+            return result[0]['value']
+        else:
+            print("- Error in mongodb.py -> def get_system_settings(self, attribute)")
+            print("exit 446")
+            exit(446)

@@ -7,10 +7,10 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Makhela</title>
+  <title>Dashio - Bootstrap Admin Template</title>
 
   <!-- Favicons -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
@@ -20,8 +20,8 @@
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/to-do.css">
   <link href="css/custome-style.css" rel="stylesheet">
-  <script src="lib/chart-master/Chart.js"></script>
 
   <!-- =======================================================
     Template Name: Dashio
@@ -42,7 +42,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>Makhela</b></a>
+      <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -280,67 +280,120 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-      <section class="wrapper site-min-height">
-        <h3><i class="fa fa-plus"></i> New Suggestions</h3>
-        <div class="row">
-          <div class="col-lg-12">
-            <section class="panel">
+      <section class="wrapper">
+        <h3><i class="fa fa-cogs"></i> Settings</h3>
+        <!-- COMPLEX TO DO LIST -->
+        <div class="row mt">
+          <div class="col-md-12">
+            <section class="task-panel tasks-widget">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  <h5><i class="fa fa-users"></i> Users</h5>
+                </div>
+                <br>
+              </div>
               <div class="panel-body">
-              <strong class="">Filters: </strong>
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-theme03">Action</button>
-                              <button type="button" class="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                              <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                            </div>
+                <div class="task-content">
+                  <ul class="task-list">
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">Yaniv Ben Hamo</span>
+                        <div class="pull-left hidden-phone">
+                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <b>Admin</b>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class=" add-task-row">
+                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New User</a>
+                </div>
               </div>
             </section>
           </div>
+          <!-- /col-md-12-->
         </div>
-        <div class="row">
-          <div class="col-md-4 mb">
-            <!-- Suggestion User panel -->
-            <div class="white-panel pn">
-              <div class="white-header">
-                <div class="row">
-                  <div class="col-xs-4 col-md-4"><button type="button" class="btn btn-round btn-success">Add</button></div>
-                  <div class="col-xs-4 col-md-4"><h5>Barbara A. Leaf</h5></div>
-                  <div class="col-xs-4 col-md-4"><button type="button" class="btn btn-round btn-danger">Black List</button></div>
+        <!-- /row -->
+        <!-- SORTABLE TO DO LIST -->
+        <div class="row mt mb">
+          <div class="col-md-12">
+            <section class="task-panel tasks-widget">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  <h5><i class="fa fa-tasks"></i> Tweets and Connection Collector Thresholds</h5>
+                </div>
+                <br>
+              </div>
+              <div class="panel-body">
+                <div class="task-content">
+                  <ul class="task-list">
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MAX_LEVEL_OF_CERTAINTY</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="task-title">
+                        <span class="task-title-sp">MIN_LEVEL_OF_CERTAINTY</span>
+                        <div class="pull-right hidden-phone">
+                          <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="pull-right">
+                          <input type="text" class="centered" value="10"/>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <a href="profile.html" class="suggestions-links">
-                <p><img src="http://pbs.twimg.com/profile_images/980107108900274176/aWxwXSWB_400x400.jpg" class="img-circle" width="80"></p>
-                <p><b>Senior Fellow The Washington Institute for Near East Policy. Fmr US Amb to the UAE; with views on everything under the Middle Eastern sun. Russia, too.</b></p>
-                <div class="row">
-                  <div class="col-xs-6 col-sm-3">
-                    <h6>Twitter ID</h6>
-                    <p>SafiraLeaf</p>
-                  </div>
-                  <div class="col-xs-6 col-sm-3">
-                    <h6>Member Since</h6>
-                    <p>2011-08-04</p>
-                  </div>
-                  <div class="col-xs-6 col-sm-3">
-                    <h6>Certainty Level</h6>
-                    <p>4</p>
-                  </div>
-                  <div class="col-xs-6 col-sm-3">
-                    <h6>Followers</h6>
-                    <p>7639</p>
-                  </div>
-                </div>
-              </a>
-            </div>
+            </section>
           </div>
+          <!--/col-md-12 -->
         </div>
+        <!-- /row -->
       </section>
       <!-- /wrapper -->
     </section>
@@ -361,7 +414,7 @@
           -->
           Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
         </div>
-        <a href="blank.html#" class="go-top">
+        <a href="todo_list.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
@@ -371,14 +424,24 @@
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="lib/jquery-ui-1.9.2.custom.min.js"></script>
-  <script src="lib/jquery.ui.touch-punch.min.js"></script>
   <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
   <script src="lib/jquery.scrollTo.min.js"></script>
   <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
   <!--common script for all pages-->
   <script src="lib/common-scripts.js"></script>
   <!--script for this page-->
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="lib/tasks.js" type="text/javascript"></script>
+  <script>
+    jQuery(document).ready(function() {
+      TaskList.initTaskWidget();
+    });
+
+    $(function() {
+      $("#sortable").sortable();
+      $("#sortable").disableSelection();
+    });
+  </script>
 
 </body>
 

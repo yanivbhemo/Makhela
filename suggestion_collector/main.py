@@ -9,6 +9,7 @@ def main():
     log_handler = logger.logger_handler()
     twitter_handler = twitter.Twitter_handler(log_handler)
     db_handler = mongodb.DataBaseHandler(log_handler)
+    collection_config.load_thresholds(db_handler)
     collector = clt.Suggestion_Collector(log_handler, twitter_handler, db_handler)
     collector.collect()
     log_handler.close_logfile()

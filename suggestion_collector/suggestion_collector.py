@@ -21,7 +21,7 @@ class Suggestion_Collector:
             self.current_suggested_leaders.append(leader)
 
     def collect(self):
-        filter_query = {"checked_for_suggestions": False}
+        filter_query = { "$or": [{"checked_for_suggestions": False}, {"checked_for_suggestions": {"$exists": False}}] }
         # stop_flag
         posts = self.db.get_collection_with_filter("posts", filter_query, 220)
         post_arr = []
