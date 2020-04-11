@@ -73,3 +73,11 @@
     margin-right: 0;
     margin-left: 0;
 }
+
+.login-logo {
+    position: relative;
+    top: 160px;
+    font-family: 'Ruda', sans-serif;
+    font-weight: bold;
+    color: white;
+}
