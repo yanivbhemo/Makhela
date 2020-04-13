@@ -63,7 +63,8 @@ class DataBaseHandler:
                 'new_leader': new_leader,
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
-                'lock': False
+                'lock': False,
+                "internal_create_date": datetime.datetime.now()
             }
         }
         col = self.db[collection]
@@ -170,7 +171,8 @@ class DataBaseHandler:
                 'new_leader': False,
                 'level_of_certainty': 10,
                 'twitter_profile_image': items[i]['twitter_id'],
-                'lock': False
+                'lock': False,
+                "internal_create_date": datetime.datetime.now()
             })
         bulk.execute()
 
@@ -198,7 +200,8 @@ class DataBaseHandler:
                 'new_leader': new_leader,
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
-                'lock': False
+                'lock': False,
+                "internal_create_date": datetime.datetime.now()
         }
         col = self.db[collection]
         col.insert_one(query)
