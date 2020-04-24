@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"Makhela.blacklist"}],"uuid":"00b4f8fdd0b346eaa766bf39c06d76ec"}

@@ -116,7 +116,7 @@ class Twitter_handler:
             try:
                 result = self.api.friends_ids(id=status_id)
                 flag = True
-            except tweepy.RateLimitError as e:
+            except Exception as e:
                 self.logger.send_message_to_logAndSlack("- Rate limit. sleep for 15 minutes")
                 self.logger.send_message_to_logAndSlack("- Twitter Error: \n" + str(e))
                 time.sleep(15 * 60)

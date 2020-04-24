@@ -1,3 +1,4 @@
+import datetime
 import os
 import numpy as np
 import re
@@ -72,10 +73,12 @@ class Collector:
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
     def collect_connections(self):
+        current_time = datetime.datetime.now()
         """ First cycle only for the new members in the community """
+        self.logger.send_message_to_logfile("- First cycle: Search connections for new members in the cummunity")
         temp = self.leaders
         self.leaders = []
-        leaders = self.db.get_collection_with_filter("opinion_leaders",{"community_following": None})
+        leaders = self.db.get_collection_with_filter(self.collection,{'$or': [{'community_following': {'$exists': False}}]})
         for leader in leaders:
             self.leaders.append(leader)
         self.logger.send_message_to_slack("- Start collecting")
@@ -88,7 +91,7 @@ class Collector:
                     self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['twitter_screen_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    self.collect_and_save_connections(leader['twitter_id'])
+                    self.collect_and_save_connections(leader, current_time)
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
@@ -101,8 +104,9 @@ class Collector:
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
         """ Second cycle for the rest of the community """
-        self.leaders = temp
-        for leader in self.leaders:
+        self.logger.send_message_to_logfile("- Second cycle: Search connections for the rest of the cummunity")
+        leaders = self.db.get_collection_with_filter(self.collection,{'$or': [{'community_following':[]}, {'community_following.found_date': {'$not': {'$eq': current_time}}}]})
+        for leader in leaders:
             if leader['lock'] == False:
                 self.db.lock_opinion_leader(leader['_id'])
                 try:
@@ -111,7 +115,7 @@ class Collector:
                     self.logger.send_message_to_logfile("\n- Handles: {0}".format(leader['twitter_screen_name']))
                 if leader['new_leader'] == False:
                     self.logger.send_message_to_logfile("- Not a new leader")
-                    self.collect_and_save_connections(leader['twitter_id'])
+                    self.collect_and_save_connections(leader, current_time)
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     self.collect_leader_init_details(leader['_id'], leader['full_name'])
@@ -295,39 +299,59 @@ class Collector:
         for item in soup.find_all('title'):
             self.logger.send_message_to_logfile(item.get_text())
 
-    def collect_and_save_connections(self, leader_twitter_id):
+    def collect_and_save_connections(self, leader, current_time):
         """
         Search in every opinion leader's twitter account
         for followers from the rest of the opinion leaders in the DB
         """
+        leader_twitter_id = np.long(leader['twitter_id'])
         self.logger.send_message_to_logfile("- Search for connection to another opinion leaders")
         followers_array = self.source_handler.get_following_list(leader_twitter_id)
-        connection_arr = []
+        if len(leader['community_following']) > 0:
+            connection_arr = leader['community_following']
+        else:
+            connection_arr = []
+        new_connections_arr = []
+
         for follower in followers_array:
-            if self.check_follower(follower, leader_twitter_id):
-                connection_arr.append(follower)
+            if self.check_follower(follower, leader_twitter_id, connection_arr):
+                connection_arr.append({'twitter_id':follower,"found_date":current_time})
+                new_connections_arr.append({'twitter_id': follower, "found_date": str(current_time)})
         self.logger.send_message_to_logfile("- Connections found:")
-        self.logger.send_message_to_logfile(connection_arr)
+        self.logger.send_message_to_logfile(new_connections_arr)
         if len(connection_arr) > 0:
-            self.db.insert_connections("opinion_leaders", leader_twitter_id, connection_arr)
+            self.db.insert_connections(self.collection, leader_twitter_id, connection_arr)
         return
 
-    def check_follower(self, follower, leader_twitter_id):
+    def check_follower(self, follower, leader_twitter_id, connection_arr):
         flag = False
         for leader in self.leaders:
             if follower == leader['twitter_id']:
                 flag = True
+                break
         if not flag:
             return False
-        for i in range(len(self.leaders)):
-            if self.leaders[i]['twitter_id'] == leader_twitter_id:
-                try:
-                    for item in self.leaders[i]['community_following']:
-                        if item == follower:
-                            return False
-                except:
-                    return True
-                break
+        # for i in range(len(self.leaders)):
+        #     if self.leaders[i]['twitter_id'] == leader_twitter_id:
+        #         try:
+        #             for item in self.leaders[i]['community_following']:
+        #                 if item == follower:
+        #                     return False
+        #                 try:
+        #                     if item['twitter_id'] == follower:
+        #                         return False
+        #                 except:
+        #                     pass
+        #         except:
+        #             return True
+        #         break
+        # return True
+        for item in connection_arr:
+            try:
+                if item['twitter_id'] == follower:
+                    return False
+            except:
+                pass
         return True
 
     def update_opinion_leaders_information(self):

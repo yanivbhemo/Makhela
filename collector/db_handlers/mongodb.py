@@ -56,7 +56,6 @@ class DataBaseHandler:
                 'level_of_certainty': level_of_certainty,
                 'twitter_profile_image': leader_twitter_profile_image_url,
                 'lock': False,
-                'internal_create_date': datetime.datetime.now()
             }
         }
         col = self.db[collection]

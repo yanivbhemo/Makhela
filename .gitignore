@@ -4,7 +4,6 @@ desktop.ini
 *"*"
 .config
 .config.txt
-.idea/
 __pycache__/
 .gitsecret/keys/random_seed
 analyzer/password.txt
