@@ -106,6 +106,7 @@ class Collector:
         """ Second cycle for the rest of the community """
         self.logger.send_message_to_logfile("- Second cycle: Search connections for the rest of the cummunity")
         leaders = self.db.get_collection_with_filter(self.collection,{'$or': [{'community_following':[]}, {'community_following.found_date': {'$not': {'$eq': current_time}}}]})
+        self.leaders = temp
         for leader in leaders:
             if leader['lock'] == False:
                 self.db.lock_opinion_leader(leader['_id'])
@@ -331,21 +332,6 @@ class Collector:
                 break
         if not flag:
             return False
-        # for i in range(len(self.leaders)):
-        #     if self.leaders[i]['twitter_id'] == leader_twitter_id:
-        #         try:
-        #             for item in self.leaders[i]['community_following']:
-        #                 if item == follower:
-        #                     return False
-        #                 try:
-        #                     if item['twitter_id'] == follower:
-        #                         return False
-        #                 except:
-        #                     pass
-        #         except:
-        #             return True
-        #         break
-        # return True
         for item in connection_arr:
             try:
                 if item['twitter_id'] == follower:

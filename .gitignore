@@ -9,4 +9,5 @@ __pycache__/
 analyzer/password.txt
 Makhela-end/node_modules
 Makhela-end/consts.js
+logs/
 
