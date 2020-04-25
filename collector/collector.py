@@ -78,7 +78,7 @@ class Collector:
         self.logger.send_message_to_logfile("- First cycle: Search connections for new members in the cummunity")
         temp = self.leaders
         self.leaders = []
-        leaders = self.db.get_collection_with_filter(self.collection,{'$or': [{'community_following': {'$exists': False}}]})
+        leaders = self.db.get_collection_with_filter(self.collection,{'$or': [{'community_following': {'$exists': False}},{'community_following': []}]})
         for leader in leaders:
             self.leaders.append(leader)
         self.logger.send_message_to_slack("- Start collecting")
@@ -308,6 +308,7 @@ class Collector:
         leader_twitter_id = np.long(leader['twitter_id'])
         self.logger.send_message_to_logfile("- Search for connection to another opinion leaders")
         followers_array = self.source_handler.get_following_list(leader_twitter_id)
+        self.send_message_to_logfile(followers_array)
         if len(leader['community_following']) > 0:
             connection_arr = leader['community_following']
         else:
