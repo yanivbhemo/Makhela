@@ -119,5 +119,5 @@ class Twitter_handler:
             except Exception as e:
                 self.logger.send_message_to_logAndSlack("- Rate limit. sleep for 15 minutes")
                 self.logger.send_message_to_logAndSlack("- Twitter Error: \n" + str(e))
-                time.sleep(15 * 60)
+                time.sleep(60)
         return result
