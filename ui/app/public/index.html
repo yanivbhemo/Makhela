@@ -39,8 +39,10 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <section id="root">
-      
+    <section id="container">
+      <section id="root">
+        
+      </section>
     </section>
     <!--
       This HTML file is a template.
@@ -64,6 +66,34 @@
     <!--common script for all pages-->
     <script src="lib/common-scripts.js"></script>
     <!--script for this page-->
+    <script type="text/javascript" src="lib/jquery.backstretch.min.js"></script>
+  <script>
+    if(window.location.pathname === "/login"){
+      $.backstretch("img/login-bg.jpg", {
+        speed: 500
+      });
+      
+      function getTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('showtime').innerHTML = h + ":" + m + ":" + s;
+        t = setTimeout(function() {
+          getTime()
+        }, 500);
+      }
 
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+  </script>
   </body>
 </html>
