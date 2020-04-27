@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const Leader = require('../models/opinion-leader')
+const Suggestion = require('../models/suggestion')
 
 exports.getSize = (req, res) => {
-    Leader.find({}).count(function(err, count) {
+    Suggestion.find({}).count(function(err, count) {
         if(!err) {
             console.log(count)
             return res.json(count)

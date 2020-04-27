@@ -3,7 +3,8 @@ import Content from '../Content'
 import Row from '../Row'
 import Col from '../Col'
 import Panel from '../Panel'
-import {community_stats_panel, posts_collected_panel, health_dashboard_panel} from '../Panels'
+import Community_stats_panel from '../Panels'
+import {Posts_collected_panel, Health_dashboard_panel} from '../Panels'
 
 class GraphPage extends Component {
     constructor(props) {
@@ -33,13 +34,13 @@ class GraphPage extends Component {
                 </Row>
                 <Row>
                     <Col className="col-md-4 col-sm-4 mb">
-                        {community_stats_panel()}
+                        <Community_stats_panel />
                     </Col>
                     <Col className="col-md-4 col-sm-4 mb">
-                        {posts_collected_panel()}
+                        <Posts_collected_panel />
                     </Col>
                     <Col className="col-md-4 col-sm-4 mb">
-                        {health_dashboard_panel()}
+                        <Health_dashboard_panel />
                     </Col>
                 </Row>
             </Content>

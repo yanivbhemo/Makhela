@@ -1,1 +1,2 @@
+require('./database')
 require('./server')
