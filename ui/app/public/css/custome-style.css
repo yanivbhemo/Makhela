@@ -1,0 +1,83 @@
+.d-block {
+    display: block;
+}
+
+#health-check-dashboard-tbody {
+    /* color:black; */
+    text-align: left;
+}
+
+.pn {
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pn-auto {
+    height:auto;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.suggestions-links {
+    color:black;
+}
+
+.profile-text h3 {
+    color:#7731c3;
+}
+
+.profile-text h4 {
+    color:#7731c3;
+}
+
+.profile-text h6 {
+    color:#888888;
+}
+
+.detailed h4 {
+    color:#7731c3;
+}
+
+#contact {
+    padding: 0;
+}
+
+#map {
+    height: auto;
+    width:100%;
+}
+
+.task-title-sp {
+    padding-left: 10px;
+}
+
+#nohover:hover  {
+    background: none;
+}
+
+.tasks-widget .task-list  li a {
+    color: #e4ff00;
+    font-weight: bolder;
+}
+.label-makhela{
+    background-color: #7731c3;
+}
+
+#no-border-bottom {
+    border-bottom: none;
+}
+
+.pb-0 {
+    padding-bottom: 0;
+}
+
+#profile-page-row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.login-logo {
+    position: relative;
+    top: 160px;
+    font-family: 'Ruda', sans-serif;
+    font-weight: bold;
+    color: white;
+}
