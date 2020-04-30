@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Suggestion = require('../models/suggestion')
 
 exports.getSize = (req, res) => {
-    Suggestion.find({}).count(function(err, count) {
+    Suggestion.find({}).countDocuments(function(err, count) {
         if(!err) {
             console.log(count)
             return res.json(count)
