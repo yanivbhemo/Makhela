@@ -3,7 +3,7 @@ import * as CONSTS from '../../consts'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
-class Community_stats_panel extends Component {
+class CommunityPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -56,7 +56,7 @@ class Community_stats_panel extends Component {
     }
 }
 
-class Posts_collected_panel extends Component {
+class PostsPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -83,10 +83,10 @@ class Posts_collected_panel extends Component {
     }
 }
 
-class Health_dashboard_panel extends Component {
-  constructor(props) {
-    super(props)
-  }
+class HealthPanel extends Component {
+  // constructor(props) {
+  //   super(props)
+  // }
     render() {
       return (
         <div className="darkblue-panel pn">
@@ -126,8 +126,55 @@ class Health_dashboard_panel extends Component {
     }
 }
 
-export default Community_stats_panel;
+class LeaderPanel extends Component {
+  constructor(props){
+    super(props)
+    this.moveToBlackList = this.moveToBlackList.bind(this)
+  }
+  moveToBlackList() {
+    console.log("test1")
+    this.props.onBlackListBtn(this.props.index)
+  }
+  render(){
+    return(
+      <div className="white-panel pn-auto">
+        <div className="white-header">
+          <div className="row">
+            <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList}>Black List</button></div>
+            <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
+          </div>
+          <a href={`/opinion_leaders/${this.props.twitter_id}`} className="suggestions-links">
+                        <p><img src={this.props.twitter_profile_image} className="img-circle" width="80" alt="name"/></p>
+                        <p><b>{this.props.twitter_description}</b></p>
+                        <div className="row">
+                        <div className="col-xs-6 col-sm-3">
+                            <h6>Twitter ID</h6>
+                            <p>{this.props.twitter_screen_name}</p>
+                        </div>
+                        <div className="col-xs-6 col-sm-3">
+                            <h6>Member Since</h6>
+                            {/* <p>{this.props.twitter_created_at}</p> */}
+                            <p>{this.props.twitter_created_at}</p>
+                        </div>
+                        <div className="col-xs-6 col-sm-3">
+                            <h6>Cert. Level</h6>
+                            <p>{this.props.level_of_certainty}</p>
+                        </div>
+                        <div className="col-xs-6 col-sm-3">
+                            <h6>Followers</h6>
+                            <p>{this.props.twitter_followers_count}</p>
+                        </div>
+                        </div>
+                    </a>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default CommunityPanel;
 export {
-  Posts_collected_panel,
-  Health_dashboard_panel
+  PostsPanel,
+  HealthPanel,
+  LeaderPanel
 }

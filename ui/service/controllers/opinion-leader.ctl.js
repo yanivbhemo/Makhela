@@ -10,3 +10,18 @@ exports.getSize = (req, res) => {
         else return res.json(count)
     })
 }
+
+exports.getAllLeaders = (req, res) => {
+    Leader.find({}).limit(10)
+    .then( docs => {
+        return res.status(200).json(docs)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+exports.MoveToBlackList = (req, res) => {
+    console.log(req.params.twitter_id)
+    res.status(200).send("OK")
+}

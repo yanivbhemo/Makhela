@@ -6,13 +6,13 @@ import Panel from '../Panel'
 import Header from '../Header'
 import Menu from '../Menu'
 import Footer from '../Footer'
-import Community_stats_panel from '../Panels'
-import {Posts_collected_panel, Health_dashboard_panel} from '../Panels'
+import CommunityPanel from '../Panels'
+import {PostsPanel, HealthPanel} from '../Panels'
 
 class GraphPage extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     componentDidMount() {
         document.title = "Main Graph"
@@ -40,13 +40,13 @@ class GraphPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-md-4 col-sm-4 mb">
-                            <Community_stats_panel />
+                            <CommunityPanel />
                         </Col>
                         <Col className="col-md-4 col-sm-4 mb">
-                            <Posts_collected_panel />
+                            <PostsPanel />
                         </Col>
                         <Col className="col-md-4 col-sm-4 mb">
-                            <Health_dashboard_panel />
+                            <HealthPanel />
                         </Col>
                     </Row>
                 </Content>
