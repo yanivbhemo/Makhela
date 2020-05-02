@@ -131,16 +131,19 @@ class LeaderPanel extends Component {
     super(props)
     this.moveToBlackList = this.moveToBlackList.bind(this)
   }
-  moveToBlackList() {
+
+  moveToBlackList(props) {
     console.log("test1")
     this.props.onBlackListBtn(this.props.index)
   }
+
   render(){
     return(
+      <div>
       <div className="white-panel pn-auto">
         <div className="white-header">
           <div className="row">
-            <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList}>Black List</button></div>
+            <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div>
             <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
           </div>
           <a href={`/opinion_leaders/${this.props.twitter_id}`} className="suggestions-links">
@@ -167,6 +170,7 @@ class LeaderPanel extends Component {
                         </div>
                     </a>
         </div>
+      </div>
       </div>
     )
   }

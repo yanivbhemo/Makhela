@@ -8,7 +8,7 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import { LeaderPanel } from '../Panels'
 import * as CONSTS from '../../consts'
-
+import ModalBox from '../ModalBox'
 
 const filter_button_style = {
     paddingRight: "10px"
@@ -20,12 +20,18 @@ class CommunityPage extends Component {
         super(props)
         this.state = {
             leaders: [],
-            loadingActive: true
+            loadingActive: true,
+            showModal: false,
+            blackBackground: 'none',
+            id_to_blacklist: '',
+            amount_of_leaders: ''
         }
         
         this.add = this.add.bind(this)
         this.eachLeader = this.eachLeader.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
+        this.modalOnClose = this.modalOnClose.bind(this)
+        this.modalOnSubmit = this.modalOnSubmit.bind(this)
     }
 
     componentDidMount() {
@@ -66,14 +72,10 @@ class CommunityPage extends Component {
     }
 
     moveToBlackList(twitter_id){
-        console.log(twitter_id)
-        const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_id
-        fetch(url)
-        .then(res =>{
-            console.log(res)
-        })
-        .catch(err => console.log(err))
+        this.setState({showModal: true, blackBackground:'', id_to_blacklist:twitter_id})
     }
+
+
 
     eachLeader(leader, i) {
         return(
@@ -94,6 +96,29 @@ class CommunityPage extends Component {
                 </LeaderPanel>
             </Col>
         )
+    }
+
+    modalOnClose() {
+        this.setState({showModal: false, blackBackground:'none'})
+    }
+
+    modalOnSubmit(){
+        const twitter_id = this.state.id_to_blacklist
+        const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_id
+        fetch(url)
+        .then(res =>{
+            if(res.status === 200){
+                this.setState(prevState => ({
+                    leaders: prevState.leaders.filter(leader => leader.twitter_id !== twitter_id),
+                    showModal: false, 
+                    blackBackground:'none'
+                }))
+            }
+            else {
+                console.log("Error: " + res.status)
+            }
+        })
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -131,6 +156,11 @@ class CommunityPage extends Component {
                         </Col>
                     </Row>
                     <Row>
+                        <Col className="col-lg-12">
+                            <h4>Amount of results: </h4>
+                        </Col>
+                    </Row>
+                    <Row>
                         <div className="leadersList">
                             {
                             this.state.leaders.map(this.eachLeader)
@@ -138,7 +168,17 @@ class CommunityPage extends Component {
                         </div>
                     </Row>
                 </Content>
+                <ModalBox 
+                show={this.state.showModal} 
+                title="Are you sure?"
+                onClose={this.modalOnClose}
+                rightBtnText="Blacklist"
+                onSubmit={this.modalOnSubmit}
+                type="danger"
+                >
+                </ModalBox>
                 <Footer />
+                <div className="modal-backdrop fade in" style={{display: this.state.blackBackground}}></div>
             </React.Fragment>
         )
     }
