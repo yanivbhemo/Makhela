@@ -9,7 +9,7 @@ var user = new mongoose.Schema({
     username: {type: String, required: true},
     password: String,
     role: {type: String, required: true}
-}, { collection: 'users' }, {versionKey: ''} )
+}, { collection: 'users', versionKey: ''} )
 
 user.pre('save', function(next) {
     if(this.isNew || this.isModified('password') || this.isModified('username')) {

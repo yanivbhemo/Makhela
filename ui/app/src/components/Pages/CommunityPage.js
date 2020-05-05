@@ -9,6 +9,7 @@ import Footer from '../Footer'
 import { LeaderPanel } from '../Panels'
 import * as CONSTS from '../../consts'
 import ModalBox from '../ModalBox'
+import { NavLink } from 'react-router-dom';
 
 const filter_button_style = {
     paddingRight: "10px"
@@ -24,35 +25,49 @@ class CommunityPage extends Component {
             showModal: false,
             blackBackground: 'none',
             id_to_blacklist: '',
-            amount_of_leaders: ''
+            amount_of_leaders: '',
+            locations: [],
         }
         
-        this.add = this.add.bind(this)
+        this.addLeaders = this.addLeaders.bind(this)
         this.eachLeader = this.eachLeader.bind(this)
+        this.eachLocation = this.eachLocation.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.modalOnClose = this.modalOnClose.bind(this)
         this.modalOnSubmit = this.modalOnSubmit.bind(this)
+        this.locationOnClick = this.locationOnClick.bind(this)
     }
 
     componentDidMount() {
         document.title = "Community"
-        const url = CONSTS.GET_ALL_LEADERS
+
+        var url = CONSTS.GET_ALL_LEADERS
         fetch(url)
         .then(res => res.json())
-        .then(data => data.map(leader => this.add({
+        .then(data => data.map(leader => this.addLeaders({
             full_name: leader.full_name, 
             twitter_id: leader.twitter_id, 
             twitter_profile_image: leader.twitter_profile_image,
             twitter_description: leader.twitter_description,
+            twitter_location: leader.twitter_location,
             twitter_screen_name: leader.twitter_screen_name,
             twitter_created_at: leader.twitter_created_at,
             level_of_certainty: leader.level_of_certainty,
             twitter_followers_count: leader.twitter_followers_count
         })))
+        .then(res => this.setState({amount_of_leaders: res.length}))
+        .catch(err => console.log(err))
+
+        url = CONSTS.GET_ALL_LEADERS_LOCATIONS
+        fetch(url)
+        .then(res => res.json())
+        .then(data => data.map(location => this.addLocations({
+            location
+        })))
         .catch(err => console.log(err))
     }
 
-    add({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
             leaders: [
                 ...prevState.leaders,
@@ -61,6 +76,7 @@ class CommunityPage extends Component {
                     twitter_id: twitter_id, 
                     twitter_profile_image: twitter_profile_image,
                     twitter_description: twitter_description,
+                    twitter_location: twitter_location,
                     twitter_screen_name: twitter_screen_name,
                     twitter_created_at: twitter_created_at,
                     level_of_certainty: level_of_certainty,
@@ -71,11 +87,27 @@ class CommunityPage extends Component {
         }))
     }
 
+    addLocations({location}){
+        this.setState(prevState => ({
+            locations: [
+                ...prevState.locations,
+                {
+                    name: location
+                }
+            ]
+        }))
+    }
+
     moveToBlackList(twitter_id){
         this.setState({showModal: true, blackBackground:'', id_to_blacklist:twitter_id})
     }
 
-
+    eachLocation(location, i){
+        // console.log(location)
+        return(
+            <li key={`Item${i}`}><a key={`Item${i}`} index={location} onClick={this.locationOnClick.bind(this, location)}>{location.name}</a></li>
+        )
+    }
 
     eachLeader(leader, i) {
         return(
@@ -111,7 +143,8 @@ class CommunityPage extends Component {
                 this.setState(prevState => ({
                     leaders: prevState.leaders.filter(leader => leader.twitter_id !== twitter_id),
                     showModal: false, 
-                    blackBackground:'none'
+                    blackBackground:'none',
+                    amount_of_leaders: this.state.amount_of_leaders - 1
                 }))
             }
             else {
@@ -121,7 +154,20 @@ class CommunityPage extends Component {
         .catch(err => console.log(err))
     }
 
+    locationOnClick(location){
+        if(!location)
+            var url = CONSTS.GET_ALL_LEADERS   
+        else var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
+        fetch(url)
+        .then(res  => res.json())
+        .then(data => {
+            this.setState({leaders:data, amount_of_leaders:data.length})
+        })
+        .catch(err => console.log(err))
+    }
+
     render() {
+        
         return(
             <React.Fragment>
                 <Header />
@@ -130,7 +176,9 @@ class CommunityPage extends Component {
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
-                                <a href="add_leader.html"><button type="button" className="btn btn-success">Add a leader</button></a>
+                                <NavLink exact to="/addLeader">
+                                    <button type="button" className="btn btn-success">Add a leader</button>
+                                </NavLink>
                             </Panel>
                         </Col>
                     </Row>
@@ -139,17 +187,15 @@ class CommunityPage extends Component {
                             <Panel>
                                 <strong style={filter_button_style}>Filters: </strong>
                                 <div className="btn-group">
-                                    <button type="button" className="btn btn-theme03">Action</button>
+                                    <button type="button" className="btn btn-theme03">Locations</button>
                                     <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         <span className="caret"></span>
                                         <span className="sr-only">Toggle Dropdown</span>
                                         </button>
-                                    <ul className="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li className="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                    <ul className="dropdown-menu overflow-auto" role="menu">
+                                        {/* {this.state.locations.map(this.eachLocation)} */}
+                                        <li><a onClick={this.locationOnClick.bind(this, '')}>All</a></li>
+                                        {this.state.locations.map(this.eachLocation)} 
                                     </ul>
                                 </div>
                             </Panel>
@@ -157,13 +203,13 @@ class CommunityPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Amount of results: </h4>
+                            <h4>Amount of leaders: {this.state.amount_of_leaders}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <div className="leadersList">
                             {
-                            this.state.leaders.map(this.eachLeader)
+                                this.state.leaders.map(this.eachLeader)
                             }
                         </div>
                     </Row>

@@ -12,8 +12,8 @@ class Menu extends Component {
                 <div id="sidebar" className="nav-collapse " tabIndex="5000" style={{overflow: "hidden", outline: "none"}}>
                     {/* <!-- sidebar menu start--> */}
                     <ul className="sidebar-menu" id="nav-accordion">
-                    <p className="centered"><a href="profile.html"><img src="img/ui-sam.jpg" className="img-circle" width="80" alt="User-Icon" /></a></p>
-                    <h5 className="centered">Sam Soffes</h5>
+                    <p className="centered"><a href="profile.html"><img src="img/unknown.jpeg" className="img-circle" width="80" alt="User-Icon" /></a></p>
+                    <h5 className="centered">{sessionStorage.getItem('user_fullname')}</h5>
                     
                         <li className="mt">
                             <NavLink exact to="/">

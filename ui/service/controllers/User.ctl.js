@@ -57,14 +57,16 @@ exports.authenticate2 = (req, res) => {
                 } else {
                   // Issue token
                   // Get role
-                  User.findOne({username},'role', (err, data) => {
+                  User.findOne({username}, (err, data) => {
                     let user_role = data.role
-                    const payload = { username, user_role };
+                    let full_name = data.full_name
+                    const payload = { username, user_role, full_name };
                     const token = jwt.sign(payload, consts.JSON_TOKEN_SECRET, {
                       expiresIn: '1h'
                     });
                     console.log("Token: ", token)
-                    res.status(200).json(token)
+                    let response = {token, full_name}
+                    res.status(200).json(response)
                   })
                 }
               });
@@ -105,7 +107,6 @@ exports.authenticate = (req, res) => {
                     User.findOne({username},'role', (err, data) => {
                       let user_role = data.role
                       const payload = { username, user_role };
-                      console.log("hey")
                       const token = jwt.sign(payload, consts.JSON_TOKEN_SECRET, {
                         expiresIn: '1h'
                       });

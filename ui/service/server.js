@@ -31,6 +31,8 @@ app.use(   (req, res, next) => {
 
 app.get('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.get('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
+app.get('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations);
+app.get('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
 app.get('/opinion_leaders/moveToBlackList/:twitter_id', withAuth, opinionLeaderCtl.MoveToBlackList);
 app.get('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
 app.get('/posts/getSize', withAuth, postsCtl.getSize);

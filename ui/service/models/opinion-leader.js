@@ -21,7 +21,7 @@ var leader = new mongoose.Schema({
     betweenness_centrality: Number,
     closeness_centrality: Number,
     analyzed_date: Date    
-}, { collection: 'opinion_leaders' }, {versionKey: ''} )
+}, { collection: 'opinion_leaders', versionKey: ''} )
 
 var Leader = mongoose.model('Leader', leader)
 

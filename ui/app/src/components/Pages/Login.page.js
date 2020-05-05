@@ -37,7 +37,9 @@ class LoginPage extends Component {
                 res.json().then(
                     res2 => {
                         this.setState({error: ''})
-                        document.cookie = "token="+res2
+                        console.log(res2)
+                        sessionStorage.setItem('user_fullname',res2.full_name)
+                        document.cookie = "token="+res2.token
                         window.location.href = "/"
                     }
                 )

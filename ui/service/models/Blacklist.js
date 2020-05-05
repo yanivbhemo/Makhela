@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 
-var suggestion = new mongoose.Schema({
+var blacklist_leader = new mongoose.Schema({
     full_name: {type: String, required: true, index: 2 },
     new_leader: Boolean,
     twitter_created_at: Date,
@@ -12,11 +12,17 @@ var suggestion = new mongoose.Schema({
     twitter_screen_name: String,
     twitter_statuses_count: Number,
     level_of_certainty: {type: Number, required: true},
+    community_following: Number,
     lock: Boolean,
     twitter_profile_image: String,
-    internal_create_date: {type: Date, required: true},   
-}, { collection: 'suggestions', versionKey: ''} )
+    internal_create_date: {type: Date, required: true},
+    community: Number,
+    deg_centrality: Number,
+    betweenness_centrality: Number,
+    closeness_centrality: Number,
+    analyzed_date: Date
+}, { collection: 'blacklist', versionKey: ''} )
 
-var Suggestion = mongoose.model('Suggestion', suggestion)
+var BlackListLeader = mongoose.model('BlackListLeader', blacklist_leader)
 
-module.exports = Suggestion;
+module.exports = BlackListLeader
