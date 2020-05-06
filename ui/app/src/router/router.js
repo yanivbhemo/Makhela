@@ -1,17 +1,19 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
-import Header from '../components/Header'
-import Menu from '../components/Menu'
 import GraphPage from '../components/Pages/GraphPage'
 import CommunityPage from '../components/Pages/CommunityPage'
+import LoginPage from '../components/Pages/Login.page'
+import withAuth from '../components/withAuth';
+import addLeader from '../components/Pages/AddLeader.page'
+
 
 const ReactRouter = () => {
     return (
         <React.Fragment>
-            <Header />
-            <Menu />
-            <Route exact path="/" component={GraphPage} />
-            <Route exact path="/community" component={CommunityPage} />
+            <Route exact path="/" component={withAuth(GraphPage)} />
+            <Route exact path="/community" component={withAuth(CommunityPage)} />
+            <Route exact path="/addLeader" component={withAuth(addLeader)} />
+            <Route exact path="/login" component={LoginPage} />
         </React.Fragment>
     )
 }

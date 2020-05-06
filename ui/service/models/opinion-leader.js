@@ -7,21 +7,21 @@ var leader = new mongoose.Schema({
     twitter_description: String,
     twitter_followers_count: Number,
     twitter_friends_count: Number,
-    twitter_id: {type: Number, required: true, index: 1},
+    twitter_id: {type: Number, index: 1},
     twitter_location: String,
     twitter_screen_name: String,
     twitter_statuses_count: Number,
-    level_of_certainty: {type: Number, required: true},
+    level_of_certainty: {type: Number},
     community_following: Number,
     lock: Boolean,
     twitter_profile_image: String,
-    internal_create_date: {type: Date, required: true},
+    internal_create_date: {type: Date},
     community: Number,
     deg_centrality: Number,
     betweenness_centrality: Number,
     closeness_centrality: Number,
     analyzed_date: Date    
-}, { collection: 'opinion_leaders' }, {versionKey: ''} )
+}, { collection: 'opinion_leaders', versionKey: ''} )
 
 var Leader = mongoose.model('Leader', leader)
 

@@ -15,7 +15,7 @@ var suggestion = new mongoose.Schema({
     lock: Boolean,
     twitter_profile_image: String,
     internal_create_date: {type: Date, required: true},   
-}, { collection: 'suggestions' }, {versionKey: ''} )
+}, { collection: 'suggestions', versionKey: ''} )
 
 var Suggestion = mongoose.model('Suggestion', suggestion)
 

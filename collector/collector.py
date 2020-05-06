@@ -63,7 +63,7 @@ class Collector:
                     self.collect_and_save_tweets(leader['twitter_id'])
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
-                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                    self.collect_leader_init_details(leader['_id'], leader['full_name'], leader['twitter_screen_name'])
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
                 try:
@@ -129,54 +129,62 @@ class Collector:
                     self.logger.send_message_to_logfile(
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
-    def collect_leader_init_details(self, leader_db_id, leader_fullName):
-        leader_info = self.source_handler.search_twitter_name(leader_fullName)
+    def collect_leader_init_details(self, leader_db_id, leader_fullName, twitter_screen_name=""):
+        if twitter_screen_name:
+            leader_info = self.source_handler.search_twitter_name(twitter_screen_name)
+            results_length = len(leader_info)
+        else:
+            leader_info = self.source_handler.search_twitter_name(leader_fullName)
+            results_length = len(leader_info)
         # Checks of more than 1 name came up
-        if len(leader_info) == 1:
-            for details in leader_info:
-                profile_image = details.profile_image_url[0:details.profile_image_url.find(
-                    '_normal')] + "_400x400" + details.profile_image_url[
-                                               details.profile_image_url.rfind('.'):len(details.profile_image_url)]
-                self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id, details.screen_name,
-                                                      details.location, details.description, details.followers_count,
-                                                      details.friends_count, details.created_at, details.statuses_count,
-                                                      False, 10, profile_image)
-        elif len(leader_info) == 0:
-            self.logger.send_message_to_logfile("- Collector did not find any person with that name")
-            self.db.insert_leader_details_empty("blacklist", leader_fullName)
-        elif len(leader_info) > 1:
-            self.logger.send_message_to_logfile("- Search for screen name came up with more than 1 result".format(
-                leader_fullName))
-            required_id = self.resolve_search_leader_multiple_results(leader_info, leader_fullName)
-            try:
-                if required_id['id'] == 0:
+        if leader_info:
+            if results_length == 1:
+                for details in leader_info:
+                    profile_image = details.profile_image_url[0:details.profile_image_url.find(
+                        '_normal')] + "_400x400" + details.profile_image_url[
+                                                   details.profile_image_url.rfind('.'):len(details.profile_image_url)]
+                    self.db.update_leader_details_regular(self.collection, leader_db_id, details.id, details.screen_name,
+                                                          details.location, details.description, details.followers_count,
+                                                          details.friends_count, details.created_at, details.statuses_count,
+                                                          False, 10, profile_image)
+            elif results_length == 0:
+                self.logger.send_message_to_logfile("- Collector did not find any person with that name")
+                self.db.insert_leader_details_empty("blacklist", leader_fullName)
+            elif results_length > 1:
+                self.logger.send_message_to_logfile("- Search for screen name came up with more than 1 result".format(
+                    leader_fullName))
+                required_id = self.resolve_search_leader_multiple_results(leader_info, leader_fullName)
+                try:
+                    if required_id['id'] == 0:
+                        self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
+                        self.db.insert_leader_details_empty("blacklist", leader_fullName)
+                except:
                     self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
                     self.db.insert_leader_details_empty("blacklist", leader_fullName)
-            except:
-                self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
-                self.db.insert_leader_details_empty("blacklist", leader_fullName)
-            else:
-                for details in leader_info:
-                    if details.id == required_id["id"]:
-                        profile_image = details.profile_image_url[0:details.profile_image_url.find(
-                            '_normal')] + "_400x400" + details.profile_image_url[details.profile_image_url.rfind('.'):len(details.profile_image_url)]
-                        if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY:
-                            self.db.update_leader_details_regular("suggestions", leader_db_id, details.id,
+                else:
+                    for details in leader_info:
+                        if details.id == required_id["id"]:
+                            profile_image = details.profile_image_url[0:details.profile_image_url.find(
+                                '_normal')] + "_400x400" + details.profile_image_url[details.profile_image_url.rfind('.'):len(details.profile_image_url)]
+                            if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY:
+                                self.db.update_leader_details_regular("suggestions", leader_db_id, details.id,
+                                                                      details.screen_name,
+                                                                      details.location, details.description,
+                                                                      details.followers_count,
+                                                                      details.friends_count, details.created_at,
+                                                                      details.statuses_count,
+                                                                      False, required_id["level_of_certainty"],
+                                                                      profile_image)
+                            else:
+                                self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id,
                                                                   details.screen_name,
                                                                   details.location, details.description,
                                                                   details.followers_count,
                                                                   details.friends_count, details.created_at,
                                                                   details.statuses_count,
-                                                                  False, required_id["level_of_certainty"],
-                                                                  profile_image)
-                        else:
-                            self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id,
-                                                              details.screen_name,
-                                                              details.location, details.description,
-                                                              details.followers_count,
-                                                              details.friends_count, details.created_at,
-                                                              details.statuses_count,
-                                                              False, 10, profile_image)
+                                                                  False, 10, profile_image)
+        else:
+            self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
 
     def refresh_leaders_init_details(self):
         for leader in self.leaders:

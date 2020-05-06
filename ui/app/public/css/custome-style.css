@@ -12,7 +12,7 @@
 }
 
 .pn-auto {
-    height:auto;
+    height: 340px;
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -80,4 +80,20 @@
     font-family: 'Ruda', sans-serif;
     font-weight: bold;
     color: white;
+}
+
+.open>.dropdown-menu {
+    height: 150px;
+    overflow: auto;
+}
+
+.grey-panel {
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#leader-panel-header{
+    
 }

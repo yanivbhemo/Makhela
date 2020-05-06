@@ -16,6 +16,5 @@ def main():
 
 
 if __name__ == "__main__":
-    collection_config.load_env_variables()
     main()
     exit(0)
