@@ -98,6 +98,7 @@ exports.getLeadersByLocation = (req, res) => {
     .catch(err => {
         console.log(err)
     })
+<<<<<<< HEAD
 }
 
 exports.addNewLeader = (req, res) => {
@@ -130,4 +131,6 @@ exports.addNewLeader = (req, res) => {
         console.log(err)
         return res.sendStatus(500)
     })
+=======
+>>>>>>> 96ab1366edc726d1cfc0d41f88dd6db82d995251
 }

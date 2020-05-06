@@ -34,7 +34,10 @@ app.get('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeade
 app.get('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations);
 app.get('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
 app.get('/opinion_leaders/moveToBlackList/:twitter_id', withAuth, opinionLeaderCtl.MoveToBlackList);
+<<<<<<< HEAD
 app.post('/opinion_leaders/addNewLeader', withAuth, opinionLeaderCtl.addNewLeader);
+=======
+>>>>>>> 96ab1366edc726d1cfc0d41f88dd6db82d995251
 app.get('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
 app.get('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/users/new', userCtl.createUser);

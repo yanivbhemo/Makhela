@@ -103,6 +103,10 @@ class CommunityPage extends Component {
     }
 
     eachLocation(location, i){
+<<<<<<< HEAD
+=======
+        // console.log(location)
+>>>>>>> 96ab1366edc726d1cfc0d41f88dd6db82d995251
         return(
             <li key={`Item${i}`}><a key={`Item${i}`} index={location} onClick={this.locationOnClick.bind(this, location)}>{location.name}</a></li>
         )
@@ -166,6 +170,7 @@ class CommunityPage extends Component {
     }
 
     render() {
+        
         return(
             <React.Fragment>
                 <Header />
@@ -206,7 +211,13 @@ class CommunityPage extends Component {
                     </Row>
                     <Row>
                         <div className="leadersList">
+<<<<<<< HEAD
                             {this.state.leaders.map(this.eachLeader)}
+=======
+                            {
+                                this.state.leaders.map(this.eachLeader)
+                            }
+>>>>>>> 96ab1366edc726d1cfc0d41f88dd6db82d995251
                         </div>
                     </Row>
                 </Content>
