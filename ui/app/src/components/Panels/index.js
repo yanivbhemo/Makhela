@@ -140,15 +140,9 @@ class LeaderPanel extends Component {
   render(){
     return(
       <div>
-<<<<<<< HEAD
       <div className="white-panel pn-auto grey-panel">
         <div className="white-header">
           <div className="row" id="leader-panel-header">
-=======
-      <div className="white-panel pn-auto">
-        <div className="white-header">
-          <div className="row">
->>>>>>> 96ab1366edc726d1cfc0d41f88dd6db82d995251
             <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div>
             <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
           </div>
