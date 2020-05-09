@@ -3,7 +3,7 @@ if(process.env.production)
     url = "http://makhela.live:3000"
 export const OPINION_LEADERS_SIZE = url + "/opinion_leaders/getCommunitySize"
 export const SUGGESTIONS_COLLECTION_SIZE = url + "/suggestions/getSize"
-export const POSTS_COLLECTION_SIZE = "http://localhost:3000/posts/getSize"
+export const POSTS_COLLECTION_SIZE = url + "/posts/getSize"
 export const AUTHENTICATION_URL = url + "/users/auth2"
 export const AUTH_CHECK = url + "/users/checkToken"
 export const GET_ALL_LEADERS = url + "/opinion_leaders/getAllLeaders"
