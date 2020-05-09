@@ -13,7 +13,7 @@ exports.getSize = (req, res) => {
 }
 
 exports.getAllLeaders = (req, res) => {
-    Leader.find({}).limit(10)
+    Leader.find({}).sort({"internal_create_date": -1}).limit(20)
     .then( docs => {
         console.log("- Request: Return all leaders")
         return res.status(200).json(docs)
@@ -125,6 +125,68 @@ exports.addNewLeader = (req, res) => {
         }
         else
             return res.sendStatus(404)
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(500)
+    })
+}
+
+exports.getLeader = (req, res) => {
+    console.log("- Request: Get information of leader " + req.params.twitter_screen_name)
+    let query
+    if(req.params.twitter_screen_name.match(/^[0-9]+$/))
+    {
+        let twitter_id = req.params.twitter_screen_name
+        query={twitter_id}
+    }
+    else{
+        let twitter_screen_name = req.params.twitter_screen_name
+        query={twitter_screen_name}
+    }
+
+    Leader.findOne(query)
+    .then(doc => {
+        if(doc){
+            return res.status(200).json(doc)
+        } else {
+            return res.sendStatus(404)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(500)
+    })
+}
+
+exports.getLeaderFriends = (req, res) => {
+    console.log("- Request: Get leader's friends inside the community: " + req.params.twitter_id)
+    let twitter_id = req.params.twitter_id
+    Leader.findOne({twitter_id}).select('community_following')
+    .then(docs => {
+        console.log(docs)
+        if(docs){
+            return res.status(200).json(docs)
+        } else {
+            return res.sendStatus(404)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(500)
+    })
+}
+
+exports.getLeaderShortDetails = (req, res) => {
+    console.log("- Request: Get leader's information short version")
+    let twitter_id = req.params.twitter_id
+    Leader.findOne({twitter_id}).select('full_name twitter_screen_name twitter_profile_image')
+    .then(doc => {
+        if(!doc) {
+            payload = {"full_name": "none", "twitter_screen_name": "none", "twitter_profile_image": "none"}
+            return res.status(200).json(payload)
+        } else
+            return res.status(200).json(doc)
     })
     .catch(err => {
         console.log(err)

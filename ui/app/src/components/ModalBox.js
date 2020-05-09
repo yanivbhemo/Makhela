@@ -19,13 +19,15 @@ class ModalBox extends Component {
     render(){
         if(!this.props.show)
             return null
+        var rightBtnClass ="btn"
+        var headerColor = "#f0ad4e"
         if(this.props.type === "warning"){
-            var rightBtnClass="btn btn-warning"
-            var headerColor="#f0ad4e"
+            rightBtnClass="btn btn-warning"
+            headerColor="#f0ad4e"
         }
         if(this.props.type === "danger") {
-            var rightBtnClass="btn btn-danger"
-            var headerColor="#d9534f"
+            rightBtnClass="btn btn-danger"
+            headerColor="#d9534f"
         }
         return(
             <div className="modal fade in" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style={{display: "block", paddingRight: "17px"}}>

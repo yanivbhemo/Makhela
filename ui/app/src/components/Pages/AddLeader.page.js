@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import Content from '../Content'
 import Row from '../Row'
 import Col from '../Col'
-import Panel from '../Panel'
 import Header from '../Header'
 import Menu from '../Menu'
 import Footer from '../Footer'
-import { LeaderPanel } from '../Panels'
 import * as CONSTS from '../../consts'
 
 class AddUser extends Component {

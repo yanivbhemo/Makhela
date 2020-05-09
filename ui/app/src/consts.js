@@ -8,3 +8,7 @@ export const MOVE_LEADER_TO_BLACKLIST = "http://localhost:3000/opinion_leaders/m
 export const GET_ALL_LEADERS_LOCATIONS = "http://localhost:3000/opinion_leaders/getLocations"
 export const GET_SPECIFIC_LOCATION_LEADERS = "http://localhost:3000/opinion_leaders/getLocations"
 export const ADD_NEW_LEADER = "http://localhost:3000/opinion_leaders/addNewLeader"
+export const GET_SPECIFIC_LEADER = "http://localhost:3000/opinion_leaders/leader/"
+export const GET_LEADER_POSTS = "http://localhost:3000/posts/getLeaderPosts/"
+export const GET_LEADER_FRIENDS = "http://localhost:3000/opinion_leaders/leader/getLeaderFriends/"
+export const GET_LEADER_SHORT_DETAILS = "http://localhost:3000/opinion_leaders/getLeaderShortDetails/"

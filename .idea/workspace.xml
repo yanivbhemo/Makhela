@@ -2,398 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/500.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/Readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/advanced_form_components.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/advanced_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/basic_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/blank.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/buttons.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/calendar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/chartjs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/chat_room.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/contactform.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/contactform/Readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/contactform/contactform.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/credits.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/css/style-responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/css/table-responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/css/to-do.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/css/zabuto_calendar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/dropzone.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/faq.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/file_upload.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/flot_chart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/font_awesome.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/form_component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/form_validation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/gallery.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/general.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/google_maps.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/grids.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/404.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/500.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/blog-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/checkbox-gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-09.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/friends/fr-11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/instagram.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/login-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/lorde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/mask.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ny.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/portfolio/port06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/product.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/profile-01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/profile-02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/radio-gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ui-danro.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ui-divya.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ui-sam.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ui-sherman.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/ui-zac.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/weather.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/img/zoom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/inbox.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/index - Copy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/inline_editor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/invoice.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/DT_bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/demo_page.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/demo_table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/demo_table_jui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/jquery.dataTables.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/css/jquery.dataTables_themeroller.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/back_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/back_enabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/back_enabled_hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/details_close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/details_open.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/forward_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/forward_enabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/forward_enabled_hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/sort_asc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/sort_asc_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/sort_both.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/sort_desc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/images/sort_desc_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/js/DT_bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/js/jquery.dataTables.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/js/jquery.dataTables.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-datatable/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/advanced-form-components.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-datepicker/css/datepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-daterangepicker/date.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-daterangepicker/daterangepicker-bs3.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-daterangepicker/daterangepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-daterangepicker/daterangepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-daterangepicker/moment.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-datetimepicker/css/datetimepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-fileupload/bootstrap-fileupload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-inputmask/bootstrap-inputmask.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-switch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-timepicker/compiled/timepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap-wysihtml5/wysihtml5-0.3.0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/bootstrap/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/calendar-conf-events.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/chart-master/Chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/chartjs-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/ckeditor/ckeditor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/common-scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/dropzone/css/dropzone.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/dropzone/dropzone.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/dropzone/images/spritemap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/dropzone/images/spritemap@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/easy-pie-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/fancybox/jquery.fancybox.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/fancybox/jquery.fancybox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/css/jquery.fileupload-noscript.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/css/jquery.fileupload-ui-noscript.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/css/jquery.fileupload-ui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/css/jquery.fileupload.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/img/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/img/progressbar.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/cors/jquery.xdr-transport.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-audio.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-image.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-process.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-ui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload-video.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.fileupload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/jquery.iframe-transport.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/file-uploader/js/vendor/jquery.ui.widget.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flot/jquery.flot.crosshair.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flot/jquery.flot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flot/jquery.flot.pie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flot/jquery.flot.resize.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flot/jquery.flot.stack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/flotchart-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/form-component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/form-validation-script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/fullcalendar/bootstrap-fullcalendar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/fullcalendar/fullcalendar.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/google-maps/data/points.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/google-maps/maplace.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/css/jquery.gritter.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/css/jquery.gritter0.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/images/gritter-light.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/images/gritter-long.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/images/gritter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/images/ie-spacer.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/gritter/js/jquery.gritter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery-easy-pie-chart/jquery.easy-pie-chart.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery-easy-pie-chart/jquery.easy-pie-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery-ui-1.9.2.custom.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.backstretch.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.dcjqaccordion.2.7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.nicescroll.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.scrollTo.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.sparkline.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.tagsinput.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery.ui.touch-punch.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/jquery/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/morris-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/morris/morris.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/php-mail-form/validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/raphael/raphael.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/sparkline-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/tasks.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/xchart/d3.v3.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/xchart/xcharts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/xchart/xcharts.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lib/zabuto_calendar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lobby.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/lock_screen.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/mail_compose.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/mail_view.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/morris.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/panels.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/pricing_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/responsive_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/todo_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Dashio/xchart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/add_leader.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/blank.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/community.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/contactform/Readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/contactform/contactform.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/custome-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/style-responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/table-responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/to-do.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/css/zabuto_calendar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/404.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/500.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/blog-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/checkbox-gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-09.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/friends/fr-11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/instagram.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/login-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/lorde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/mask.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/network-graph.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ny.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/portfolio/port06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/product.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/profile-01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/profile-02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/radio-gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ui-danro.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ui-divya.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ui-sam.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ui-sherman.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/ui-zac.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/unknown.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/users/yanivbh.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/weather.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/img/zoom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/DT_bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/demo_page.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/demo_table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/demo_table_jui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/jquery.dataTables.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/css/jquery.dataTables_themeroller.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/back_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/back_enabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/back_enabled_hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/details_close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/details_open.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/forward_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/forward_enabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/forward_enabled_hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/sort_asc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/sort_asc_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/sort_both.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/sort_desc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/images/sort_desc_disabled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/js/DT_bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/js/jquery.dataTables.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/js/jquery.dataTables.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-datatable/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/advanced-form-components.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-datepicker/css/datepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-datepicker/js/bootstrap-datepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-daterangepicker/date.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-daterangepicker/daterangepicker-bs3.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-daterangepicker/daterangepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-daterangepicker/daterangepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-daterangepicker/moment.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-datetimepicker/css/datetimepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-fileupload/bootstrap-fileupload.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-fileupload/bootstrap-fileupload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-inputmask/bootstrap-inputmask.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-switch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-timepicker/compiled/timepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-timepicker/js/bootstrap-timepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap-wysihtml5/wysihtml5-0.3.0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/bootstrap/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/calendar-conf-events.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/chart-master/Chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/chartjs-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/ckeditor/ckeditor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/common-scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/dropzone/css/dropzone.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/dropzone/dropzone.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/dropzone/images/spritemap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/dropzone/images/spritemap@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/easy-pie-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/fancybox/jquery.fancybox.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/fancybox/jquery.fancybox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/css/jquery.fileupload-noscript.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/css/jquery.fileupload-ui-noscript.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/css/jquery.fileupload-ui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/css/jquery.fileupload.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/img/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/img/progressbar.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/cors/jquery.xdr-transport.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-audio.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-image.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-process.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-ui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload-video.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.fileupload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/jquery.iframe-transport.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/file-uploader/js/vendor/jquery.ui.widget.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flot/jquery.flot.crosshair.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flot/jquery.flot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flot/jquery.flot.pie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flot/jquery.flot.resize.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flot/jquery.flot.stack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/flotchart-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/form-component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/form-validation-script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/fullcalendar/bootstrap-fullcalendar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/fullcalendar/fullcalendar.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/google-maps/data/points.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/google-maps/maplace.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/css/jquery.gritter.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/css/jquery.gritter0.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/images/gritter-light.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/images/gritter-long.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/images/gritter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/images/ie-spacer.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/gritter/js/jquery.gritter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery-easy-pie-chart/jquery.easy-pie-chart.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery-easy-pie-chart/jquery.easy-pie-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery-ui-1.9.2.custom.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.backstretch.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.dcjqaccordion.2.7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.nicescroll.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.scrollTo.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.sparkline.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.tagsinput.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery.ui.touch-punch.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/jquery/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/morris-conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/morris/morris.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/php-mail-form/validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/raphael/raphael.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/sparkline-chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/tasks.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/xchart/d3.v3.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/xchart/xcharts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/xchart/xcharts.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/lib/zabuto_calendar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/settings.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/suggestions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/public/css/custome-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/public/css/custome-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/ModalBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/ModalBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/AddLeader.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/AddLeader.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/CommunityPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/CommunityPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Row.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Row.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/consts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/router/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/controllers/Post.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/Post.ctl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/models/opinion-leader.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/models/opinion-leader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +70,7 @@
         <env name="access_token_secret" value="uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj" />
         <env name="db_username" value="yaniv" />
         <env name="db_password" value="Azaz123123" />
-        <env name="slack_url" value="https://hooks.slack.com/services/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" />
+        <env name="slack_url" value="&quot;https://hooks.slack.com/services/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&quot;" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\benhay\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/suggestion_collector" />
@@ -453,7 +78,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collector/main.py" />
-      <option name="PARAMETERS" value="tweets tests" />
+      <option name="PARAMETERS" value="tweets opinion_leaders" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -518,11 +143,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1585143773298" />
-    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588715976303">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588846251272">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588715976303" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1584710270004" />
+    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588840208701" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1588846251272" />
     <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1587380256997" />
     <state x="558" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585562578358">
       <screen x="0" y="0" width="1536" height="824" />
@@ -552,28 +177,28 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1584710266511" />
     <state x="2660" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1584717004501" />
-    <state width="1515" height="266" key="GridCell.Tab.0.bottom" timestamp="1588749241684">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="266" key="GridCell.Tab.0.bottom" timestamp="1588852425570">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588717098714" />
+    <state width="1515" height="266" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1515" height="427" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698590" />
     <state width="1515" height="266" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1515" height="266" key="GridCell.Tab.0.center" timestamp="1588749241684">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="266" key="GridCell.Tab.0.center" timestamp="1588852425570">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="187" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588717098714" />
+    <state width="1515" height="266" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1515" height="427" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698590" />
     <state width="1515" height="266" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1515" height="266" key="GridCell.Tab.0.left" timestamp="1588749241684">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="266" key="GridCell.Tab.0.left" timestamp="1588852425570">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="187" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588717098714" />
+    <state width="1515" height="266" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1515" height="427" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698590" />
     <state width="1515" height="266" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1515" height="266" key="GridCell.Tab.0.right" timestamp="1588749241684">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="266" key="GridCell.Tab.0.right" timestamp="1588852425570">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="187" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588717098714" />
+    <state width="1515" height="266" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1515" height="427" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698590" />
     <state width="1515" height="266" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
     <state width="1899" height="187" key="GridCell.Tab.1.bottom" timestamp="1588749241682">

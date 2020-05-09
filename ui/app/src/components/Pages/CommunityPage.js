@@ -28,7 +28,6 @@ class CommunityPage extends Component {
             amount_of_leaders: '',
             locations: [],
         }
-        
         this.addLeaders = this.addLeaders.bind(this)
         this.eachLeader = this.eachLeader.bind(this)
         this.eachLocation = this.eachLocation.bind(this)
@@ -109,6 +108,15 @@ class CommunityPage extends Component {
     }
 
     eachLeader(leader, i) {
+        var newUser = false
+        var create_date=''
+        var profile_pic = "img/unknown.jpeg"
+        if(leader.twitter_created_at){
+            create_date = leader.twitter_created_at.substring(0,10)
+            profile_pic = leader.twitter_profile_image
+            newUser = true
+        }
+
         return(
             <Col className="col-md-4 mb" key={`Col${i}`} >
                 <LeaderPanel 
@@ -116,13 +124,14 @@ class CommunityPage extends Component {
                 index={leader.twitter_id}
                 full_name={leader.full_name}
                 twitter_id={leader.twitter_id}
-                twitter_profile_image={leader.twitter_profile_image}
+                twitter_profile_image={profile_pic}
                 twitter_description={leader.twitter_description}
                 twitter_screen_name={leader.twitter_screen_name}
                 level_of_certainty={leader.level_of_certainty}
                 twitter_followers_count={leader.twitter_followers_count}
-                twitter_created_at={leader.twitter_created_at.substring(0,10)}
+                twitter_created_at={create_date}
                 onBlackListBtn={this.moveToBlackList}
+                newUser={newUser}
                 >
                 </LeaderPanel>
             </Col>
@@ -154,9 +163,9 @@ class CommunityPage extends Component {
     }
 
     locationOnClick(location){
+        var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
         if(!location)
-            var url = CONSTS.GET_ALL_LEADERS   
-        else var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
+            url = CONSTS.GET_ALL_LEADERS   
         fetch(url)
         .then(res  => res.json())
         .then(data => {

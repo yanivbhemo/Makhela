@@ -28,6 +28,10 @@
     color:#7731c3;
 }
 
+.profile-text h5 {
+    color:#7731c3;
+}
+
 .profile-text h6 {
     color:#888888;
 }
@@ -94,6 +98,6 @@
     align-items: center;
 }
 
-#leader-panel-header{
-    
-}
+ 
+.mapouter{position:relative;text-align:center;}
+.gmap_canvas {overflow:hidden;background:none!important;}

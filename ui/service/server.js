@@ -35,8 +35,12 @@ app.get('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations
 app.get('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
 app.get('/opinion_leaders/moveToBlackList/:twitter_id', withAuth, opinionLeaderCtl.MoveToBlackList);
 app.post('/opinion_leaders/addNewLeader', withAuth, opinionLeaderCtl.addNewLeader);
+app.get('/opinion_leaders/leader/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeader)
+app.get('/opinion_leaders/leader/getLeaderFriends/:twitter_id', withAuth, opinionLeaderCtl.getLeaderFriends)
+app.get('/opinion_leaders/getLeaderShortDetails/:twitter_id', withAuth, opinionLeaderCtl.getLeaderShortDetails)
 app.get('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
 app.get('/posts/getSize', withAuth, postsCtl.getSize);
+app.get('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
 app.post('/users/new', userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
 app.get('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})

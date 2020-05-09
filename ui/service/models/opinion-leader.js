@@ -12,7 +12,7 @@ var leader = new mongoose.Schema({
     twitter_screen_name: String,
     twitter_statuses_count: Number,
     level_of_certainty: {type: Number},
-    community_following: Number,
+    community_following: [[]],
     lock: Boolean,
     twitter_profile_image: String,
     internal_create_date: {type: Date},
