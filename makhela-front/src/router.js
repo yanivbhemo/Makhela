@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-// import NetworkGraph from './components/NetworkGraph'
 import MoDSpecialist from './components/SuggestedLeader'
-// import SuggestedLeader from './Leader'
 import { Button } from 'react-bootstrap'
 import Header from './Header'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/App.css'
 import MyNetwork from './components/Graph'
-import Network from './components/Network'
-// import './App.css'
+
 
 const MyRouter = () => {
     return (

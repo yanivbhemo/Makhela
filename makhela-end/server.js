@@ -18,8 +18,8 @@ app.use(
 
 app.all('/allsuggestions', suggestions.getData);
 app.all('/allposts', posts.getData);
-app.all('/getPosts', posts.getPosts);
-app.all('/getPost', posts.getPosts);
+// app.all('/getPosts', posts.getPosts);
+// app.all('/getPost', posts.getPosts);
 app.all('/getLeaders', leaders.getLeaders);
 
 

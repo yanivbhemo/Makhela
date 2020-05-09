@@ -14,12 +14,17 @@ exports.getLeaders = (req, res) => {
                         following: item.twitter_friends_count,
                         twitterName: item.twitter_screen_name,
                         communityFollowing: item.community_following,
+                        community: item.community,
+                        degCentrality:item.community,
+                        betweennessCentrality:item.community,
+                        closenessCentrality: item.community,
+                        analyzedDate: item.community,
                       },
                 )
               })
               data.map(item =>{
                   if(item.communityFollowing){
-                    item.communityFollowing = item.communityFollowing.map(value => {return value.toString()})
+                    item.communityFollowing = item.communityFollowing.map(value => {return value.twitter_id.toString()})
                   }
               })
            

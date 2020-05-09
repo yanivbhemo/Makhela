@@ -1,8 +1,7 @@
 import React from "react";
 import Graph from "react-graph-vis";
-import { Button } from "react-bootstrap";
 
-class MyNetwork extends React.Component {
+class Network extends React.Component {
   constructor() {
     super();
       this.state = {
@@ -36,9 +35,8 @@ class MyNetwork extends React.Component {
         let myEdges = []
         this.state.leaders.map(item => {
           if(Array.isArray(item.communityFollowing)){
-            item.communityFollowing.map(value => {
-              myEdges.push({ from: item.id, to: value})
-            })
+            item.communityFollowing.map(value => myEdges.push({ from: item.id, to: value})
+            )
           }
         })
         this.setState({nodes: mynodes, edges: myEdges, loading: false})              
@@ -81,7 +79,7 @@ class MyNetwork extends React.Component {
         randomSeed: 34,
         hierarchical: false
       },
-      height: "400px", 
+      height: "500px", 
     }
     const events = {
       select: (event) => {
@@ -128,14 +126,14 @@ class MyNetwork extends React.Component {
   }
 
   show(){
-    if(this.state.post ==! ''){
-      let post = this.state.posts.find(element => element.postId == this.state.post);
+    if(this.state.post !== ''){
+      let post = this.state.posts.find(element => element.postId === this.state.post);
       console.log(post)
 
       return(
         <React.Fragment>
           {/* <h1>name: {post.fullText}</h1> */}
-          <Button onClick={() => this.fetchPosts()}>Show posts graph</Button>
+          <button onClick={() => this.fetchPosts()}>Show posts graph</button>
       </React.Fragment>
       )
     }
@@ -147,7 +145,7 @@ class MyNetwork extends React.Component {
         <h1>twitter name: {leader.twitterName}</h1>
         <h1>followers: {leader.followers}</h1>
         <h1>following: {leader.following}</h1>   
-        <Button onClick={() => this.fetchPosts()}>Show posts graph</Button>
+        <button onClick={() => this.fetchPosts()}>Show posts graph</button>
       </React.Fragment>
     )
     }
@@ -160,17 +158,17 @@ class MyNetwork extends React.Component {
         <h1>twitter name: {leader.twitterName}</h1>
         <h1>followers: {leader.followers}</h1>
         <h1>following: {leader.following}</h1>   
-        <Button onClick={() => this.fetchPosts()}>Show posts graph</Button>
+        <button onClick={() => this.fetchPosts()}>Show posts graph</button>
       </React.Fragment>
     )
   }
 
   showPost(id){
-    let post = this.state.posts.find(element => element.postId == id);
+    let post = this.state.posts.find(element => element.postId === id);
     return(
       <React.Fragment>
         {/* <h1>name: {post.fullText}</h1> */}
-        <Button onClick={() => this.fetchPosts()}>Show posts graph</Button>
+        <button onClick={() => this.fetchPosts()}>Show posts graph</button>
     </React.Fragment>
     )
   }
@@ -189,4 +187,4 @@ class MyNetwork extends React.Component {
   }
    
 }
-export default MyNetwork
+export default Network

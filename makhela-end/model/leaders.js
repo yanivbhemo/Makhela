@@ -15,7 +15,12 @@ var mongoose = require('mongoose'),
         community_following: Object,
         lock: Boolean,
         twitter_profile_image: String,
-        posts: Object
+        posts: Object,
+        community: Number,
+        deg_centrality: Number,
+        betweenness_centrality: Number,
+        closeness_centrality: Number,
+        analyzed_date: Date
     });
    
     var Leaders = mongoose.model('opinion_leaders', leaders);

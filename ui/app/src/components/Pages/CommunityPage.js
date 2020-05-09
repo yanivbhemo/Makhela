@@ -5,6 +5,7 @@ import Col from '../Col'
 import Panel from '../Panel'
 import Community_stats_panel from '../Panels'
 import {Posts_collected_panel, Health_dashboard_panel} from '../Panels'
+import Network from './Network'
 
 class GraphPage extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class GraphPage extends Component {
                 <Row>
                     <Col className="col-lg-12">
                         <Panel headeline="Graph">
-                            <img className="img-fluid img-thumbnail" src="img/network-graph.jpg" alt="Main Graph" />
+                            <Network />
                         </Panel>
                     </Col>
                 </Row>
