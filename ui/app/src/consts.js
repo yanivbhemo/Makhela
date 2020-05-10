@@ -1,4 +1,4 @@
-var url = "http://makhela.live:3000"
+var url = "http://localhost:3000"
 export const OPINION_LEADERS_SIZE = url + "/opinion_leaders/getCommunitySize"
 export const SUGGESTIONS_COLLECTION_SIZE = url + "/suggestions/getSize"
 export const POSTS_COLLECTION_SIZE = url + "/posts/getSize"
