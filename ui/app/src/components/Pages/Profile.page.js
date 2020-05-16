@@ -8,6 +8,9 @@ import Row from '../Row'
 import Col from '../Col'
 import * as CONSTS from '../../consts'
 import Iframe from 'react-iframe'
+import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
+
 
 export default class ProfilePage extends Component {
     constructor(props){
@@ -41,8 +44,14 @@ export default class ProfilePage extends Component {
         else
             this.setState({inCommunity: false})
         var url = CONSTS.GET_SPECIFIC_LEADER+this.state.twitter_screen_name
-        fetch(url)
-        .then(res => res.json())
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
+        .then(res => (res.status === 200) ? res.json() : window.location.href = "/community")
             .then(leader => {
                 this.addInformation({
                 full_name: leader.full_name, 
@@ -59,7 +68,13 @@ export default class ProfilePage extends Component {
                 })
                 
                 url = CONSTS.GET_LEADER_POSTS + this.state.information.twitter_id
-                fetch(url)
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({"token":Cookies.get('token')}),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                })
                 .then(res => res.json())
                     .then(posts => {
                         posts.map(post => this.addPosts({
@@ -72,7 +87,13 @@ export default class ProfilePage extends Component {
                 .catch(err => console.log(err))
         
                 url = CONSTS.GET_LEADER_FRIENDS + this.state.information.twitter_id
-                fetch(url)
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({"token":Cookies.get('token')}),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                })
                 .then(res => res.json())
                     .then(friends => {
                         if(friends.community_following.length > 0 ){
@@ -92,7 +113,13 @@ export default class ProfilePage extends Component {
 
     addFriends({twitter_id, found_date}){
         let url = CONSTS.GET_LEADER_SHORT_DETAILS + twitter_id
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
         .then(res => res.json())
             .then(details => {
                 const full_name = details.full_name || ""
@@ -176,7 +203,13 @@ export default class ProfilePage extends Component {
     modalOnSubmit(){
         const twitter_id = this.state.twitter_id
         const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_id
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({

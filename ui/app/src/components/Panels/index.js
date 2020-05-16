@@ -3,6 +3,7 @@ import * as CONSTS from '../../consts'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import {Link} from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 
 class CommunityPanel extends Component {
@@ -16,13 +17,25 @@ class CommunityPanel extends Component {
 
   componentDidMount() {
     let url = CONSTS.OPINION_LEADERS_SIZE
-    fetch(url)
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then(res => res.json())
     .then(data => this.setState({opinion_leaders_size: data}))
     .catch(err => console.log(err))
 
     url = CONSTS.SUGGESTIONS_COLLECTION_SIZE
-    fetch(url)
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then(res => res.json())
     .then(data => this.setState({suggestions_size: data}))
     .catch(err => console.log(err))
@@ -68,7 +81,13 @@ class PostsPanel extends Component {
 
   componentDidMount() {
     let url = CONSTS.POSTS_COLLECTION_SIZE
-    fetch(url)
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then(res => res.json())
     .then(data => this.setState({posts_amount: data}))
     .catch(err => console.log(err))

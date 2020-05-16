@@ -8,6 +8,7 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
+import Network from '../Network'
 
 class GraphPage extends Component {
     // constructor(props) {
@@ -27,7 +28,8 @@ class GraphPage extends Component {
                     <Row>
                         <Col className="col-lg-12">
                             <Panel headeline="Graph">
-                                <img className="img-fluid img-thumbnail" src="img/network-graph.jpg" alt="Main Graph" />
+                                {/* <img className="img-fluid img-thumbnail" src="img/network-graph.jpg" alt="Main Graph" /> */}
+                                <Network />
                             </Panel>
                         </Col>
                     </Row>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import {AUTH_CHECK} from '../consts'
+import Cookies from 'js-cookie';
 
 
 export default function withAuth(ComponentToProtect) {
@@ -17,11 +18,12 @@ export default function withAuth(ComponentToProtect) {
           if(!document.cookie) this.setState({loading: false,redirect: true})
           else {
             fetch(AUTH_CHECK, {
+              method: 'POST',
+              body: JSON.stringify({"token":Cookies.get('token')}),
               headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
               },
-              credentials: 'include'
+              credentials: 'same-origin'
             })
                 .then(res => {
                   if (res.status === 200) {

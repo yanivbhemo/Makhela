@@ -10,6 +10,8 @@ import { LeaderPanel } from '../Panels'
 import * as CONSTS from '../../consts'
 import ModalBox from '../ModalBox'
 import { NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 
 const filter_button_style = {
     paddingRight: "10px"
@@ -41,7 +43,13 @@ class CommunityPage extends Component {
         document.title = "Community"
 
         var url = CONSTS.GET_ALL_LEADERS
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
         .then(res => res.json())
         .then(data => data.map(leader => this.addLeaders({
             full_name: leader.full_name, 
@@ -58,7 +66,13 @@ class CommunityPage extends Component {
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_LEADERS_LOCATIONS
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
         .then(res => res.json())
         .then(data => data.map(location => this.addLocations({
             location
@@ -145,7 +159,13 @@ class CommunityPage extends Component {
     modalOnSubmit(){
         const twitter_id = this.state.id_to_blacklist
         const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_id
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
@@ -166,7 +186,13 @@ class CommunityPage extends Component {
         var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
         if(!location)
             url = CONSTS.GET_ALL_LEADERS   
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
         .then(res  => res.json())
         .then(data => {
             this.setState({leaders:data, amount_of_leaders:data.length})

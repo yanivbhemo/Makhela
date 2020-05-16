@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {AUTHENTICATION_URL, AUTH_CHECK} from '../../consts'
+import {AUTHENTICATION_URL, AUTH_CHECK_TOKEN} from '../../consts'
+import Cookies from 'js-cookie';
 
 class LoginPage extends Component {
     
@@ -57,8 +58,8 @@ class LoginPage extends Component {
     componentDidMount() {
         document.body.style.backgroundImage = 'url("img/login-bg.jpg")'
         if(document.cookie) {
-            let url = AUTH_CHECK
-            fetch(url, {credentials: 'include'})
+            let url = AUTH_CHECK_TOKEN + Cookies.get('token')
+            fetch(url)
             .then(res => {
                 if (res.status === 200) {
                     window.location.href = "/"
