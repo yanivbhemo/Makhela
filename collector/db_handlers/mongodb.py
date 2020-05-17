@@ -191,3 +191,11 @@ class DataBaseHandler:
             print("- Error in mongodb.py -> def get_system_settings(self, attribute)")
             print("exit 446")
             exit(446)
+
+    def init_documents_with_ids(self, collection):
+        # Give each document in the collection an internal native id
+        result = self.db[collection].find({})
+        id = 0
+        for doc in result:
+            self.db[collection].update_one({"_id":doc['_id']}, {'$set': {"native_id": id}})
+            id += 1

@@ -8,7 +8,8 @@ var user = new mongoose.Schema({
     email: String,
     username: {type: String, required: true},
     password: String,
-    role: {type: String, required: true}
+    role: {type: String, required: true},
+    native_id: Number
 }, { collection: 'users', versionKey: ''} )
 
 user.pre('save', function(next) {

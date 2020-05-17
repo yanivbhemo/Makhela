@@ -12,7 +12,7 @@ var blacklist_leader = new mongoose.Schema({
     twitter_screen_name: String,
     twitter_statuses_count: Number,
     level_of_certainty: {type: Number, required: true},
-    community_following: Number,
+    community_following: [],
     lock: Boolean,
     twitter_profile_image: String,
     internal_create_date: {type: Date, required: true},
@@ -20,7 +20,8 @@ var blacklist_leader = new mongoose.Schema({
     deg_centrality: Number,
     betweenness_centrality: Number,
     closeness_centrality: Number,
-    analyzed_date: Date
+    analyzed_date: Date,
+    native_id: Number
 }, { collection: 'blacklist', versionKey: ''} )
 
 var BlackListLeader = mongoose.model('BlackListLeader', blacklist_leader)

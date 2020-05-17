@@ -12,14 +12,53 @@ exports.getSize = (req, res) => {
     })
 }
 
-exports.getAllLeaders = (req, res) => {
-    Leader.find({}).sort({"internal_create_date": -1}).limit(20)
+exports.getAllLeadersLimited = (req, res) => {
+    const limitNum = req.body.limitNum
+    Leader.find({}).sort({"internal_create_date": -1}).limit(limitNum)
     .then( docs => {
         console.log("- Request: Return all leaders")
         return res.status(200).json(docs)
     })
     .catch(err => {
         console.log(err)
+    })
+}
+
+exports.getAllLeaders = (req, res) => {
+    Leader.find({}).sort({"internal_create_date": -1})
+    .then( docs => {
+        console.log("- Request: Return all leaders")
+        return res.status(200).json(docs)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+exports.getLeadersByRange = (req, res) => {
+    var start_index = req.body.start
+    var end_index = req.body.end
+    Leader.find({}).countDocuments(function(err, count) {
+        if(!err) {
+            if(end_index < count) {
+                console.log(end_index)
+                // you can process it
+                Leader.find({$and: [{"native_id": {$gte: start_index}},{"native_id": {$lt: end_index}}]}).sort({"internal_create_date": -1})
+                .then( docs => {
+                    console.log(docs.length)
+                    console.log("- Request: Return leaders by range")
+                    return res.status(200).json(docs)
+                })
+                .catch(err => {
+                    console.log(err)
+                    return res.sendStatus(403)
+                })
+            } else {
+                return res.sendStatus(404)
+            }
+        } else {
+            return res.sendStatus(403)
+        }
     })
 }
 
@@ -43,42 +82,47 @@ exports.getLocations = (req, res) => {
 }
 
 exports.MoveToBlackList = (req, res) => {
-    const twitter_id = req.params.twitter_id
-    console.log(`Move the following twitter id to blacklist: ${twitter_id}`)
-    Leader.findOne({twitter_id})
+    const twitter_screen_name = req.params.twitter_screen_name
+    var new_id;
+    console.log(`Move the following twitter id to blacklist: ${twitter_screen_name}`)
+    Leader.findOne({twitter_screen_name})
     .then( doc => {
-        let swap = new BlackListLeader({
-            full_name: doc.full_name,
-            new_leader: doc.new_leader,
-            twitter_created_at: doc.twitter_created_at,
-            twitter_description: doc.twitter_description,
-            twitter_followers_count: doc.twitter_followers_count,
-            twitter_friends_count: doc.twitter_friends_count,
-            twitter_id: doc.twitter_id,
-            twitter_location: doc.twitter_location,
-            twitter_screen_name: doc.twitter_screen_name,
-            twitter_statuses_count: doc.twitter_statuses_count,
-            level_of_certainty: doc.level_of_certainty,
-            community_following: doc.community_following,
-            lock: doc.lock,
-            twitter_profile_image: doc.twitter_profile_image,
-            internal_create_date: doc.internal_create_date,
-            community: doc.community,
-            deg_centrality: doc.deg_centrality,
-            betweenness_centrality: doc.betweenness_centrality,
-            closeness_centrality: doc.closeness_centrality,
-            analyzed_date: doc.analyzed_date
-        })
-        swap.save((err, result) => {
-            if(err){
-                console.log(err)
-                res.sendStatus(404)
-            }
-            else {
-                console.log(result)
-                doc.remove()
-                res.sendStatus(200)
-            }
+        BlackListLeader.findOne({}).sort({"native_id": -1}).limit(1)
+        .then(last_doc => {
+            new_id = ++last_doc.native_id
+            let swap = new BlackListLeader({
+                full_name: doc.full_name,
+                new_leader: doc.new_leader,
+                twitter_created_at: doc.twitter_created_at,
+                twitter_description: doc.twitter_description,
+                twitter_followers_count: doc.twitter_followers_count,
+                twitter_friends_count: doc.twitter_friends_count,
+                twitter_id: doc.twitter_id,
+                twitter_location: doc.twitter_location,
+                twitter_screen_name: doc.twitter_screen_name,
+                twitter_statuses_count: doc.twitter_statuses_count,
+                level_of_certainty: doc.level_of_certainty,
+                community_following: doc.community_following,
+                lock: doc.lock,
+                twitter_profile_image: doc.twitter_profile_image,
+                internal_create_date: doc.internal_create_date,
+                community: doc.community,
+                deg_centrality: doc.deg_centrality,
+                betweenness_centrality: doc.betweenness_centrality,
+                closeness_centrality: doc.closeness_centrality,
+                analyzed_date: doc.analyzed_date,
+                native_id: new_id
+            })
+            swap.save((err, result) => {
+                if(err){
+                    console.log(err)
+                    return res.sendStatus(404)
+                }
+                else {
+                    doc.remove()
+                    return res.sendStatus(200)
+                }
+            })
         })
     })
     .catch(err => {
@@ -107,20 +151,25 @@ exports.addNewLeader = (req, res) => {
     Leader.findOne({$and: [{"twitter_screen_name":twitter_screen_name},{"full_name": full_name}]})
     .then( doc => {
         if(!doc){
-            let newLeader = new Leader({
-                full_name: full_name,
-                twitter_screen_name: twitter_screen_name,
-                new_leader: true,
-                internal_create_date: datetime
-            })
-            newLeader.save((err, result) => {
-                if(err){
-                    console.log(err)
-                    res.sendStatus(403)
-                }
-                else {
-                    res.sendStatus(200)
-                }
+            Leader.findOne({}).sort({"native_id": -1}).limit(1)
+            .then(last_doc => {
+                new_id = ++last_doc.native_id
+                let newLeader = new Leader({
+                    full_name: full_name,
+                    twitter_screen_name: twitter_screen_name,
+                    new_leader: true,
+                    internal_create_date: datetime,
+                    native_id: new_id
+                })
+                newLeader.save((err, result) => {
+                    if(err){
+                        console.log(err)
+                        res.sendStatus(403)
+                    }
+                    else {
+                        res.sendStatus(200)
+                    }
+                })  
             })
         }
         else

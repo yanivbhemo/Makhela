@@ -1,20 +1,21 @@
 const express   = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 
 const opinionLeaderCtl   = require('./controllers/opinion-leader.ctl');
 const suggestionsCtl   = require('./controllers/suggestion.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
-const {withAuth, withAuth2} = require('./middleware')
+const {withAuth,withAuthToken} = require('./middleware')
 
 // const keywordsCtl   = require('./controllers/keywords.ctl');
 
 const app       = express();
-const port      = process.env.PORT || 3000;
+const port      = process.env.PORT || 3002;
 
 app.set('port',port);
-
+app.use(cors())
 app.use('/', express.static('./public')); // for API
 app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -29,20 +30,23 @@ app.use(   (req, res, next) => {
     next();
 });
 
-app.get('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
-app.get('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
-app.get('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations);
-app.get('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
-app.get('/opinion_leaders/moveToBlackList/:twitter_id', withAuth, opinionLeaderCtl.MoveToBlackList);
+app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
+app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
+app.post('/opinion_leaders/getLeadersByRange', withAuth, opinionLeaderCtl.getLeadersByRange);
+app.post('/opinion_leaders/getAllLeadersLimited', withAuth, opinionLeaderCtl.getAllLeadersLimited);
+app.post('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations);
+app.post('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
+app.post('/opinion_leaders/moveToBlackList/:twitter_screen_name', withAuth, opinionLeaderCtl.MoveToBlackList);
 app.post('/opinion_leaders/addNewLeader', withAuth, opinionLeaderCtl.addNewLeader);
-app.get('/opinion_leaders/leader/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeader)
-app.get('/opinion_leaders/leader/getLeaderFriends/:twitter_id', withAuth, opinionLeaderCtl.getLeaderFriends)
-app.get('/opinion_leaders/getLeaderShortDetails/:twitter_id', withAuth, opinionLeaderCtl.getLeaderShortDetails)
-app.get('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
-app.get('/posts/getSize', withAuth, postsCtl.getSize);
-app.get('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
+app.post('/opinion_leaders/leader/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeader)
+app.post('/opinion_leaders/leader/getLeaderFriends/:twitter_id', withAuth, opinionLeaderCtl.getLeaderFriends)
+app.post('/opinion_leaders/getLeaderShortDetails/:twitter_id', withAuth, opinionLeaderCtl.getLeaderShortDetails)
+app.post('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
+app.post('/posts/getSize', withAuth, postsCtl.getSize);
+app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
 app.post('/users/new', userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
-app.get('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
+app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
+app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
 
 app.listen(port, () => console.log(`listening on port ${port}`));
