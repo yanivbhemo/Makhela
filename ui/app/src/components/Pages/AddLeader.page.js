@@ -6,6 +6,7 @@ import Header from '../Header'
 import Menu from '../Menu'
 import Footer from '../Footer'
 import * as CONSTS from '../../consts'
+import Cookies from 'js-cookie';
 
 class AddUser extends Component {
     constructor(props) {
@@ -15,7 +16,9 @@ class AddUser extends Component {
             twitter_screen_name: '',
             error_fullname: '',
             class_fullname: 'form-group',
-            errorlbl:''
+            errorlbl:'',
+            token: Cookies.get('token')
+
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)

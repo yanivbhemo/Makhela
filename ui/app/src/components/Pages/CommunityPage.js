@@ -11,6 +11,7 @@ import * as CONSTS from '../../consts'
 import ModalBox from '../ModalBox'
 import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const filter_button_style = {
@@ -23,29 +24,40 @@ class CommunityPage extends Component {
         super(props)
         this.state = {
             leaders: [],
+            leaders_full: [],
+            filterdLeaders: [],
             loadingActive: true,
             showModal: false,
             blackBackground: 'none',
             id_to_blacklist: '',
             amount_of_leaders: '',
             locations: [],
+            filterByName: '',
+            filterByScreenName: '',
+            start_leader_index: 0,
+            end_leader_index: 20,
+            hasMore: true
         }
         this.addLeaders = this.addLeaders.bind(this)
+        this.addAllLeaders = this.addAllLeaders.bind(this)
         this.eachLeader = this.eachLeader.bind(this)
         this.eachLocation = this.eachLocation.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.modalOnClose = this.modalOnClose.bind(this)
         this.modalOnSubmit = this.modalOnSubmit.bind(this)
         this.locationOnClick = this.locationOnClick.bind(this)
+        this.filterByName = this.filterByName.bind(this)
+        this.filterByScreenName = this.filterByScreenName.bind(this)
+        this.fetchMoreLeaders = this.fetchMoreLeaders.bind(this)
     }
 
     componentDidMount() {
         document.title = "Community"
 
-        var url = CONSTS.GET_ALL_LEADERS
+        var url = CONSTS.GET_ALL_LEADERS_LIMITED
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
@@ -62,7 +74,7 @@ class CommunityPage extends Component {
             level_of_certainty: leader.level_of_certainty,
             twitter_followers_count: leader.twitter_followers_count
         })))
-        .then(res => this.setState({amount_of_leaders: res.length}))
+        .then(res => this.setState({loadingActive: false, amount_of_leaders: res.length}))
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_LEADERS_LOCATIONS
@@ -76,6 +88,28 @@ class CommunityPage extends Component {
         .then(res => res.json())
         .then(data => data.map(location => this.addLocations({
             location
+        })))
+        .catch(err => console.log(err))
+
+        var url = CONSTS.GET_ALL_LEADERS
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => data.map(leader => this.addAllLeaders({
+            full_name: leader.full_name, 
+            twitter_id: leader.twitter_id, 
+            twitter_profile_image: leader.twitter_profile_image,
+            twitter_description: leader.twitter_description,
+            twitter_location: leader.twitter_location,
+            twitter_screen_name: leader.twitter_screen_name,
+            twitter_created_at: leader.twitter_created_at,
+            level_of_certainty: leader.level_of_certainty,
+            twitter_followers_count: leader.twitter_followers_count
         })))
         .catch(err => console.log(err))
     }
@@ -96,7 +130,40 @@ class CommunityPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            loadingActive: false
+            filterdLeaders: [
+                ...prevState.filterdLeaders,
+                {
+                    full_name: full_name, 
+                    twitter_id: twitter_id, 
+                    twitter_profile_image: twitter_profile_image,
+                    twitter_description: twitter_description,
+                    twitter_location: twitter_location,
+                    twitter_screen_name: twitter_screen_name,
+                    twitter_created_at: twitter_created_at,
+                    level_of_certainty: level_of_certainty,
+                    twitter_followers_count: twitter_followers_count
+                }
+            ],
+            
+        }))
+    }
+
+    addAllLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+        this.setState(prevState => ({
+            leaders_full: [
+                ...prevState.leaders_full,
+                {
+                    full_name: full_name, 
+                    twitter_id: twitter_id, 
+                    twitter_profile_image: twitter_profile_image,
+                    twitter_description: twitter_description,
+                    twitter_location: twitter_location,
+                    twitter_screen_name: twitter_screen_name,
+                    twitter_created_at: twitter_created_at,
+                    level_of_certainty: level_of_certainty,
+                    twitter_followers_count: twitter_followers_count
+                }
+            ]
         }))
     }
 
@@ -111,8 +178,8 @@ class CommunityPage extends Component {
         }))
     }
 
-    moveToBlackList(twitter_id){
-        this.setState({showModal: true, blackBackground:'', id_to_blacklist:twitter_id})
+    moveToBlackList(twitter_screen_name){
+        this.setState({showModal: true, blackBackground:'', id_to_blacklist:twitter_screen_name})
     }
 
     eachLocation(location, i){
@@ -135,7 +202,7 @@ class CommunityPage extends Component {
             <Col className="col-md-4 mb" key={`Col${i}`} >
                 <LeaderPanel 
                 key={`panel${i}`} 
-                index={leader.twitter_id}
+                index={leader.twitter_screen_name}
                 full_name={leader.full_name}
                 twitter_id={leader.twitter_id}
                 twitter_profile_image={profile_pic}
@@ -157,8 +224,8 @@ class CommunityPage extends Component {
     }
 
     modalOnSubmit(){
-        const twitter_id = this.state.id_to_blacklist
-        const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_id
+        const twitter_screen_name = this.state.id_to_blacklist
+        const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_screen_name
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -169,7 +236,7 @@ class CommunityPage extends Component {
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
-                    leaders: prevState.leaders.filter(leader => leader.twitter_id !== twitter_id),
+                    leaders: prevState.leaders.filter(leader => leader.twitter_screen_name !== twitter_screen_name),
                     showModal: false, 
                     blackBackground:'none',
                     amount_of_leaders: this.state.amount_of_leaders - 1
@@ -185,10 +252,10 @@ class CommunityPage extends Component {
     locationOnClick(location){
         var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
         if(!location)
-            url = CONSTS.GET_ALL_LEADERS   
+            url = CONSTS.GET_ALL_LEADERS_LIMITED   
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
@@ -198,6 +265,56 @@ class CommunityPage extends Component {
             this.setState({leaders:data, amount_of_leaders:data.length})
         })
         .catch(err => console.log(err))
+    }
+
+    filterByName(e) {
+        if(e.target.value.length < this.state.filterByName.length)
+            this.setState({filterByName:'',leaders: this.state.filterdLeaders})
+        else if(e.target.value==="") {
+            this.setState({
+                filterByName: e.target.value,
+                leaders: this.state.filterdLeaders,
+            })
+        } else {
+            const {leaders} = this.state
+            this.setState({
+                filterByName: e.target.value,
+                leaders: leaders.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+            })
+        }
+    }
+
+    filterByScreenName(e) {
+        if(e.target.value.length < this.state.filterByScreenName.length)
+            this.setState({filterByScreenName:'',leaders: this.state.filterdLeaders})
+        else if(e.target.value==="") {
+            this.setState({
+                filterByName: e.target.value,
+                leaders: this.state.filterdLeaders,
+            })
+        } else {
+            const {leaders} = this.state
+            this.setState({
+                filterByScreenName: e.target.value,
+                leaders: leaders.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+            })
+        }
+    }
+
+    fetchMoreLeaders() {
+        var endIndex = this.state.leaders.length*2
+        var hasMore = true
+        if(this.state.leaders.length * 2 > this.state.leaders_full.length){
+            endIndex = this.state.leaders.length + (this.state.leaders_full.length - this.state.leaders.length)
+            hasMore = false
+        }
+        this.setState({start_leader_index: this.state.leaders.length, end_leader_index: endIndex})
+        var updatedLeaders = this.state.leaders
+        var fullLeaders = this.state.leaders_full
+        for (let i = this.state.start_leader_index; i < this.state.end_leader_index; i++){
+            updatedLeaders.push(fullLeaders[i])
+        }
+        this.setState({leaders: updatedLeaders, amount_of_leaders: updatedLeaders.length, hasMore: hasMore})
     }
 
     render() {
@@ -218,19 +335,32 @@ class CommunityPage extends Component {
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
-                                <strong style={filter_button_style}>Filters: </strong>
-                                <div className="btn-group">
-                                    <button type="button" className="btn btn-theme03">Locations</button>
-                                    <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <span className="caret"></span>
-                                        <span className="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                    <ul className="dropdown-menu overflow-auto" role="menu">
-                                        {/* {this.state.locations.map(this.eachLocation)} */}
-                                        <li><a onClick={this.locationOnClick.bind(this, '')}>All</a></li>
-                                        {this.state.locations.map(this.eachLocation)} 
-                                    </ul>
-                                </div>
+                                {/* <strong style={filter_button_style}>Filters: </strong> */}
+                                {/* <div className="form-panel"> */}
+                                    <h4 className="mb"><i className="fa fa-angle-right"></i> Filters</h4>
+                                    <form className="form-inline" role="form">
+                                        <div className="form-group">
+                                            <div className="btn-group">
+                                                <button type="button" className="btn btn-theme03">Locations</button>
+                                                <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <span className="caret"></span>
+                                                    <span className="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                <ul className="dropdown-menu overflow-auto" role="menu">
+                                                    {/* {this.state.locations.map(this.eachLocation)} */}
+                                                    <li><a onClick={this.locationOnClick.bind(this, '')}>All</a></li>
+                                                    {this.state.locations.map(this.eachLocation)} 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="form-group" style={{marginLeft: "10px"}}>
+                                            <input className="form-control" style={{width: "100%"}} placeholder="By Name" type="text" value={this.state.filterByName} onChange={this.filterByName} />
+                                        </div>
+                                        <div className="form-group" style={{marginLeft: "10px"}}>
+                                            <input className="form-control" style={{width: "100%"}} placeholder="By Twitter Name" type="text" value={this.state.filterByScreenName} onChange={this.filterByScreenName} />
+                                        </div>
+                                    </form>
+                                {/* </div> */}
                             </Panel>
                         </Col>
                     </Row>
@@ -240,9 +370,20 @@ class CommunityPage extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <div className="leadersList">
+                        <InfiniteScroll
+                        dataLength={this.state.amount_of_leaders}
+                        next={this.fetchMoreLeaders}
+                        hasMore={this.state.hasMore}
+                        loader={<h4>Loading more leaders</h4>}
+                        endMessage={
+                            <p>No more leaders</p>
+                        }
+                        >
+                        {this.state.leaders.map(this.eachLeader)}
+                        </InfiniteScroll>
+                        {/* <div className="leadersList">
                             {this.state.leaders.map(this.eachLeader)}
-                        </div>
+                        </div> */}
                     </Row>
                 </Content>
                 <ModalBox 

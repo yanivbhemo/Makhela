@@ -154,7 +154,6 @@ class LeaderPanel extends Component {
   }
 
   moveToBlackList(props) {
-    console.log("test1")
     this.props.onBlackListBtn(this.props.index)
   }
 
@@ -167,7 +166,7 @@ class LeaderPanel extends Component {
             {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
             <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
           </div>
-          <Link to={`/community/${this.props.twitter_screen_name}`} className="suggestions-links">
+          <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
                         <p><img src={this.props.twitter_profile_image} className="img-circle" width="80" alt="name"/></p>
                         <p><b>{this.props.twitter_description}</b></p>
                         <div className="row">
