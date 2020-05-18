@@ -3,14 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/CommunityPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/CommunityPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suggestion_collector/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suggestion_collector/source_handlers/twitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/source_handlers/twitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Network.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,7 @@
       <recent name="C:\Users\benhay\Desktop\Makhela\collector" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.collector_main">
+  <component name="RunManager" selected="Python.suggestion_main">
     <configuration name="collector_main" type="PythonConfigurationType" factoryName="Python">
       <module name="Makhela" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -62,7 +64,7 @@
         <env name="access_token_secret" value="uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj" />
         <env name="db_username" value="yaniv" />
         <env name="db_password" value="Azaz123123" />
-        <env name="slack_url" value="&quot;https://hooks.slack.com/services/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&quot;" />
+        <env name="slack_url" value="https://hooks.slack.com/services/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" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\benhay\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/suggestion_collector" />
@@ -84,7 +86,13 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="vault_ro_token" value="s.V4pJ3Hu95qp42NPBVvh9eH14" />
+        <env name="db_username" value="yaniv" />
+        <env name="db_password" value="Azaz123123" />
+        <env name="slack_url" value="https://hooks.slack.com/services/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" />
+        <env name="consumer_key" value="uPVsXcMAIZLfYtOdJ6J3aapIG" />
+        <env name="consumer_secret" value="fAWhsif5q0Ik9JN9ecC3nrt4QoqA97Sp3lRb4HUfneFWBqRnns" />
+        <env name="access_token" value="1231936499211436033-gOBdrXqzpjT28yPn2TnVoNBU9h189H" />
+        <env name="access_token_secret" value="uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\benhay\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/suggestion_collector" />
@@ -135,11 +143,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1585143773298" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589633296709">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2183" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589787484656">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588840208701" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589633296709" />
+    <state x="2183" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589787484656" />
     <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1587380256997" />
     <state x="558" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585562578358">
       <screen x="0" y="0" width="1536" height="824" />
@@ -154,68 +162,70 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2534" y="114" key="CommitChangelistDialog2/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1584712349966" />
-    <state width="1519" height="589" key="DebuggerActiveHint" timestamp="1588746958732">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1519" height="589" key="DebuggerActiveHint" timestamp="1589786951660">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1274" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1587730586514" />
+    <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589786951660" />
     <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588746958732" />
-    <state x="718" y="168" key="EnvironmentVariablesDialog" timestamp="1588715346657">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="898" y="212" key="EnvironmentVariablesDialog" timestamp="1589786768232">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="168" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588715346657" />
+    <state x="898" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589786768232" />
     <state x="2817" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1585495130760" />
     <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1584717004501">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1584710266511" />
     <state x="2660" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1584717004501" />
-    <state width="1899" height="349" key="GridCell.Tab.0.bottom" timestamp="1589633357676">
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom" timestamp="1589788961449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
-    <state width="1899" height="349" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589633357676" />
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1515" height="266" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1899" height="349" key="GridCell.Tab.0.center" timestamp="1589633357676">
+    <state width="1899" height="187" key="GridCell.Tab.0.center" timestamp="1589788961448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
-    <state width="1899" height="349" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589633357676" />
+    <state width="1899" height="187" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961448" />
     <state width="1515" height="266" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1899" height="349" key="GridCell.Tab.0.left" timestamp="1589633357676">
+    <state width="1899" height="187" key="GridCell.Tab.0.left" timestamp="1589788961448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
-    <state width="1899" height="349" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589633357676" />
+    <state width="1899" height="187" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961448" />
     <state width="1515" height="266" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1899" height="349" key="GridCell.Tab.0.right" timestamp="1589633357676">
+    <state width="1899" height="187" key="GridCell.Tab.0.right" timestamp="1589788961449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
-    <state width="1899" height="349" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589633357676" />
+    <state width="1899" height="187" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1515" height="266" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241684" />
-    <state width="1899" height="187" key="GridCell.Tab.1.bottom" timestamp="1588749241682">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1899" height="187" key="GridCell.Tab.1.bottom" timestamp="1589788961449">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="187" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588717098211" />
-    <state width="1515" height="427" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698591" />
+    <state width="1899" height="187" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1899" height="187" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241682" />
-    <state width="1899" height="187" key="GridCell.Tab.1.center" timestamp="1588749241682">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1899" height="187" key="GridCell.Tab.1.center" timestamp="1589788961449">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="187" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1588717098211" />
-    <state width="1515" height="427" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698591" />
+    <state width="1899" height="187" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1899" height="187" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241682" />
-    <state width="1899" height="187" key="GridCell.Tab.1.left" timestamp="1588749241682">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1899" height="187" key="GridCell.Tab.1.left" timestamp="1589788961449">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="187" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1588717098211" />
-    <state width="1515" height="427" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698591" />
+    <state width="1899" height="187" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1899" height="187" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241682" />
-    <state width="1899" height="187" key="GridCell.Tab.1.right" timestamp="1588749241682">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1899" height="187" key="GridCell.Tab.1.right" timestamp="1589788961449">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="187" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1588717098211" />
-    <state width="1515" height="427" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586676698591" />
+    <state width="1899" height="187" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
     <state width="1899" height="187" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1588749241682" />
     <state x="2266" y="69" key="SettingsEditor" timestamp="1586514857349">
       <screen x="1920" y="0" width="1920" height="1040" />

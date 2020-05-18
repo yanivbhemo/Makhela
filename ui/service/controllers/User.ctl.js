@@ -61,9 +61,7 @@ exports.authenticate2 = (req, res) => {
                     let user_role = data.role
                     let full_name = data.full_name
                     const payload = { username, user_role, full_name };
-                    const token = jwt.sign(payload, consts.JSON_TOKEN_SECRET, {
-                      expiresIn: '1h'
-                    });
+                    const token = jwt.sign(payload, consts.JSON_TOKEN_SECRET);
                     console.log("Token: ", token)
                     let response = {token, full_name}
                     res.status(200).json(response)

@@ -41,7 +41,18 @@ app.post('/opinion_leaders/addNewLeader', withAuth, opinionLeaderCtl.addNewLeade
 app.post('/opinion_leaders/leader/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeader)
 app.post('/opinion_leaders/leader/getLeaderFriends/:twitter_id', withAuth, opinionLeaderCtl.getLeaderFriends)
 app.post('/opinion_leaders/getLeaderShortDetails/:twitter_id', withAuth, opinionLeaderCtl.getLeaderShortDetails)
+
 app.post('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
+app.post('/suggestions/getAllSuggestions', withAuth, suggestionsCtl.getAllSuggestions);
+app.post('/suggestions/getSuggestionsByRange', withAuth, suggestionsCtl.getSuggestionsByRange);
+app.post('/suggestions/getAllSuggestionsLimited', withAuth, suggestionsCtl.getAllSuggestionsLimited);
+app.post('/suggestions/getLocations', withAuth, suggestionsCtl.getLocations);
+app.post('/suggestions/getLocations/:location', withAuth, suggestionsCtl.getSuggestionsByLocation);
+app.post('/suggestions/moveToBlackList/:twitter_screen_name', withAuth, suggestionsCtl.MoveToBlackList);
+app.post('/suggestions/suggestion/:twitter_screen_name', withAuth, suggestionsCtl.getSuggestion)
+app.post('/suggestions/suggestion/getSuggestionFriends/:twitter_id', withAuth, suggestionsCtl.getSuggestionFriends)
+app.post('/suggestions/getSuggestionShortDetails/:twitter_id', withAuth, suggestionsCtl.getSuggestionShortDetails)
+
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
 app.post('/users/new', userCtl.createUser);

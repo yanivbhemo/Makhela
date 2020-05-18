@@ -119,8 +119,18 @@ exports.MoveToBlackList = (req, res) => {
                     return res.sendStatus(404)
                 }
                 else {
-                    doc.remove()
-                    return res.sendStatus(200)
+                    doc.remove((err, result) => {
+                        if(err){
+                            console.log(err)
+                            return res.sendStatus(404)
+                        } else {
+                            Leader.update({},{$pull: {"community_following":{"twitter_id": doc.twitter_id}}}, function(err, numAffected){
+                                console.log(numAffected)
+                                if(!err) return res.sendStatus(200)
+                                else return res.sendStatus(404)
+                            })
+                        }       
+                    })
                 }
             })
         })
