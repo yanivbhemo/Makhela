@@ -59,7 +59,7 @@ class Network extends React.Component {
     let formBody = "leader="+this.state.leader
     console.log(this.state.leader)
     let found = this.state.leaders.find(element => element.id == this.state.leader);
-    console.log(found)
+    console.log(found,"1")
     const url = 'https://makhela-graph.herokuapp.com/allposts'
 
     fetch(url, {
