@@ -166,22 +166,27 @@ class LeaderPanel extends Component {
   render(){
     return(
       <div>
-      <div className="white-panel pn-auto grey-panel">
+      <div className="white-panel pn-auto">
         <div className="white-header">
           <div className="row" id="leader-panel-header">
             {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
-            <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
+            <div className="col-xs-4 col-md-4">
+              <h5>{this.props.full_name}</h5>
+            </div>
           </div>
-          <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
+        </div>
+        <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
                         {/* <p><img src={this.checkIfImageExist(this.props.twitter_profile_image)} className="img-circle" width="80" alt="name"/></p> */}
                         <p>
                           <ReactImageFallback
                               src={this.props.twitter_profile_image}
                               fallbackImage="/img/unknown.jpeg"
-                              initialImage="loader.gif"
+                              initialImage="/img/unknown.jpeg"
                               alt={this.props.full_name}
                               className="img-circle"
-                              width="80" />
+                              width="80"
+                              initialTimeout="5"
+                              />
                         </p>
                         <p><b>{this.props.twitter_description}</b></p>
                         <div className="row">
@@ -204,7 +209,6 @@ class LeaderPanel extends Component {
                         </div>
                         {!this.props.newUser ? <div className="row"><h4>New Leader. Yet collected</h4></div> : ''}
                     </Link>
-        </div>
       </div>
       </div>
     )

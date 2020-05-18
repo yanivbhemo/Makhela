@@ -14,11 +14,6 @@ import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const filter_button_style = {
-    paddingRight: "10px"
-};
-
-
 class CommunityPage extends Component {
     constructor(props) {
         super(props)
@@ -367,7 +362,7 @@ class CommunityPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Amount of leaders: {this.state.amount_of_leaders}</h4>
+                            <h4>Display {this.state.amount_of_leaders} out of {this.state.leaders_full.length}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -382,9 +377,6 @@ class CommunityPage extends Component {
                         >
                         {this.state.leaders.map(this.eachLeader)}
                         </InfiniteScroll>
-                        {/* <div className="leadersList">
-                            {this.state.leaders.map(this.eachLeader)}
-                        </div> */}
                     </Row>
                 </Content>
                 <ModalBox 

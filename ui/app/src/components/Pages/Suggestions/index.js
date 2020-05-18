@@ -9,7 +9,6 @@ import Footer from '../../Footer'
 import { LeaderPanel } from '../../Panels'
 import * as CONSTS from '../../../consts'
 import ModalBox from '../../ModalBox'
-import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -74,7 +73,7 @@ class SuggestionsPage extends Component {
             level_of_certainty: leader.level_of_certainty,
             twitter_followers_count: leader.twitter_followers_count
         })))
-        .then(res => this.setState({loadingActive: false, amount_of_leaders: res.length}))
+        .then(res => this.setState({amount_of_leaders: res.length}))
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
@@ -144,7 +143,6 @@ class SuggestionsPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            
         }))
     }
 
@@ -163,7 +161,8 @@ class SuggestionsPage extends Component {
                     level_of_certainty: level_of_certainty,
                     twitter_followers_count: twitter_followers_count
                 }
-            ]
+            ],
+            loadingActive: false
         }))
     }
 
@@ -357,7 +356,7 @@ class SuggestionsPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Amount of leaders: {this.state.amount_of_leaders}</h4>
+                            <h4>Display {this.state.amount_of_leaders} out of {this.state.leaders_full.length}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -365,7 +364,7 @@ class SuggestionsPage extends Component {
                         dataLength={this.state.amount_of_leaders}
                         next={this.fetchMoreLeaders}
                         hasMore={this.state.hasMore}
-                        loader={<h4>Loading more leaders</h4>}
+                        loader={<h4>Loading more suggestion</h4>}
                         endMessage={
                             <p>No more leaders</p>
                         }
