@@ -34,7 +34,7 @@ class Community:
                 leaders[leader["twitter_id"]] = leader
                 leader["posts"] = []
             except:
-                log.send_message_to_logfile("failed to fetch: ", leader["twitter_id"])
+                log.send_message_to_logfile("failed to fetch: ", leader)
                 continue
         self.leaders = leaders
 
