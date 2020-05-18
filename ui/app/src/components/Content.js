@@ -17,6 +17,7 @@ class Content extends Component {
                         active={this.props.loadingActive}
                         spinner
                         text='Loading the community'
+                        className="overlay"
                 >
                 <section className="wrapper site-min-height">
                     <h3>

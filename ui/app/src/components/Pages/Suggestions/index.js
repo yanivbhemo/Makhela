@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Content from '../Content'
-import Row from '../Row'
-import Col from '../Col'
-import Panel from '../Panel'
-import Header from '../Header'
-import Menu from '../Menu'
-import Footer from '../Footer'
-import { LeaderPanel } from '../Panels'
-import * as CONSTS from '../../consts'
-import ModalBox from '../ModalBox'
+import Content from '../../Content'
+import Row from '../../Row'
+import Col from '../../Col'
+import Panel from '../../Panel'
+import Header from '../../Header'
+import Menu from '../../Menu'
+import Footer from '../../Footer'
+import { LeaderPanel } from '../../Panels'
+import * as CONSTS from '../../../consts'
+import ModalBox from '../../ModalBox'
 import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -19,7 +19,7 @@ const filter_button_style = {
 };
 
 
-class CommunityPage extends Component {
+class SuggestionsPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,9 +52,9 @@ class CommunityPage extends Component {
     }
 
     componentDidMount() {
-        document.title = "Community"
+        document.title = "Suggestions"
 
-        var url = CONSTS.GET_ALL_LEADERS_LIMITED
+        var url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
@@ -74,10 +74,10 @@ class CommunityPage extends Component {
             level_of_certainty: leader.level_of_certainty,
             twitter_followers_count: leader.twitter_followers_count
         })))
-        .then(res => this.setState({amount_of_leaders: res.length}))
+        .then(res => this.setState({loadingActive: false, amount_of_leaders: res.length}))
         .catch(err => console.log(err))
 
-        url = CONSTS.GET_ALL_LEADERS_LOCATIONS
+        url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -91,7 +91,7 @@ class CommunityPage extends Component {
         })))
         .catch(err => console.log(err))
 
-        var url = CONSTS.GET_ALL_LEADERS
+        var url = CONSTS.GET_ALL_SUGGESTIONS
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -163,8 +163,7 @@ class CommunityPage extends Component {
                     level_of_certainty: level_of_certainty,
                     twitter_followers_count: twitter_followers_count
                 }
-            ],
-            loadingActive: false
+            ]
         }))
     }
 
@@ -226,7 +225,7 @@ class CommunityPage extends Component {
 
     modalOnSubmit(){
         const twitter_screen_name = this.state.id_to_blacklist
-        const url = CONSTS.MOVE_LEADER_TO_BLACKLIST+"/"+twitter_screen_name
+        const url = CONSTS.MOVE_SUGGESTIONS_TO_BLACKLIST+"/"+twitter_screen_name
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -251,9 +250,9 @@ class CommunityPage extends Component {
     }
 
     locationOnClick(location){
-        var url = CONSTS.GET_SPECIFIC_LOCATION_LEADERS+"/"+location.name
+        var url = CONSTS.GET_SPECIFIC_LOCATION_SUGGESTIONS+"/"+location.name
         if(!location)
-            url = CONSTS.GET_ALL_LEADERS_LIMITED   
+            url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED   
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
@@ -323,16 +322,7 @@ class CommunityPage extends Component {
             <React.Fragment>
                 <Header />
                 <Menu />
-                <Content title="Community" fa="fa-users" loadingActive={this.state.loadingActive}>
-                    <Row>
-                        <Col className="col-lg-12">
-                            <Panel>
-                                <NavLink exact to="/addLeader">
-                                    <button type="button" className="btn btn-success">Add a leader</button>
-                                </NavLink>
-                            </Panel>
-                        </Col>
-                    </Row>
+                <Content title="Suggestions" fa="fa-plus" loadingActive={this.state.loadingActive}>
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
@@ -403,4 +393,4 @@ class CommunityPage extends Component {
     }
 }
 
-export default CommunityPage;
+export default SuggestionsPage;
