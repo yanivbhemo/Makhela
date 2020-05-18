@@ -9,7 +9,7 @@ import Col from '../Col'
 import * as CONSTS from '../../consts'
 import Iframe from 'react-iframe'
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom';
+import ReactImageFallback from "react-image-fallback";
 
 
 export default class ProfilePage extends Component {
@@ -236,16 +236,24 @@ export default class ProfilePage extends Component {
     }
 
     eachFriend(friend, i) {
-        var pic = "/img/unknown.jpeg"
-        var name = friend.twitter_id
-        var url = ""
-        if(friend.twitter_profile_image !== "none")
-            pic = friend.twitter_profile_image
-            name = friend.full_name
-            url = "/community/" + friend.twitter_screen_name
+        var pic = friend.twitter_profile_image
+        var name = friend.full_name
+        var url = "/community/" + friend.twitter_screen_name
         return(
             <li key={`friend${i}`}>
-                <a href={url}><div className="friends-pic"><img className="img-circle" width="35" height="35" src={pic} alt={name} title={name} /></div></a>
+                <a href={url}>
+                    <div className="friends-pic">
+                            <ReactImageFallback
+                              src={pic}
+                              fallbackImage="/img/unknown.jpeg"
+                              initialImage="loader.gif"
+                              alt={name}
+                              title={name}
+                              className="img-circle"
+                              width="35"
+                              height="35" />
+                    </div>
+                </a>
             </li>
         )
     }
