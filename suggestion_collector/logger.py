@@ -31,6 +31,7 @@ class logger_handler:
             print("EXCEPTION: " + str(em))
 
     def send_message_to_logAndSlack(self, text):
+        text = ()
         self.send_message_to_slack(text)
         self.send_message_to_logfile(text)
 

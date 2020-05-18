@@ -28,10 +28,10 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
-                        <a href="suggestions.html">
+                        <NavLink exact to="/suggestions">
                         <i className="fa fa-plus"></i>
                         <span>Suggestions</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="sub-menu">
                         <a href="settings.html">

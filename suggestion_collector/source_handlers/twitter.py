@@ -116,3 +116,4 @@ class Twitter_handler:
             return result
         except Exception as e:
             self.logger.send_message_to_logAndSlack(e)
+            return None

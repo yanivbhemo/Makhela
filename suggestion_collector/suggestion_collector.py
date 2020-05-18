@@ -23,7 +23,7 @@ class Suggestion_Collector:
     def collect(self):
         filter_query = { "$or": [{"checked_for_suggestions": False}, {"checked_for_suggestions": {"$exists": False}}] }
         # stop_flag
-        posts = self.db.get_collection_with_filter("posts", filter_query, 220)
+        posts = self.db.get_collection_with_filter("posts", filter_query, 20)
         post_arr = []
         names_arr = []
         self.leaders_to_check = []
@@ -115,7 +115,6 @@ class Suggestion_Collector:
             # Forth check: Amount of posts
             if person_twitter_profile.statuses_count > int(os.getenv('MIN_AMOUNT_OF_STATUSES')):
                 level_of_certainty += 1
-
         return level_of_certainty
 
     def add_certain_level_of_certainty_to_community(self, minimum_level):
@@ -142,10 +141,10 @@ class Suggestion_Collector:
                             '_normal')] + "_400x400" + details.profile_image_url[
                                                        details.profile_image_url.rfind('.'):len(
                                                            details.profile_image_url)]
-                    if self.leaders_to_check[i]['level_of_certainty'] < int(os.getenv('AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY')):
+                    if self.leaders_to_check[i]['level_of_certainty'] < int(os.getenv('AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY')) and self.leaders_to_check[i]['level_of_certainty'] > int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY')):
                         self.db.insert_leader_details_regular("suggestions", details.id, details.screen_name, fullname, details.location, details.description,details.followers_count, details.friends_count, details.created_at, details.statuses_count, False, self.leaders_to_check[i]['level_of_certainty'], profile_image)
                         self.logger.send_message_to_logfile("\t+ '" + details.screen_name + "' Inserted into 'suggestions' collection")
-                    else:
+                    elif self.leaders_to_check[i]['level_of_certainty'] > int(os.getenv('AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY')):
                         self.db.insert_leader_details_regular("opinion_leaders", details.id, details.screen_name,
                                                                   fullname, details.location, details.description,
                                                                   details.followers_count, details.friends_count,
@@ -153,6 +152,9 @@ class Suggestion_Collector:
                                                                   self.leaders_to_check[i]['level_of_certainty'],
                                                                   profile_image)
                         self.logger.send_message_to_logfile("\t+ '" + details.screen_name + "' Inserted into 'opinion_leaders' collection")
+                    else:
+                        self.logger.send_message_to_logfile(
+                            "\t+ '" + details.screen_name + "' Certainty level too low")
                 else:
                     self.logger.send_message_to_logAndSlack("- Couldn't find the following in twitter: " + self.leaders_to_check[i]['screen_name'])
         else:

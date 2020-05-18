@@ -4,6 +4,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie';
+import ReactImageFallback from "react-image-fallback";
 
 
 class CommunityPanel extends Component {
@@ -151,10 +152,15 @@ class LeaderPanel extends Component {
   constructor(props){
     super(props)
     this.moveToBlackList = this.moveToBlackList.bind(this)
+    this.checkIfImageExist = this.checkIfImageExist.bind(this)
   }
 
   moveToBlackList(props) {
     this.props.onBlackListBtn(this.props.index)
+  }
+
+  checkIfImageExist(url) {
+    return '/img/unknown.jpeg'
   }
 
   render(){
@@ -167,7 +173,16 @@ class LeaderPanel extends Component {
             <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
           </div>
           <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
-                        <p><img src={this.props.twitter_profile_image} className="img-circle" width="80" alt="name"/></p>
+                        {/* <p><img src={this.checkIfImageExist(this.props.twitter_profile_image)} className="img-circle" width="80" alt="name"/></p> */}
+                        <p>
+                          <ReactImageFallback
+                              src={this.props.twitter_profile_image}
+                              fallbackImage="/img/unknown.jpeg"
+                              initialImage="loader.gif"
+                              alt={this.props.full_name}
+                              className="img-circle"
+                              width="80" />
+                        </p>
                         <p><b>{this.props.twitter_description}</b></p>
                         <div className="row">
                           <div className="col-xs-6 col-sm-3">

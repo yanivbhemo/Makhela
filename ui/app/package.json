@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-graph-vis": "^1.0.5",
     "react-iframe": "^1.8.0",
+    "react-image-fallback": "^8.0.0",
     "react-infinite-scroll-component": "^5.0.4",
     "react-loader-spinner": "^3.1.14",
     "react-loading-bar": "0.0.7",
@@ -24,7 +25,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-tooltip": "^4.2.6",
-    "universal-cookie": "^4.0.3"
+    "universal-cookie": "^4.0.3",
+    "validate-image-url": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
