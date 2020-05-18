@@ -166,22 +166,27 @@ class LeaderPanel extends Component {
   render(){
     return(
       <div>
-      <div className="white-panel pn-auto grey-panel">
+      <div className="white-panel pn-auto">
         <div className="white-header">
           <div className="row" id="leader-panel-header">
             {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
-            <div className="col-xs-4 col-md-4"><h5>{this.props.full_name}</h5></div>
+            <div className="col-xs-4 col-md-4">
+              <h5>{this.props.full_name}</h5>
+            </div>
           </div>
-          <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
+        </div>
+        <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
                         {/* <p><img src={this.checkIfImageExist(this.props.twitter_profile_image)} className="img-circle" width="80" alt="name"/></p> */}
                         <p>
                           <ReactImageFallback
                               src={this.props.twitter_profile_image}
                               fallbackImage="/img/unknown.jpeg"
-                              initialImage="loader.gif"
+                              initialImage="/img/unknown.jpeg"
                               alt={this.props.full_name}
                               className="img-circle"
-                              width="80" />
+                              width="80"
+                              initialTimeout={5}
+                              />
                         </p>
                         <p><b>{this.props.twitter_description}</b></p>
                         <div className="row">
@@ -204,7 +209,72 @@ class LeaderPanel extends Component {
                         </div>
                         {!this.props.newUser ? <div className="row"><h4>New Leader. Yet collected</h4></div> : ''}
                     </Link>
+      </div>
+      </div>
+    )
+  }
+}
+
+class SuggestionPanel extends Component {
+  constructor(props){
+    super(props)
+    this.moveToBlackList = this.moveToBlackList.bind(this)
+    this.checkIfImageExist = this.checkIfImageExist.bind(this)
+  }
+
+  moveToBlackList(props) {
+    this.props.onBlackListBtn(this.props.index)
+  }
+
+  checkIfImageExist(url) {
+    return '/img/unknown.jpeg'
+  }
+
+  render(){
+    return(
+      <div>
+      <div className="white-panel pn-auto">
+        <div className="white-header">
+          <div className="row" id="leader-panel-header">
+            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
+            <div className="col-xs-4 col-md-4">
+              <h5>{this.props.full_name}</h5>
+            </div>
+          </div>
         </div>
+        <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
+                        <p>
+                          <ReactImageFallback
+                              src={this.props.twitter_profile_image}
+                              fallbackImage="/img/unknown.jpeg"
+                              initialImage="/img/unknown.jpeg"
+                              alt={this.props.full_name}
+                              className="img-circle"
+                              width="80"
+                              initialTimeout={5}
+                              />
+                        </p>
+                        <p><b>{this.props.twitter_description}</b></p>
+                        <div className="row">
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Twitter ID</h6>
+                              <p>{this.props.twitter_screen_name}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Member Since</h6>
+                              <p>{this.props.twitter_created_at}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Cert. Level</h6>
+                              <p>{this.props.level_of_certainty}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Followers</h6>
+                              <p>{this.props.twitter_followers_count}</p>
+                          </div>
+                        </div>
+                        {!this.props.newUser ? <div className="row"><h4>New Suggestion. Yet collected</h4></div> : ''}
+                    </Link>
       </div>
       </div>
     )
@@ -215,5 +285,6 @@ export default CommunityPanel;
 export {
   PostsPanel,
   HealthPanel,
-  LeaderPanel
+  LeaderPanel,
+  SuggestionPanel
 }

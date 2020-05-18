@@ -6,10 +6,9 @@ import Panel from '../../Panel'
 import Header from '../../Header'
 import Menu from '../../Menu'
 import Footer from '../../Footer'
-import { LeaderPanel } from '../../Panels'
+import { SuggestionPanel } from '../../Panels'
 import * as CONSTS from '../../../consts'
 import ModalBox from '../../ModalBox'
-import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -23,24 +22,24 @@ class SuggestionsPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            leaders: [],
-            leaders_full: [],
-            filterdLeaders: [],
+            suggestions: [],
+            suggestions_full: [],
+            filterdsuggestions: [],
             loadingActive: true,
             showModal: false,
             blackBackground: 'none',
             id_to_blacklist: '',
-            amount_of_leaders: '',
+            amount_of_suggestions: '',
             locations: [],
             filterByName: '',
             filterByScreenName: '',
-            start_leader_index: 0,
-            end_leader_index: 20,
+            start_suggestion_index: 0,
+            end_suggestion_index: 20,
             hasMore: true
         }
-        this.addLeaders = this.addLeaders.bind(this)
-        this.addAllLeaders = this.addAllLeaders.bind(this)
-        this.eachLeader = this.eachLeader.bind(this)
+        this.addSuggestions = this.addSuggestions.bind(this)
+        this.addAllsuggestions = this.addAllsuggestions.bind(this)
+        this.eachSuggestion = this.eachSuggestion.bind(this)
         this.eachLocation = this.eachLocation.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.modalOnClose = this.modalOnClose.bind(this)
@@ -48,7 +47,7 @@ class SuggestionsPage extends Component {
         this.locationOnClick = this.locationOnClick.bind(this)
         this.filterByName = this.filterByName.bind(this)
         this.filterByScreenName = this.filterByScreenName.bind(this)
-        this.fetchMoreLeaders = this.fetchMoreLeaders.bind(this)
+        this.fetchMoreSuggestions = this.fetchMoreSuggestions.bind(this)
     }
 
     componentDidMount() {
@@ -57,24 +56,24 @@ class SuggestionsPage extends Component {
         var url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_suggestion_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
         })
         .then(res => res.json())
-        .then(data => data.map(leader => this.addLeaders({
-            full_name: leader.full_name, 
-            twitter_id: leader.twitter_id, 
-            twitter_profile_image: leader.twitter_profile_image,
-            twitter_description: leader.twitter_description,
-            twitter_location: leader.twitter_location,
-            twitter_screen_name: leader.twitter_screen_name,
-            twitter_created_at: leader.twitter_created_at,
-            level_of_certainty: leader.level_of_certainty,
-            twitter_followers_count: leader.twitter_followers_count
+        .then(data => data.map(suggestion => this.addSuggestions({
+            full_name: suggestion.full_name, 
+            twitter_id: suggestion.twitter_id, 
+            twitter_profile_image: suggestion.twitter_profile_image,
+            twitter_description: suggestion.twitter_description,
+            twitter_location: suggestion.twitter_location,
+            twitter_screen_name: suggestion.twitter_screen_name,
+            twitter_created_at: suggestion.twitter_created_at,
+            level_of_certainty: suggestion.level_of_certainty,
+            twitter_followers_count: suggestion.twitter_followers_count
         })))
-        .then(res => this.setState({loadingActive: false, amount_of_leaders: res.length}))
+        .then(res => this.setState({amount_of_suggestions: res.length}))
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
@@ -100,24 +99,24 @@ class SuggestionsPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(leader => this.addAllLeaders({
-            full_name: leader.full_name, 
-            twitter_id: leader.twitter_id, 
-            twitter_profile_image: leader.twitter_profile_image,
-            twitter_description: leader.twitter_description,
-            twitter_location: leader.twitter_location,
-            twitter_screen_name: leader.twitter_screen_name,
-            twitter_created_at: leader.twitter_created_at,
-            level_of_certainty: leader.level_of_certainty,
-            twitter_followers_count: leader.twitter_followers_count
+        .then(data => data.map(suggestion => this.addAllsuggestions({
+            full_name: suggestion.full_name, 
+            twitter_id: suggestion.twitter_id, 
+            twitter_profile_image: suggestion.twitter_profile_image,
+            twitter_description: suggestion.twitter_description,
+            twitter_location: suggestion.twitter_location,
+            twitter_screen_name: suggestion.twitter_screen_name,
+            twitter_created_at: suggestion.twitter_created_at,
+            level_of_certainty: suggestion.level_of_certainty,
+            twitter_followers_count: suggestion.twitter_followers_count
         })))
         .catch(err => console.log(err))
     }
 
-    addLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addSuggestions({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            leaders: [
-                ...prevState.leaders,
+            suggestions: [
+                ...prevState.suggestions,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -130,8 +129,8 @@ class SuggestionsPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            filterdLeaders: [
-                ...prevState.filterdLeaders,
+            filterdsuggestions: [
+                ...prevState.filterdsuggestions,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -144,14 +143,13 @@ class SuggestionsPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            
         }))
     }
 
-    addAllLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addAllsuggestions({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            leaders_full: [
-                ...prevState.leaders_full,
+            suggestions_full: [
+                ...prevState.suggestions_full,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -163,7 +161,8 @@ class SuggestionsPage extends Component {
                     level_of_certainty: level_of_certainty,
                     twitter_followers_count: twitter_followers_count
                 }
-            ]
+            ],
+            loadingActive: false
         }))
     }
 
@@ -188,33 +187,33 @@ class SuggestionsPage extends Component {
         )
     }
 
-    eachLeader(leader, i) {
+    eachSuggestion(suggestion, i) {
         var newUser = false
         var create_date=''
         var profile_pic = "img/unknown.jpeg"
-        if(leader.twitter_created_at){
-            create_date = leader.twitter_created_at.substring(0,10)
-            profile_pic = leader.twitter_profile_image
+        if(suggestion.twitter_created_at){
+            create_date = suggestion.twitter_created_at.substring(0,10)
+            profile_pic = suggestion.twitter_profile_image
             newUser = true
         }
 
         return(
             <Col className="col-md-4 mb" key={`Col${i}`} >
-                <LeaderPanel 
+                <SuggestionPanel 
                 key={`panel${i}`} 
-                index={leader.twitter_screen_name}
-                full_name={leader.full_name}
-                twitter_id={leader.twitter_id}
+                index={suggestion.twitter_screen_name}
+                full_name={suggestion.full_name}
+                twitter_id={suggestion.twitter_id}
                 twitter_profile_image={profile_pic}
-                twitter_description={leader.twitter_description}
-                twitter_screen_name={leader.twitter_screen_name}
-                level_of_certainty={leader.level_of_certainty}
-                twitter_followers_count={leader.twitter_followers_count}
+                twitter_description={suggestion.twitter_description}
+                twitter_screen_name={suggestion.twitter_screen_name}
+                level_of_certainty={suggestion.level_of_certainty}
+                twitter_followers_count={suggestion.twitter_followers_count}
                 twitter_created_at={create_date}
                 onBlackListBtn={this.moveToBlackList}
                 newUser={newUser}
                 >
-                </LeaderPanel>
+                </SuggestionPanel>
             </Col>
         )
     }
@@ -236,10 +235,10 @@ class SuggestionsPage extends Component {
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
-                    leaders: prevState.leaders.filter(leader => leader.twitter_screen_name !== twitter_screen_name),
+                    suggestions: prevState.suggestions.filter(suggestion => suggestion.twitter_screen_name !== twitter_screen_name),
                     showModal: false, 
                     blackBackground:'none',
-                    amount_of_leaders: this.state.amount_of_leaders - 1
+                    amount_of_suggestions: this.state.amount_of_suggestions - 1
                 }))
             }
             else {
@@ -255,66 +254,66 @@ class SuggestionsPage extends Component {
             url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED   
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_leader_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_suggestion_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
         .then(res  => res.json())
         .then(data => {
-            this.setState({leaders:data, amount_of_leaders:data.length})
+            this.setState({suggestions:data, amount_of_suggestions:data.length})
         })
         .catch(err => console.log(err))
     }
 
     filterByName(e) {
         if(e.target.value.length < this.state.filterByName.length)
-            this.setState({filterByName:'',leaders: this.state.filterdLeaders})
+            this.setState({filterByName:'',suggestions: this.state.filterdsuggestions})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                leaders: this.state.filterdLeaders,
+                suggestions: this.state.filterdsuggestions,
             })
         } else {
-            const {leaders} = this.state
+            const {suggestions} = this.state
             this.setState({
                 filterByName: e.target.value,
-                leaders: leaders.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                suggestions: suggestions.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
     filterByScreenName(e) {
         if(e.target.value.length < this.state.filterByScreenName.length)
-            this.setState({filterByScreenName:'',leaders: this.state.filterdLeaders})
+            this.setState({filterByScreenName:'',suggestions: this.state.filterdsuggestions})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                leaders: this.state.filterdLeaders,
+                suggestions: this.state.filterdsuggestions,
             })
         } else {
-            const {leaders} = this.state
+            const {suggestions} = this.state
             this.setState({
                 filterByScreenName: e.target.value,
-                leaders: leaders.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                suggestions: suggestions.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
-    fetchMoreLeaders() {
-        var endIndex = this.state.leaders.length*2
+    fetchMoreSuggestions() {
+        var endIndex = this.state.suggestions.length*2
         var hasMore = true
-        if(this.state.leaders.length * 2 > this.state.leaders_full.length){
-            endIndex = this.state.leaders.length + (this.state.leaders_full.length - this.state.leaders.length)
+        if(this.state.suggestions.length * 2 > this.state.suggestions_full.length){
+            endIndex = this.state.suggestions.length + (this.state.suggestions_full.length - this.state.suggestions.length)
             hasMore = false
         }
-        this.setState({start_leader_index: this.state.leaders.length, end_leader_index: endIndex})
-        var updatedLeaders = this.state.leaders
-        var fullLeaders = this.state.leaders_full
-        for (let i = this.state.start_leader_index; i < this.state.end_leader_index; i++){
-            updatedLeaders.push(fullLeaders[i])
+        this.setState({start_suggestion_index: this.state.suggestions.length, end_suggestion_index: endIndex})
+        var updatedsuggestions = this.state.suggestions
+        var fullsuggestions = this.state.suggestions_full
+        for (let i = this.state.start_suggestion_index; i < this.state.end_suggestion_index; i++){
+            updatedsuggestions.push(fullsuggestions[i])
         }
-        this.setState({leaders: updatedLeaders, amount_of_leaders: updatedLeaders.length, hasMore: hasMore})
+        this.setState({suggestions: updatedsuggestions, amount_of_suggestions: updatedsuggestions.length, hasMore: hasMore})
     }
 
     render() {
@@ -326,8 +325,6 @@ class SuggestionsPage extends Component {
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
-                                {/* <strong style={filter_button_style}>Filters: </strong> */}
-                                {/* <div className="form-panel"> */}
                                     <h4 className="mb"><i className="fa fa-angle-right"></i> Filters</h4>
                                     <form className="form-inline" role="form">
                                         <div className="form-group">
@@ -357,24 +354,21 @@ class SuggestionsPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Amount of leaders: {this.state.amount_of_leaders}</h4>
+                            <h4>Display {this.state.amount_of_suggestions} out of {this.state.suggestions_full.length}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <InfiniteScroll
-                        dataLength={this.state.amount_of_leaders}
-                        next={this.fetchMoreLeaders}
+                        dataLength={this.state.amount_of_suggestions}
+                        next={this.fetchMoreSuggestions}
                         hasMore={this.state.hasMore}
-                        loader={<h4>Loading more leaders</h4>}
+                        loader={<h4>Loading more suggestion</h4>}
                         endMessage={
-                            <p>No more leaders</p>
+                            <p>No more suggestions</p>
                         }
                         >
-                        {this.state.leaders.map(this.eachLeader)}
+                        {this.state.suggestions.map(this.eachSuggestion)}
                         </InfiniteScroll>
-                        {/* <div className="leadersList">
-                            {this.state.leaders.map(this.eachLeader)}
-                        </div> */}
                     </Row>
                 </Content>
                 <ModalBox 
