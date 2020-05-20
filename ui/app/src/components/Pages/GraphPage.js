@@ -26,10 +26,19 @@ class GraphPage extends Component {
                 <Menu />
                 <Content title="Main Graph" fa="fa-home">
                     <Row>
-                        <Col className="col-lg-12">
+                        <Col className="col-lg-8">
                             <Panel headeline="Graph">
-                                {/* <img className="img-fluid img-thumbnail" src="img/network-graph.jpg" alt="Main Graph" /> */}
                                 <Network />
+                            </Panel>
+                        </Col>
+                        {/* SWITCH TO COMPONENT */}
+                        <Col className="col-lg-4">
+                            <Panel headeline="Topics">
+                                <div className="col-md-4 profile-text">
+                                    <h3>Community Topics</h3>
+                                    <h5>community 1</h5>
+                                    <p>topic</p>
+                                </div>
                             </Panel>
                         </Col>
                     </Row>

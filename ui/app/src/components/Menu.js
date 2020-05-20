@@ -28,6 +28,12 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
+                        <NavLink exact to="/research">
+                            <i className="fa fa-pie-chart"></i>
+                            <span>Research</span>
+                        </NavLink>
+                    </li>
+                    <li className="sub-menu">
                         <NavLink exact to="/suggestions">
                         <i className="fa fa-plus"></i>
                         <span>Suggestions</span>
