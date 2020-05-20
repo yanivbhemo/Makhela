@@ -34,6 +34,12 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
+                        <NavLink exact to="/blacklist">
+                        <i className="fa fa-times"></i>
+                        <span>Black List</span>
+                        </NavLink>
+                    </li>
+                    <li className="sub-menu">
                         <a href="settings.html">
                         <i className="fa fa-cogs"></i>
                         <span>Settings</span>

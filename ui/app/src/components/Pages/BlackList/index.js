@@ -6,40 +6,35 @@ import Panel from '../../Panel'
 import Header from '../../Header'
 import Menu from '../../Menu'
 import Footer from '../../Footer'
-import { SuggestionPanel } from '../../Panels'
+import { BlackListPanel } from '../../Panels'
 import * as CONSTS from '../../../consts'
 import ModalBox from '../../ModalBox'
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const filter_button_style = {
-    paddingRight: "10px"
-};
-
-
-class SuggestionsPage extends Component {
+class BlackListPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            suggestions: [],
-            suggestions_full: [],
-            filterdsuggestions: [],
+            blacklistLeaders: [],
+            blacklistLeaders_full: [],
+            filterdblacklistLeaders: [],
             loadingActive: true,
             showModal: false,
             blackBackground: 'none',
             id_to_blacklist: '',
-            amount_of_suggestions: '',
+            amount_of_blacklistLeaders: '',
             locations: [],
             filterByName: '',
             filterByScreenName: '',
-            start_suggestion_index: 0,
-            end_suggestion_index: 20,
+            start_blacklistLeader_index: 0,
+            end_blacklistLeader_index: 20,
             hasMore: true
         }
-        this.addSuggestions = this.addSuggestions.bind(this)
-        this.addAllsuggestions = this.addAllsuggestions.bind(this)
-        this.eachSuggestion = this.eachSuggestion.bind(this)
+        this.addBlacklistLeaders = this.addBlacklistLeaders.bind(this)
+        this.addAllblacklistLeaders = this.addAllblacklistLeaders.bind(this)
+        this.eachBlacklistLeader = this.eachBlacklistLeader.bind(this)
         this.eachLocation = this.eachLocation.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.addToCommunity = this.addToCommunity.bind(this)
@@ -48,33 +43,33 @@ class SuggestionsPage extends Component {
         this.locationOnClick = this.locationOnClick.bind(this)
         this.filterByName = this.filterByName.bind(this)
         this.filterByScreenName = this.filterByScreenName.bind(this)
-        this.fetchMoreSuggestions = this.fetchMoreSuggestions.bind(this)
+        this.fetchMoreBlacklistLeaders = this.fetchMoreBlacklistLeaders.bind(this)
     }
 
     componentDidMount() {
-        document.title = "Suggestions"
+        document.title = "Black List"
 
         var url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_suggestion_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_blacklistLeader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
         })
         .then(res => res.json())
-        .then(data => data.map(suggestion => this.addSuggestions({
-            full_name: suggestion.full_name, 
-            twitter_id: suggestion.twitter_id, 
-            twitter_profile_image: suggestion.twitter_profile_image,
-            twitter_description: suggestion.twitter_description,
-            twitter_location: suggestion.twitter_location,
-            twitter_screen_name: suggestion.twitter_screen_name,
-            twitter_created_at: suggestion.twitter_created_at,
-            level_of_certainty: suggestion.level_of_certainty,
-            twitter_followers_count: suggestion.twitter_followers_count
+        .then(data => data.map(blacklistLeader => this.addBlacklistLeaders({
+            full_name: blacklistLeader.full_name, 
+            twitter_id: blacklistLeader.twitter_id, 
+            twitter_profile_image: blacklistLeader.twitter_profile_image,
+            twitter_description: blacklistLeader.twitter_description,
+            twitter_location: blacklistLeader.twitter_location,
+            twitter_screen_name: blacklistLeader.twitter_screen_name,
+            twitter_created_at: blacklistLeader.twitter_created_at,
+            level_of_certainty: blacklistLeader.level_of_certainty,
+            twitter_followers_count: blacklistLeader.twitter_followers_count
         })))
-        .then(res => this.setState({amount_of_suggestions: res.length}))
+        .then(res => this.setState({amount_of_blacklistLeaders: res.length}))
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
@@ -100,24 +95,24 @@ class SuggestionsPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(suggestion => this.addAllsuggestions({
-            full_name: suggestion.full_name, 
-            twitter_id: suggestion.twitter_id, 
-            twitter_profile_image: suggestion.twitter_profile_image,
-            twitter_description: suggestion.twitter_description,
-            twitter_location: suggestion.twitter_location,
-            twitter_screen_name: suggestion.twitter_screen_name,
-            twitter_created_at: suggestion.twitter_created_at,
-            level_of_certainty: suggestion.level_of_certainty,
-            twitter_followers_count: suggestion.twitter_followers_count
+        .then(data => data.map(blacklistLeader => this.addAllblacklistLeaders({
+            full_name: blacklistLeader.full_name, 
+            twitter_id: blacklistLeader.twitter_id, 
+            twitter_profile_image: blacklistLeader.twitter_profile_image,
+            twitter_description: blacklistLeader.twitter_description,
+            twitter_location: blacklistLeader.twitter_location,
+            twitter_screen_name: blacklistLeader.twitter_screen_name,
+            twitter_created_at: blacklistLeader.twitter_created_at,
+            level_of_certainty: blacklistLeader.level_of_certainty,
+            twitter_followers_count: blacklistLeader.twitter_followers_count
         })))
         .catch(err => console.log(err))
     }
 
-    addSuggestions({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addBlacklistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            suggestions: [
-                ...prevState.suggestions,
+            blacklistLeaders: [
+                ...prevState.blacklistLeaders,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -130,8 +125,8 @@ class SuggestionsPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            filterdsuggestions: [
-                ...prevState.filterdsuggestions,
+            filterdblacklistLeaders: [
+                ...prevState.filterdblacklistLeaders,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -147,10 +142,10 @@ class SuggestionsPage extends Component {
         }))
     }
 
-    addAllsuggestions({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addAllblacklistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            suggestions_full: [
-                ...prevState.suggestions_full,
+            blacklistLeaders_full: [
+                ...prevState.blacklistLeaders_full,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -194,8 +189,8 @@ class SuggestionsPage extends Component {
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
-                    suggestions: prevState.suggestions.filter(suggestion => suggestion.twitter_screen_name !== twitter_screen_name),
-                    amount_of_suggestions: this.state.amount_of_suggestions - 1
+                    blacklistLeaders: prevState.blacklistLeaders.filter(blacklistLeader => blacklistLeader.twitter_screen_name !== twitter_screen_name),
+                    amount_of_blacklistLeaders: this.state.amount_of_blacklistLeaders - 1
                 }))
             }
             else {
@@ -211,34 +206,34 @@ class SuggestionsPage extends Component {
         )
     }
 
-    eachSuggestion(suggestion, i) {
+    eachBlacklistLeader(blacklistLeader, i) {
         var newUser = false
         var create_date=''
         var profile_pic = "img/unknown.jpeg"
-        if(suggestion.twitter_created_at){
-            create_date = suggestion.twitter_created_at.substring(0,10)
-            profile_pic = suggestion.twitter_profile_image
+        if(blacklistLeader.twitter_created_at){
+            create_date = blacklistLeader.twitter_created_at.substring(0,10)
+            profile_pic = blacklistLeader.twitter_profile_image
             newUser = true
         }
 
         return(
             <Col className="col-md-4 mb" key={`Col${i}`} >
-                <SuggestionPanel 
+                <BlackListPanel 
                 key={`panel${i}`} 
-                index={suggestion.twitter_screen_name}
-                full_name={suggestion.full_name}
-                twitter_id={suggestion.twitter_id}
+                index={blacklistLeader.twitter_screen_name}
+                full_name={blacklistLeader.full_name}
+                twitter_id={blacklistLeader.twitter_id}
                 twitter_profile_image={profile_pic}
-                twitter_description={suggestion.twitter_description}
-                twitter_screen_name={suggestion.twitter_screen_name}
-                level_of_certainty={suggestion.level_of_certainty}
-                twitter_followers_count={suggestion.twitter_followers_count}
+                twitter_description={blacklistLeader.twitter_description}
+                twitter_screen_name={blacklistLeader.twitter_screen_name}
+                level_of_certainty={blacklistLeader.level_of_certainty}
+                twitter_followers_count={blacklistLeader.twitter_followers_count}
                 twitter_created_at={create_date}
                 onBlackListBtn={this.moveToBlackList}
                 onAddBtn={this.addToCommunity}
                 newUser={newUser}
                 >
-                </SuggestionPanel>
+                </BlackListPanel>
             </Col>
         )
     }
@@ -260,10 +255,10 @@ class SuggestionsPage extends Component {
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
-                    suggestions: prevState.suggestions.filter(suggestion => suggestion.twitter_screen_name !== twitter_screen_name),
+                    blacklistLeaders: prevState.blacklistLeaders.filter(blacklistLeader => blacklistLeader.twitter_screen_name !== twitter_screen_name),
                     showModal: false, 
                     blackBackground:'none',
-                    amount_of_suggestions: this.state.amount_of_suggestions - 1
+                    amount_of_blacklistLeaders: this.state.amount_of_blacklistLeaders - 1
                 }))
             }
             else {
@@ -279,66 +274,66 @@ class SuggestionsPage extends Component {
             url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED   
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_suggestion_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_blacklistLeader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
         .then(res  => res.json())
         .then(data => {
-            this.setState({suggestions:data, amount_of_suggestions:data.length})
+            this.setState({blacklistLeaders:data, amount_of_blacklistLeaders:data.length})
         })
         .catch(err => console.log(err))
     }
 
     filterByName(e) {
         if(e.target.value.length < this.state.filterByName.length)
-            this.setState({filterByName:'',suggestions: this.state.filterdsuggestions})
+            this.setState({filterByName:'',blacklistLeaders: this.state.filterdblacklistLeaders})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                suggestions: this.state.filterdsuggestions,
+                blacklistLeaders: this.state.filterdblacklistLeaders,
             })
         } else {
-            const {suggestions} = this.state
+            const {blacklistLeaders} = this.state
             this.setState({
                 filterByName: e.target.value,
-                suggestions: suggestions.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                blacklistLeaders: blacklistLeaders.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
     filterByScreenName(e) {
         if(e.target.value.length < this.state.filterByScreenName.length)
-            this.setState({filterByScreenName:'',suggestions: this.state.filterdsuggestions})
+            this.setState({filterByScreenName:'',blacklistLeaders: this.state.filterdblacklistLeaders})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                suggestions: this.state.filterdsuggestions,
+                blacklistLeaders: this.state.filterdblacklistLeaders,
             })
         } else {
-            const {suggestions} = this.state
+            const {blacklistLeaders} = this.state
             this.setState({
                 filterByScreenName: e.target.value,
-                suggestions: suggestions.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                blacklistLeaders: blacklistLeaders.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
-    fetchMoreSuggestions() {
-        var endIndex = this.state.suggestions.length*2
+    fetchMoreBlacklistLeaders() {
+        var endIndex = this.state.blacklistLeaders.length*2
         var hasMore = true
-        if(this.state.suggestions.length * 2 > this.state.suggestions_full.length){
-            endIndex = this.state.suggestions.length + (this.state.suggestions_full.length - this.state.suggestions.length)
+        if(this.state.blacklistLeaders.length * 2 > this.state.blacklistLeaders_full.length){
+            endIndex = this.state.blacklistLeaders.length + (this.state.blacklistLeaders_full.length - this.state.blacklistLeaders.length)
             hasMore = false
         }
-        this.setState({start_suggestion_index: this.state.suggestions.length, end_suggestion_index: endIndex})
-        var updatedsuggestions = this.state.suggestions
-        var fullsuggestions = this.state.suggestions_full
-        for (let i = this.state.start_suggestion_index; i < this.state.end_suggestion_index; i++){
-            updatedsuggestions.push(fullsuggestions[i])
+        this.setState({start_blacklistLeader_index: this.state.blacklistLeaders.length, end_blacklistLeader_index: endIndex})
+        var updatedblacklistLeaders = this.state.blacklistLeaders
+        var fullblacklistLeaders = this.state.blacklistLeaders_full
+        for (let i = this.state.start_blacklistLeader_index; i < this.state.end_blacklistLeader_index; i++){
+            updatedblacklistLeaders.push(fullblacklistLeaders[i])
         }
-        this.setState({suggestions: updatedsuggestions, amount_of_suggestions: updatedsuggestions.length, hasMore: hasMore})
+        this.setState({blacklistLeaders: updatedblacklistLeaders, amount_of_blacklistLeaders: updatedblacklistLeaders.length, hasMore: hasMore})
     }
 
     render() {
@@ -346,7 +341,7 @@ class SuggestionsPage extends Component {
             <React.Fragment>
                 <Header />
                 <Menu />
-                <Content title="Suggestions" fa="fa-plus" loadingActive={this.state.loadingActive}>
+                <Content title="Black List" fa="fa-times" loadingActive={this.state.loadingActive}>
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
@@ -379,20 +374,20 @@ class SuggestionsPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Display {this.state.amount_of_suggestions} out of {this.state.suggestions_full.length}</h4>
+                            <h4>Display {this.state.amount_of_blacklistLeaders} out of {this.state.blacklistLeaders_full.length}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <InfiniteScroll
-                        dataLength={this.state.amount_of_suggestions}
-                        next={this.fetchMoreSuggestions}
+                        dataLength={this.state.amount_of_blacklistLeaders}
+                        next={this.fetchMoreBlacklistLeaders}
                         hasMore={this.state.hasMore}
-                        loader={<h4>Loading more suggestion</h4>}
+                        loader={<h4>Loading more black list Leader</h4>}
                         endMessage={
-                            <p>No more suggestions</p>
+                            <p>No more black list Leaders</p>
                         }
                         >
-                        {this.state.suggestions.map(this.eachSuggestion)}
+                        {this.state.blacklistLeaders.map(this.eachBlacklistLeader)}
                         </InfiniteScroll>
                     </Row>
                 </Content>
@@ -412,4 +407,4 @@ class SuggestionsPage extends Component {
     }
 }
 
-export default SuggestionsPage;
+export default BlackListPage;
