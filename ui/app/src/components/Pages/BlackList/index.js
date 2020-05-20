@@ -38,8 +38,6 @@ class BlackListPage extends Component {
         this.eachLocation = this.eachLocation.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.addToCommunity = this.addToCommunity.bind(this)
-        this.modalOnClose = this.modalOnClose.bind(this)
-        this.modalOnSubmit = this.modalOnSubmit.bind(this)
         this.locationOnClick = this.locationOnClick.bind(this)
         this.filterByName = this.filterByName.bind(this)
         this.filterByScreenName = this.filterByScreenName.bind(this)
@@ -49,7 +47,7 @@ class BlackListPage extends Component {
     componentDidMount() {
         document.title = "Black List"
 
-        var url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED
+        var url = CONSTS.GET_ALL_BLACKLISTS_LIMITED
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"limitNum": this.state.end_blacklistLeader_index, "token":Cookies.get('token')}),
@@ -72,7 +70,7 @@ class BlackListPage extends Component {
         .then(res => this.setState({amount_of_blacklistLeaders: res.length}))
         .catch(err => console.log(err))
 
-        url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
+        url = CONSTS.GET_ALL_BLACKLISTS_LOCATIONS
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -86,7 +84,7 @@ class BlackListPage extends Component {
         })))
         .catch(err => console.log(err))
 
-        var url = CONSTS.GET_ALL_SUGGESTIONS
+        var url = CONSTS.GET_ALL_BLACKLISTS
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -178,10 +176,11 @@ class BlackListPage extends Component {
     }
 
     addToCommunity(twitter_screen_name){
-        const url = CONSTS.MOVE_SUGGESTIONS_TO_COMMUNITY
+        console.log("Hello")
+        const url = CONSTS.MOVE_BLACKLISTS_TO_COMMUNITY + twitter_screen_name
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"token":Cookies.get('token'), "twitter_screen_name": twitter_screen_name}),
+            body: JSON.stringify({"token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
@@ -236,36 +235,6 @@ class BlackListPage extends Component {
                 </BlackListPanel>
             </Col>
         )
-    }
-
-    modalOnClose() {
-        this.setState({showModal: false, blackBackground:'none'})
-    }
-
-    modalOnSubmit(){
-        const twitter_screen_name = this.state.id_to_blacklist
-        const url = CONSTS.MOVE_SUGGESTIONS_TO_BLACKLIST+"/"+twitter_screen_name
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({"token":Cookies.get('token')}),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-        .then(res =>{
-            if(res.status === 200){
-                this.setState(prevState => ({
-                    blacklistLeaders: prevState.blacklistLeaders.filter(blacklistLeader => blacklistLeader.twitter_screen_name !== twitter_screen_name),
-                    showModal: false, 
-                    blackBackground:'none',
-                    amount_of_blacklistLeaders: this.state.amount_of_blacklistLeaders - 1
-                }))
-            }
-            else {
-                console.log("Error: " + res.status)
-            }
-        })
-        .catch(err => console.log(err))
     }
 
     locationOnClick(location){

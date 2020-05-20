@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const BlackListLeader = require('../models/suggestion')
+const BlackListLeader = require('../models/Blacklist')
 const Leader = require('../models/opinion-leader')
 
 exports.getSize = (req, res) => {
@@ -82,8 +82,7 @@ exports.getLocations = (req, res) => {
 }
 
 exports.moveToCommunity = (req, res) => {
-    const twitter_screen_name = req.body.twitter_screen_name
-    console.log(twitter_screen_name)
+    const twitter_screen_name = req.params.twitter_screen_name
     var new_id;
     console.log(`Move the following twitter id into the community: ${twitter_screen_name}`)
     BlackListLeader.findOne({twitter_screen_name})
@@ -152,6 +151,7 @@ exports.getBlackListLeadersByLocation = (req, res) => {
 }
 
 exports.getBlackListLeader = (req, res) => {
+    console.log(req)
     console.log("- Request: Get information of BlackListLeader " + req.params.twitter_screen_name)
     let query
     if(req.params.twitter_screen_name.match(/^[0-9]+$/))
