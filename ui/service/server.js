@@ -61,10 +61,10 @@ app.post('/blacklist/getBlackListLeadersByRange', withAuth, blackListCtl.getBlac
 app.post('/blacklist/getAllBlackListLeadersLimited', withAuth, blackListCtl.getAllBlackListLeadersLimited);
 app.post('/blacklist/getLocations', withAuth, blackListCtl.getLocations);
 app.post('/blacklist/getLocations/:location', withAuth, blackListCtl.getBlackListLeadersByLocation);
-app.post('/blacklist/suggestion/:twitter_screen_name', withAuth, blackListCtl.getBlackListLeader)
-app.post('/blacklist/suggestion/getBlackListLeaderFriends/:twitter_id', withAuth, blackListCtl.getBlackListLeaderFriends)
+app.post('/blacklist/:twitter_screen_name', withAuth, blackListCtl.getBlackListLeader)
+app.post('/blacklist/getBlackListLeaderFriends/:twitter_id', withAuth, blackListCtl.getBlackListLeaderFriends)
 app.post('/blacklist/getBlackListLeaderShortDetails/:twitter_id', withAuth, blackListCtl.getBlackListLeaderShortDetails)
-app.post('/blacklist/moveToCommunity', withAuth, blackListCtl.moveToCommunity)
+app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListCtl.moveToCommunity)
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
