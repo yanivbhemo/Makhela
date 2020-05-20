@@ -12,12 +12,6 @@ import ModalBox from '../../ModalBox'
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-
-const filter_button_style = {
-    paddingRight: "10px"
-};
-
-
 class SuggestionsPage extends Component {
     constructor(props) {
         super(props)

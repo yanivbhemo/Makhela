@@ -8,6 +8,7 @@ const suggestionsCtl   = require('./controllers/suggestion.ctl');
 const blackListCtl = require('./controllers/Blacklist.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
+const systemCtl = require('./controllers/system.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
 // const keywordsCtl   = require('./controllers/keywords.ctl');
@@ -72,5 +73,7 @@ app.post('/users/new', userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
 app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
+
+app.post('/system/init', withAuth, systemCtl.initSystem)
 
 app.listen(port, () => console.log(`listening on port ${port}`));

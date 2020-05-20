@@ -8,6 +8,7 @@ import addLeader from '../components/Pages/AddLeader.page'
 import ProfilePage from '../components/Pages/Profile.page'
 import SuggestionsPage from '../components/Pages/Suggestions'
 import BlackListPage from '../components/Pages/BlackList'
+import SettingsPage from '../components/Pages/Settings'
 
 
 const ReactRouter = () => {
@@ -19,6 +20,7 @@ const ReactRouter = () => {
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
             <Route exact path="/blacklist" component={withAuth(BlackListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
+            <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />
         </React.Fragment>
     )
