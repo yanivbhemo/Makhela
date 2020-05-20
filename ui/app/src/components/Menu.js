@@ -40,10 +40,10 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
-                        <a href="settings.html">
+                        <NavLink exact to="/settings">
                         <i className="fa fa-cogs"></i>
                         <span>Settings</span>
-                        </a>
+                        </NavLink>
                     </li>
                     </ul>
                     {/* <!-- sidebar menu end--> */}
