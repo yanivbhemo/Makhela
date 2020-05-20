@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const opinionLeaderCtl   = require('./controllers/opinion-leader.ctl');
 const suggestionsCtl   = require('./controllers/suggestion.ctl');
+const blackListCtl = require('./controllers/Blacklist.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
 const {withAuth,withAuthToken} = require('./middleware')
@@ -52,6 +53,18 @@ app.post('/suggestions/moveToBlackList/:twitter_screen_name', withAuth, suggesti
 app.post('/suggestions/suggestion/:twitter_screen_name', withAuth, suggestionsCtl.getSuggestion)
 app.post('/suggestions/suggestion/getSuggestionFriends/:twitter_id', withAuth, suggestionsCtl.getSuggestionFriends)
 app.post('/suggestions/getSuggestionShortDetails/:twitter_id', withAuth, suggestionsCtl.getSuggestionShortDetails)
+app.post('/suggestions/moveToCommunity', withAuth, suggestionsCtl.moveToCommunity)
+
+app.post('/blacklist/getSize', withAuth, blackListCtl.getSize);
+app.post('/blacklist/getAllBlackListLeaders', withAuth, blackListCtl.getAllBlackListLeaders);
+app.post('/blacklist/getBlackListLeadersByRange', withAuth, blackListCtl.getBlackListLeadersByRange);
+app.post('/blacklist/getAllBlackListLeadersLimited', withAuth, blackListCtl.getAllBlackListLeadersLimited);
+app.post('/blacklist/getLocations', withAuth, blackListCtl.getLocations);
+app.post('/blacklist/getLocations/:location', withAuth, blackListCtl.getBlackListLeadersByLocation);
+app.post('/blacklist/suggestion/:twitter_screen_name', withAuth, blackListCtl.getBlackListLeader)
+app.post('/blacklist/suggestion/getBlackListLeaderFriends/:twitter_id', withAuth, blackListCtl.getBlackListLeaderFriends)
+app.post('/blacklist/getBlackListLeaderShortDetails/:twitter_id', withAuth, blackListCtl.getBlackListLeaderShortDetails)
+app.post('/blacklist/moveToCommunity', withAuth, blackListCtl.moveToCommunity)
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
