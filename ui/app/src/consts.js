@@ -19,11 +19,25 @@ export const GET_LEADER_FRIENDS = url + "/opinion_leaders/leader/getLeaderFriend
 export const GET_LEADER_SHORT_DETAILS = url + "/opinion_leaders/getLeaderShortDetails/"
 
 //Suggestions
-export const SUGGESTIONS_SIZE = url + "/suggestions/getCommunitySize"
+export const SUGGESTIONS_SIZE = url + "/suggestions/getSize"
 export const GET_ALL_SUGGESTIONS = url + "/suggestions/getAllSuggestions"
 export const GET_SUGGESTIONS_BY_RANGE = url + "/suggestions/getSuggestionsByRange"
 export const GET_ALL_SUGGESTIONS_LIMITED = url + "/suggestions/getAllSuggestionsLimited"
 export const MOVE_SUGGESTIONS_TO_BLACKLIST = url + "/suggestions/moveToBlackList"
+export const MOVE_SUGGESTIONS_TO_COMMUNITY = url + "/suggestions/moveToCommunity"
+export const GET_ALL_SUGGESTIONS_LOCATIONS = url + "/suggestions/getLocations"
+export const GET_SPECIFIC_LOCATION_SUGGESTIONS = url + "/suggestions/getLocations"
+export const GET_SPECIFIC_SUGGESTIONS = url + "/suggestions/suggestion/"
+export const GET_SUGGESTIONS_FRIENDS = url + "/suggestions/suggestion/getSuggestionFriends/"
+export const GET_SUGGESTIONS_SHORT_DETAILS = url + "/suggestions/getSuggestionShortDetails/"
+
+//BlackList
+export const BLACKLIST_SIZE = url + "/suggestions/getCommunitySize"
+export const GET_ALL_SUGGESTIONS = url + "/suggestions/getAllSuggestions"
+export const GET_SUGGESTIONS_BY_RANGE = url + "/suggestions/getSuggestionsByRange"
+export const GET_ALL_SUGGESTIONS_LIMITED = url + "/suggestions/getAllSuggestionsLimited"
+export const MOVE_SUGGESTIONS_TO_BLACKLIST = url + "/suggestions/moveToBlackList"
+export const MOVE_SUGGESTIONS_TO_COMMUNITY = url + "/suggestions/moveToCommunity"
 export const GET_ALL_SUGGESTIONS_LOCATIONS = url + "/suggestions/getLocations"
 export const GET_SPECIFIC_LOCATION_SUGGESTIONS = url + "/suggestions/getLocations"
 export const GET_SPECIFIC_SUGGESTIONS = url + "/suggestions/suggestion/"

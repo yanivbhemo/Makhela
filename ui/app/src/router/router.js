@@ -7,6 +7,7 @@ import withAuth from '../components/withAuth';
 import addLeader from '../components/Pages/AddLeader.page'
 import ProfilePage from '../components/Pages/Profile.page'
 import SuggestionsPage from '../components/Pages/Suggestions'
+import BlackListPage from '../components/Pages/BlackList'
 
 
 const ReactRouter = () => {
@@ -16,6 +17,7 @@ const ReactRouter = () => {
             <Route exact path="/community" component={withAuth(CommunityPage)} />
             <Route exact path="/community/:twitter_screen_name" component={withAuth(ProfilePage)} />
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
+            <Route exact path="/blacklist" component={withAuth(BlackListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
             <Route exact path="/login" component={LoginPage} />
         </React.Fragment>

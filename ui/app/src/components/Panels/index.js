@@ -219,11 +219,16 @@ class SuggestionPanel extends Component {
   constructor(props){
     super(props)
     this.moveToBlackList = this.moveToBlackList.bind(this)
+    this.addToCommunity = this.addToCommunity.bind(this)
     this.checkIfImageExist = this.checkIfImageExist.bind(this)
   }
 
-  moveToBlackList(props) {
+  moveToBlackList() {
     this.props.onBlackListBtn(this.props.index)
+  }
+
+  addToCommunity() {
+    this.props.onAddBtn(this.props.index)
   }
 
   checkIfImageExist(url) {
@@ -236,13 +241,13 @@ class SuggestionPanel extends Component {
       <div className="white-panel pn-auto">
         <div className="white-header">
           <div className="row" id="leader-panel-header">
-            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
+          {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-success" onClick={this.addToCommunity} data-toggle="modal" data-target="#blackListModal">Add</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
             <div className="col-xs-4 col-md-4">
               <h5>{this.props.full_name}</h5>
             </div>
+            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
           </div>
         </div>
-        <Link to={(this.props.newUser) ? `/community/${this.props.twitter_screen_name}` : '#'} className="suggestions-links">
                         <p>
                           <ReactImageFallback
                               src={this.props.twitter_profile_image}
@@ -274,7 +279,70 @@ class SuggestionPanel extends Component {
                           </div>
                         </div>
                         {!this.props.newUser ? <div className="row"><h4>New Suggestion. Yet collected</h4></div> : ''}
-                    </Link>
+      </div>
+      </div>
+    )
+  }
+}
+
+class BlackListPanel extends Component {
+  constructor(props){
+    super(props)
+    this.moveToBlackList = this.moveToBlackList.bind(this)
+    this.checkIfImageExist = this.checkIfImageExist.bind(this)
+  }
+
+  moveToBlackList() {
+    this.props.onBlackListBtn(this.props.index)
+  }
+
+  checkIfImageExist(url) {
+    return '/img/unknown.jpeg'
+  }
+
+  render(){
+    return(
+      <div>
+      <div className="white-panel pn-auto">
+        <div className="white-header">
+          <div className="row" id="leader-panel-header">
+          {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-success" onClick={this.addToCommunity} data-toggle="modal" data-target="#blackListModal">Add</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
+            <div className="col-xs-4 col-md-4">
+              <h5>{this.props.full_name}</h5>
+            </div>
+          </div>
+        </div>
+                        <p>
+                          <ReactImageFallback
+                              src={this.props.twitter_profile_image}
+                              fallbackImage="/img/unknown.jpeg"
+                              initialImage="/img/unknown.jpeg"
+                              alt={this.props.full_name}
+                              className="img-circle"
+                              width="80"
+                              initialTimeout={5}
+                              />
+                        </p>
+                        <p><b>{this.props.twitter_description}</b></p>
+                        <div className="row">
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Twitter ID</h6>
+                              <p>{this.props.twitter_screen_name}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Member Since</h6>
+                              <p>{this.props.twitter_created_at}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Cert. Level</h6>
+                              <p>{this.props.level_of_certainty}</p>
+                          </div>
+                          <div className="col-xs-6 col-sm-3">
+                              <h6>Followers</h6>
+                              <p>{this.props.twitter_followers_count}</p>
+                          </div>
+                        </div>
+                        {!this.props.newUser ? <div className="row"><h4>New Suggestion. Yet collected</h4></div> : ''}
       </div>
       </div>
     )
@@ -286,5 +354,6 @@ export {
   PostsPanel,
   HealthPanel,
   LeaderPanel,
-  SuggestionPanel
+  SuggestionPanel,
+  BlackListPanel
 }
