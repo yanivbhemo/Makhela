@@ -46,6 +46,12 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
+                        <NavLink exact to="/initiation">
+                        <i className="fa fa-file"></i>
+                        <span>Init System</span>
+                        </NavLink>
+                    </li>
+                    <li className="sub-menu">
                         <a href="settings.html">
                         <i className="fa fa-cogs"></i>
                         <span>Settings</span>

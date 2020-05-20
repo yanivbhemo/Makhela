@@ -9,6 +9,8 @@ import ProfilePage from '../components/Pages/Profile.page'
 import SuggestionsPage from '../components/Pages/Suggestions'
 import BlackListPage from '../components/Pages/BlackList'
 import Research from '../components/Pages/Research.page'
+import Initiation from '../components/Pages/Initiation.page'
+
 
 
 const ReactRouter = () => {
@@ -18,6 +20,7 @@ const ReactRouter = () => {
             <Route exact path="/community" component={withAuth(CommunityPage)} />
             <Route exact path="/community/:twitter_screen_name" component={withAuth(ProfilePage)} />
             <Route exact path="/research" component={withAuth(Research)} />
+            <Route exact path="/initiation" component={withAuth(Initiation)} />
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
             <Route exact path="/blacklist" component={withAuth(BlackListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
