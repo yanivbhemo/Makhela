@@ -3,11 +3,13 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
 
+const initCtl   = require('./controllers/Initiation.ctl');
 const opinionLeaderCtl   = require('./controllers/opinion-leader.ctl');
 const suggestionsCtl   = require('./controllers/suggestion.ctl');
 const blackListCtl = require('./controllers/Blacklist.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
+
 const {withAuth,withAuthToken} = require('./middleware')
 
 // const keywordsCtl   = require('./controllers/keywords.ctl');
@@ -30,6 +32,10 @@ app.use(   (req, res, next) => {
     res.set("Content-Type", "application/json");
     next();
 });
+
+// app.post('/initiation', withAuth, initCtl.initSystem);
+app.post('/initiation', initCtl.initSystem);
+
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
