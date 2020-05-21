@@ -52,7 +52,10 @@ class Initiation extends Component {
               'Content-Type': 'application/json'
             }
           })
-        .then(res => res.json())
+        .then(res =>{
+            if(res.status === 200)
+                this.props.history.push('/')
+        })
         .then(data => console.log(data))
         .catch(err => console.log(err))
         this.setState({
