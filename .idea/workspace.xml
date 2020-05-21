@@ -3,16 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/source_handlers/twitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/source_handlers/twitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/Initiation.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/Initiation.page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/suggestion.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/suggestion.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/system.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/system.ctl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/service/models/KeyWord.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/models/KeyWord.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,30 +170,30 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1584710266511" />
     <state x="2660" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1584717004501" />
-    <state width="1899" height="349" key="GridCell.Tab.0.bottom" timestamp="1590077835795">
+    <state width="1899" height="349" key="GridCell.Tab.0.bottom" timestamp="1590077854657">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1899" height="187" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
-    <state width="1899" height="349" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077835795" />
-    <state width="1899" height="349" key="GridCell.Tab.0.center" timestamp="1590077835795">
+    <state width="1899" height="349" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077854657" />
+    <state width="1899" height="349" key="GridCell.Tab.0.center" timestamp="1590077854657">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1899" height="187" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961448" />
-    <state width="1899" height="349" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077835795" />
-    <state width="1899" height="349" key="GridCell.Tab.0.left" timestamp="1590077835794">
+    <state width="1899" height="349" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077854657" />
+    <state width="1899" height="349" key="GridCell.Tab.0.left" timestamp="1590077854657">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1899" height="187" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961448" />
-    <state width="1899" height="349" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077835794" />
-    <state width="1899" height="349" key="GridCell.Tab.0.right" timestamp="1590077835795">
+    <state width="1899" height="349" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077854657" />
+    <state width="1899" height="349" key="GridCell.Tab.0.right" timestamp="1590077854657">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="266" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588852425570" />
     <state width="1899" height="187" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589788961449" />
-    <state width="1899" height="349" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077835795" />
+    <state width="1899" height="349" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590077854657" />
     <state width="1899" height="187" key="GridCell.Tab.1.bottom" timestamp="1590077147313">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
