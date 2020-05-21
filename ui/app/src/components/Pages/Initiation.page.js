@@ -30,22 +30,21 @@ class Initiation extends Component {
     }
 
     handleClick = () => {
-        console.log("click")
-        // let url = CONSTS.INIT_SYSTEM
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         "token":Cookies.get('token'),
-        //         "keyWords": this.state.keyWords,
-        //         "leaders": this.state.leaders
-        //     }),
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     }
-        //   })
-        // .then(res => res.json())
-        // .then(data => console.log(data))
-        // .catch(err => console.log(err))
+        let url = CONSTS.INIT_SYSTEM
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                "token":Cookies.get('token'),
+                "keyWords": this.state.keyWords,
+                "leaders": this.state.leaders
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
         this.setState({
             leaders: '',
             keyWords: '',
