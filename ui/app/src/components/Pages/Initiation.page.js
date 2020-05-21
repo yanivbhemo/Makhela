@@ -23,6 +23,7 @@ class Initiation extends Component {
             keyWords: '',
             showModal: false
           }
+        this.checkForDuplication = this.checkForDuplication.bind(this)
     }
 
     componentDidMount() {
@@ -42,36 +43,75 @@ class Initiation extends Component {
         })
     }
 
-    handleClick = () => {
-        let url = CONSTS.INIT_SYSTEM
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({
-                "token":Cookies.get('token'),
-                "keyWords": this.state.keyWords,
-                "leaders": this.state.leaders
-            }),
-            headers: {
-              'Content-Type': 'application/json'
+    checkForDuplication() {
+        var leaders_arr = this.state.leaders.split(/\r\n|\n/)
+        let count = 0
+        for(var i = 0; i < leaders_arr.length; i++) {
+            for(var j = 0; j < leaders_arr.length; j++) {
+                if(leaders_arr[i] === leaders_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return leaders_arr[i]
+                }
             }
-          })
-        .then(res =>{
-            if(res.status === 200)
-                this.props.history.push('/')
-        })
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-        this.setState({
-            leaders: '',
-            keyWords: '',
-            showModal: true
-        })
+            count = 0
+        }
+
+        var keywords_arr = this.state.keyWords.split(/\r\n|\n/)
+        count = 0
+        for(var i = 0; i < keywords_arr.length; i++) {
+            for(var j = 0; j < keywords_arr.length; j++) {
+                if(keywords_arr[i] === keywords_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return keywords_arr[i]
+                }
+            }
+            count = 0
+        }
+        return true
+    }
+
+    handleClick = () => {
+        var duplication = this.checkForDuplication()
+        if(duplication===true) {
+            let url = CONSTS.INIT_SYSTEM
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "token":Cookies.get('token'),
+                    "keyWords": this.state.keyWords,
+                    "leaders": this.state.leaders
+                }),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(res =>{
+                if(res.status === 200)
+                    // 
+                    this.setState({
+                        leaders: '',
+                        keyWords: '',
+                        showModal: true
+                    })
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        }
+        else{
+            alert("Duplications: " + duplication)
+        }
     }
     handleChange = e => {
-        if(e.target.id === "leaders")
+        if(e.target.id === "leaders"){
             this.setState({leaders: e.target.value})
-        else if(e.target.id === "keywords")
-        this.setState({keyWords: e.target.value})
+        } 
+        else if(e.target.id === "keywords") {
+            this.setState({keyWords: e.target.value})
+        }
     }
     render() {
         return(
@@ -82,7 +122,7 @@ class Initiation extends Component {
                 <ModalBox 
         show={this.state.showModal}
         title="System initiation"
-        onClose={() => this.setState({showModal:false})}
+        onClose={() => this.props.history.push('/')}
         // rightBtnText="Blacklist"
         // onSubmit={this.modalOnSubmit}
         // type="danger"

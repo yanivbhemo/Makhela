@@ -64,9 +64,9 @@ class Collector:
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
                     try:
-                        self.collect_leader_init_details(leader['_id'], leader['full_name'], leader['twitter_screen_name'])
+                        self.collect_leader_init_details(leader, leader['twitter_screen_name'])
                     except:
-                        self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                        self.collect_leader_init_details(leader)
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
                 try:
@@ -97,7 +97,7 @@ class Collector:
                     self.collect_and_save_connections(leader, current_time)
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
-                    self.collect_leader_init_details(leader['_id'], leader['full_name'])
+                    self.collect_leader_init_details(leader)
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
                 try:
@@ -132,12 +132,12 @@ class Collector:
                     self.logger.send_message_to_logfile(
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
-    def collect_leader_init_details(self, leader_db_id, leader_fullName, twitter_screen_name=""):
+    def collect_leader_init_details(self, leader, twitter_screen_name=""):
         if twitter_screen_name:
             leader_info = self.source_handler.search_twitter_name(twitter_screen_name)
             results_length = len(leader_info)
         else:
-            leader_info = self.source_handler.search_twitter_name(leader_fullName)
+            leader_info = self.source_handler.search_twitter_name(leader['full_name'])
             results_length = len(leader_info)
         # Checks of more than 1 name came up
         if leader_info:
@@ -146,48 +146,57 @@ class Collector:
                     profile_image = details.profile_image_url[0:details.profile_image_url.find(
                         '_normal')] + "_400x400" + details.profile_image_url[
                                                    details.profile_image_url.rfind('.'):len(details.profile_image_url)]
-                    self.db.update_leader_details_regular(self.collection, leader_db_id, details.id, details.screen_name,
+                    self.db.update_leader_details_regular(self.collection, leader['_id'], details.id, details.screen_name,
                                                           details.location, details.description, details.followers_count,
                                                           details.friends_count, details.created_at, details.statuses_count,
                                                           False, 10, profile_image)
+                    self.logger.send_message_to_logfile("- Search came up with only 1 result. Insert into community")
             elif results_length == 0:
                 self.logger.send_message_to_logfile("- Collector did not find any person with that name")
-                self.db.insert_leader_details_empty("blacklist", leader_fullName)
+                self.db.insert_leader_details_empty("blacklist", leader['full_name'])
             elif results_length > 1:
                 self.logger.send_message_to_logfile("- Search for screen name came up with more than 1 result".format(
-                    leader_fullName))
-                required_id = self.resolve_search_leader_multiple_results(leader_info, leader_fullName)
+                    leader['full_name']))
+                required_id = self.resolve_search_leader_multiple_results(leader_info, leader['full_name'])
                 try:
                     if required_id['id'] == 0:
                         self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
-                        self.db.insert_leader_details_empty("blacklist", leader_fullName)
+                        self.db.insert_leader_details_empty("blacklist", leader['full_name'])
                 except:
                     self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
-                    self.db.insert_leader_details_empty("blacklist", leader_fullName)
+                    self.db.insert_leader_details_empty("blacklist", leader['full_name'])
                 else:
                     for details in leader_info:
                         if details.id == required_id["id"]:
                             profile_image = details.profile_image_url[0:details.profile_image_url.find(
                                 '_normal')] + "_400x400" + details.profile_image_url[details.profile_image_url.rfind('.'):len(details.profile_image_url)]
-                            if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY:
-                                self.db.update_leader_details_regular("suggestions", leader_db_id, details.id,
+                            if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY and required_id["level_of_certainty"] >= self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY:
+                                self.db.move_leader_from_community_to_suggestions(self.collection, leader['_id'], details.id,
                                                                       details.screen_name,
                                                                       details.location, details.description,
                                                                       details.followers_count,
                                                                       details.friends_count, details.created_at,
                                                                       details.statuses_count,
                                                                       False, required_id["level_of_certainty"],
-                                                                      profile_image)
-                            else:
-                                self.db.update_leader_details_regular("opinion_leaders", leader_db_id, details.id,
+                                                                      profile_image,leader['full_name'], leader['internal_create_date'])
+                                self.logger.send_message_to_logfile("- Moved to suggestions collection")
+                            elif required_id["level_of_certainty"] > self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY:
+                                self.db.update_leader_details_regular(self.collection, leader['_id'], details.id,
                                                                   details.screen_name,
                                                                   details.location, details.description,
                                                                   details.followers_count,
                                                                   details.friends_count, details.created_at,
                                                                   details.statuses_count,
                                                                   False, 10, profile_image)
+                                self.logger.send_message_to_logfile("- Inserted into the community")
+                            else:
+                                self.db.move_leader_from_community_to_blacklist(self.collection, leader['_id'])
+                                self.logger.send_message_to_logfile("- Low level of certainty. Move to blacklist")
         else:
-            self.logger.send_message_to_logfile("- Issue found while resolving the conflict. error 100")
+            self.db.move_leader_from_community_to_blacklist(self.collection, leader['_id'])
+            self.logger.send_message_to_logfile("- Leader was not to be found. error 101")
+            self.logger.send_message_to_logfile("- Moved to blacklist")
+
 
     def refresh_leaders_init_details(self):
         for leader in self.leaders:
@@ -251,6 +260,9 @@ class Collector:
                 post_id = post.id
                 post_text = post.full_text
                 date_created = post.created_at
+                retweet_count = post.retweet_count
+                retweeted = post.retweeted
+                likes = post.favorite_count
                 try:
                     in_reply_to_status_id = post.in_reply_to_status_id
                     if in_reply_to_status_id != None:
@@ -293,8 +305,9 @@ class Collector:
                 self.db.insert_postV2("posts", leader_twitter_id, post_id, post_text, date_created,
                                       in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id,
                                       quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id,
-                                      retweeted_status_text, retweeted_status_user_id)
+                                      retweeted_status_text, retweeted_status_user_id, retweet_count, retweeted, likes)
                 self.logger.send_message_to_logfile("- New post found and collected: " + str(post_id))
+
 
     def check_if_post_exists_in_db(self, tweet_id):
         query = {"post_id": tweet_id}

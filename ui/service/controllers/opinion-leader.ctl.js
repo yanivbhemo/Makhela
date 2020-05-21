@@ -88,8 +88,6 @@ exports.MoveToBlackList = (req, res) => {
     Leader.findOne({twitter_screen_name})
     .then( doc => {
         BlackListLeader.findOne({}).sort({"native_id": -1}).limit(1)
-        .then(last_doc => {
-            new_id = ++last_doc.native_id
             let swap = new BlackListLeader({
                 full_name: doc.full_name,
                 new_leader: doc.new_leader,
@@ -111,7 +109,6 @@ exports.MoveToBlackList = (req, res) => {
                 betweenness_centrality: doc.betweenness_centrality,
                 closeness_centrality: doc.closeness_centrality,
                 analyzed_date: doc.analyzed_date,
-                native_id: new_id
             })
             swap.save((err, result) => {
                 if(err){
@@ -133,7 +130,6 @@ exports.MoveToBlackList = (req, res) => {
                     })
                 }
             })
-        })
     })
     .catch(err => {
         console.log(err)
@@ -161,15 +157,12 @@ exports.addNewLeader = (req, res) => {
     Leader.findOne({$and: [{"twitter_screen_name":twitter_screen_name},{"full_name": full_name}]})
     .then( doc => {
         if(!doc){
-            Leader.findOne({}).sort({"native_id": -1}).limit(1)
-            .then(last_doc => {
-                new_id = ++last_doc.native_id
+            Leader.findOne({}).limit(1)
                 let newLeader = new Leader({
                     full_name: full_name,
                     twitter_screen_name: twitter_screen_name,
                     new_leader: true,
                     internal_create_date: datetime,
-                    native_id: new_id
                 })
                 newLeader.save((err, result) => {
                     if(err){
@@ -180,7 +173,6 @@ exports.addNewLeader = (req, res) => {
                         res.sendStatus(200)
                     }
                 })  
-            })
         }
         else
             return res.sendStatus(404)
