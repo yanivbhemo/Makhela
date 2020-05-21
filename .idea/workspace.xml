@@ -4,7 +4,6 @@
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collector/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/service/models/KeyWord.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/models/KeyWord.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
