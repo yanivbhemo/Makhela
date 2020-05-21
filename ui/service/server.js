@@ -33,8 +33,8 @@ app.use(   (req, res, next) => {
     next();
 });
 
-// app.post('/initiation', withAuth, initCtl.initSystem);
-app.post('/initiation', initCtl.initSystem);
+app.post('/initiation', withAuth, initCtl.initSystem);
+// app.post('/initiation', initCtl.initSystem);
 
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);

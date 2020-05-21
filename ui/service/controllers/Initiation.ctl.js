@@ -1,35 +1,42 @@
 const mongoose = require('mongoose')
 const Leader = require('../models/opinion-leader')
+const KeyWord = require('../models/KeyWord')
 
 exports.initSystem = (req, res) => {
-    let d = new Date();
+    let date = new Date();
 
     const leaders = req.body.leaders
     const keyWords = req.body.keyWords
     let leadersDocs  = []
-    
-    let allLines = leaders.split(/\r\n|\n/);
-       
-    // allLines.forEach(line => {
-    //     if (line.trim().isEmpty() == false){
-    //         leadersDocs.push(
-    //             {
-    //                 full_name: line,
-    //                 internal_create_date: d,
-    //                 new_leader: true
-    //             })
-    //     }
-    // })
-
-    // Leader.insertMany(leadersDocs)
-    //       .then(docs => {
-    //         console.log(keyWords)
-    //         console.log(leaders)  
-    //         res.json(docs)})
-    //       .catch(err => res.status(500).send(err))
-   
-
-
-
-    res.json({success:true})
+    let keyWordsDocs  = []
+    let allLines
+    allLines = leaders.split(/\r\n|\n/);
+    allLines.map(line => {
+        if(line.trim().length)
+            leadersDocs.push(
+                {
+                    full_name: line.trim(),
+                    internal_create_date: date,
+                    new_leader: true
+                })
+        })
+    allLines = keyWords.split(/\r\n|\n/);
+    allLines.map(line => {
+        if(line.trim().length)
+            keyWordsDocs.push({word: line.trim()})
+        })
+        
+        Leader.insertMany(leadersDocs,  (err, docs) => {
+            if (err){ 
+                return res.status(500).send(err)
+            } else {
+                KeyWord.insertMany(keyWordsDocs,  (err, docs) => {
+                    if (err){ 
+                        return res.status(500).send(err)
+                    } else {
+                      res.json({success:true})
+                    }
+                  });
+            }
+          });
 }

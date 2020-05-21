@@ -8,6 +8,9 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
+import * as CONSTS from '../../consts'
+import Cookies from 'js-cookie';
+
 
 
 class Initiation extends Component {
@@ -25,6 +28,25 @@ class Initiation extends Component {
 
     handleClick = () => {
         console.log("click")
+        let url = CONSTS.INIT_SYSTEM
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                "token":Cookies.get('token'),
+                "keyWords": this.state.keyWords,
+                "leaders": this.state.leaders
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+        this.setState({
+            leaders: '',
+            keyWords: ''
+        })
     }
     handleChange = e => {
         if(e.target.id === "leaders")
