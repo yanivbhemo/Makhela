@@ -40,5 +40,10 @@ export const MOVE_BLACKLISTS_TO_COMMUNITY = url + "/blacklist/moveToCommunity/"
 export const GET_ALL_BLACKLISTS_LOCATIONS = url + "/blacklist/getLocations"
 export const GET_SPECIFIC_LOCATION_BLACKLISTS = url + "/blacklist/getLocations"
 export const GET_SPECIFIC_BLACKLISTS = url + "/blacklist/"
+export const GET_BLACKLISTS_FRIENDS = url + "/blacklist/getSuggestionFriends/"
+export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getSuggestionShortDetails/"
 export const GET_BLACKLISTS_FRIENDS = url + "/blacklist/getBlackListLeaderFriends/"
 export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getBlackListLeaderShortDetails/"
+
+//Init
+export const INIT_SYSTEM = url + "/initiation"

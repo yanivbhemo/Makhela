@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import Graph from "react-graph-vis";
 import ReactTooltip from "react-tooltip";
 import { degree, betweenness, closeness } from './ClosenessExp'
+import Col from './Col'
+import Row from './Row'
+
 class Network extends React.Component {
   constructor() {
     super();
@@ -22,11 +25,11 @@ class Network extends React.Component {
   }
 
   centrality(centralityState){
-    console.log(centralityState)
     this.setState({centrality:centralityState})
+    let myNodes 
     switch(this.state.centrality){
             case 'degCentrality':
-             var  mynodes =  this.state.leaders.map(item => { 
+              myNodes =  this.state.leaders.map(item => { 
                 return {id: item.id, 
                         value: item.degCentrality, 
                         label: item.twitterName, 
@@ -40,17 +43,19 @@ class Network extends React.Component {
               })
               break;
             case 'betweennessCentrality':
-              var mynodes =  this.state.leaders.map(item => { 
+              myNodes =  this.state.leaders.map(item => { 
                 return {id: item.id, value: item.betweennessCentrality , label: item.twitterName, title: item.name, group: item.community }
               })
               break;
             case 'closenessCentrality':
-              var mynodes =  this.state.leaders.map(item => { 
+              myNodes =  this.state.leaders.map(item => { 
                 return {id: item.id, value: item.degCentrality , label: item.twitterName, title: item.name, group: item.community }
               })
               break;
+              default:
+                myNodes = [];
           }
-          this.setState({nodes:mynodes})
+          this.setState({nodes:myNodes})
   }
 
   fetchPosts(){
@@ -95,17 +100,47 @@ class Network extends React.Component {
 
   showLeader(id){
     let leader = this.state.leaders.find(element => element.id === id);
+    console.log(leader)
     return(
-      <React.Fragment>
-        <h1>name: {leader.name}</h1>
-        <h1>twitter name: {leader.twitterName}</h1>
-        <h1>followers: {leader.followers}</h1>
-        <h1>following: {leader.following}</h1>   
-        <button onClick={() => this.fetchPosts()}>Show posts graph</button>
-    </React.Fragment>
+      <div>
+         <Row>
+          <Col className="col-lg-4">
+                            {/* <Panel headeline="Graph">
+                                <Network />
+                            </Panel> */}
+                             <div className="profile-pic">
+                              <img src={leader.twitterProfileImage} alt="Logo" />;
+                           </div>
+                        </Col>
+                        <Col className="col-lg-3">
+                        <h1>check</h1>
+                        <div className="col-md-3 profile-text">
+                          <h3>{leader.name}</h3>
+                          <h5>{leader.twitterName}</h5>
+                          <p>followers {leader.followers}</p>
+                          <p>followers {leader.following}</p>
+                      </div>
+                        </Col>
+                        <Col className="col-lg-1">
+                          <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
+                          <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show profile</button>
+                        </Col>
+                        </Row>
+         {/* <div className="profile-pic">
+        <img src={leader.twitterProfileImage} alt="Logo" />;
+        </div>
+      <div className="col-md-3 profile-text">
+          <h3>{leader.name}</h3>
+          <h5>{leader.twitterName}</h5>
+          <p>followers {leader.followers}</p>
+          <p>followers {leader.following}</p>
+      </div>
+      <div className="col-md-3 profile-text">
+        <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
+        <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show profile</button>
+      </div> */}
+    </div>
     )
-    // console.log(leader);
-
   }
   draw(){
     const graph = {
@@ -164,18 +199,18 @@ class Network extends React.Component {
         .then(res => res.json())
         .then(data => { 
           this.setState({ leaders: data })
-          let mynodes =  this.state.leaders.map(item => { 
-            return {id: item.id, value: item.closenessCentrality , label: item.twitterName, title: item.name, group: item.community, shape: "dot" }
-          })
+          // let mynodes =  this.state.leaders.map(item => { 
+          //   return {id: item.id, value: item.closenessCentrality , label: item.twitterName, title: "ddd", group: item.community, shape: "dot" }
+          // })
+          let myNodes = []
+          this.state.leaders.map(item => myNodes.push({id: item.id, value: item.closenessCentrality , label: item.twitterName, title: "ddd", group: item.community, shape: "dot" }))
           let myEdges = []
           this.state.leaders.map(value => {
-              if(Array.isArray(value.communityFollowing)){
-                  value.communityFollowing.map(fl => {
-                      myEdges.push({ from: value.id, to: fl})
-                  })
-              }
+              if(Array.isArray(value.communityFollowing))
+                  value.communityFollowing.map(fl => myEdges.push({ from: value.id, to: fl}))
+              
               });
-          this.setState({nodes: mynodes, edges: myEdges, loading: false})              
+          this.setState({nodes: myNodes, edges: myEdges, loading: false})              
       })
         .catch(err => console.error(err));
   }
@@ -186,13 +221,13 @@ class Network extends React.Component {
       else
         return(
           <div>
-            <button  data-for="degCentrality" data-tip onClick={() => this.centrality('degCentrality')}>Degree Centralitys</button>
+            <button  data-for="degCentrality" className="btn btn-theme03" data-tip onClick={() => this.centrality('degCentrality')}>Degree Centralitys</button>
             <ReactTooltip type="warning" id="degCentrality" getContent={() => degree}/>
            
-            <button  data-for="betweennessCentrality" data-tip  onClick={() => this.centrality('betweennessCentrality')}>Betweenness Centrality</button>
+            <button  data-for="betweennessCentrality" className="btn btn-theme03" data-tip  onClick={() => this.centrality('betweennessCentrality')}>Betweenness Centrality</button>
             <ReactTooltip type="warning" id="betweennessCentrality" getContent={() => betweenness}/>
 
-            <button data-for="closenessCentrality" data-tip onClick={() => this.centrality('closenessCentrality')}>Closeness Centrality</button>
+            <button data-for="closenessCentrality" className="btn btn-theme03" data-tip onClick={() => this.centrality('closenessCentrality')}>Closeness Centrality</button>
             <ReactTooltip type="warning" id="closenessCentrality" getContent={() => closeness}/>
             
             {this.draw()}

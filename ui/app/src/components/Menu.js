@@ -28,6 +28,12 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
+                        <NavLink exact to="/research">
+                            <i className="fa fa-pie-chart"></i>
+                            <span>Research</span>
+                        </NavLink>
+                    </li>
+                    <li className="sub-menu">
                         <NavLink exact to="/suggestions">
                         <i className="fa fa-plus"></i>
                         <span>Suggestions</span>
@@ -40,9 +46,15 @@ class Menu extends Component {
                         </NavLink>
                     </li>
                     <li className="sub-menu">
+                        <NavLink exact to="/initiation">
+                        <i className="fa fa-file"></i>
+                        <span>Init System</span>
+                        </NavLink>
+                    </li>
+                    <li className="sub-menu">
                         <NavLink exact to="/settings">
-                        <i className="fa fa-cogs"></i>
-                        <span>Settings</span>
+                          <i className="fa fa-cogs"></i>
+                          <span>Settings</span>
                         </NavLink>
                     </li>
                     </ul>
