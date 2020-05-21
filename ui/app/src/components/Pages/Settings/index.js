@@ -25,7 +25,10 @@ function SettingsPage() {
             }
           })
         .then(res => {
-            toggleModel({modalStatus: false, blackBackground: "none"})
+            if(res.status === 200){
+                toggleModel({modalStatus: false, blackBackground: "none"})
+            }
+            else alert('Init did not succeeded')
         })
     }
     
