@@ -75,7 +75,6 @@ class Initiation extends Component {
            <br/>
            System began collectiong network.
         </ModalBox>
-       )
                 <Row>
                         <Col className="col-lg-12">
                             <Panel>
