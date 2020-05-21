@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Leader = require('../models/opinion-leader')
-const KeyWord = require('../models/KeyWord')
+const KeyWord = require('../models/Keyword')
 
 exports.initSystem = (req, res) => {
     let date = new Date();

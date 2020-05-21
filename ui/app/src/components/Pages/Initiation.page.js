@@ -67,9 +67,6 @@ class Initiation extends Component {
         show={this.state.showModal}
         title="System initiation"
         onClose={() => this.setState({showModal:false})}
-        // rightBtnText="Blacklist"
-        // onSubmit={this.modalOnSubmit}
-        // type="danger"
         >
            Opinion leaders and Keywords saved.
            <br/>
