@@ -290,10 +290,15 @@ class BlackListPanel extends Component {
     super(props)
     this.moveToBlackList = this.moveToBlackList.bind(this)
     this.checkIfImageExist = this.checkIfImageExist.bind(this)
+    this.addToCommunity = this.addToCommunity.bind(this)
   }
 
   moveToBlackList() {
     this.props.onBlackListBtn(this.props.index)
+  }
+
+  addToCommunity() {
+    this.props.onAddBtn(this.props.index)
   }
 
   checkIfImageExist(url) {
@@ -342,7 +347,7 @@ class BlackListPanel extends Component {
                               <p>{this.props.twitter_followers_count}</p>
                           </div>
                         </div>
-                        {!this.props.newUser ? <div className="row"><h4>New Suggestion. Yet collected</h4></div> : ''}
+                        {!this.props.newUser ? <div className="row"><h4>Not Collected</h4></div> : ''}
       </div>
       </div>
     )

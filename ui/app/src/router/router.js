@@ -10,8 +10,7 @@ import SuggestionsPage from '../components/Pages/Suggestions'
 import BlackListPage from '../components/Pages/BlackList'
 import Research from '../components/Pages/Research.page'
 import Initiation from '../components/Pages/Initiation.page'
-
-
+import SettingsPage from '../components/Pages/Settings'
 
 const ReactRouter = () => {
     return (
@@ -24,6 +23,7 @@ const ReactRouter = () => {
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
             <Route exact path="/blacklist" component={withAuth(BlackListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
+            <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />
         </React.Fragment>
     )

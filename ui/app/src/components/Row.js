@@ -7,7 +7,7 @@ class Row extends Component {
 
     render() {
         return(
-            <div className="row" id={this.props.id}>
+            <div className={this.props.className || 'row'} id={this.props.id}>
                 {this.props.children}
             </div>
         )

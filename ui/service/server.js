@@ -9,7 +9,7 @@ const suggestionsCtl   = require('./controllers/suggestion.ctl');
 const blackListCtl = require('./controllers/Blacklist.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
-
+const systemCtl = require('./controllers/system.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
 // const keywordsCtl   = require('./controllers/keywords.ctl');
@@ -67,10 +67,10 @@ app.post('/blacklist/getBlackListLeadersByRange', withAuth, blackListCtl.getBlac
 app.post('/blacklist/getAllBlackListLeadersLimited', withAuth, blackListCtl.getAllBlackListLeadersLimited);
 app.post('/blacklist/getLocations', withAuth, blackListCtl.getLocations);
 app.post('/blacklist/getLocations/:location', withAuth, blackListCtl.getBlackListLeadersByLocation);
-app.post('/blacklist/suggestion/:twitter_screen_name', withAuth, blackListCtl.getBlackListLeader)
-app.post('/blacklist/suggestion/getBlackListLeaderFriends/:twitter_id', withAuth, blackListCtl.getBlackListLeaderFriends)
+app.post('/blacklist/:twitter_screen_name', withAuth, blackListCtl.getBlackListLeader)
+app.post('/blacklist/getBlackListLeaderFriends/:twitter_id', withAuth, blackListCtl.getBlackListLeaderFriends)
 app.post('/blacklist/getBlackListLeaderShortDetails/:twitter_id', withAuth, blackListCtl.getBlackListLeaderShortDetails)
-app.post('/blacklist/moveToCommunity', withAuth, blackListCtl.moveToCommunity)
+app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListCtl.moveToCommunity)
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
@@ -78,5 +78,7 @@ app.post('/users/new', userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
 app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
+
+app.post('/system/init', withAuth, systemCtl.initSystem)
 
 app.listen(port, () => console.log(`listening on port ${port}`));
