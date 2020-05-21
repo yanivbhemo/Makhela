@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/db_handlers/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/source_handlers/twitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/source_handlers/twitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Network.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Network.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Panels/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/Initiation.ctl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/service/models/KeyWord.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/models/KeyWord.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +44,7 @@
       <recent name="C:\Users\benhay\Desktop\Makhela\collector" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.suggestion_main">
+  <component name="RunManager" selected="Python.collector_main">
     <configuration name="collector_main" type="PythonConfigurationType" factoryName="Python">
       <module name="Makhela" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -143,10 +136,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1585143773298" />
-    <state x="2183" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589787484656">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590054976203">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588840208701" />
+    <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590054976203" />
     <state x="2183" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589787484656" />
     <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1587380256997" />
     <state x="558" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585562578358">
@@ -246,7 +239,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/collector/collector.py</url>
-          <line>330</line>
+          <line>333</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

@@ -63,7 +63,10 @@ class Collector:
                     self.collect_and_save_tweets(leader['twitter_id'])
                 else:
                     self.logger.send_message_to_logfile("- New leader. Collecting init details")
-                    self.collect_leader_init_details(leader['_id'], leader['full_name'], leader['twitter_screen_name'])
+                    if leader['twitter_screen_name']:
+                        self.collect_leader_init_details(leader['_id'], leader['full_name'], leader['twitter_screen_name'])
+                    else:
+                        self.collect_leader_init_details(leader['_id'], leader['full_name'])
                 self.db.unlock_opinion_leader(leader['_id'])
             else:
                 try:

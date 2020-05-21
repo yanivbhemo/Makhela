@@ -17,7 +17,8 @@ exports.initSystem = (req, res) => {
                 {
                     full_name: (line.trim()).replace(/  +/g, ' '),
                     internal_create_date: date,
-                    new_leader: true
+                    new_leader: true,
+                    lock: false
                 })
         })
     allLines = keyWords.split(/\r\n|\n/);
