@@ -29,28 +29,28 @@ exports.initSystem = (req, res) => {
                         })
                         .catch(err => {
                             console.log(err)
-                            return res.sendStatus(403)
+                            return res.sendStatus(404)
                         })
                     })
                 })
                 .catch(err => {
                     console.log(err)
-                    return res.sendStatus(403)
+                    return res.sendStatus(404)
                 })
             })
             .catch(err => {
                 console.log(err)
-                return res.sendStatus(403)
+                return res.sendStatus(404)
             })
         })
         .catch(err => {
             console.log(err)
-            return res.sendStatus(403)
+            return res.sendStatus(404)
         })    
     })
     .catch(err => {
         console.log(err)
-        return res.sendStatus(403)
+        return res.sendStatus(404)
     })    
 }
 
@@ -62,11 +62,11 @@ exports.checkSystemStatus = (req, res) => {
             console.log("Yes")
             return res.sendStatus(200)
         } else {
-            return res.sendStatus(403)
+            return res.sendStatus(404)
         }
     })
     .catch(err => {
         console.log(err)
-        return res.sendStatus(403)
+        return res.sendStatus(404)
     }) 
 }

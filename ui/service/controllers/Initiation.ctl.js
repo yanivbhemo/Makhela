@@ -10,6 +10,7 @@ exports.initSystem = (req, res) => {
     let leadersDocs  = []
     let keyWordsDocs  = []
     let allLines
+
     allLines = leaders.split(/\r\n|\n/);
     allLines.map(line => {
         if(line.trim().length)
@@ -18,7 +19,7 @@ exports.initSystem = (req, res) => {
                     full_name: (line.trim()).replace(/  +/g, ' '),
                     internal_create_date: date,
                     new_leader: true,
-                    lock: false
+                    lock: false,
                 })
         })
     allLines = keyWords.split(/\r\n|\n/);

@@ -187,9 +187,6 @@ class DataBaseHandler:
                               leader_twitter_friends_count, leader_twitter_created_at, leader_twitter_statuses_count,
                               new_leader, level_of_certainty, leader_twitter_profile_image_url):
         col = self.db[collection]
-        mydocs = col.find().sort("native_id", -1).limit(1)
-        for doc in mydocs:
-            new_id = doc['native_id'] + 1
         query = {
                 'twitter_id': leader_twitter_id,
                 'full_name': leader_fullname,
@@ -205,7 +202,6 @@ class DataBaseHandler:
                 'twitter_profile_image': leader_twitter_profile_image_url,
                 'lock': False,
                 "internal_create_date": datetime.datetime.now(),
-                "native_id": new_id
         }
         col = self.db[collection]
         col.insert_one(query)
