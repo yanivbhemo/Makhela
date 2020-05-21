@@ -34,7 +34,7 @@ class ModalBox extends Component {
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header" style={{backgroundColor: headerColor}}>
-                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={e=> { this.onClose(e)}}>×</button>
                         <h4 className="modal-title" id="modalLabel">{this.props.title}</h4>
                     </div>
                     <div className="modal-body">
