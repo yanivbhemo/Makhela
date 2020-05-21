@@ -333,9 +333,12 @@ class Collector:
         self.logger.send_message_to_logfile("- Search for connection to another opinion leaders")
         followers_array = self.source_handler.get_following_list(leader_twitter_id)
         print(followers_array)
-        if len(leader['community_following']) > 0:
-            connection_arr = leader['community_following']
-        else:
+        try:
+            if len(leader['community_following']) > 0:
+                connection_arr = leader['community_following']
+            else:
+                connection_arr = []
+        except:
             connection_arr = []
         new_connections_arr = []
 
