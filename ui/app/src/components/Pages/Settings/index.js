@@ -7,8 +7,9 @@ import Col from '../../Col'
 import UsersPanel,{InitSystemPanel} from './Panel'
 import ModalBox from '../../ModalBox'
 import Cookies from 'js-cookie';
+import * as CONSTS from '../../../consts'
 
-function SettingsPage() {
+function SettingsPage(props) {
 
     const [modelOpen, toggleModel] = useState({modalStatus: false, blackBackground: "none"})
     useEffect(() => {
@@ -16,7 +17,7 @@ function SettingsPage() {
     })
 
     function onConfirmDeletion() {
-        const url="http://localhost:3002/system/init"
+        const url = CONSTS.FORMAT_SYSTEM
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -26,7 +27,7 @@ function SettingsPage() {
           })
         .then(res => {
             if(res.status === 200){
-                toggleModel({modalStatus: false, blackBackground: "none"})
+                props.history.push('/initiation')
             }
             else alert('Init did not succeeded')
         })

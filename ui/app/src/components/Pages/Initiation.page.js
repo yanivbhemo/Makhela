@@ -24,10 +24,22 @@ class Initiation extends Component {
 
     componentDidMount() {
         document.title = "Initiation"
+        const url = CONSTS.CHECK_IF_SYSTEM_INIT
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => {
+            if(res.status === 403){
+                this.props.history.push('/')
+            }
+        })
     }
 
     handleClick = () => {
-        console.log("click")
         let url = CONSTS.INIT_SYSTEM
         fetch(url, {
             method: 'POST',
@@ -55,9 +67,6 @@ class Initiation extends Component {
         this.setState({keyWords: e.target.value})
     }
     render() {
-        console.log(this.state.leaders) 
-       console.log(this.state.keyWords) 
-        
         return(
             <React.Fragment>
                 <Header />
