@@ -4,8 +4,10 @@ import Row from '../Row'
 import Col from '../Col'
 import Panel from '../Panel'
 import Header from '../Header'
-import Menu from '../Menu'
 import Footer from '../Footer'
+
+import Menu from '../Menu'
+import ModalBox from '../ModalBox'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
 import * as CONSTS from '../../consts'
@@ -18,7 +20,8 @@ class Initiation extends Component {
         super()
         this.state = {
             leaders: '',
-            keyWords: ''
+            keyWords: '',
+            showModal: false
           }
     }
 
@@ -57,7 +60,8 @@ class Initiation extends Component {
         .catch(err => console.log(err))
         this.setState({
             leaders: '',
-            keyWords: ''
+            keyWords: '',
+            showModal: true
         })
     }
     handleChange = e => {
@@ -72,6 +76,18 @@ class Initiation extends Component {
                 <Header />
                 <Menu />
                 <Content title="Init System" fa="fa-file">
+                <ModalBox 
+        show={this.state.showModal}
+        title="System initiation"
+        onClose={() => this.setState({showModal:false})}
+        // rightBtnText="Blacklist"
+        // onSubmit={this.modalOnSubmit}
+        // type="danger"
+        >
+           Opinion leaders and Keywords saved.
+           <br/>
+           System began collectiong network.
+        </ModalBox>
                 <Row>
                         <Col className="col-lg-12">
                             <Panel>
