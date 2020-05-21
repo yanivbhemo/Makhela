@@ -45,3 +45,5 @@ export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getBlackListLeader
 
 //Init
 export const INIT_SYSTEM = url + "/initiation"
+export const FORMAT_SYSTEM = url + "/system/init"
+export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"

@@ -1,10 +1,10 @@
 var mongoose = require('mongoose')
 
-var system = new mongoose.Schema({
+var setting = new mongoose.Schema({
     attribute: {type: String, required: true, index: 1 },
     value: {type: String, required: true}
 }, { collection: 'settings', versionKey: ''} )
 
-var System = mongoose.model('System', system)
+var Setting = mongoose.model('Setting', setting)
 
-module.exports = System
+module.exports = Setting

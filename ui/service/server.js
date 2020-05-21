@@ -12,8 +12,6 @@ const userCtl   = require('./controllers/User.ctl');
 const systemCtl = require('./controllers/system.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
-// const keywordsCtl   = require('./controllers/keywords.ctl');
-
 const app       = express();
 const port      = process.env.PORT || 3002;
 
@@ -34,8 +32,6 @@ app.use(   (req, res, next) => {
 });
 
 app.post('/initiation', withAuth, initCtl.initSystem);
-// app.post('/initiation', initCtl.initSystem);
-
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
@@ -80,5 +76,6 @@ app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
 
 app.post('/system/init', withAuth, systemCtl.initSystem)
+app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 
 app.listen(port, () => console.log(`listening on port ${port}`));

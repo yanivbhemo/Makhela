@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const Leader = require('../models/opinion-leader')
-const KeyWord = require('../models/KeyWord')
+const Keyword = require('../models/Keyword')
+const Setting = require('../models/Setting')
 
 exports.initSystem = (req, res) => {
     let date = new Date();
-
     const leaders = req.body.leaders
     const keyWords = req.body.keyWords
     let leadersDocs  = []
@@ -15,7 +15,7 @@ exports.initSystem = (req, res) => {
         if(line.trim().length)
             leadersDocs.push(
                 {
-                    full_name: line.trim(),
+                    full_name: (line.trim()).replace(/  +/g, ' '),
                     internal_create_date: date,
                     new_leader: true
                 })
@@ -23,18 +23,21 @@ exports.initSystem = (req, res) => {
     allLines = keyWords.split(/\r\n|\n/);
     allLines.map(line => {
         if(line.trim().length)
-            keyWordsDocs.push({word: line.trim()})
+            keyWordsDocs.push({word: line.trim(), internal_create_date: date})
         })
-        
         Leader.insertMany(leadersDocs,  (err, docs) => {
             if (err){ 
                 return res.status(500).send(err)
             } else {
-                KeyWord.insertMany(keyWordsDocs,  (err, docs) => {
+                Keyword.insertMany(keyWordsDocs,  (err, docs) => {
                     if (err){ 
+                        console.log(err)
                         return res.status(500).send(err)
                     } else {
-                      res.json({success:true})
+                      Setting.updateOne({attribute: "NEW_SYSTEM"}, {$set: {value: false}})
+                      .then(()=>{
+                        return res.json({success:true})
+                      })
                     }
                   });
             }

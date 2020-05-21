@@ -27,6 +27,19 @@ class Initiation extends Component {
 
     componentDidMount() {
         document.title = "Initiation"
+        const url = CONSTS.CHECK_IF_SYSTEM_INIT
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => {
+            if(res.status === 403){
+                this.props.history.push('/')
+            }
+        })
     }
 
     handleClick = () => {
@@ -57,7 +70,7 @@ class Initiation extends Component {
         else if(e.target.id === "keywords")
         this.setState({keyWords: e.target.value})
     }
-    render() {      
+    render() {
         return(
             <React.Fragment>
                 <Header />
