@@ -346,8 +346,8 @@ class Collector:
             if self.check_follower(follower, leader_twitter_id, connection_arr):
                 twitter_screen_name = self.db.convertTwitterId_to_TwitterScreenName(self.collection, follower)
                 if twitter_screen_name != None:
-                    connection_arr.append({'twitter_screen_name': twitter_screen_name, "found_date":current_time})
-                    new_connections_arr.append({'twitter_screen_name': twitter_screen_name, "found_date": str(current_time)})
+                    connection_arr.append({'twitter_screen_name': twitter_screen_name, 'twitter_id': follower, "found_date":current_time})
+                    new_connections_arr.append({'twitter_screen_name': twitter_screen_name, 'twitter_id': follower, "found_date": str(current_time)})
                 else:
                     self.logger.send_message_to_logfile("- Issue in convert twitter_id into twitter_screen_name. Ignore")
         self.logger.send_message_to_logfile("- Connections found:")
