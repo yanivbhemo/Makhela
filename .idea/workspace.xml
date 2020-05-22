@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/suggestion_collector/suggestion_collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/app/src/components/Pages/Profile.page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/opinion-leader.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/controllers/system.ctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/controllers/system.ctl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/models/opinion-leader.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/models/opinion-leader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/service/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/ui/service/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,11 +134,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1585143773298" />
-    <state x="675" y="94" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590148386781">
+    <state x="675" y="94" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590150731492">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590054976203" />
-    <state x="675" y="94" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590148386781" />
+    <state x="675" y="94" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150731492" />
     <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590073799000" />
     <state x="558" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585562578358">
       <screen x="0" y="0" width="1536" height="824" />
@@ -168,11 +159,11 @@
     <state width="1274" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1587730586514" />
     <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589786951660" />
     <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590069227347" />
-    <state x="898" y="212" key="EnvironmentVariablesDialog" timestamp="1590148385325">
+    <state x="898" y="212" key="EnvironmentVariablesDialog" timestamp="1590150385397">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="168" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588715346657" />
-    <state x="898" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590148385325" />
+    <state x="898" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150385397" />
     <state x="2817" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590060720582" />
     <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1584717004501">
       <screen x="1920" y="0" width="1920" height="1040" />
