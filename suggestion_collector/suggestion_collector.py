@@ -59,7 +59,7 @@ class Suggestion_Collector:
             self.collect_suggested_leader_init_details()
             self.db.bulk_update_suggestion_posts(post_arr)
         else:
-            self.logger.send_message_to_logAndSlack("- Suggestion Collector couldn't find any new suggestions")
+            self.logger.send_message_to_logfile("- Suggestion Collector couldn't find any new suggestions")
 
     def check_if_person_in_blacklist(self, twitter_id):
         query = {
@@ -156,6 +156,6 @@ class Suggestion_Collector:
                         self.logger.send_message_to_logfile(
                             "\t+ '" + details.screen_name + "' Certainty level too low")
                 else:
-                    self.logger.send_message_to_logAndSlack("- Couldn't find the following in twitter: " + self.leaders_to_check[i]['screen_name'])
+                    self.logger.send_message_to_logfile("- Couldn't find the following in twitter: " + self.leaders_to_check[i]['screen_name'])
         else:
-            self.logger.send_message_to_logAndSlack("- self.leaders_to_check Variable is empty!")
+            self.logger.send_message_to_logfile("- self.leaders_to_check Variable is empty!")

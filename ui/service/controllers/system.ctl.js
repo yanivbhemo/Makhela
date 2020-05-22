@@ -62,11 +62,11 @@ exports.checkSystemStatus = (req, res) => {
             console.log("Yes")
             return res.sendStatus(200)
         } else {
-            return res.sendStatus(404)
+            return res.sendStatus(201)
         }
     })
     .catch(err => {
         console.log(err)
-        return res.sendStatus(404)
+        return res.sendStatus(201)
     }) 
 }

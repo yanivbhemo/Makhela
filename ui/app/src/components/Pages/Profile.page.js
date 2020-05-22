@@ -52,7 +52,8 @@ export default class ProfilePage extends Component {
             }
         })
         .then(res => (res.status === 200) ? res.json() : window.location.href = "/community")
-            .then(leader => {
+            .then(leader => 
+                {
                 this.addInformation({
                 full_name: leader.full_name, 
                 twitter_id: leader.twitter_id, 
@@ -85,8 +86,8 @@ export default class ProfilePage extends Component {
                         }))
                     })
                 .catch(err => console.log(err))
-        
-                url = CONSTS.GET_LEADER_FRIENDS + this.state.information.twitter_id
+
+                url = CONSTS.GET_LEADER_FRIENDS + this.state.information.twitter_screen_name
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify({"token":Cookies.get('token')}),
@@ -98,7 +99,7 @@ export default class ProfilePage extends Component {
                     .then(friends => {
                         if(friends.community_following.length > 0 ){
                             friends.community_following.map(friend => this.addFriends({
-                                twitter_id: friend[0].twitter_id,
+                                twitter_screen_name: friend[0].twitter_screen_name,
                                 found_date: friend[0].found_date
                             }))
                         } else {
@@ -111,8 +112,8 @@ export default class ProfilePage extends Component {
         .catch(err => console.log(err))
     }
 
-    addFriends({twitter_id, found_date}){
-        let url = CONSTS.GET_LEADER_SHORT_DETAILS + twitter_id
+    addFriends({twitter_screen_name, found_date}){
+        let url = CONSTS.GET_LEADER_SHORT_DETAILS + twitter_screen_name
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -123,13 +124,11 @@ export default class ProfilePage extends Component {
         .then(res => res.json())
             .then(details => {
                 const full_name = details.full_name || ""
-                const twitter_screen_name = details.twitter_screen_name || ""
                 const twitter_profile_image = details.twitter_profile_image || ""
                 this.setState(prevState => ({
                     friends: [
                         ...prevState.friends,
                         {
-                            twitter_id: twitter_id,
                             found_date: found_date,
                             full_name: full_name,
                             twitter_screen_name: twitter_screen_name,

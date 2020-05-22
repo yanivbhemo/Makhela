@@ -237,3 +237,11 @@ class DataBaseHandler:
         col.insert_one(doc)
         col = self.db[collection]
         col.delete_one({'_id': id_to_update})
+
+    def convertTwitterId_to_TwitterScreenName(self, collection, twitter_id):
+        col = self.db[collection]
+        doc = col.find_one({"twitter_id": twitter_id})
+        if len(doc) > 0:
+            return doc['twitter_screen_name']
+        else:
+            return None

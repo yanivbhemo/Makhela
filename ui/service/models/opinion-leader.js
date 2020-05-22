@@ -7,7 +7,7 @@ var leader = new mongoose.Schema({
     twitter_description: String,
     twitter_followers_count: Number,
     twitter_friends_count: Number,
-    twitter_id: {type: Number, index: 1},
+    twitter_id: {type: String, index: 1},
     twitter_location: String,
     twitter_screen_name: String,
     twitter_statuses_count: Number,

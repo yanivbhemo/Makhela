@@ -198,6 +198,7 @@ exports.getLeader = (req, res) => {
 
     Leader.findOne(query)
     .then(doc => {
+        console.log(doc)
         if(doc){
             return res.status(200).json(doc)
         } else {
@@ -211,9 +212,9 @@ exports.getLeader = (req, res) => {
 }
 
 exports.getLeaderFriends = (req, res) => {
-    console.log("- Request: Get leader's friends inside the community: " + req.params.twitter_id)
-    let twitter_id = req.params.twitter_id
-    Leader.findOne({twitter_id}).select('community_following')
+    console.log("- Request: Get leader's friends inside the community: " + req.params.twitter_screen_name)
+    let twitter_screen_name = req.params.twitter_screen_name
+    Leader.findOne({twitter_screen_name}).select('community_following')
     .then(docs => {
         console.log(docs)
         if(docs){
@@ -230,11 +231,11 @@ exports.getLeaderFriends = (req, res) => {
 
 exports.getLeaderShortDetails = (req, res) => {
     console.log("- Request: Get leader's information short version")
-    let twitter_id = req.params.twitter_id
-    Leader.findOne({twitter_id}).select('full_name twitter_screen_name twitter_profile_image')
+    let twitter_screen_name = req.params.twitter_screen_name
+    Leader.findOne({twitter_screen_name}).select('full_name twitter_profile_image')
     .then(doc => {
         if(!doc) {
-            payload = {"full_name": "none", "twitter_screen_name": "none", "twitter_profile_image": "none"}
+            payload = {"full_name": "none", "twitter_profile_image": "none"}
             return res.status(200).json(payload)
         } else
             return res.status(200).json(doc)
