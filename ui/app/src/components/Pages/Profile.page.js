@@ -7,10 +7,11 @@ import Content from '../Content'
 import Row from '../Row'
 import Col from '../Col'
 import * as CONSTS from '../../consts'
+import * as KEYS from '../../keys'
 import Iframe from 'react-iframe'
 import Cookies from 'js-cookie';
 import ReactImageFallback from "react-image-fallback";
-
+import Map from '../Map'
 
 export default class ProfilePage extends Component {
     constructor(props){
@@ -22,10 +23,13 @@ export default class ProfilePage extends Component {
             inCommunity: '',
             showModal: false,
             blackBackground: 'none',
-            location_url: '',
+            twitter_location: '',
+            // location_url: '',
             posts:[],
             friends: [],
-            friendsGraphLbl: ''
+            friendsGraphLbl: '',
+            lat: 0,
+            lng: 0
         }
         this.addInformation = this.addInformation.bind(this)
         this.addPosts = this.addPosts.bind(this)
@@ -43,7 +47,7 @@ export default class ProfilePage extends Component {
             this.setState({inCommunity: true})
         else
             this.setState({inCommunity: false})
-        var url = CONSTS.GET_SPECIFIC_LEADER+this.state.twitter_screen_name
+        let url = CONSTS.GET_SPECIFIC_LEADER+this.state.twitter_screen_name
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -187,9 +191,25 @@ export default class ProfilePage extends Component {
                     twitter_statuses_count: twitter_statuses_count,
                 },
         }))
-        var string = encodeURIComponent(this.state.information.twitter_location)
-        var location = `https://maps.google.com/maps?q=${string}&amp;t=k&amp;z=5&amp;ie=UTF8&amp;iwloc=&amp;output=embed`
-        this.setState({location_url: location})
+        let city = this.state.information.twitter_location.replace(" ", "%20");
+        let url = `${CONSTS.ALT_LNG}key=${KEYS.MAP_KEY}&location=${city}`
+        
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                    .then(data => {
+                        console.log(data.results[0].locations[0].displayLatLng.lat)
+                        console.log(data.results[0].locations[0].displayLatLng.lng)
+                        this.setState({
+                            lat: data.results[0].locations[0].displayLatLng.lat,
+                            lng: data.results[0].locations[0].displayLatLng.lng
+                        })
+                    })
+                .catch(err => console.log(err))
     }
 
     moveToBlackList(twitter_id){
@@ -380,16 +400,19 @@ export default class ProfilePage extends Component {
                                 <div id="contact" className="tab-pane">
                                     <div className="row">
                                     <div className="col-lg-12">
-                                        <h4>Washington, DC</h4>
+                                        <h4>{this.state.information.twitter_location}</h4>
                                         <div id="map">
                                         <div className="mapouter">
                                             <div className="gmap_canvas">
-                                            <Iframe
-                                            url={this.state.location_url || ''}
-                                            width="1080px"
-                                            height="500px"
-                                            id="gmap_canvas"
-                                            />
+                                            <Map
+                                                lat = {this.state.lat}
+                                                lng = {this.state.lng}
+                                                isMarkerShown
+                                                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                                                loadingElement={<div style={{ height: `100%` }} />}
+                                                containerElement={<div style={{ height: `400px` }} />}
+                                                mapElement={<div style={{ height: `100%` }} />}
+                                                />  
                                             </div>
                                         </div>
                                         </div>

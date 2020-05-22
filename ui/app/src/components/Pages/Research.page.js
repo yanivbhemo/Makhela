@@ -8,7 +8,6 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
-import Network from '../Network'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

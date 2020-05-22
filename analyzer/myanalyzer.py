@@ -1,5 +1,6 @@
 import pandas as pd
 import nltk;
+
 nltk.download('stopwords')
 import re
 import numpy as np
@@ -11,6 +12,7 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 import spacy
 from nltk.corpus import stopwords
+
 stop_words = stopwords.words('english')
 stop_words.extend(['http', 'https', 'co'])
 import networkx as nx
@@ -19,13 +21,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 import logger
 
+
 class Analyzer:
 
     def __init__(self, leaders, posts, key_words):
         self.leaders = leaders
         self.posts = posts
         self.key_words = key_words
-        self.DG = ''
+        self.DG = '',
+        self.topics_data = {}
 
     def analyze_community(self):
         log = logger.logger_handler()
@@ -33,17 +37,56 @@ class Analyzer:
 
         self.add_key_words(log)
         self.important_words(log)
-        self.analyze_lda(log)
+
+        log.send_message_to_logfile("Analyzing LDA Leaders")
+        for key, value in self.leaders.items():
+            try:
+                if value['posts']:
+                    self.leaders[key]['topics'] = self.analyze_lda(value['posts'], log)
+                else:
+                    self.leaders[key]['topics'] = []
+            except:
+                log.send_message_to_logfile("Failed LDA leader", key)
+                continue
+
         self.build_graph(log)
         self.centrality(log)
         self.community(log)
+
+        log.send_message_to_logfile("Analyzing LDA - Communities")
+        community_posts = {}
+        for key, value in self.leaders.items():
+            try:
+                community_posts[value['community']] += value['posts']
+            except:
+                community_posts[value['community']] = value['posts']
+        topics = {}
+        for key, value in community_posts.items():
+            try:
+                topics[key] = self.analyze_lda(value, log)
+            except:
+                log.send_message_to_logfile("exception LDA", key)
+
+        log.send_message_to_logfile("Analyzing LDA - Network")
+        posts_data = []
+        for key, value in self.posts.items():
+            posts_data.append(value['full_text'])
+        try:
+            posts_topics = self.analyze_lda(posts_data, log)
+        except:
+            log.send_message_to_logfile("exception LDA")
+
+        today = datetime.datetime.today()
+        self.topics_data['network'] = str(posts_topics)
+        self.topics_data['communities'] = str(topics)
+        self.topics_data['date'] = str(today)
+
         for key, value in self.leaders.items():
             try:
                 del value['posts']
             except:
                 continue
-        return self.leaders, self.posts
-
+        return self.leaders, self.posts, self.topics_data
 
     def add_key_words(self, log):
         log.send_message_to_logfile("adding key word indicator to post")
@@ -104,7 +147,7 @@ class Analyzer:
 
         return
 
-    def analyze_lda(self, log):
+    def analyze_lda(self, data, log):
         log.send_message_to_logfile("Analyzing LDA")
 
         def sent_to_words(sentences):
@@ -129,59 +172,58 @@ class Analyzer:
                 texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
             return texts_out
 
-        for key, value in self.leaders.items():
+        def lda_analyzing(data):
             try:
-                if value['posts']:
-                    data = value['posts']
-                    data = [re.sub('#', '', sent) for sent in data]
-                    data = [re.sub('\s+', ' ', sent) for sent in data]
-                    data = [re.sub("\'", "", sent) for sent in data]
-                    data_words = list(sent_to_words(data))
-                    # Build the bigram and trigram models
-                    bigram = gensim.models.Phrases(data_words, min_count=5,
-                                                   threshold=100)  # higher threshold fewer phrases.
-                    trigram = gensim.models.Phrases(bigram[data_words], threshold=100)
+                data = [re.sub('#', '', sent) for sent in data]
+                data = [re.sub('\s+', ' ', sent) for sent in data]
+                data = [re.sub("\'", "", sent) for sent in data]
+                data_words = list(sent_to_words(data))
+                # Build the bigram and trigram models
+                bigram = gensim.models.Phrases(data_words, min_count=5,
+                                               threshold=100)  # higher threshold fewer phrases.
+                trigram = gensim.models.Phrases(bigram[data_words], threshold=100)
 
-                    # Faster way to get a sentence clubbed as a trigram/bigram
-                    bigram_mod = gensim.models.phrases.Phraser(bigram)
-                    trigram_mod = gensim.models.phrases.Phraser(trigram)
-                    # Remove Stop Words
-                    data_words_nostops = remove_stopwords(data_words)
+                # Faster way to get a sentence clubbed as a trigram/bigram
+                bigram_mod = gensim.models.phrases.Phraser(bigram)
+                trigram_mod = gensim.models.phrases.Phraser(trigram)
+                # Remove Stop Words
+                data_words_nostops = remove_stopwords(data_words)
 
-                    # Form Bigrams
-                    data_words_bigrams = make_bigrams(data_words_nostops)
+                # Form Bigrams
+                data_words_bigrams = make_bigrams(data_words_nostops)
 
-                    # Initialize spacy 'en' model, keeping only tagger component (for efficiency)
-                    # python3 -m spacy download en
-                    nlp = spacy.load('en', disable=['parser', 'ner'])
+                # Initialize spacy 'en' model, keeping only tagger component (for efficiency)
+                # python3 -m spacy download en
+                nlp = spacy.load('en', disable=['parser', 'ner'])
 
-                    # Do lemmatization keeping only noun, adj, vb, adv
-                    data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
+                # Do lemmatization keeping only noun, adj, vb, adv
+                data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
 
-                    # Create Dictionary
-                    id2word = corpora.Dictionary(data_lemmatized)
+                # Create Dictionary
+                id2word = corpora.Dictionary(data_lemmatized)
 
-                    # Create Corpus
-                    texts = data_lemmatized
+                # Create Corpus
+                texts = data_lemmatized
 
-                    # Term Document Frequency
-                    corpus = [id2word.doc2bow(text) for text in texts]
+                # Term Document Frequency
+                corpus = [id2word.doc2bow(text) for text in texts]
 
-                    # Build LDA model
-                    lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-                                                                id2word=id2word,
-                                                                num_topics=3,
-                                                                random_state=100,
-                                                                update_every=1,
-                                                                chunksize=100,
-                                                                passes=10,
-                                                                alpha='auto',
-                                                                per_word_topics=True)
-                    self.leaders[key]['topics'] = lda_model.print_topics()
-                else:
-                    self.leaders[key]['topics'] = []
+                # Build LDA model
+                lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                                            id2word=id2word,
+                                                            num_topics=3,
+                                                            random_state=100,
+                                                            update_every=1,
+                                                            chunksize=100,
+                                                            passes=10,
+                                                            alpha='auto',
+                                                            per_word_topics=True)
+                return lda_model.print_topics()
             except:
-                log.send_message_to_logfile("exception LDA ", key)
+                log.send_message_to_logfile("LDA failed")
+                pass
+
+        return lda_analyzing(data)
 
     def build_graph(self, log):
         log.send_message_to_logfile("Building Graph")
@@ -190,11 +232,14 @@ class Analyzer:
             self.DG.add_nodes_from(self.leaders)
         except:
             log.send_message_to_logfile("failed adding nodes")
-
+            pass
         try:
             for key, value in self.leaders.items():
-                for following in value['community_following']:
-                    self.DG.add_edge(key, following['twitter_id'])
+                try:
+                    for following in value['community_following']:
+                        self.DG.add_edge(key, following['twitter_id'])
+                except:
+                    continue
         except:
             log.send_message_to_logfile("failed adding edges ", key)
 
@@ -213,22 +258,22 @@ class Analyzer:
         except:
             log.send_message_to_logfile("exception finding closeness_centrality")
 
-            for key, value in self.leaders.items():
-                try:
-                    self.leaders[key]["deg_centrality"] = deg_centrality[key]
-                except:
-                    log.send_message_to_logfile("exception adding deg_centrality: ", key)
-                    continue
-                try:
-                    self.leaders[key]["betweenness_centrality"] = betweenness_centrality[key]
-                except:
-                    log.send_message_to_logfile("exception adding betweenness_centrality: ", key)
-                    continue
-                try:
-                    self.leaders[key]["closeness_centrality"] = closeness_centrality[key]
-                except:
-                    log.send_message_to_logfile("exception adding closeness_centrality: ", key)
-                    continue
+        for key, value in self.leaders.items():
+            try:
+                self.leaders[key]["deg_centrality"] = deg_centrality[key]
+            except:
+                log.send_message_to_logfile("exception adding deg_centrality: ", key)
+                continue
+        try:
+            self.leaders[key]["betweenness_centrality"] = betweenness_centrality[key]
+        except:
+            log.send_message_to_logfile("exception adding betweenness_centrality: ", key)
+            pass
+        try:
+            self.leaders[key]["closeness_centrality"] = closeness_centrality[key]
+        except:
+            log.send_message_to_logfile("exception adding closeness_centrality: ", key)
+            pass
 
     def community(self, log):
         log.send_message_to_logfile("Analyzing community")
@@ -237,18 +282,25 @@ class Analyzer:
             top_level_communities = next(communities_generator)
             next_level_communities = next(communities_generator)
             community_found = sorted(map(sorted, next_level_communities))
+
+            counter = 1
+            for community in community_found:
+                if len(community) == 1:
+                    try:
+                        self.leaders[community[0]]['community'] = 0
+                    except:
+                        log.send_message_to_logfile("failed adding community to ", community[0])
+                        pass
+                else:
+                    for c in community:
+                        try:
+                            self.leaders[c]['community'] = counter
+                        except:
+                            log.send_message_to_logfile("failed adding community to ", c)
+                            continue
+                    counter += 1
         except:
             log.send_message_to_logfile("failed analyzing community")
-        counter = 0
-        for community in community_found:
-            if len(community) > 1:
-                for c in community:
-                    try:
-                        self.leaders[c]['community'] = counter + 1
-                    except:
-                        log.send_message_to_logfile("failed adding community to ", c)
-                        continue
-                counter += 1
-            else:
-                self.leaders[community[0]]['community'] = 0
+
+
 

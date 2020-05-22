@@ -20,9 +20,10 @@ def main():
     leaders, posts, key_words = community.get_community()
 
     analyzer = myanalyzer.Analyzer(leaders, posts, key_words)
-    leaders, posts = analyzer.analyze_community()
+    leaders, posts, topics = analyzer.analyze_community()
 
-    community.save(leaders, posts)
+    community.save_community(leaders, posts)
+    community.save_topics(topics)
 
 if __name__ == "__main__":
     username = 'sveta'

@@ -45,3 +45,6 @@ export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getBlackListLeader
 
 //Init
 export const INIT_SYSTEM = url + "/initiation"
+
+//Find Alt Lng
+export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"

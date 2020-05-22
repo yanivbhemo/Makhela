@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Redirect } from 'react-router-dom'
+
 import Graph from "react-graph-vis";
 import ReactTooltip from "react-tooltip";
 import { degree, betweenness, closeness } from './ClosenessExp'
@@ -107,25 +109,29 @@ class Network extends React.Component {
       return(
       <div>
          <Row>
-          <Col className="col-lg-4">
+          <Col className="col-lg-3">
                             {/* <Panel headeline="Graph">
                                 <Network />
                             </Panel> */}
                              <div className="profile-pic">
-                              <img src={leader.twitterProfileImage} alt="Logo" />;
+                              <img src={leader.twitterProfileImage} alt="Logo" />
                            </div>
                         </Col>
-                        <Col className="col-lg-3">
-                        <div className="col-md-3 profile-text">
+                        <Col className="col-lg-4">
+                        <div className="profile-text">
                           <h3>{leader.name}</h3>
                           <h5>{leader.twitterName}</h5>
                           <p>followers {leader.followers}</p>
                           <p>followers {leader.following}</p>
+                          {/* <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
+                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button> */}
                       </div>
-                        </Col>
-                        <Col className="col-lg-1">
+                      </Col>
+                      </Row>
+                      <Row>
+                        <Col className="col-lg-12">
                           <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
-                          <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show profile</button>
+                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button>
                         </Col>
                         </Row>
          {/* <div className="profile-pic">
