@@ -6,6 +6,7 @@ const fs = require('fs');
 const express   = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet')
 const cors = require('cors')
 
 const initCtl   = require('./controllers/Initiation.ctl');
@@ -22,6 +23,7 @@ const port      = process.env.PORT || 3002;
 
 app.set('port',port);
 app.use(cors())
+app.use(helmet())
 app.use('/', express.static('./public')); // for API
 app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -82,6 +84,8 @@ app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus
 
 app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
+app.post('/system/getAllSettings', withAuth, systemCtl.getAllSystemSettings)
+app.post('/system/updateSetting', withAuth, systemCtl.updateSetting)
 
 if(process.env.node_environment === "production")
 {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const panelHeadingStyle={
     paddingBottom: "30px"
@@ -57,6 +57,47 @@ export function InitSystemPanel(props) {
               </div>
             </div>
     )
+}
+
+export function ThresholdPanel(props) {
+
+  return(
+      <div className="task-panel tasks-widget">
+            <div className="panel-heading" style={panelHeadingStyle}>
+              <div className="pull-left">
+                <h4><i className="fa fa-tasks"></i> {props.title}</h4>
+              </div>
+            </div>
+            <div className="panel-body">
+              <div className="task-content">
+                <ul className="task-list">
+                  {props.children}
+                </ul>
+              </div>
+            </div>
+          </div>
+  )
+}
+
+export function SettingItem(props) {
+  const [settingValue, setSettingValue] = useState(props.value)
+
+  function onClickHandle() {
+    props.onBtnClick(props.attribute, settingValue)
+  }
+  return(
+                   <li>
+                      <div className="task-title">
+                        <span className="task-title-sp">{props.attribute}</span>
+                        <div className="pull-right hidden-phone">
+                          <button className="btn btn-success btn-xs" onClick={onClickHandle}><i className="fa fa-check"></i></button>
+                        </div>
+                        <div className="pull-right">
+                          <input onChange={(e)=>setSettingValue(e.target.value)} type="text" className="centered" defaultValue={props.value} name={`input_${props.attribute}`} />
+                        </div>
+                      </div>
+                  </li>
+  )
 }
 
 export default UsersPanel;
