@@ -1,6 +1,6 @@
 var url = "http://localhost:3002"
 
-if(process.env.node_environment === "production")
+if(process.env.NODE_ENV === "production")
     url = "https://makhela.live/api"
 
 export const OPINION_LEADERS_SIZE = url + "/opinion_leaders/getCommunitySize"
