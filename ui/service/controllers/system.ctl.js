@@ -3,8 +3,8 @@ const BlackListLeader = require('../models/Blacklist')
 const Leader = require('../models/opinion-leader')
 const Post = require('../models/Post')
 const Suggestion = require('../models/suggestion')
+const Setting = require('../models/Setting')
 const Keyword = require('../models/Keyword')
-const System = require('../models/System')
 
 exports.initSystem = (req, res) => {
     console.log("- Request: Initilize the data")
@@ -23,33 +23,50 @@ exports.initSystem = (req, res) => {
                     console.log("Empty Keywords collection")
                     Keyword.deleteMany({})
                     .then(()=>{
-                        System.updateOne({attribute: "NEW_SYSTEM"}, {$set: {value: true}})
+                        Setting.updateOne({attribute: "NEW_SYSTEM"}, {$set: {value: true}})
                         .then(()=>{
                             return res.sendStatus(200)
                         })
                         .catch(err => {
                             console.log(err)
-                            return res.sendStatus(403)
+                            return res.sendStatus(404)
                         })
                     })
                 })
                 .catch(err => {
                     console.log(err)
-                    return res.sendStatus(403)
+                    return res.sendStatus(404)
                 })
             })
             .catch(err => {
                 console.log(err)
-                return res.sendStatus(403)
+                return res.sendStatus(404)
             })
         })
         .catch(err => {
             console.log(err)
-            return res.sendStatus(403)
+            return res.sendStatus(404)
         })    
     })
     .catch(err => {
         console.log(err)
-        return res.sendStatus(403)
+        return res.sendStatus(404)
     })    
+}
+
+exports.checkSystemStatus = (req, res) => {
+    console.log("- Request: Check if system is formatted")
+    Setting.findOne({attribute: "NEW_SYSTEM", value: true})
+    .then(doc => {
+        if(doc) {
+            console.log("Yes")
+            return res.sendStatus(200)
+        } else {
+            return res.sendStatus(201)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(201)
+    }) 
 }

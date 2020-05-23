@@ -12,8 +12,6 @@ const userCtl   = require('./controllers/User.ctl');
 const systemCtl = require('./controllers/system.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
-// const keywordsCtl   = require('./controllers/keywords.ctl');
-
 const app       = express();
 const port      = process.env.PORT || 3002;
 
@@ -34,8 +32,6 @@ app.use(   (req, res, next) => {
 });
 
 app.post('/initiation', withAuth, initCtl.initSystem);
-// app.post('/initiation', initCtl.initSystem);
-
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
@@ -46,8 +42,8 @@ app.post('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.g
 app.post('/opinion_leaders/moveToBlackList/:twitter_screen_name', withAuth, opinionLeaderCtl.MoveToBlackList);
 app.post('/opinion_leaders/addNewLeader', withAuth, opinionLeaderCtl.addNewLeader);
 app.post('/opinion_leaders/leader/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeader)
-app.post('/opinion_leaders/leader/getLeaderFriends/:twitter_id', withAuth, opinionLeaderCtl.getLeaderFriends)
-app.post('/opinion_leaders/getLeaderShortDetails/:twitter_id', withAuth, opinionLeaderCtl.getLeaderShortDetails)
+app.post('/opinion_leaders/leader/getLeaderFriends/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeaderFriends)
+app.post('/opinion_leaders/getLeaderShortDetails/:twitter_screen_name', withAuth, opinionLeaderCtl.getLeaderShortDetails)
 
 app.post('/suggestions/getSize', withAuth, suggestionsCtl.getSize);
 app.post('/suggestions/getAllSuggestions', withAuth, suggestionsCtl.getAllSuggestions);
@@ -80,5 +76,6 @@ app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
 
 app.post('/system/init', withAuth, systemCtl.initSystem)
+app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 
 app.listen(port, () => console.log(`listening on port ${port}`));

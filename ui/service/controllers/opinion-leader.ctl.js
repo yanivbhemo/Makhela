@@ -88,8 +88,6 @@ exports.MoveToBlackList = (req, res) => {
     Leader.findOne({twitter_screen_name})
     .then( doc => {
         BlackListLeader.findOne({}).sort({"native_id": -1}).limit(1)
-        .then(last_doc => {
-            new_id = ++last_doc.native_id
             let swap = new BlackListLeader({
                 full_name: doc.full_name,
                 new_leader: doc.new_leader,
@@ -111,7 +109,6 @@ exports.MoveToBlackList = (req, res) => {
                 betweenness_centrality: doc.betweenness_centrality,
                 closeness_centrality: doc.closeness_centrality,
                 analyzed_date: doc.analyzed_date,
-                native_id: new_id
             })
             swap.save((err, result) => {
                 if(err){
@@ -133,7 +130,6 @@ exports.MoveToBlackList = (req, res) => {
                     })
                 }
             })
-        })
     })
     .catch(err => {
         console.log(err)
@@ -161,15 +157,12 @@ exports.addNewLeader = (req, res) => {
     Leader.findOne({$and: [{"twitter_screen_name":twitter_screen_name},{"full_name": full_name}]})
     .then( doc => {
         if(!doc){
-            Leader.findOne({}).sort({"native_id": -1}).limit(1)
-            .then(last_doc => {
-                new_id = ++last_doc.native_id
+            Leader.findOne({}).limit(1)
                 let newLeader = new Leader({
                     full_name: full_name,
                     twitter_screen_name: twitter_screen_name,
                     new_leader: true,
                     internal_create_date: datetime,
-                    native_id: new_id
                 })
                 newLeader.save((err, result) => {
                     if(err){
@@ -180,7 +173,6 @@ exports.addNewLeader = (req, res) => {
                         res.sendStatus(200)
                     }
                 })  
-            })
         }
         else
             return res.sendStatus(404)
@@ -206,6 +198,7 @@ exports.getLeader = (req, res) => {
 
     Leader.findOne(query)
     .then(doc => {
+        console.log(doc)
         if(doc){
             return res.status(200).json(doc)
         } else {
@@ -219,9 +212,9 @@ exports.getLeader = (req, res) => {
 }
 
 exports.getLeaderFriends = (req, res) => {
-    console.log("- Request: Get leader's friends inside the community: " + req.params.twitter_id)
-    let twitter_id = req.params.twitter_id
-    Leader.findOne({twitter_id}).select('community_following')
+    console.log("- Request: Get leader's friends inside the community: " + req.params.twitter_screen_name)
+    let twitter_screen_name = req.params.twitter_screen_name
+    Leader.findOne({twitter_screen_name}).select('community_following')
     .then(docs => {
         console.log(docs)
         if(docs){
@@ -238,11 +231,11 @@ exports.getLeaderFriends = (req, res) => {
 
 exports.getLeaderShortDetails = (req, res) => {
     console.log("- Request: Get leader's information short version")
-    let twitter_id = req.params.twitter_id
-    Leader.findOne({twitter_id}).select('full_name twitter_screen_name twitter_profile_image')
+    let twitter_screen_name = req.params.twitter_screen_name
+    Leader.findOne({twitter_screen_name}).select('full_name twitter_profile_image')
     .then(doc => {
         if(!doc) {
-            payload = {"full_name": "none", "twitter_screen_name": "none", "twitter_profile_image": "none"}
+            payload = {"full_name": "none", "twitter_profile_image": "none"}
             return res.status(200).json(payload)
         } else
             return res.status(200).json(doc)

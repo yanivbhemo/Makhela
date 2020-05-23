@@ -48,3 +48,5 @@ export const INIT_SYSTEM = url + "/initiation"
 
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
+export const FORMAT_SYSTEM = url + "/system/init"
+export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"

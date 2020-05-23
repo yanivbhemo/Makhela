@@ -23,41 +23,97 @@ class Initiation extends Component {
             keyWords: '',
             showModal: false
           }
+        this.checkForDuplication = this.checkForDuplication.bind(this)
     }
 
     componentDidMount() {
         document.title = "Initiation"
-    }
-
-    handleClick = () => {
-        let url = CONSTS.INIT_SYSTEM
+        const url = CONSTS.CHECK_IF_SYSTEM_INIT
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({
-                "token":Cookies.get('token'),
-                "keyWords": this.state.keyWords,
-                "leaders": this.state.leaders
-            }),
+            body: JSON.stringify({"token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-        this.setState({
-            leaders: '',
-            keyWords: '',
-            showModal: true
+        .then(res => {
+            if(res.status === 403){
+                this.props.history.push('/')
+            }
         })
     }
-    handleChange = e => {
-        if(e.target.id === "leaders")
-            this.setState({leaders: e.target.value})
-        else if(e.target.id === "keywords")
-        this.setState({keyWords: e.target.value})
+
+    checkForDuplication() {
+        var leaders_arr = this.state.leaders.split(/\r\n|\n/)
+        let count = 0
+        for(var i = 0; i < leaders_arr.length; i++) {
+            for(var j = 0; j < leaders_arr.length; j++) {
+                if(leaders_arr[i] === leaders_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return leaders_arr[i]
+                }
+            }
+            count = 0
+        }
+
+        var keywords_arr = this.state.keyWords.split(/\r\n|\n/)
+        count = 0
+        for(var i = 0; i < keywords_arr.length; i++) {
+            for(var j = 0; j < keywords_arr.length; j++) {
+                if(keywords_arr[i] === keywords_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return keywords_arr[i]
+                }
+            }
+            count = 0
+        }
+        return true
     }
-    render() {      
+
+    handleClick = () => {
+        var duplication = this.checkForDuplication()
+        if(duplication===true) {
+            let url = CONSTS.INIT_SYSTEM
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "token":Cookies.get('token'),
+                    "keyWords": this.state.keyWords,
+                    "leaders": this.state.leaders
+                }),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(res =>{
+                if(res.status === 200)
+                    // 
+                    this.setState({
+                        leaders: '',
+                        keyWords: '',
+                        showModal: true
+                    })
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        }
+        else{
+            alert("Duplications: " + duplication)
+        }
+    }
+    handleChange = e => {
+        if(e.target.id === "leaders"){
+            this.setState({leaders: e.target.value})
+        } 
+        else if(e.target.id === "keywords") {
+            this.setState({keyWords: e.target.value})
+        }
+    }
+    render() {
         return(
             <React.Fragment>
                 <Header />
