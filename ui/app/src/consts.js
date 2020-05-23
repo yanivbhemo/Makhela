@@ -1,5 +1,8 @@
-// var url = "http://ui-service.makhela.live:3000"
 var url = "http://localhost:3002"
+
+if(process.env.node_environment === "production")
+    var url = "https://makhela.live/api"
+
 export const OPINION_LEADERS_SIZE = url + "/opinion_leaders/getCommunitySize"
 export const SUGGESTIONS_COLLECTION_SIZE = url + "/suggestions/getSize"
 export const POSTS_COLLECTION_SIZE = url + "/posts/getSize"
