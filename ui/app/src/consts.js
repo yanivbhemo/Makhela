@@ -50,6 +50,8 @@ export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getBlackListLeader
 export const INIT_SYSTEM = url + "/initiation"
 export const FORMAT_SYSTEM = url + "/system/init"
 export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
+export const GET_ALL_SYSTEMS_SETTINGS = url + "/system/getAllSettings"
+export const UPDATE_SETTING = url + "/system/updateSetting"
 
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"

@@ -70,3 +70,28 @@ exports.checkSystemStatus = (req, res) => {
         return res.sendStatus(201)
     }) 
 }
+
+exports.getAllSystemSettings = (req, res) => {
+    console.log("- Request: Get all system's settings")
+    Setting.find()
+    .then(docs => {
+        return res.status(200).json(docs)
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(404)
+    })
+}
+
+exports.updateSetting = (req, res) => {
+    const {attribute, value} = req.body;
+    console.log("- Request: Update specific setting - " + attribute)
+    Setting.updateOne({attribute}, {$set: {value: value}})
+    .then(() => {
+        return res.sendStatus(200)
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(404)
+    })
+}

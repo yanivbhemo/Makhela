@@ -4,17 +4,14 @@ import Menu from '../../Menu'
 import Content from '../../Content'
 import Row from '../../Row'
 import Col from '../../Col'
-import UsersPanel,{InitSystemPanel} from './Panel'
+import UsersPanel,{InitSystemPanel, ThresholdPanel, SettingItem} from './Panel'
 import ModalBox from '../../ModalBox'
 import Cookies from 'js-cookie';
 import * as CONSTS from '../../../consts'
 
 function SettingsPage(props) {
 
-    const [modelOpen, toggleModel] = useState({modalStatus: false, blackBackground: "none"})
-    useEffect(() => {
-        (modelOpen.modalStatus) ? console.log("Open") : console.log("Close")
-    })
+    const [modelOpen, toggleModel] = useState({modalStatus: false, blackBackground: "none", modalType: '', modalText:''})
 
     function onConfirmDeletion() {
         const url = CONSTS.FORMAT_SYSTEM
@@ -32,6 +29,54 @@ function SettingsPage(props) {
             else alert('Init did not succeeded')
         })
     }
+
+    const [settings, setSettings] = useState([])
+    useEffect(() => {
+        const url = CONSTS.GET_ALL_SYSTEMS_SETTINGS
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({"token":Cookies.get('token')}),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+            .then(res => res.json())
+              .then(data => {
+                  setSettings(data)
+              })
+              .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    }, [])
+
+    function eachSetting(setting, id) {
+        return(
+            <SettingItem 
+                key={`setting${id}`}
+                attribute={setting.attribute}
+                value={setting.value}
+                onBtnClick={saveSetting}
+                setting_id={setting._id}
+            />
+        )
+    }
+
+    function saveSetting(attribute, value)
+    {
+        const url = CONSTS.UPDATE_SETTING
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"token":Cookies.get('token'), attribute: attribute, value: value}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => {
+            if(res.status === 200) {
+                toggleModel({modalStatus: true, blackBackground: "block", modalType: 'success', modalText:'Changes Saved Successfuly'})
+            }
+        })
+        .catch(err => console.log(err))
+    }
     
     return(
         <React.Fragment>
@@ -47,7 +92,16 @@ function SettingsPage(props) {
                 </Row>
                 <Row className="row mt">
                     <Col className="col-md-12">
-                        <InitSystemPanel title="Initilize System" onClick={()=>toggleModel({modalStatus: true, blackBackground: "block"})}>
+                        <ThresholdPanel 
+                        title="Collector and Suggestions Thresholds"
+                        >
+                        {settings.map((item,i) => eachSetting(item, i))}
+                        </ThresholdPanel>
+                    </Col>
+                </Row>
+                <Row className="row mt">
+                    <Col className="col-md-12">
+                        <InitSystemPanel title="Initilize System" onClick={()=>toggleModel({modalStatus: true, blackBackground: "block", modalType: 'danger', modalText:'Are you sure? All data will be lost'})}>
                             Test
                         </InitSystemPanel>
                     </Col>
@@ -55,11 +109,11 @@ function SettingsPage(props) {
             </Content>
             <ModalBox 
                 show={modelOpen.modalStatus} 
-                title="Are you sure? All the data will be lost"
+                title={modelOpen.modalText}
                 onClose={()=>toggleModel({modalStatus: false, blackBackground: "none"})}
                 rightBtnText="Confirm"
                 onSubmit={onConfirmDeletion}
-                type="danger"
+                type={modelOpen.modalType}
                 >
             </ModalBox>
             <div className="modal-backdrop fade in" style={{display: modelOpen.blackBackground}}></div>

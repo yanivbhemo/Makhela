@@ -29,6 +29,10 @@ class ModalBox extends Component {
             rightBtnClass="btn btn-danger"
             headerColor="#d9534f"
         }
+        if(this.props.type === "success") {
+            rightBtnClass="btn btn-success"
+            headerColor="#28a745"
+        }
         return(
             <div className="modal fade in" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style={{display: "block", paddingRight: "17px"}}>
                 <div className="modal-dialog">
@@ -42,7 +46,7 @@ class ModalBox extends Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-default" data-dismiss="modal" onClick={e=> { this.onClose(e)}}>Close</button>
-                        <button type="button" className={rightBtnClass} onClick={this.onSubmit}>{this.props.rightBtnText}</button>
+                        {(this.props.type === "success") ? '' : <button type="button" className={rightBtnClass} onClick={this.onSubmit}>{this.props.rightBtnText}</button>}
                     </div>
                     </div>
                 </div>
