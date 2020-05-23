@@ -23,7 +23,7 @@ class Suggestion_Collector:
     def collect(self):
         filter_query = { "$or": [{"checked_for_suggestions": False}, {"checked_for_suggestions": {"$exists": False}}] }
         # stop_flag
-        posts = self.db.get_collection_with_filter("posts", filter_query, 20)
+        posts = self.db.get_collection_with_filter("posts", filter_query, 30)
         post_arr = []
         names_arr = []
         self.leaders_to_check = []
@@ -43,7 +43,7 @@ class Suggestion_Collector:
                     if not self.check_if_person_in_blacklist(leader_to_check):
                         if not self.check_if_person_in_community(leader_to_check):
                             level_of_certainty = self.check_level_of_certainty(leader_to_check)
-                            if level_of_certainty > 0:
+                            if level_of_certainty >= int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY')):
                                 self.leaders_to_check.append({"screen_name": leader_to_check, "level_of_certainty": level_of_certainty})
                                 names_arr.append(leader_to_check)
                             else:
@@ -59,7 +59,7 @@ class Suggestion_Collector:
             self.collect_suggested_leader_init_details()
             self.db.bulk_update_suggestion_posts(post_arr)
         else:
-            self.logger.send_message_to_logAndSlack("- Suggestion Collector couldn't find any new suggestions")
+            self.logger.send_message_to_logfile("- Suggestion Collector couldn't find any new suggestions")
 
     def check_if_person_in_blacklist(self, twitter_id):
         query = {
@@ -156,6 +156,6 @@ class Suggestion_Collector:
                         self.logger.send_message_to_logfile(
                             "\t+ '" + details.screen_name + "' Certainty level too low")
                 else:
-                    self.logger.send_message_to_logAndSlack("- Couldn't find the following in twitter: " + self.leaders_to_check[i]['screen_name'])
+                    self.logger.send_message_to_logfile("- Couldn't find the following in twitter: " + self.leaders_to_check[i]['screen_name'])
         else:
-            self.logger.send_message_to_logAndSlack("- self.leaders_to_check Variable is empty!")
+            self.logger.send_message_to_logfile("- self.leaders_to_check Variable is empty!")

@@ -1,9 +1,10 @@
 var mongoose = require('mongoose')
 
-var keyWord = new mongoose.Schema({
+var keyword = new mongoose.Schema({
     word: {type: String, required: true, index: 1 },
-  }, { collection: 'keywords', versionKey: ''} )
+    internal_create_date: {type: Date, required: true}
+}, { collection: 'keywords', versionKey: ''} )
 
-var keyWord = mongoose.model('keywords', keyWord)
+var Keyword = mongoose.model('Keyword', keyword)
 
-module.exports = keyWord
+module.exports = Keyword
