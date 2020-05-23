@@ -23,7 +23,7 @@ const port      = process.env.PORT || 3002;
 
 app.set('port',port);
 app.use(cors())
-// app.use(helmet())
+app.use(helmet())
 app.use('/', express.static('./public')); // for API
 app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
