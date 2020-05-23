@@ -1,16 +1,8 @@
 const consts = require('./consts');
 const { SSL_KEY_PATH, SSL_CERT_PATH } = consts;
+const https = require('https');
+const fs = require('fs');
 
-if(process.env.node_environment === "production")
-{
-    const https = require('https');
-    const fs = require('fs');
-
-    const options = {
-        key: fs.readFileSync(SSL_KEY_PATH),
-        cert: fs.readFileSync(SSL_CERT_PATH)
-    };
-}
 const express   = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
@@ -93,6 +85,10 @@ app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 
 if(process.env.node_environment === "production")
 {
+    const options = {
+        key: fs.readFileSync(SSL_KEY_PATH),
+        cert: fs.readFileSync(SSL_CERT_PATH)
+    };
     var httpsServer = https.createServer(options, app);
     httpsServer.listen(port, () => console.log(` - Production version! -\nlistening on port ${port}`))
 }
