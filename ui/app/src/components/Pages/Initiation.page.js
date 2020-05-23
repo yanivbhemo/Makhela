@@ -4,8 +4,10 @@ import Row from '../Row'
 import Col from '../Col'
 import Panel from '../Panel'
 import Header from '../Header'
-import Menu from '../Menu'
 import Footer from '../Footer'
+
+import Menu from '../Menu'
+import ModalBox from '../ModalBox'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
 import * as CONSTS from '../../consts'
@@ -18,51 +20,114 @@ class Initiation extends Component {
         super()
         this.state = {
             leaders: '',
-            keyWords: ''
+            keyWords: '',
+            showModal: false
           }
+        this.checkForDuplication = this.checkForDuplication.bind(this)
     }
 
     componentDidMount() {
         document.title = "Initiation"
-    }
-
-    handleClick = () => {
-        console.log("click")
-        let url = CONSTS.INIT_SYSTEM
+        const url = CONSTS.CHECK_IF_SYSTEM_INIT
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({
-                "token":Cookies.get('token'),
-                "keyWords": this.state.keyWords,
-                "leaders": this.state.leaders
-            }),
+            body: JSON.stringify({"token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-        this.setState({
-            leaders: '',
-            keyWords: ''
+        .then(res => {
+            if(res.status === 403){
+                this.props.history.push('/')
+            }
         })
     }
+
+    checkForDuplication() {
+        var leaders_arr = this.state.leaders.split(/\r\n|\n/)
+        let count = 0
+        for(var i = 0; i < leaders_arr.length; i++) {
+            for(var j = 0; j < leaders_arr.length; j++) {
+                if(leaders_arr[i] === leaders_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return leaders_arr[i]
+                }
+            }
+            count = 0
+        }
+
+        var keywords_arr = this.state.keyWords.split(/\r\n|\n/)
+        count = 0
+        for(var i = 0; i < keywords_arr.length; i++) {
+            for(var j = 0; j < keywords_arr.length; j++) {
+                if(keywords_arr[i] === keywords_arr[j]){                    
+                    count++
+                }
+                if(count > 1){
+                    return keywords_arr[i]
+                }
+            }
+            count = 0
+        }
+        return true
+    }
+
+    handleClick = () => {
+        var duplication = this.checkForDuplication()
+        if(duplication===true) {
+            let url = CONSTS.INIT_SYSTEM
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "token":Cookies.get('token'),
+                    "keyWords": this.state.keyWords,
+                    "leaders": this.state.leaders
+                }),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(res =>{
+                if(res.status === 200)
+                    // 
+                    this.setState({
+                        leaders: '',
+                        keyWords: '',
+                        showModal: true
+                    })
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        }
+        else{
+            alert("Duplications: " + duplication)
+        }
+    }
     handleChange = e => {
-        if(e.target.id === "leaders")
+        if(e.target.id === "leaders"){
             this.setState({leaders: e.target.value})
-        else if(e.target.id === "keywords")
-        this.setState({keyWords: e.target.value})
+        } 
+        else if(e.target.id === "keywords") {
+            this.setState({keyWords: e.target.value})
+        }
     }
     render() {
-        console.log(this.state.leaders) 
-       console.log(this.state.keyWords) 
-        
         return(
             <React.Fragment>
                 <Header />
                 <Menu />
                 <Content title="Init System" fa="fa-file">
+                <ModalBox 
+        show={this.state.showModal}
+        title="System initiation"
+        onClose={() => this.setState({showModal:false})}
+        >
+           Opinion leaders and Keywords saved.
+           <br/>
+           System began collectiong network.
+        </ModalBox>
                 <Row>
                         <Col className="col-lg-12">
                             <Panel>

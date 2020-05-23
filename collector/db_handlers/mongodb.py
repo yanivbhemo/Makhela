@@ -118,7 +118,7 @@ class DataBaseHandler:
         col = self.db[collection]
         col.insert_one(query)
 
-    def insert_postV2(self, collection, leader_twitter_id, post_id, full_text, date_created, in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id):
+    def insert_postV2(self, collection, leader_twitter_id, post_id, full_text, date_created, in_reply_to_status_id, in_reply_to_status_text, in_reply_to_status_user_id, quoted_status_id, quoted_status_text, quoted_status_user_id, retweeted_status_id, retweeted_status_text, retweeted_status_user_id, retweet_count, retweeted, likes):
         query = {
             "leader_twitter_id": leader_twitter_id,
             "post_id": post_id,
@@ -134,7 +134,10 @@ class DataBaseHandler:
             "retweeted_status_text": retweeted_status_text,
             "retweeted_status_user_id": retweeted_status_user_id,
             "checked_for_suggestions": False,
-            "internal_create_date": datetime.datetime.now()
+            "internal_create_date": datetime.datetime.now(),
+            "retweet_count": retweet_count,
+            "retweeted": retweeted,
+            "likes": likes
         }
         col = self.db[collection]
         col.insert_one(query)
@@ -199,3 +202,46 @@ class DataBaseHandler:
         for doc in result:
             self.db[collection].update_one({"_id":doc['_id']}, {'$set': {"native_id": id}})
             id += 1
+
+    def move_leader_from_community_to_suggestions(self, collection, id_to_update, leader_twitter_id, leader_twitter_screen_name,
+                              leader_twitter_location, leader_twitter_description, leader_twitter_followers_count,
+                              leader_twitter_friends_count, leader_twitter_created_at, leader_twitter_statuses_count,
+                              new_leader, level_of_certainty, leader_twitter_profile_image_url, leader_fullName, internal_create_date):
+        # This function move leaders from community to the suggestions collection based on their level of certainty
+        query = {
+                'full_name': leader_fullName,
+                'twitter_id': leader_twitter_id,
+                'twitter_screen_name': leader_twitter_screen_name,
+                'twitter_location': leader_twitter_location,
+                'twitter_description': leader_twitter_description,
+                'twitter_followers_count': leader_twitter_followers_count,
+                'twitter_friends_count': leader_twitter_friends_count,
+                'twitter_created_at': leader_twitter_created_at,
+                'twitter_statuses_count': leader_twitter_statuses_count,
+                'new_leader': new_leader,
+                'level_of_certainty': level_of_certainty,
+                'twitter_profile_image': leader_twitter_profile_image_url,
+                'lock': False,
+                'internal_create_date': internal_create_date
+        }
+        col = self.db["suggestions"]
+        col.insert_one(query)
+        col = self.db[collection]
+        col.delete_one({'_id': id_to_update})
+
+    def move_leader_from_community_to_blacklist(self, collection, id_to_update):
+        # This function move leaders from community to the blacklist collection based on their level of certainty
+        col = self.db[collection]
+        doc = col.find_one({"_id": id_to_update})
+        col = self.db["blacklist"]
+        col.insert_one(doc)
+        col = self.db[collection]
+        col.delete_one({'_id': id_to_update})
+
+    def convertTwitterId_to_TwitterScreenName(self, collection, twitter_id):
+        col = self.db[collection]
+        doc = col.find_one({"twitter_id": twitter_id})
+        if len(doc) > 0:
+            return doc['twitter_screen_name']
+        else:
+            return None

@@ -1,5 +1,5 @@
 import datetime
-import csv
+import re
 import os.path
 from urllib import request
 import json
@@ -31,7 +31,7 @@ class logger_handler:
             print("EXCEPTION: " + str(em))
 
     def send_message_to_logAndSlack(self, text):
-        text = ()
+        text = re.sub('[\W_]+', '', text)
         self.send_message_to_slack(text)
         self.send_message_to_logfile(text)
 

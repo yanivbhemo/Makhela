@@ -89,8 +89,6 @@ exports.MoveToBlackList = (req, res) => {
     Suggestion.findOne({twitter_screen_name})
     .then( doc => {
         BlackListLeader.findOne({}).sort({"native_id": -1}).limit(1)
-        .then(last_doc => {
-            new_id = ++last_doc.native_id
             let swap = new BlackListLeader({
                 full_name: doc.full_name,
                 new_leader: doc.new_leader,
@@ -112,7 +110,6 @@ exports.MoveToBlackList = (req, res) => {
                 betweenness_centrality: doc.betweenness_centrality,
                 closeness_centrality: doc.closeness_centrality,
                 analyzed_date: doc.analyzed_date,
-                native_id: new_id
             })
             swap.save((err, result) => {
                 if(err){
@@ -134,7 +131,6 @@ exports.MoveToBlackList = (req, res) => {
                     })
                 }
             })
-        })
     })
     .catch(err => {
         console.log(err)
@@ -149,8 +145,6 @@ exports.moveToCommunity = (req, res) => {
     Suggestion.findOne({twitter_screen_name})
     .then( doc => {
         Leader.findOne({}).sort({"native_id": -1}).limit(1)
-        .then(last_doc => {
-            new_id = ++last_doc.native_id
             let swap = new Leader({
                 full_name: doc.full_name,
                 new_leader: doc.new_leader,
@@ -172,7 +166,6 @@ exports.moveToCommunity = (req, res) => {
                 betweenness_centrality: doc.betweenness_centrality,
                 closeness_centrality: doc.closeness_centrality,
                 analyzed_date: doc.analyzed_date,
-                native_id: new_id
             })
             swap.save((err, result) => {
                 if(err){
@@ -194,7 +187,6 @@ exports.moveToCommunity = (req, res) => {
                     })
                 }
             })
-        })
     })
     .catch(err => {
         console.log(err)

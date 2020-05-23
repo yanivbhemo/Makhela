@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 import logger
 import datetime
+import json
+
 
 class Community:
 
@@ -24,14 +26,13 @@ class Community:
         except:
             log.send_message_to_logfile("failed to connect")
 
-
     def fetch_opinion_leaders(self, log):
         log.send_message_to_logfile("fetching opinion leaders")
         res_leaders = self.db["opinion_leaders"].find()
         leaders = {}
         for leader in res_leaders:
             try:
-                leaders[leader["twitter_id"]] = leader
+                leaders[int(leader["twitter_id"])] = leader
                 leader["posts"] = []
             except:
                 log.send_message_to_logfile("failed to fetch: ", leader)
@@ -52,7 +53,6 @@ class Community:
                     log.send_message_to_logfile("exception ", key)
                     continue
         self.posts = posts
-
 
     def fetch_key_words(self, log):
         log.send_message_to_logfile("fatching keywords")
@@ -83,10 +83,9 @@ class Community:
         self.fetch_key_words(log)
         return self.leaders, self.posts, self.key_words
 
-
-    def save(self, leaders, posts):
+    def save_community(self, leaders, posts):
         log = logger.logger_handler()
-        log.send_message_to_logfile("saving to db")
+        log.send_message_to_logfile("saving leaders, posts to db")
         today = datetime.datetime.today()
         for key, value in leaders.items():
             try:
@@ -102,3 +101,12 @@ class Community:
             except:
                 log.send_message_to_logfile("exception saving to db - posts: ", key)
                 continue
+
+    def save_topics(self, topics):
+        log = logger.logger_handler()
+        log.send_message_to_logfile("saving topics to db")
+        try:
+            self.db['topics'].insert_one(topics)
+        except:
+            log.send_message_to_logfile("exception saving topic ")
+            pass

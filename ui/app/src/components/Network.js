@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Redirect } from 'react-router-dom'
+
 import Graph from "react-graph-vis";
 import ReactTooltip from "react-tooltip";
 import { degree, betweenness, closeness } from './ClosenessExp'
@@ -99,31 +101,37 @@ class Network extends React.Component {
     }
 
   showLeader(id){
+    console.log(id)
     let leader = this.state.leaders.find(element => element.id === id);
-    console.log(leader)
-    return(
+    if(leader===undefined) 
+       return(<h3>This member was not analyzed yet</h3>)
+    else 
+      return(
       <div>
          <Row>
-          <Col className="col-lg-4">
+          <Col className="col-lg-3">
                             {/* <Panel headeline="Graph">
                                 <Network />
                             </Panel> */}
                              <div className="profile-pic">
-                              <img src={leader.twitterProfileImage} alt="Logo" />;
+                              <img src={leader.twitterProfileImage} alt="Logo" />
                            </div>
                         </Col>
-                        <Col className="col-lg-3">
-                        <h1>check</h1>
-                        <div className="col-md-3 profile-text">
+                        <Col className="col-lg-4">
+                        <div className="profile-text">
                           <h3>{leader.name}</h3>
                           <h5>{leader.twitterName}</h5>
                           <p>followers {leader.followers}</p>
                           <p>followers {leader.following}</p>
+                          {/* <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
+                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button> */}
                       </div>
-                        </Col>
-                        <Col className="col-lg-1">
+                      </Col>
+                      </Row>
+                      <Row>
+                        <Col className="col-lg-12">
                           <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
-                          <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show profile</button>
+                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button>
                         </Col>
                         </Row>
          {/* <div className="profile-pic">
@@ -181,6 +189,8 @@ class Network extends React.Component {
       select: (event) => {
               var { nodes, edges } = event;
               if(nodes[0])
+                console.log(nodes[0])
+                console.log(this.state.leaders)
                 this.setState({leader : nodes[0]})
             }
     };
@@ -189,7 +199,6 @@ class Network extends React.Component {
                 options={options}
                 events={events}
                 getNetwork={network => {
-                  //  if you want access to vis.js network api you can set the state in a parent component using this property
                 }}
               />
   }  
@@ -199,17 +208,13 @@ class Network extends React.Component {
         .then(res => res.json())
         .then(data => { 
           this.setState({ leaders: data })
-          // let mynodes =  this.state.leaders.map(item => { 
-          //   return {id: item.id, value: item.closenessCentrality , label: item.twitterName, title: "ddd", group: item.community, shape: "dot" }
-          // })
           let myNodes = []
           this.state.leaders.map(item => myNodes.push({id: item.id, value: item.closenessCentrality , label: item.twitterName, title: "ddd", group: item.community, shape: "dot" }))
           let myEdges = []
           this.state.leaders.map(value => {
               if(Array.isArray(value.communityFollowing))
                   value.communityFollowing.map(fl => myEdges.push({ from: value.id, to: fl}))
-              
-              });
+             });
           this.setState({nodes: myNodes, edges: myEdges, loading: false})              
       })
         .catch(err => console.error(err));
@@ -221,13 +226,13 @@ class Network extends React.Component {
       else
         return(
           <div>
-            <button  data-for="degCentrality" className="btn btn-theme03" data-tip onClick={() => this.centrality('degCentrality')}>Degree Centralitys</button>
+            <button  data-for="degCentrality" style={{marginRight: "10px", marginBottom:"10px"}} className="btn btn-theme03" data-tip onClick={() => this.centrality('degCentrality')}>Degree Centrality</button>
             <ReactTooltip type="warning" id="degCentrality" getContent={() => degree}/>
            
-            <button  data-for="betweennessCentrality" className="btn btn-theme03" data-tip  onClick={() => this.centrality('betweennessCentrality')}>Betweenness Centrality</button>
+            <button  data-for="betweennessCentrality" style={{marginRight: "10px", marginBottom:"10px"}} className="btn btn-theme03" data-tip  onClick={() => this.centrality('betweennessCentrality')}>Betweenness Centrality</button>
             <ReactTooltip type="warning" id="betweennessCentrality" getContent={() => betweenness}/>
 
-            <button data-for="closenessCentrality" className="btn btn-theme03" data-tip onClick={() => this.centrality('closenessCentrality')}>Closeness Centrality</button>
+            <button data-for="closenessCentrality" style={{marginRight: "10px", marginBottom:"10px"}} className="btn btn-theme03" data-tip onClick={() => this.centrality('closenessCentrality')}>Closeness Centrality</button>
             <ReactTooltip type="warning" id="closenessCentrality" getContent={() => closeness}/>
             
             {this.draw()}
