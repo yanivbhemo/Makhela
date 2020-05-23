@@ -1,3 +1,16 @@
+const consts = require('./consts');
+const { SSL_KEY_PATH, SSL_CERT_PATH } = consts;
+
+if(process.env.node_environment === "production")
+{
+    const https = require('https');
+    const fs = require('fs');
+
+    const options = {
+        key: fs.readFileSync(SSL_KEY_PATH),
+        cert: fs.readFileSync(SSL_CERT_PATH)
+    };
+}
 const express   = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
@@ -78,4 +91,9 @@ app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus
 app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+if(process.env.node_environment === "production")
+{
+    var httpsServer = https.createServer(options, app);
+    httpsServer.listen(port, () => console.log(` - Production version! -\nlistening on port ${port}`))
+}
+else app.listen(port, () => console.log(` - Development version - \nlistening on port ${port}`));
