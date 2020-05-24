@@ -16,7 +16,9 @@ class Research extends Component {
     constructor() {
         super()
         this.state = {
-            startDate: new Date()
+            startDate: new Date(),
+            before: '',
+            after: ''
           }
     }
 
@@ -27,10 +29,26 @@ class Research extends Component {
         });
       };
     componentDidMount() {
-        document.title = "Main Graph"
+        document.title = "Research"
+
+    const url = 'http://localhost:3002/topics'
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+    //   body: formBody
+    })
+    .then(res => res.json())
+    .then(data => this.setState({
+        before: data[0],
+        after: data[1]
+    }))
+    .catch(err => console.error(err));
     }
 
     render() {
+        console.log("before", this.state.before)
+        console.log("after", this.state.after)
         return(
             <React.Fragment>
                 <Header />
@@ -74,16 +92,19 @@ class Research extends Component {
                     <Row>
                         <Col className="col-lg-6">
                             <Panel headeline="Network topics">
+                             <p> {this.state.before.network}</p> 
                             </Panel>
                         </Col>
                         <Col className="col-lg-6">
                             <Panel headeline="Communities topics">
+                            <p> {this.state.before.communities}</p> 
                             </Panel>
                         </Col>
                     </Row>
                     <Row>
                     <Col className="col-lg-4">
                             <Panel headeline="Posts with key words">
+                            {/* <CommunityPanel /> */}
                             </Panel>
                         </Col>
                         <Col className="col-lg-4">

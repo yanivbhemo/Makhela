@@ -59,3 +59,8 @@ export const ADD_KEYWORD = url + "/system/addKeyword"
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
 
+//Graph
+export const GET_GRAPH_LEADERS = url + "/graph/getLeaders"
+export const GET_GRAPH_POSTS = url + "/graph/getPosts"
+
+
