@@ -52,6 +52,9 @@ export const FORMAT_SYSTEM = url + "/system/init"
 export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
 export const GET_ALL_SYSTEMS_SETTINGS = url + "/system/getAllSettings"
 export const UPDATE_SETTING = url + "/system/updateSetting"
+export const GET_ALL_KEYWORDS = url + "/system/getAllKeywords"
+export const DELETE_KEYWORD = url + "/system/deleteKeyword"
+export const ADD_KEYWORD = url + "/system/addKeyword"
 
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"

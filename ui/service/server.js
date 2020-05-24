@@ -86,6 +86,9 @@ app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 app.post('/system/getAllSettings', withAuth, systemCtl.getAllSystemSettings)
 app.post('/system/updateSetting', withAuth, systemCtl.updateSetting)
+app.post('/system/getAllKeywords', withAuth, systemCtl.getAllKeywords)
+app.post('/system/deleteKeyword', withAuth, systemCtl.deleteKeyword)
+app.post('/system/addKeyword', withAuth, systemCtl.addKeyword)
 
 if(process.env.node_environment === "production")
 {

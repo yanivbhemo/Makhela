@@ -74,6 +74,21 @@ export function ThresholdPanel(props) {
                   {props.children}
                 </ul>
               </div>
+              <div className="panel-footer">
+                <h5><strong>Calculations:</strong></h5>
+                <p>
+                  <strong>New Suggestions :</strong> If certainty level >= 'AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY' <br />
+                  <strong>Automatic addition of Opinion Leader :</strong> If certainty level > 'AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY' <br/>
+                </p>
+                <strong>Suggestions Ranking Mechanism:</strong><br/>
+                <ul>
+                    <li>Description has 1 or more keywords += 'AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY'</li>
+                    <li>'MIN_AMOUNT_OF_FOLLOWERS' <u>Lower than</u> Amount of followers <u>Lower than</u> MID_AMOUNT_OF_FOLLOWERS += 1</li>
+                    <li>'MID_AMOUNT_OF_FOLLOWERS' <u>Lower than</u> Amount of followers <u>Lower than</u> MAX_AMOUNT_OF_FOLLOWERS += 2</li>
+                    <li>'MIN_AMOUNT_OF_STATUSES' <u>Lower than</u> Amount of statuses += 1</li>
+                    <li></li>
+                  </ul>
+              </div>
             </div>
           </div>
   )
@@ -97,6 +112,54 @@ export function SettingItem(props) {
                         </div>
                       </div>
                   </li>
+  )
+}
+
+export function KeywordPanel(props) {
+
+  const [keywordValue, setkeywordValue] = useState('')
+
+  function onAddHandle() {
+    props.onAddClick(keywordValue)
+  }
+
+  return(
+      <div className="task-panel tasks-widget">
+            <div className="panel-heading" style={panelHeadingStyle}>
+              <div className="pull-left">
+                <h4><i className="fa fa-tasks"></i> {props.title}</h4>
+              </div>
+            </div>
+            <div className="panel-body">
+              <div className="task-content">
+                <ul className="task-list">
+                  {props.children}
+                </ul>
+              </div>
+              <div className="panel-footer">
+                <h5>New keyword</h5>
+                <div className="input-group bootstrap-timepicker">
+                  <input type="text" onChange={(e)=>setkeywordValue(e.target.value)} className="form-control timepicker-default" />
+                  <span className="input-group-btn">
+                    <button className="btn btn-success" type="button" onClick={onAddHandle}><i className="fa fa-check"></i></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+  )
+}
+
+export function KeywordItem(props) {
+  function onClickHandle() {
+    props.onDltBtnClick(props.word)
+  }
+  return(
+    <span className="task-title-sp">
+        <button type="button" className="btn btn-primary" style={{cursor: "default"}}>
+          {props.word} <span className="badge badge-light" style={{cursor: "pointer"}} onClick={onClickHandle}>X</span>
+        </button>
+    </span>
   )
 }
 
