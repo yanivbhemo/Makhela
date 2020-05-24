@@ -1,5 +1,8 @@
-// var url = "http://ui-service.makhela.live:3000"
 var url = "http://localhost:3002"
+
+if(process.env.NODE_ENV === "production")
+    url = "https://makhela.live/api"
+
 export const OPINION_LEADERS_SIZE = url + "/opinion_leaders/getCommunitySize"
 export const SUGGESTIONS_COLLECTION_SIZE = url + "/suggestions/getSize"
 export const POSTS_COLLECTION_SIZE = url + "/posts/getSize"
@@ -45,13 +48,19 @@ export const GET_BLACKLISTS_SHORT_DETAILS = url + "/blacklist/getBlackListLeader
 
 //Init
 export const INIT_SYSTEM = url + "/initiation"
+export const FORMAT_SYSTEM = url + "/system/init"
+export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
+export const GET_ALL_SYSTEMS_SETTINGS = url + "/system/getAllSettings"
+export const UPDATE_SETTING = url + "/system/updateSetting"
+export const GET_ALL_KEYWORDS = url + "/system/getAllKeywords"
+export const DELETE_KEYWORD = url + "/system/deleteKeyword"
+export const ADD_KEYWORD = url + "/system/addKeyword"
 
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
-export const FORMAT_SYSTEM = url + "/system/init"
-export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
 
 //Graph
 export const GET_GRAPH_LEADERS = url + "/graph/getLeaders"
 export const GET_GRAPH_POSTS = url + "/graph/getPosts"
+
 

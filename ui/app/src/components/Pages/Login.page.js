@@ -45,13 +45,14 @@ class LoginPage extends Component {
                     }
                 )
             } else {
+              this.setState({error: 'Incorrect email or password'})
               const error = new Error(res.error);
               throw error;
             }
           })
           .catch(err => {
             console.error(err);
-            this.setState({error: 'password'})
+            this.setState({error: 'Cannot communicate with the server'})
           });
     }
 
@@ -72,7 +73,7 @@ class LoginPage extends Component {
 
     handleError(msg) {
         return (
-            <div className="alert alert-danger mt"><b>Oh snap!</b>{msg}</div>
+            <div className="alert alert-danger mt"><b>Oh snap! </b>{msg}</div>
         )
     }
 
@@ -99,7 +100,7 @@ class LoginPage extends Component {
                                                 <p className="centered"><img className="img-circle" width="80" src="img/unknown.jpeg" alt="user img" /></p>
                                                 <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" /><br />
                                                 <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" />
-                                                {!this.state.error ? '' : this.handleError("Incorrect email or password")}
+                                                {!this.state.error ? '' : this.handleError(this.state.error)}
                                             </div>
                                             <div className="modal-footer centered">
                                                 <button data-dismiss="modal" className="btn btn-theme04" type="button">Cancel</button>
