@@ -50,3 +50,8 @@ export const INIT_SYSTEM = url + "/initiation"
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
 export const FORMAT_SYSTEM = url + "/system/init"
 export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
+
+//Graph
+export const GET_GRAPH_LEADERS = url + "/graph/getLeaders"
+export const GET_GRAPH_POSTS = url + "/graph/getPosts"
+

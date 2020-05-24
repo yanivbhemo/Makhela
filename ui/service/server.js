@@ -10,6 +10,8 @@ const blackListCtl = require('./controllers/Blacklist.ctl');
 const postsCtl   = require('./controllers/Post.ctl');
 const userCtl   = require('./controllers/User.ctl');
 const systemCtl = require('./controllers/system.ctl')
+const topics = require('./controllers/Topics.ctl')
+const graphCtl = require('./controllers/Graph.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
 const app       = express();
@@ -31,7 +33,10 @@ app.use(   (req, res, next) => {
     next();
 });
 
-app.post('/initiation', withAuth, initCtl.initSystem);
+app.all('/graph/getLeaders', graphCtl.getLeaders);
+app.all('/graph/getPosts', graphCtl.getPosts);
+
+app.post('/topics', topics.getTopics);
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
@@ -75,6 +80,7 @@ app.post('/users/auth2', userCtl.authenticate2);
 app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
 
+app.post('/initiation', withAuth, initCtl.initSystem);
 app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
 

@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Redirect } from 'react-router-dom'
-
 import Graph from "react-graph-vis";
 import ReactTooltip from "react-tooltip";
 import { degree, betweenness, closeness } from './ClosenessExp'
 import Col from './Col'
 import Row from './Row'
+import * as CONSTS from '../consts'
+import Cookies from 'js-cookie';
+
+
 
 class Network extends React.Component {
   constructor() {
@@ -24,6 +26,12 @@ class Network extends React.Component {
       this.showLeader = this.showLeader.bind(this)
       this.fetchPosts = this.fetchPosts.bind(this)
       this.centrality = this.centrality.bind(this)
+  }
+
+  showLeader(leader){
+    let found = this.state.leaders.find(element => element.id === leader);
+    console.log(found)
+    this.props.onChange(leader,found.twitterName, found.followers, found.following, found.twitterProfileImage)
   }
 
   centrality(centralityState){
@@ -61,7 +69,6 @@ class Network extends React.Component {
   }
 
   fetchPosts(){
-    // event.preventDefault()
     this.setState({loading: true})
     let formBody = "leader="+this.state.leader
     console.log(this.state.leader)
@@ -99,57 +106,6 @@ class Network extends React.Component {
       })
         .catch(err => console.error(err));
     }
-
-  showLeader(id){
-    console.log(id)
-    let leader = this.state.leaders.find(element => element.id === id);
-    if(leader===undefined) 
-       return(<h3>This member was not analyzed yet</h3>)
-    else 
-      return(
-      <div>
-         <Row>
-          <Col className="col-lg-3">
-                            {/* <Panel headeline="Graph">
-                                <Network />
-                            </Panel> */}
-                             <div className="profile-pic">
-                              <img src={leader.twitterProfileImage} alt="Logo" />
-                           </div>
-                        </Col>
-                        <Col className="col-lg-4">
-                        <div className="profile-text">
-                          <h3>{leader.name}</h3>
-                          <h5>{leader.twitterName}</h5>
-                          <p>followers {leader.followers}</p>
-                          <p>followers {leader.following}</p>
-                          {/* <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
-                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button> */}
-                      </div>
-                      </Col>
-                      </Row>
-                      <Row>
-                        <Col className="col-lg-12">
-                          <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
-                          <button className="btn btn-theme03" onClick={() => <Redirect to='/target' />}>Show profile</button>
-                        </Col>
-                        </Row>
-         {/* <div className="profile-pic">
-        <img src={leader.twitterProfileImage} alt="Logo" />;
-        </div>
-      <div className="col-md-3 profile-text">
-          <h3>{leader.name}</h3>
-          <h5>{leader.twitterName}</h5>
-          <p>followers {leader.followers}</p>
-          <p>followers {leader.following}</p>
-      </div>
-      <div className="col-md-3 profile-text">
-        <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show posts graph</button>
-        <button className="btn btn-theme03" onClick={() => this.fetchPosts()}>Show profile</button>
-      </div> */}
-    </div>
-    )
-  }
   draw(){
     const graph = {
       nodes: this.state.nodes,
@@ -188,10 +144,12 @@ class Network extends React.Component {
     const events = {
       select: (event) => {
               var { nodes, edges } = event;
-              if(nodes[0])
-                console.log(nodes[0])
-                console.log(this.state.leaders)
-                this.setState({leader : nodes[0]})
+              if(nodes[0]){
+                // console.log(nodes[0])
+                // console.log(this.state.leaders)
+                this.showLeader(nodes[0])
+                // this.setState({leader : nodes[0]})
+              }
             }
     };
     return <Graph
@@ -203,7 +161,17 @@ class Network extends React.Component {
               />
   }  
   componentDidMount() {
-    const url = 'https://makhela-graph.herokuapp.com/getLeaders';
+    const url = CONSTS.GET_GRAPH_LEADERS
+    // const url = 'https://makhela-graph.herokuapp.com/getLeaders';
+    fetch(url, {
+      // method: 'GET',
+      method: 'POST',
+      // body: JSON.stringify({"token":Cookies.get('token')}),
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+  })
     fetch(url)
         .then(res => res.json())
         .then(data => { 
@@ -214,7 +182,8 @@ class Network extends React.Component {
           this.state.leaders.map(value => {
               if(Array.isArray(value.communityFollowing))
                   value.communityFollowing.map(fl => myEdges.push({ from: value.id, to: fl}))
-             });
+              
+              });
           this.setState({nodes: myNodes, edges: myEdges, loading: false})              
       })
         .catch(err => console.error(err));

@@ -15,7 +15,9 @@ var post = new mongoose.Schema({
     retweeted_status_text:String,
     retweeted_status_user_id:String,
     checked_for_suggestions:Boolean,
-    internal_create_date:Date
+    internal_create_date:Date,
+    likes: Number,
+    retweet_count: Number
 }, { collection: 'posts', versionKey: ''} )
 
 var Post = mongoose.model('Post', post);
