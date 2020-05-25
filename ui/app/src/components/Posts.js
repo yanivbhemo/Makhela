@@ -39,23 +39,25 @@ class Posts extends React.Component {
           var mynodes = [] 
           var myEdges = []
 
-          mynodes.push({id: this.props.leader, label: this.props.leaderName,
+          mynodes.push({id: this.props.leader, label: this.props.leaderName, color:'red',
+            //  shape:"circularImage", 
+            //  shape:"dot",  
+          // image: found.twitterProfileImage, 
           size: 100})
           this.state.posts.map(item => { 
             mynodes.push({
                           id: item.postId.toString(), 
-                          // color: "#86A3C3",
+                          color: "#86A3C3",
                           shape: "dot",
                           title: `<div style="padding:10px;background-color:black">
                                   <p style="color:blue">${item.fulText}</p>
                                   <p style="color:green">${item.dateCreated.toString()}</p>
                                 <div/>` ,
                           // group: item.community
-                          value: item.likes,
-                          group: item.keyWords
+                          value: item.likes
                           
                         })
-            myEdges.push({ from: this.props.leader, to: item.postId.toString(), value:item.retweetCount})
+            myEdges.push({ from: this.props.leader, to: item.postId.toString(), value:item.retweetCount, color: "#86A3C3"})
           })
 
           this.setState({nodes: mynodes, edges: myEdges, loading: false})       

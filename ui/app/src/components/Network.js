@@ -24,6 +24,7 @@ class Network extends React.Component {
       };
       this.draw = this.draw.bind(this)
       this.showLeader = this.showLeader.bind(this)
+      this.fetchPosts = this.fetchPosts.bind(this)
       this.centrality = this.centrality.bind(this)
   }
 
@@ -66,6 +67,45 @@ class Network extends React.Component {
           }
           this.setState({nodes:myNodes})
   }
+
+  fetchPosts(){
+    this.setState({loading: true})
+    let formBody = "leader="+this.state.leader
+    console.log(this.state.leader)
+    let found = this.state.leaders.find(element => element.id == this.state.leader);
+    console.log(found)
+    const url = 'https://makhela-graph.herokuapp.com/allposts'
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+      body: formBody
+    })
+    .then(res => res.json())
+        .then(data => { 
+          this.setState({ posts: data })
+          var mynodes = [] 
+          var myEdges = []
+
+          mynodes.push({id: this.state.leader, shape:"circularImage", image: found.twitterProfileImage, size: 100})
+          this.state.posts.map(item => { 
+            mynodes.push({
+                          id: item.postId.toString(), 
+                          color: "#86A3C3",
+                          shape: "dot",
+                          title: `<div style="padding:10px;background-color:black">
+                                  <p style="color:blue">${item.fulText}</p>
+                                  <p style="color:green">${item.dateCreated.toString()}</p>
+                                <div/>` 
+                          
+                        })
+            myEdges.push({ from: this.state.leader, to: item.postId.toString(), color: "#86A3C3"})
+          })
+
+          this.setState({nodes: mynodes, edges: myEdges, loading: false})       
+      })
+        .catch(err => console.error(err));
+    }
   draw(){
     const graph = {
       nodes: this.state.nodes,
@@ -122,6 +162,7 @@ class Network extends React.Component {
   }  
   componentDidMount() {
     const url = CONSTS.GET_GRAPH_LEADERS
+    // const url = 'https://makhela-graph.herokuapp.com/getLeaders';
     fetch(url, {
       // method: 'GET',
       method: 'POST',

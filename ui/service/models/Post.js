@@ -17,8 +17,7 @@ var post = new mongoose.Schema({
     checked_for_suggestions:Boolean,
     internal_create_date:Date,
     likes: Number,
-    retweet_count: Number,
-    key_word: Number
+    retweet_count: Number
 }, { collection: 'posts', versionKey: ''} )
 
 var Post = mongoose.model('Post', post);

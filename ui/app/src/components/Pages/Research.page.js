@@ -8,7 +8,6 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
-import * as CONSTS from '../../consts'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -21,38 +20,8 @@ class Research extends Component {
             before: '',
             after: ''
           }
-        this.showNetwork = this.showNetwork.bind(this)
-        this.showCommunities = this.showCommunities.bind(this)
     }
 
-    showNetwork(){
-        if(this.state.before.network)
-            return(
-                <div>{this.state.before.network.map(topic =>
-                    <div>
-                        <sapn> -></sapn>
-                        {topic.map(item => <sapn> {item} |</sapn>)}
-                    </div>
-                )}</div>
-            )
-    }
-
-    showCommunities(){
-        if(this.state.before.communities)
-            return(
-                <div>{this.state.before.communities.map(community => 
-                    <span>
-                        <h4>community</h4>
-                        {community.map(topic =>
-                    <div>
-                        <sapn> -></sapn>
-                        {topic.map(item => <sapn> {item} |</sapn>)}
-                    </div>
-                )}
-                    </span>    
-                )}</div>
-            )
-    }
 
     handleChange = date => {
         this.setState({
@@ -62,8 +31,7 @@ class Research extends Component {
     componentDidMount() {
         document.title = "Research"
 
-    // const url = 'http://localhost:3002/topics'
-    const url = CONSTS.GET_TOPICS
+    const url = 'http://localhost:3002/topics'
 
     fetch(url, {
       method: 'POST',
@@ -124,12 +92,12 @@ class Research extends Component {
                     <Row>
                         <Col className="col-lg-6">
                             <Panel headeline="Network topics">
-                             <p> {this.showNetwork()}</p> 
+                             <p> {this.state.before.network}</p> 
                             </Panel>
                         </Col>
                         <Col className="col-lg-6">
                             <Panel headeline="Communities topics">
-                            <p> {this.showCommunities()}</p> 
+                            <p> {this.state.before.communities}</p> 
                             </Panel>
                         </Col>
                     </Row>
