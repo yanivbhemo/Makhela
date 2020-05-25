@@ -1,6 +1,12 @@
+const consts = require('./consts');
+const { SSL_KEY_PATH, SSL_CERT_PATH } = consts;
+const https = require('https');
+const fs = require('fs');
+
 const express   = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet')
 const cors = require('cors')
 
 const initCtl   = require('./controllers/Initiation.ctl');
@@ -19,6 +25,7 @@ const port      = process.env.PORT || 3002;
 
 app.set('port',port);
 app.use(cors())
+app.use(helmet())
 app.use('/', express.static('./public')); // for API
 app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -75,13 +82,31 @@ app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListC
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
-app.post('/users/new', userCtl.createUser);
+
+app.post('/users/new', withAuth, userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
 app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
+app.post('/users/getAllUsers', withAuth, userCtl.getAllUsers);
+app.post('/users/deleteUser', withAuth, userCtl.deleteUser);
+app.post('/users/updateUser', withAuth, userCtl.updateUser);
 
 app.post('/initiation', withAuth, initCtl.initSystem);
 app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)
+app.post('/system/getAllSettings', withAuth, systemCtl.getAllSystemSettings)
+app.post('/system/updateSetting', withAuth, systemCtl.updateSetting)
+app.post('/system/getAllKeywords', withAuth, systemCtl.getAllKeywords)
+app.post('/system/deleteKeyword', withAuth, systemCtl.deleteKeyword)
+app.post('/system/addKeyword', withAuth, systemCtl.addKeyword)
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+if(process.env.node_environment === "production")
+{
+    const options = {
+        key: fs.readFileSync(SSL_KEY_PATH),
+        cert: fs.readFileSync(SSL_CERT_PATH)
+    };
+    var httpsServer = https.createServer(options, app);
+    httpsServer.listen(port, () => console.log(` - Production version! -\nlistening on port ${port}`))
+}
+else app.listen(port, () => console.log(` - Development version - \nlistening on port ${port}`));

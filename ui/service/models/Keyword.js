@@ -7,4 +7,4 @@ var keyword = new mongoose.Schema({
 
 var Keyword = mongoose.model('Keyword', keyword)
 
-module.exports = Keyword;
+module.exports = Keyword
