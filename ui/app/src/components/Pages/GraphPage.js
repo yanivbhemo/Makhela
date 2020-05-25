@@ -9,6 +9,7 @@ import Footer from '../Footer'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel, LeaderPanel} from '../Panels'
 import Network from '../Network'
+import Topics from '../Topics'
 import Posts from '../Posts'
 
 class GraphPage extends Component {
@@ -90,10 +91,8 @@ class GraphPage extends Component {
                         </Col>
                         <Col className="col-lg-4">
                             <Panel headeline="Topics">
-                                <div className="col-md-4 profile-text">
-                                    <h3>Community Topics</h3>
-                                    <h5>community 1</h5>
-                                    <p>topic</p>
+                                <div className="col-md-12 profile-text">
+                                    <Topics/>
                                 </div>
                             </Panel>
                         </Col>
