@@ -40,7 +40,7 @@ exports.getLeaders = (req, res) => {
 
 exports.getPosts = (req, res) => {
     let { leader } = req.body;
-    console.log(leader)
+    // console.log(leader)
     Post.find({ "leader_twitter_id": leader })
     .then(docs => {
         let data = []
@@ -54,6 +54,8 @@ exports.getPosts = (req, res) => {
                     replyPostId: item.in_reply_to_status_id,
                     retweetCount: item.retweet_count,
                     likes: item.likes,
+                    keyWords: item.key_word
+
                 },
             )
           })

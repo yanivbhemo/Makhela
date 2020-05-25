@@ -55,3 +55,5 @@ export const CHECK_IF_SYSTEM_INIT = url + "/system/init_status"
 export const GET_GRAPH_LEADERS = url + "/graph/getLeaders"
 export const GET_GRAPH_POSTS = url + "/graph/getPosts"
 
+//Research 
+export const GET_TOPICS = url + "/topics"
