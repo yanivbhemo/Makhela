@@ -4,16 +4,59 @@ const jwt = require('jsonwebtoken')
 const consts = require('../consts');
 
 exports.createUser = (req, res) => {
+  console.log("- Request: Create new user")
     const { full_name, email, username, password, role } = req.body;
-    const user = new User({ full_name, email, username, password, role });
-    user.save(function(err) {
-      if (err) {
-        res.status(500)
-          .send("Error registering new user please try again.");
-      } else {
-        res.status(200).send("Welcome to the club!");
+    User.findOne({email})
+    .then(doc => {
+      if(doc){
+        return res.sendStatus(403)
+      } else{
+          const user = new User({ full_name, email, username, password, role });
+          user.save(function(err) {
+            if (err) {
+              return res.status(500)
+                .send("Error registering new user please try again.");
+            } else {
+                return res.status(200).send("Welcome to the club!");
+            }
+          });
       }
-    });
+    })
+    .catch(err => {
+      console.log(err)
+      return res.sendStatus(401)
+    })
+}
+
+exports.deleteUser = (req, res) => {
+  const email = req.body.email;
+  console.log("- Request: Delete user", email)
+  User.deleteOne({email})
+  .then((result)=>{
+    if(result.deletedCount === 1)
+      return res.sendStatus(200)
+    else return res.sendStatus(401)
+  })
+  .catch(err => {
+    console.log(err)
+    return res.sendStatus(401)
+  })
+}
+
+exports.updateUser = (req, res) => {
+  const { full_name, email, username, password, role } = req.body;
+  console.log("- Request: Update user", username)
+  User.updateOne({email},{full_name,email,username,password,role})
+  .then((result)=>{
+    if(result.ok === 1)
+      return res.sendStatus(200)
+    else
+      return res.sendStatus(401)
+  })
+  .catch(err => {
+    console.log(err)
+    return res.sendStatus(401)
+  })
 }
 
 exports.authenticate2 = (req, res) => {
@@ -115,4 +158,16 @@ exports.authenticate = (req, res) => {
                 });
             }
     })
+}
+
+exports.getAllUsers = (req, res) => {
+  console.log("- Request: Get all users")
+  User.find()
+  .then(docs => {
+    return res.status(200).json(docs)
+  })
+  .catch(err => {
+    console.log(err)
+    return res.sendStatus(401)
+  })
 }

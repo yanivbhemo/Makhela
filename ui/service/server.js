@@ -77,10 +77,14 @@ app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListC
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
-app.post('/users/new', userCtl.createUser);
+
+app.post('/users/new', withAuth, userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
 app.post('/users/checkToken', withAuth, (req, res) => {res.sendStatus(200)})
 app.get('/users/checkToken/:token', withAuthToken, (req, res) => {res.sendStatus(200)})
+app.post('/users/getAllUsers', withAuth, userCtl.getAllUsers);
+app.post('/users/deleteUser', withAuth, userCtl.deleteUser);
+app.post('/users/updateUser', withAuth, userCtl.updateUser);
 
 app.post('/system/init', withAuth, systemCtl.initSystem)
 app.post('/system/init_status', withAuth, systemCtl.checkSystemStatus)

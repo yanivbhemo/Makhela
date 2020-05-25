@@ -56,6 +56,12 @@ export const GET_ALL_KEYWORDS = url + "/system/getAllKeywords"
 export const DELETE_KEYWORD = url + "/system/deleteKeyword"
 export const ADD_KEYWORD = url + "/system/addKeyword"
 
+//Users
+export const GET_ALL_USERS = url + "/users/getAllUsers"
+export const DELETE_USER = url + "/users/deleteUser"
+export const EDIT_USER = url + "/users/updateUser"
+export const ADD_USER = url + "/users/new"
+
 //Find Alt Lng
 export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
 
