@@ -12,9 +12,9 @@ def get_password():
 def main():
     log = logger.logger_handler()
     now = datetime.now()
-
+    username = 'sveta'
+    pwd = get_password()
     log.send_message_to_logfile("Analyzer: "+str(now))
-
 
     community = db_connection.Community(username, pwd)
     leaders, posts, key_words = community.get_community()
@@ -22,11 +22,10 @@ def main():
     analyzer = myanalyzer.Analyzer(leaders, posts, key_words)
     leaders, posts, topics = analyzer.analyze_community()
 
+
     community.save_community(leaders, posts)
     community.save_topics(topics)
 
 if __name__ == "__main__":
-    username = 'sveta'
-    pwd = get_password()
     main()
     exit(0)
