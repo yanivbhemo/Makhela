@@ -56,7 +56,7 @@ class GraphPage extends Component {
                 <Content title="Main Graph" fa="fa-home">
                     <Row>
                         <Col className="col-lg-8">
-                            <Panel headeline="Graph">
+                            <Panel headeline="Network">
                                 {this.state.page==='leaders'?   <Network onChange={this.update}/>:
                                 <div>
                                      <button className="btn btn-theme03" onClick={() => this.setState({page:'leaders'})}>Back to network</button>
@@ -84,26 +84,69 @@ class GraphPage extends Component {
                                     // onBlackListBtn={this.moveToBlackList}
                                     newUser={true}
                                     />
-                                    <button className="btn btn-theme03" onClick={() => this.showPostsGraph()}>Show posts graph</button>
-                                    <button className="btn btn-theme03" onClick={() => this.setState({leader:'', nickName:''})}>Close</button>
+                                    
+                                    <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.showPostsGraph()}>Show posts graph</button>
+                                    <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.setState({leader:'', nickName:''})}>Close</button>
                                 {/* </div> */}
                             </Panel> : <div></div>}
                         </Col>
                         <Col className="col-lg-4">
-                            <Panel headeline="Topics">
-                                <div className="col-md-12 profile-text">
-                                    <Topics/>
-                                </div>
-                            </Panel>
+                             
+                                {this.state.page==='leaders'?  
+                                 <Row>
+                                 <Col className="col-lg-12">
+                                 <Panel>
+                                     <p><b>
+                                         ❍ Opinion Leaer (community member)
+                                         <br/>
+                                         ⤳ Connection between members (Follow)
+                                     </b></p>
+                                     <p>
+                                     Each color represents community
+                                     <br/><b>
+                                     <span style={{color:'#a0c1f7'}}>Members who were not analyzed yet</span><br/>
+                                     <span style={{color:'#FF9900'}}>Members who were not assigned to community</span>
+                                     </b></p>
+                         
+                                 </Panel>
+                             </Col>
+                         </Row>
+                                : 
+                                <Row>
+                                <Col className="col-lg-12">
+                                <Panel>
+                                    <p><b>
+                                        ❍ Posts - Size: liked
+                                        <br/>
+                                        ⤳ Writing connection - Size: retweets
+                                    </b></p>
+                                    <p>
+                                    <b>
+                                    <span style={{color:'#a0c1f7'}}>Posts who were not analyzed yet</span><br/>
+                                    <span style={{color:'#FF9900'}}>Post that does not contain key word</span><br/>
+                                    <span style={{color:'#7c5295'}}>Post that contains key word</span> </b></p>
+                        
+                                </Panel>
+                            </Col>
+                        </Row>
+                                 
+                                }
+
+                        {this.state.page==='leaders'?
+                          <Row>
+                          <Col className="col-lg-12">
+                              <Panel headeline="Topics - Community tweets">
+                          <div className="col-md-12 profile-text">
+                              <Topics/>
+                          </div>
+                              </Panel>
+                          </Col>
+                      </Row>
+                        :<p></p>}
+                               
+                          
                         </Col>
                         
-                    </Row>
-                    <Row>
-                        <Col className="col-lg-12">
-                            <Panel headeline="Toolbar">
-                                Test
-                            </Panel>
-                        </Col>
                     </Row>
                     <Row>
                         <Col className="col-md-4 col-sm-4 mb">

@@ -5,7 +5,16 @@ class Topics extends Component {
     constructor() {
         super()
         this.state = {
-            after: ''
+            after: '',
+            colors: {
+                0: { color: "#FF9900" },// orange 
+                1: { color: "#7c5295" },// purple
+                2: { color: "#2B7CE9" },// blue
+                3: { color: "#C5000B" },// red
+                4: { color: "#FF9900" },// pink
+                5: { color: "#006400" },// green
+                6: { color: "#7D4219" },// brown
+              },
           }
         this.showNetwork = this.showNetwork.bind(this)
         this.showCommunities = this.showCommunities.bind(this)
@@ -14,31 +23,42 @@ class Topics extends Component {
     showNetwork(){
         if(this.state.after.network)
             return(
-                <div>{this.state.after.network.map(topic =>
+                <React.Fragment>
+                {/* <p>Network topics</p> */}
+                {this.state.after.network.map(topic =>
+                    
                     <div>
-                        <sapn> -></sapn>
+                        <sapn> ❏</sapn>
                         {topic.map(item => <sapn> {item} |</sapn>)}
                     </div>
-                )}</div>
+                )}</React.Fragment>
             )
     }
 
     showCommunities(){
-        if(this.state.after.communities)
+        if(this.state.after.communities){
+        let counter = -1
             return(
-                <div>{this.state.after.communities.map(community => 
-                    <span>
-                        <h4>community</h4>
+                <div>{this.state.after.communities.map(community => {
+                 
+                    counter++
+                    let curColor = this.state.colors[counter]
+                    return (
+                    <span style={curColor}>
                         {community.map(topic =>
                     <div>
-                        <sapn> -></sapn>
+                        <sapn> ❏</sapn>
                         {topic.map(item => <sapn> {item} |</sapn>)}
                     </div>
                 )}
                     </span>    
-                )}</div>
+                    
+                    )
+                    
+                    
+                })}</div>
             )
-    }
+    }}
 
     componentDidMount() {
     const url = CONSTS.GET_TOPICS

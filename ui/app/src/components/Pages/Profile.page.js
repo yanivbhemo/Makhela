@@ -191,7 +191,7 @@ export default class ProfilePage extends Component {
                 },
         }))
         let city = this.state.information.twitter_location.replace(" ", "%20");
-        let url = `${CONSTS.ALT_LNG}key=${KEYS.MAP_KEY}&location=${city}`
+        let url = `${CONSTS.ALT_LNG}key=${KEYS.MAP_GOOGLE_KEY}&location=${city}`
         
                 fetch(url, {
                     method: 'GET',
