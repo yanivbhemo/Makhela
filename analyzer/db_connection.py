@@ -2,7 +2,7 @@
 # import logger
 # import datetime
 # import json
-#
+
 #
 # class Community:
 #
@@ -136,7 +136,7 @@ class Community:
             self.db = db.Makhela
             print("connected")
         except:
-            lprint("failed to connect")
+            print("failed to connect")
 
     def fetch_opinion_leaders(self):
         print("fetching opinion leaders")

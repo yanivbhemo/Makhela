@@ -46,11 +46,10 @@ class Posts extends React.Component {
                           id: item.postId.toString(), 
                           // color: "#86A3C3",
                           shape: "dot",
-                          title: `<div style="padding:10px;background-color:black">
-                                  <p style="color:blue">${item.fulText}</p>
-                                  <p style="color:green">${item.dateCreated.toString()}</p>
+                          title: `<div style="background-color:#e6e6e6;display:flex;flex-direction:column;align-items:center;">
+                                  <p style="color:#6f38bc">${item.fulText}</p>
+                                  <p style="color:#6f38bc">${item.dateCreated.toString()}</p>
                                 <div/>` ,
-                          // group: item.community
                           value: item.likes,
                           group: item.keyWords
                           
@@ -76,6 +75,11 @@ class Posts extends React.Component {
         timestep: 0.35,
         stabilization: { iterations: 1 }
       },
+      groups: {
+        1: { color: "#FF9900" },// orange 
+        0: { color: "#7c5295" },// purple
+        gray: { color: "#e6e6e6" },
+      },
       layout: {
         randomSeed: 34,
         hierarchical: false
@@ -94,12 +98,7 @@ class Posts extends React.Component {
           forceDirection: "none",
           roundness: 0.5
         },
-        scaling: {
-          customScalingFunction: (min, max, total, value) => {return value / total},
-            min: 1,
-            max: 30
-        },
-        color: { inherit: "from" },
+        color: { inherit: "to" },
       },
       height: "400px", 
       }
@@ -135,13 +134,10 @@ class Posts extends React.Component {
         return <h1>Graph loading</h1>
       else
         return(
-          <div>
+          <React.Fragment>
             {this.draw()}
-          </div>
-        )
-        
-        
-    }
+          </React.Fragment>
+        )}
    
   }
 export default Posts

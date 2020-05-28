@@ -1,6 +1,7 @@
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import * as KEYS from '../keys'
 
 const MyMapComponent = compose(
   withProps({
@@ -15,6 +16,7 @@ const MyMapComponent = compose(
     console.log(props)
     return props.lat === 0 ? (<h4>No loaction information provided</h4>) : (
         <GoogleMap
+            bootstrapURLKeys={{ key:KEYS.MAP_GOOGLE_KEY }}
             defaultZoom={8}
             defaultCenter={{ lat:props.lat , lng: props.lng }}
         >
