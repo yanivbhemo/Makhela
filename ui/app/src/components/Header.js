@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
+import Cookies from 'js-cookie';
 
 class Header extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
+    constructor(props) {
+        super(props)
+        this.onLogoutClick = this.onLogoutClick.bind(this)
+    }
 
-    componentDidMount() {
-        // document.title = "TEST"
+    onLogoutClick(){
+        Cookies.remove('token')
+        window.location.reload();
     }
 
     render() {
@@ -18,8 +21,11 @@ class Header extends Component {
                 
                 <div className="top-menu">
                     <ul className="nav pull-right top-menu">
-                    <li><a className="logout" href="login.html">Logout</a></li>
+                        <li><button className="logout" onClick={this.onLogoutClick}>Logout</button></li>
                     </ul>
+                    {/* <ul className="nav pull-left top-menu" style={{marginLeft: "20px"}}>
+                        <li><a className="logout" href="login.html">Main</a></li>
+                    </ul> */}
                 </div>
             </header>
         )

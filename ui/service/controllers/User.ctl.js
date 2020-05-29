@@ -106,7 +106,7 @@ exports.authenticate2 = (req, res) => {
                     const payload = { username, user_role, full_name };
                     const token = jwt.sign(payload, consts.JSON_TOKEN_SECRET);
                     console.log("Token: ", token)
-                    let response = {token, full_name}
+                    let response = {token, full_name, user_role}
                     res.status(200).json(response)
                   })
                 }

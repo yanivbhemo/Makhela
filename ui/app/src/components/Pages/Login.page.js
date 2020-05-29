@@ -40,6 +40,7 @@ class LoginPage extends Component {
                         this.setState({error: ''})
                         console.log(res2)
                         sessionStorage.setItem('user_fullname',res2.full_name)
+                        sessionStorage.setItem('user_role',res2.user_role)
                         document.cookie = "token="+res2.token
                         window.location.href = "/"
                     }
@@ -101,6 +102,11 @@ class LoginPage extends Component {
                                                 <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" /><br />
                                                 <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" />
                                                 {!this.state.error ? '' : this.handleError(this.state.error)}
+                                                <p>
+                                                    amit / amit, Researcher<br />
+                                                    david / david, Analyst<br />
+                                                    yanivbh / test, Admin<br />
+                                                </p>
                                             </div>
                                             <div className="modal-footer centered">
                                                 <button data-dismiss="modal" className="btn btn-theme04" type="button">Cancel</button>
