@@ -45,7 +45,7 @@ class BlackListPage extends Component {
     }
 
     componentDidMount() {
-        document.title = "Black List"
+        document.title = "Ignore List"
 
         var url = CONSTS.GET_ALL_BLACKLISTS_LIMITED
         fetch(url, {
@@ -310,7 +310,7 @@ class BlackListPage extends Component {
             <React.Fragment>
                 <Header />
                 <Menu />
-                <Content title="Black List" fa="fa-times" loadingActive={this.state.loadingActive}>
+                <Content title="Ignore List" fa="fa-times" loadingActive={this.state.loadingActive}>
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>

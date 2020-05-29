@@ -21,7 +21,7 @@ const ReactRouter = () => {
             <Route exact path="/research" component={withAuth(Research)} />
             <Route exact path="/initiation" component={withAuth(Initiation)} />
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
-            <Route exact path="/blacklist" component={withAuth(BlackListPage)} />
+            <Route exact path="/ignoreList" component={withAuth(BlackListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
             <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />
