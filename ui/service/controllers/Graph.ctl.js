@@ -25,7 +25,9 @@ exports.getLeaders = (req, res) => {
                         community: item.community, 
                         degCentrality: item.deg_centrality,
                         betweennessCentrality: item.betweenness_centrality,
-                        closenessCentrality: item.closeness_centrality
+                        closenessCentrality: item.closeness_centrality,
+                        community_following: item.community_following,
+                        internalDate: item.internal_create_date
                       },
                 )
               })
@@ -33,6 +35,8 @@ exports.getLeaders = (req, res) => {
                   if(item.communityFollowing)
                     item.communityFollowing = item.communityFollowing.map(value =>  value[0].twitter_id.toString())
               })
+              console.log(docs[0])
+              console.log(data[0])
             return res.json(data)
         })
         .catch(err => console.log(`query error: ${err}`))
@@ -54,8 +58,7 @@ exports.getPosts = (req, res) => {
                     replyPostId: item.in_reply_to_status_id,
                     retweetCount: item.retweet_count,
                     likes: item.likes,
-                    keyWords: item.key_word
-
+                    keyWords: item.key_word,
                 },
             )
           })
