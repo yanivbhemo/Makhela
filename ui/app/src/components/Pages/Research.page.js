@@ -6,6 +6,7 @@ import Panel from '../Panel'
 import Header from '../Header'
 import Menu from '../Menu'
 import Footer from '../Footer'
+import ResearchGraph from '../ResearchGraph'
 import CommunityPanel from '../Panels'
 import {PostsPanel, HealthPanel} from '../Panels'
 import * as CONSTS from '../../consts'
@@ -23,6 +24,12 @@ class Research extends Component {
           }
         this.showNetwork = this.showNetwork.bind(this)
         this.showCommunities = this.showCommunities.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+    }
+
+
+    handleSearch(){
+        console.log(this.state.startDate)
     }
 
     showNetwork(){
@@ -95,7 +102,7 @@ class Research extends Component {
                                     dateFormat="dd/MM/yyyy"
                                     maxDate={new Date()}
                                 />
-                                <button  style={{marginLeft: "10px"}} className="btn btn-theme03">Search</button>
+                                <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={this.handleSearch}>Search</button>
                                 <div className="btn-group"  style={{marginLeft: "10px"}}>
                                     <button type="button" className="btn btn-theme03">Previous searches</button>
                                     <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -114,6 +121,7 @@ class Research extends Component {
                     <Row>
                         <Col className="col-lg-8">
                             <Panel headeline="Graph">
+                                <ResearchGraph startDate={this.state.startDate}/>
                             </Panel>
                         </Col>
                         <Col className="col-lg-4">
