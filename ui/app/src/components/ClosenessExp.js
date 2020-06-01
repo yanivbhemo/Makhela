@@ -1,5 +1,5 @@
 module.exports = {
-    degree: 'The degree centrality for a person p is the fraction of people he is connected to.',
-    betweenness: 'Betweenness centrality of a person p is the sum of the fraction of all-pairs shortest paths that pass through p',
-    closeness: 'Closeness centrality of a person p is the reciprocal of the average shortest path distance to p over all n-1 reachable people.'
+    degree: 'Displays influencers significance according to number of people following him.',
+    betweenness: 'Displays the "short path" connection number between two people passing through the influencer',
+    closeness: 'Displays the average of the "shortest paths" from the influencer to other people on the network connected to him'
 }

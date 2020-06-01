@@ -303,7 +303,7 @@ export default class ProfilePage extends Component {
                                     <h5>{this.state.information.twitter_created_at}</h5>
                                     <h6>DATE OF CREATION</h6>
                                     <h5>{this.state.information.twitter_statuses_count}</h5>
-                                    <h6>STATUS COUNT</h6>
+                                    <h6>TWEETS COUNT</h6>
                                     </div>
                                 </div>
                                 </div>
@@ -317,7 +317,7 @@ export default class ProfilePage extends Component {
                                 <p><img src={this.state.information.twitter_profile_image} className="img-circle" alt="profile" /></p>
                                 <p>
                                     {
-                                        this.state.inCommunity === true ? <button className="btn btn-danger" onClick={this.moveToBlackList}><i className="fa fa-times"></i> Blacklist</button> :
+                                        this.state.inCommunity === true ? <button className="btn btn-danger" onClick={this.moveToBlackList}><i className="fa fa-times"></i> Ignore List</button> :
                                         <button className="btn btn-success"><i className="fa fa-check"></i> Add to community</button>
                                     }
                                 </p>
@@ -336,7 +336,7 @@ export default class ProfilePage extends Component {
                                     <a data-toggle="tab" href="#contact" className="contact-map" aria-expanded="false">Location</a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#edit" aria-expanded="false">POSTS</a>
+                                    <a data-toggle="tab" href="#edit" aria-expanded="false">TWEETS</a>
                                 </li>
                                 </ul>
                             </div>
@@ -346,14 +346,14 @@ export default class ProfilePage extends Component {
                                     <div className="row">
                                     <div className="col-md-6">
                                         <div className="detailed mt">
-                                        <h4>Recent Posts</h4>
+                                        <h4>Recent Tweets</h4>
                                         <div className="recent-activity">
                                             { this.state.posts.slice(0,3).map(this.onlyLastEachPosts) }
                                         </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6 detailed">
-                                        <h4>Connections within the community</h4>
+                                        <h4>Connections within the network</h4>
                                         <div className="row centered mb">
                                         <ul className="my-friends">
                                             { this.state.friends.map(this.eachFriend)}
@@ -421,7 +421,7 @@ export default class ProfilePage extends Component {
                                 <div id="edit" className="tab-pane">
                                     <div className="row">
                                     <div className="col-lg-8 col-lg-offset-2 detailed">
-                                        <h4 className="mb">Leader's Posts</h4>
+                                        <h4 className="mb">Influenser's Tweets</h4>
                                         <section className="panel content-panel">
                                         <div className="panel-body">
                                             <strong className="">Filters: </strong>
@@ -443,7 +443,7 @@ export default class ProfilePage extends Component {
                                         </section>
                                         <section className="panel content-panel">
                                         <div className="panel-body">
-                                            <h6><b>Post id:</b> 123456</h6>
+                                            <h6><b>Tweet id:</b> 123456</h6>
                                             <h6><b>Date created:</b> 2020-03-06T15:12:24.000+00:00</h6>
                                             <h6><b>Reply to text:</b> @dassakaye Exactly. Never has made it more clear in the U.S. that good governance is a matter of life and death.</h6>
                                             <strong>@michaeltanchum Yep, this applies globally. The need for truth, data and transparency as well.</strong>

@@ -169,7 +169,7 @@ class LeaderPanel extends Component {
       <div className="white-panel pn-auto">
         <div className="white-header">
           <div className="row" id="leader-panel-header">
-            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
+            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Ignore List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
             <div className="col-xs-4 col-md-4">
               <h5>{this.props.full_name}</h5>
             </div>
@@ -245,7 +245,7 @@ class SuggestionPanel extends Component {
             <div className="col-xs-4 col-md-4">
               <h5>{this.props.full_name}</h5>
             </div>
-            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Black List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
+            {this.props.newUser ? <div className="col-xs-4 col-md-4"><button type="button" className="btn btn-round btn-danger" onClick={this.moveToBlackList} data-toggle="modal" data-target="#blackListModal">Ignore List</button></div> : <div className="col-xs-4 col-md-4"><button style={{display: "none"}}></button></div>}
           </div>
         </div>
                         <p>
