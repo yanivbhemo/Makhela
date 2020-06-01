@@ -47,7 +47,7 @@ class CommunityPage extends Component {
     }
 
     componentDidMount() {
-        document.title = "Community"
+        document.title = "Influencers"
 
         var url = CONSTS.GET_ALL_LEADERS_LIMITED
         fetch(url, {
@@ -318,12 +318,12 @@ class CommunityPage extends Component {
             <React.Fragment>
                 <Header />
                 <Menu />
-                <Content title="Community" fa="fa-users" loadingActive={this.state.loadingActive}>
+                <Content title="Influencers" fa="fa-users" loadingActive={this.state.loadingActive}>
                     <Row>
                         <Col className="col-lg-12">
                             <Panel>
                                 <NavLink exact to="/addLeader">
-                                    <button type="button" className="btn btn-success">Add a leader</button>
+                                    <button type="button" className="btn btn-success">Add an influencer</button>
                                 </NavLink>
                             </Panel>
                         </Col>
@@ -383,7 +383,7 @@ class CommunityPage extends Component {
                 show={this.state.showModal} 
                 title="Are you sure?"
                 onClose={this.modalOnClose}
-                rightBtnText="Blacklist"
+                rightBtnText="Ignore list"
                 onSubmit={this.modalOnSubmit}
                 type="danger"
                 >

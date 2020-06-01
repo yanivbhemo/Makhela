@@ -12,6 +12,7 @@ import {PostsPanel, HealthPanel} from '../Panels'
 import * as CONSTS from '../../consts'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Topics from '../Topics'
 
 
 class Research extends Component {
@@ -120,27 +121,26 @@ class Research extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-8">
-                            <Panel headeline="Graph">
+                            <Panel headeline="Network">
                                 <ResearchGraph startDate={this.state.startDate}/>
                             </Panel>
                         </Col>
                         <Col className="col-lg-4">
-                            <Panel headeline="Graph explaination">
-                            </Panel>
+                            <Row>
+                                <Panel headeline="Symbology">
+                                    <span style={{color:'#7c5295'}}>◯ Members who were added to network BEFORE chosen date</span><br/>
+                                    <span style={{color:'#C5000B'}}>◯ Members who were added to network AFTER chosen date</span><br/>
+                                    <span>Size - Number of tweets</span>
+                                </Panel>
+                            </Row>
+                            <Row>
+                                <Panel headeline="Topics - Community tweets">
+                                    <Topics/>
+                                </Panel>
+                            </Row>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col className="col-lg-6">
-                            <Panel headeline="Network topics">
-                             <p> {this.showNetwork()}</p> 
-                            </Panel>
-                        </Col>
-                        <Col className="col-lg-6">
-                            <Panel headeline="Communities topics">
-                            <p> {this.showCommunities()}</p> 
-                            </Panel>
-                        </Col>
-                    </Row>
+
                     <Row>
                     <Col className="col-lg-4">
                             <Panel headeline="Posts with key words">

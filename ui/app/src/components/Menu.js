@@ -66,13 +66,13 @@ class Menu extends Component {
                             <li className="mt">
                                 <NavLink exact to="/">
                                     <i className="fa fa-home"></i>
-                                    <span>Main Graph</span>
+                                    <span>Network Overview</span>
                                 </NavLink>
                             </li>
                         <li className="sub-menu">
                             <NavLink exact to="/community">
                                 <i className="fa fa-users"></i>
-                                <span>Community</span>
+                                <span>Influencers</span>
                             </NavLink>
                         </li>
                         <li className="sub-menu">
@@ -84,7 +84,7 @@ class Menu extends Component {
                         <li className="sub-menu">
                             <NavLink exact to="/ignoreList">
                             <i className="fa fa-times"></i>
-                            <span>Ignore list</span>
+                            <span>Ignore List</span>
                             </NavLink>
                         </li>
                         </ul>
@@ -105,13 +105,13 @@ class Menu extends Component {
                             <li className="mt">
                                 <NavLink exact to="/">
                                     <i className="fa fa-home"></i>
-                                    <span>Main Graph</span>
+                                    <span>Network Overview</span>
                                 </NavLink>
                             </li>
                         <li className="sub-menu">
                             <NavLink exact to="/community">
                                 <i className="fa fa-users"></i>
-                                <span>Community</span>
+                                <span>Influencers</span>
                             </NavLink>
                         </li>
                         <li className="sub-menu">
@@ -139,13 +139,13 @@ class Menu extends Component {
                             <li className="mt">
                                 <NavLink exact to="/">
                                     <i className="fa fa-home"></i>
-                                    <span>Main Graph</span>
+                                    <span>Network Overview</span>
                                 </NavLink>
                             </li>
                         <li className="sub-menu">
                             <NavLink exact to="/community">
                                 <i className="fa fa-users"></i>
-                                <span>Community</span>
+                                <span>Influencers</span>
                             </NavLink>
                         </li>
                         <li className="sub-menu">
@@ -163,7 +163,7 @@ class Menu extends Component {
                         <li className="sub-menu">
                             <NavLink exact to="/blacklist">
                             <i className="fa fa-times"></i>
-                            <span>Black List</span>
+                            <span>Ignore List</span>
                             </NavLink>
                         </li>
                         <li className="sub-menu">

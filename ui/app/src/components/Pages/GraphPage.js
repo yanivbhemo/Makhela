@@ -45,7 +45,7 @@ class GraphPage extends Component {
     }
 
     componentDidMount() {
-        document.title = "Main Graph"
+        document.title = "Network Overview"
     }
 
     render() {
@@ -53,7 +53,7 @@ class GraphPage extends Component {
             <React.Fragment>
                 <Header />
                 <Menu />
-                <Content title="Main Graph" fa="fa-home">
+                <Content title="Network Overview" fa="fa-home">
                     <Row>
                         <Col className="col-lg-8">
                             <Panel headeline="Network">
@@ -68,7 +68,7 @@ class GraphPage extends Component {
                         </Col>
                         {/* SWITCH TO COMPONENT */}
                         <Col className="col-lg-4">
-                            {this.state.leader?  <Panel headeline="Opinion Leader">
+                            {this.state.leader?  <Panel headeline="Influencer">
                                 {/* <div className="col-md-4 profile-text"> */}
                                 <LeaderPanel 
                                     key={this.state.leader}
@@ -85,7 +85,7 @@ class GraphPage extends Component {
                                     newUser={true}
                                     />
                                     
-                                    <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.showPostsGraph()}>Show posts graph</button>
+                                    <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.showPostsGraph()}>Show tweets graph</button>
                                     <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.setState({leader:'', nickName:''})}>Close</button>
                                 {/* </div> */}
                             </Panel> : <div></div>}
@@ -95,17 +95,17 @@ class GraphPage extends Component {
                                 {this.state.page==='leaders'?  
                                  <Row>
                                  <Col className="col-lg-12">
-                                 <Panel>
+                                 <Panel headeline="Symbology">
                                      <p><b>
-                                         ❍ Opinion Leaer (community member)
+                                        ◯ Influencer (Opinion leader)
                                          <br/>
-                                         ⤳ Connection between members (Follow)
+                                         ⤳ Follow Marker
                                      </b></p>
                                      <p>
-                                     Each color represents community
+                                     Communities are represented by different colors
                                      <br/><b>
-                                     <span style={{color:'#a0c1f7'}}>Members who were not analyzed yet</span><br/>
-                                     <span style={{color:'#FF9900'}}>Members who were not assigned to community</span>
+                                     <span style={{color:'#a0c1f7'}}>Influencer without sufficient data</span><br/>
+                                     <span style={{color:'#FF9900'}}>Influencer without significant connections to community</span>
                                      </b></p>
                          
                                  </Panel>
@@ -116,15 +116,15 @@ class GraphPage extends Component {
                                 <Col className="col-lg-12">
                                 <Panel>
                                     <p><b>
-                                        ❍ Posts - Size: liked
+                                        ◯ Tweets - Size: likes
                                         <br/>
                                         ⤳ Writing connection - Size: retweets
                                     </b></p>
                                     <p>
                                     <b>
-                                    <span style={{color:'#a0c1f7'}}>Posts who were not analyzed yet</span><br/>
-                                    <span style={{color:'#FF9900'}}>Post that does not contain key word</span><br/>
-                                    <span style={{color:'#7c5295'}}>Post that contains key word</span> </b></p>
+                                    <span style={{color:'#a0c1f7'}}>Tweet who was not analyzed yet</span><br/>
+                                    <span style={{color:'#FF9900'}}>Tweet that does not contain key word</span><br/>
+                                    <span style={{color:'#7c5295'}}>Tweet that contains key word</span> </b></p>
                         
                                 </Panel>
                             </Col>

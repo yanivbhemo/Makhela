@@ -394,7 +394,7 @@ class SuggestionsPage extends Component {
                 show={this.state.showModal} 
                 title="Are you sure?"
                 onClose={this.modalOnClose}
-                rightBtnText="Blacklist"
+                rightBtnText="Ignore List"
                 onSubmit={this.modalOnSubmit}
                 type="danger"
                 >
