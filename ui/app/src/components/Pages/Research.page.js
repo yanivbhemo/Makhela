@@ -134,6 +134,16 @@ class Research extends Component {
                 <Content title="Research" fa="fa-pie-chart">
                     <Col className="col-lg-12 mt">
                             <div className="row content-panel">
+                                <div className="btn-group"  style={{marginLeft: "15px"}}>
+                                    <button type="button" className="btn btn-theme03">Previous searches</button>
+                                    <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span className="caret"></span>
+                                    </button>
+                                    <ul className="dropdown-menu overflow-auto" role="menu">
+                                        <li><a>1</a></li>
+                                        <li><a>2</a></li>
+                                    </ul>
+                                </div>
                                 <div className="panel-heading">
                                     <ul className="nav nav-tabs nav-justified">
                                         <li className="active">
@@ -161,8 +171,8 @@ class Research extends Component {
                                                             :
                                                             <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={() => this.setState({question: '', searchWords : [], posts: '', disabled: false})}>New Search</button>
                                                             }
-                                                            <div className="btn-group"  style={{marginLeft: "10px"}}>
-                                                                <button type="button" className="btn btn-theme03">Previous searches</button>
+                                                            {/* <div className="btn-group"  style={{marginLeft: "10px"}}>
+            
                                                                 <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                                 <span className="caret"></span>
                                                                 </button>
@@ -170,7 +180,7 @@ class Research extends Component {
                                                                     <li><a>1</a></li>
                                                                     <li><a>2</a></li>
                                                                 </ul>
-                                                            </div>
+                                                            </div> */}
                                                         </form>
                                                     </Panel>
                                                 </Col>
@@ -209,7 +219,7 @@ class Research extends Component {
                                             <div></div>
                                             }
                                         </div>
-                                        <div id="history" className="tab-pane active">
+                                        <div id="history" className="tab-pane">
                                             <DatePicker
                                                 selected={this.state.startDate}
                                                 onChange={this.handleChange}
