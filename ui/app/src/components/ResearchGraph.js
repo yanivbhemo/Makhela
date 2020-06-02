@@ -13,58 +13,10 @@ class ResearchGraph extends React.Component {
         leaders: [],
         nodes: [],
         edges: [],
-        nodesPosts: [],
-        edgesPosts: [],
         after: []
       };
       this.draw = this.draw.bind(this)
-      this.drawPosts = this.drawPosts.bind(this)
-      this.fetchPosts = this.fetchPosts.bind(this)
   }
-
-  fetchPosts(){
-    let leaders = this.state.after
-    console.log(leaders)
-    const url = CONSTS.GET_GRAPH_POSTS
-    let mynodes = [] 
-    let myEdges = []
-    leaders.map(item => {
-        let formBody = "leader="+item
-
-        fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            body: formBody
-          })
-          .then(res => res.json())
-              .then(data => {                 
-      
-                mynodes.push({id: item,size: 100})
-                data.map(item => { 
-                  mynodes.push({
-                                id: item.postId.toString(), 
-                                // color: "#86A3C3",
-                                shape: "dot",
-                                title: `<div style="background-color:#e6e6e6;display:flex;flex-direction:column;align-items:center;">
-                                        <p style="color:#6f38bc">${item.fulText}</p>
-                                        <p style="color:#6f38bc">${item.dateCreated.toString()}</p>
-                                      <div/>` ,
-                                value: item.likes,
-                                group: item.keyWords
-                                
-                              })
-                  myEdges.push({ from: item, to: item.postId.toString(), value:item.retweetCount})
-                })
-      
-                      
-            })
-              .catch(err => console.error(err));
-
-    })
-    this.setState({nodesPosts: mynodes, edgesPosts: myEdges, loading: false})
-  }
-
-
    componentDidMount() {
     const url = CONSTS.GET_GRAPH_LEADERS
     fetch(url, {
@@ -133,7 +85,6 @@ class ResearchGraph extends React.Component {
       console.log(afterLeaders)
       this.setState({nodes: myNodes, after: afterLeaders})
       console.log(this.state.after)
-      this.fetchPosts()
   }
 }
 
@@ -186,59 +137,7 @@ class ResearchGraph extends React.Component {
     }
     console.log(graph)
     return <Graph graph={graph} options={options} events={events}/>
-  }  
-
-  drawPosts(){
-    const graph = {
-      nodes: this.state.nodesPosts,
-      edges: this.state.edgesPosts
-    };
-    const options = {
-      physics: {
-        maxVelocity: 10,
-        solver: "forceAtlas2Based",
-        timestep: 0.005,
-        stabilization: { iterations: 1 }
-      },
-      layout: {
-        randomSeed: 34,
-        hierarchical: false
-      },  
-      nodes: {
-        scaling: {
-            customScalingFunction: (min, max, total, value) => {return value / total},
-              min: 5,
-              max: 150
-          },
-        font: { size: 12, face: "Tahoma" }
-      },
-      edges: {
-        smooth: {
-          type: "continuous",
-          forceDirection: "none",
-          roundness: 0.5
-        },
-        color: { inherit: "to" },
-      },
-      height: "400px", 
-      }
-   
-    const events = {
-      select: (event) => {
-              let { nodes, edges } = event;
-              if(nodes[0]){
-                console.log(nodes[0])
-              }
-              else{
-                console.log("click")
-              }
-              
-            }
-    }
-    console.log(graph)
-    return <Graph graph={graph} options={options} events={events}/>
-  }  
-  
+  } 
 
   render() {
       if(this.state.loading)
@@ -247,7 +146,6 @@ class ResearchGraph extends React.Component {
         return(
           <React.Fragment>
                 {this.draw()}  
-                {this.drawPosts()}  
           </React.Fragment>
         )
         

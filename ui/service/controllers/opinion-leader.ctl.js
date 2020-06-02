@@ -245,3 +245,18 @@ exports.getLeaderShortDetails = (req, res) => {
         return res.sendStatus(500)
     })
 }
+
+exports.getLeaderById = (req, res) => {
+    const id = req.body.id.toString()
+    console.log(id)
+    Leader.find({})
+    .then(docs => {
+        let found = docs.find(element => element.twitter_id == id);
+        console.log(found)
+        res.json(found)
+    })
+    .catch(err => {
+        console.log(err)
+        return res.sendStatus(500)
+    })
+    }

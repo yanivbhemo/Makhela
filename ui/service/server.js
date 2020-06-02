@@ -18,6 +18,7 @@ const userCtl   = require('./controllers/User.ctl');
 const systemCtl = require('./controllers/system.ctl')
 const topics = require('./controllers/Topics.ctl')
 const graphCtl = require('./controllers/Graph.ctl')
+const researchCtl = require('./controllers/Research.ctl')
 const {withAuth,withAuthToken} = require('./middleware')
 
 const app       = express();
@@ -44,6 +45,12 @@ app.all('/graph/getLeaders', graphCtl.getLeaders);
 app.all('/graph/getPosts', graphCtl.getPosts);
 
 app.post('/topics', topics.getTopics);
+
+
+app.post('/posts_words', withAuth, postsCtl.getPostsWords);
+
+app.post('/getLeaderById', withAuth, opinionLeaderCtl.getLeaderById);
+app.post('/saveSearch', researchCtl.saveSearch);
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
