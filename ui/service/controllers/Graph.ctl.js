@@ -44,7 +44,6 @@ exports.getLeaders = (req, res) => {
 
 exports.getPosts = (req, res) => {
     let { leader } = req.body;
-    // console.log(leader)
     Post.find({ "leader_twitter_id": leader })
     .then(docs => {
         let data = []

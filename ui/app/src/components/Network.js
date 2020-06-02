@@ -29,7 +29,6 @@ class Network extends React.Component {
     const url = CONSTS.GET_GRAPH_LEADERS
     fetch(url, {
       method: 'POST',
-      // body: JSON.stringify({"token":Cookies.get('token')}),
       body: JSON.stringify({"token":Cookies.get('token')}),
       headers: {
         'Content-Type': 'application/json'

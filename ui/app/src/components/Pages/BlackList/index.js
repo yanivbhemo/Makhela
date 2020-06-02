@@ -351,9 +351,9 @@ class BlackListPage extends Component {
                         dataLength={this.state.amount_of_blacklistLeaders}
                         next={this.fetchMoreBlacklistLeaders}
                         hasMore={this.state.hasMore}
-                        loader={<h4>Loading more black list Leader</h4>}
+                        loader={<h4>Loading more ignore list influencers</h4>}
                         endMessage={
-                            <p>No more black list Leaders</p>
+                            <p>No more ignore list influencers</p>
                         }
                         >
                         {this.state.blacklistLeaders.map(this.eachBlacklistLeader)}
@@ -364,7 +364,7 @@ class BlackListPage extends Component {
                 show={this.state.showModal} 
                 title="Are you sure?"
                 onClose={this.modalOnClose}
-                rightBtnText="Blacklist"
+                rightBtnText="Ignore List"
                 onSubmit={this.modalOnSubmit}
                 type="danger"
                 >

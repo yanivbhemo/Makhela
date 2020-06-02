@@ -71,4 +71,6 @@ export const GET_GRAPH_POSTS = url + "/graph/getPosts"
 
 //Research 
 export const GET_TOPICS = url + "/topics"
-
+export const GET_LEADER_BY_ID = url + "/getLeaderById"
+export const SAVE_SEARCH = url + "/saveSearch"
+export const POST_WORDS = url + "/posts_words" 
