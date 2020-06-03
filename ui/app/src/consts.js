@@ -18,6 +18,7 @@ export const GET_SPECIFIC_LOCATION_LEADERS = url + "/opinion_leaders/getLocation
 export const ADD_NEW_LEADER = url + "/opinion_leaders/addNewLeader"
 export const GET_SPECIFIC_LEADER = url + "/opinion_leaders/leader/"
 export const GET_LEADER_POSTS = url + "/posts/getLeaderPosts/"
+export const GET_ALL_LEADER_POSTS = url + "/posts/getAllLeaderPosts/"
 export const GET_LEADER_FRIENDS = url + "/opinion_leaders/leader/getLeaderFriends/"
 export const GET_LEADER_SHORT_DETAILS = url + "/opinion_leaders/getLeaderShortDetails/"
 

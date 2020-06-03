@@ -89,6 +89,7 @@ app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListC
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
+app.post('/posts/getAllLeaderPosts/:twitter_id', withAuth, postsCtl.getAllLeaderPosts);
 
 app.post('/users/new', withAuth, userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);

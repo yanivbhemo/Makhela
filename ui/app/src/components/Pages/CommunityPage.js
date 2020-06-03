@@ -139,7 +139,6 @@ class CommunityPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            
         }))
     }
 
@@ -357,6 +356,25 @@ class CommunityPage extends Component {
                                         </div>
                                     </form>
                                 {/* </div> */}
+                            </Panel>
+                            <Panel>
+                                    <form className="form-inline" role="form">
+                                        <strong style={{paddingRight:"20px"}}><i className="fa fa-angle-right"></i> Sort Results</strong>
+                                        <div className="form-group">
+                                            <div className="btn-group">
+                                                <button type="button" className="btn btn-theme03">Locations</button>
+                                                <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <span className="caret"></span>
+                                                    <span className="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                <ul className="dropdown-menu overflow-auto" role="menu">
+                                                    {/* {this.state.locations.map(this.eachLocation)} */}
+                                                    <li><a onClick={this.locationOnClick.bind(this, '')}>All</a></li>
+                                                    {this.state.locations.map(this.eachLocation)} 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
                             </Panel>
                         </Col>
                     </Row>

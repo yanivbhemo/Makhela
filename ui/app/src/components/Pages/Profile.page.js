@@ -8,7 +8,7 @@ import Row from '../Row'
 import Col from '../Col'
 import * as CONSTS from '../../consts'
 import * as KEYS from '../../keys'
-import Iframe from 'react-iframe'
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Cookies from 'js-cookie';
 import ReactImageFallback from "react-image-fallback";
 import Map from '../Map'
@@ -26,19 +26,27 @@ export default class ProfilePage extends Component {
             twitter_location: '',
             // location_url: '',
             posts:[],
+            posts_full: [],
             friends: [],
             friendsGraphLbl: '',
             lat: 0,
-            lng: 0
+            lng: 0,
+            amount_of_tweets: 0,
+            start_post_index: 0,
+            end_post_index: 20,
+            hasMore: true
         }
         this.addInformation = this.addInformation.bind(this)
         this.addPosts = this.addPosts.bind(this)
+        this.addAllPosts = this.addAllPosts.bind(this)
         this.addFriends = this.addFriends.bind(this)
         this.modalOnClose = this.modalOnClose.bind(this)
         this.modalOnSubmit = this.modalOnSubmit.bind(this)
         this.moveToBlackList = this.moveToBlackList.bind(this)
         this.onlyLastEachPosts = this.onlyLastEachPosts.bind(this)
         this.eachFriend = this.eachFriend.bind(this)
+        this.eachPost = this.eachPost.bind(this)
+        this.fetchMorePosts = this.fetchMorePosts.bind(this)
     }
 
     componentDidMount(){
@@ -88,6 +96,26 @@ export default class ProfilePage extends Component {
                             date_created: post.date_created,
                             internal_create_date: post.internal_create_date
                         }))
+                        this.setState({amount_of_tweets: posts.length})
+                    })
+                .catch(err => console.log(err))
+
+                url = CONSTS.GET_ALL_LEADER_POSTS + this.state.information.twitter_id
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({"token": Cookies.get('token')}),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                    .then(posts => {
+                        posts.map(post => this.addAllPosts({
+                            post_id: post.post_id,
+                            full_text: post.full_text,
+                            date_created: post.date_created,
+                            internal_create_date: post.internal_create_date
+                        }))
                     })
                 .catch(err => console.log(err))
 
@@ -114,6 +142,20 @@ export default class ProfilePage extends Component {
                 }
             )
         .catch(err => console.log(err))
+    }
+
+    addAllPosts({post_id, full_text, date_created, internal_create_date}) {
+        this.setState(prevState => ({
+            posts_full: [
+                ...prevState.posts_full,
+                {
+                    post_id: post_id,
+                    full_text: full_text,
+                    date_created: date_created,
+                    internal_create_date: internal_create_date
+                }
+            ],
+        }))
     }
 
     addFriends({twitter_screen_name, found_date}){
@@ -277,6 +319,32 @@ export default class ProfilePage extends Component {
         )
     }
 
+    eachPost(post, i) {
+        return (
+                <div className="panel-body" key={`post${i}`}>
+                    <h6><b>Tweet id:</b> {post.post_id}</h6>
+                    <h6><b>Date created:</b> {post.date_created}</h6>
+                    <strong>{post.full_text}</strong>
+                </div>
+        )
+    }
+
+    fetchMorePosts() {
+        var endIndex = this.state.posts.length*2
+        var hasMore = true
+        if(this.state.posts.length * 2 > this.state.posts_full.length){
+            endIndex = this.state.posts.length + (this.state.posts_full.length - this.state.posts.length)
+            hasMore = false
+        }
+        this.setState({start_post_index: this.state.posts.length, end_post_index: endIndex})
+        var updatedPosts = this.state.posts
+        var fullPosts = this.state.posts_full
+        for (let i = this.state.start_post_index; i < this.state.end_post_index; i++){
+            updatedPosts.push(fullPosts[i])
+        }
+        this.setState({posts: updatedPosts, amount_of_tweets: updatedPosts.length, hasMore: hasMore})
+    }
+
     render() {
         return(
             <React.Fragment>
@@ -424,30 +492,21 @@ export default class ProfilePage extends Component {
                                         <h4 className="mb">Influenser's Tweets</h4>
                                         <section className="panel content-panel">
                                         <div className="panel-body">
-                                            <strong className="">Filters: </strong>
-                                            <div className="btn-group">
-                                            <button type="button" className="btn btn-theme03">Action</button>
-                                            <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <span className="caret"></span>
-                                                <span className="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                            <ul className="dropdown-menu" role="menu">
-                                                <li><a href="#">Action</a></li>
-                                                <li><a href="#">Another action</a></li>
-                                                <li><a href="#">Something else here</a></li>
-                                                <li className="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                            </ul>
-                                            </div>
+                                            <h4>Display {this.state.amount_of_tweets} out of {this.state.posts_full.length}</h4>
                                         </div>
                                         </section>
                                         <section className="panel content-panel">
-                                        <div className="panel-body">
-                                            <h6><b>Tweet id:</b> 123456</h6>
-                                            <h6><b>Date created:</b> 2020-03-06T15:12:24.000+00:00</h6>
-                                            <h6><b>Reply to text:</b> @dassakaye Exactly. Never has made it more clear in the U.S. that good governance is a matter of life and death.</h6>
-                                            <strong>@michaeltanchum Yep, this applies globally. The need for truth, data and transparency as well.</strong>
-                                        </div>
+                                            <InfiniteScroll
+                                            dataLength={this.state.amount_of_tweets}
+                                            next={this.fetchMorePosts}
+                                            hasMore={this.state.hasMore}
+                                            loader={<h4>Loading more posts</h4>}
+                                            endMessage={
+                                                <p>No more posts</p>
+                                            }
+                                            >
+                                            {this.state.posts.map(this.eachPost)}
+                                            </InfiniteScroll>
                                         </section>
                                     </div>
                                     </div>
