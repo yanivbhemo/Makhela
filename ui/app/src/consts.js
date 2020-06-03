@@ -15,9 +15,11 @@ export const GET_ALL_LEADERS_LIMITED = url + "/opinion_leaders/getAllLeadersLimi
 export const MOVE_LEADER_TO_BLACKLIST = url + "/opinion_leaders/moveToBlackList"
 export const GET_ALL_LEADERS_LOCATIONS = url + "/opinion_leaders/getLocations"
 export const GET_SPECIFIC_LOCATION_LEADERS = url + "/opinion_leaders/getLocations"
+export const GET_SORTED_LEADERS = url + "/opinion_leaders/getLeadersSorted"
 export const ADD_NEW_LEADER = url + "/opinion_leaders/addNewLeader"
 export const GET_SPECIFIC_LEADER = url + "/opinion_leaders/leader/"
 export const GET_LEADER_POSTS = url + "/posts/getLeaderPosts/"
+export const GET_ALL_LEADER_POSTS = url + "/posts/getAllLeaderPosts/"
 export const GET_LEADER_FRIENDS = url + "/opinion_leaders/leader/getLeaderFriends/"
 export const GET_LEADER_SHORT_DETAILS = url + "/opinion_leaders/getLeaderShortDetails/"
 

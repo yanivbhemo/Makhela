@@ -28,6 +28,23 @@ exports.getLeaderPosts = (req, res) => {
     })
 }
 
+exports.getAllLeaderPosts = (req, res) => {
+    console.log("- Request: get all the posts of a leader")
+    let leader_twitter_id = req.params.twitter_id
+    Post.find({leader_twitter_id}).sort({"date_created": -1})
+    .then(docs => {
+        if(docs){
+            return res.status(200).json(docs)
+        } else {
+            return res.sendStatus(404)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.sendStatus(500)
+    })
+}
+
 exports.getPostsWords = (req, res) => {
     const words = req.body.words
     console.log("words "+words)

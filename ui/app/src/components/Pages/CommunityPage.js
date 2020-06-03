@@ -31,7 +31,9 @@ class CommunityPage extends Component {
             filterByScreenName: '',
             start_leader_index: 0,
             end_leader_index: 20,
-            hasMore: true
+            hasMore: true,
+            sort_options: [],
+            sort_direction: -1
         }
         this.addLeaders = this.addLeaders.bind(this)
         this.addAllLeaders = this.addAllLeaders.bind(this)
@@ -44,6 +46,8 @@ class CommunityPage extends Component {
         this.filterByName = this.filterByName.bind(this)
         this.filterByScreenName = this.filterByScreenName.bind(this)
         this.fetchMoreLeaders = this.fetchMoreLeaders.bind(this)
+        this.eachSortOption = this.eachSortOption.bind(this)
+        this.sortOnClick = this.sortOnClick.bind(this)
     }
 
     componentDidMount() {
@@ -69,7 +73,13 @@ class CommunityPage extends Component {
             level_of_certainty: leader.level_of_certainty,
             twitter_followers_count: leader.twitter_followers_count
         })))
-        .then(res => this.setState({amount_of_leaders: res.length}))
+        .then(res => {
+            var sort_options = []
+            Object.keys(this.state.leaders[0]).map((key, i) => {
+                sort_options.push(key)
+            })
+            this.setState({amount_of_leaders: res.length, sort_options: sort_options})
+        })
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_LEADERS_LOCATIONS
@@ -139,7 +149,6 @@ class CommunityPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            
         }))
     }
 
@@ -313,6 +322,29 @@ class CommunityPage extends Component {
         this.setState({leaders: updatedLeaders, amount_of_leaders: updatedLeaders.length, hasMore: hasMore})
     }
 
+    eachSortOption(option, i) {
+        return(
+            <li key={`option${i}`}><a index={option} onClick={this.sortOnClick.bind(this, option)}>{option}</a></li>
+        )
+        // <li key={`Item${i}`}><a key={`Item${i}`} index={location} onClick={this.locationOnClick.bind(this, location)}>{location.name}</a></li>
+    }
+
+    sortOnClick(option) {
+        var url = CONSTS.GET_SORTED_LEADERS
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({"sort_key": option, "sort_direction": this.state.sort_direction, "token":Cookies.get('token')}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res  => res.json())
+        .then(data => {
+            this.setState({leaders:data, amount_of_leaders:data.length, sort_direction: (this.state.sort_direction===-1) ? 1 : -1})
+        })
+        .catch(err => console.log(err))
+    }
+
     render() {
         return(
             <React.Fragment>
@@ -357,6 +389,25 @@ class CommunityPage extends Component {
                                         </div>
                                     </form>
                                 {/* </div> */}
+                            </Panel>
+                            <Panel>
+                                    <form className="form-inline" role="form">
+                                        <strong style={{paddingRight:"20px"}}><i className="fa fa-angle-right"></i> Sort Results</strong>
+                                        <div className="form-group">
+                                            <div className="btn-group">
+                                                <button type="button" className="btn btn-theme03">Addition Date</button>
+                                                <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <span className="caret"></span>
+                                                    <span className="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                <ul className="dropdown-menu overflow-auto" role="menu">
+                                                    {/* {this.state.locations.map(this.eachLocation)} */}
+                                                    <li><a onClick={this.sortOnClick.bind(this, 'internal_create_date')}>Addition Date</a></li>
+                                                    {this.state.sort_options.map(this.eachSortOption)} 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
                             </Panel>
                         </Col>
                     </Row>
