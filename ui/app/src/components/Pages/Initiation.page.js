@@ -60,14 +60,12 @@ class Initiation extends Component {
 
         var keywords_arr = this.state.keyWords.split(/\r\n|\n/)
         count = 0
-        for(var i = 0; i < keywords_arr.length; i++) {
-            for(var j = 0; j < keywords_arr.length; j++) {
-                if(keywords_arr[i] === keywords_arr[j]){                    
+        for(let i = 0; i < keywords_arr.length; i++) {
+            for(let j = 0; j < keywords_arr.length; j++) {
+                if(keywords_arr[i] === keywords_arr[j])                   
                     count++
-                }
-                if(count > 1){
+                if(count > 1)
                     return keywords_arr[i]
-                }
             }
             count = 0
         }
@@ -106,12 +104,10 @@ class Initiation extends Component {
         }
     }
     handleChange = e => {
-        if(e.target.id === "leaders"){
+        if(e.target.id === "leaders")
             this.setState({leaders: e.target.value})
-        } 
-        else if(e.target.id === "keywords") {
+        else if(e.target.id === "keywords") 
             this.setState({keyWords: e.target.value})
-        }
     }
     render() {
         return(

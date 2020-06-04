@@ -7,13 +7,13 @@ class Topics extends Component {
         this.state = {
             after: '',
             colors: {
-                0: { color: "#FF9900" },// orange 
-                1: { color: "#7c5295" },// purple
-                2: { color: "#2B7CE9" },// blue
-                3: { color: "#C5000B" },// red
-                4: { color: "#FF9900" },// pink
-                5: { color: "#006400" },// green
-                6: { color: "#7D4219" },// brown
+                // 0: { color: "#FF9900" },// orange 
+                0: { color: "#7c5295" },// purple
+                1: { color: "#2B7CE9" },// blue
+                2: { color: "#C5000B" },// red
+                3: { color: "#FF9900" },// pink
+                4: { color: "#006400" },// green
+                5: { color: "#7D4219" },// brown
               },
           }
         this.showNetwork = this.showNetwork.bind(this)

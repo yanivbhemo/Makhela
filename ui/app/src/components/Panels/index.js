@@ -45,12 +45,12 @@ class CommunityPanel extends Component {
         return(
             <div className="darkblue-panel pn">
               <div className="darkblue-header">
-                <h5>Community Statistcs</h5>
+                <h5>Influencers</h5>
               </div>
               <div className="row">
                 <div className="col-xs-6">
                   <h1 className="mt"><i className="fa fa-user fa-3x" style={{color: "#AF55C9"}}></i></h1>
-                  <p>Opinion Leaders</p>
+                  <p>Influencers</p>
                   <footer>
                     <div className="centered">
                       <h5>{this.state.opinion_leaders_size}</h5>
@@ -99,7 +99,7 @@ class PostsPanel extends Component {
         <div className="twitter-panel pn" style={{color: "white"}}>
           <i className="fa fa-twitter fa-4x"></i>
           <h2>{this.state.posts_amount}</h2>
-          <h4>Posts collected</h4>
+          <h4>Tweets collected</h4>
         </div>
       )
     }
