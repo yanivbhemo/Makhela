@@ -182,7 +182,6 @@ export default class ProfilePage extends Component {
                         }
                     ],
                     loadingActive: false,
-                    friendsGraphLbl: 'VIEW AS GRAPH'
                 }))
             })
             .catch(err => {console.log(err)})
@@ -432,35 +431,6 @@ export default class ProfilePage extends Component {
                                             </div>
                                         </div>
                                         </div>
-                                        <h4>TRENDS ANALYSIS</h4>
-                                        <div className="row centered">
-                                        <div className="col-md-8 col-md-offset-2">
-                                            <h5>Dashboard Update (40%)</h5>
-                                            <div className="progress">
-                                            <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: "40%"}}>
-                                                <span className="sr-only">40% Complete (success)</span>
-                                            </div>
-                                            </div>
-                                            <h5>Unanswered Messages (80%)</h5>
-                                            <div className="progress">
-                                            <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: "80%"}}>
-                                                <span className="sr-only">80% Complete (success)</span>
-                                            </div>
-                                            </div>
-                                            <h5>Product Review (60%)</h5>
-                                            <div className="progress">
-                                            <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: "60%"}}>
-                                                <span className="sr-only">60% Complete (success)</span>
-                                            </div>
-                                            </div>
-                                            <h5>Friend Requests (90%)</h5>
-                                            <div className="progress">
-                                            <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: "90%"}}>
-                                                <span className="sr-only">90% Complete (success)</span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
                                     </div>
                                     </div>
                                 </div>
@@ -526,7 +496,6 @@ export default class ProfilePage extends Component {
                 type="danger"
                 >
                 </ModalBox>
-                <Footer />
             </React.Fragment>
         )
     }

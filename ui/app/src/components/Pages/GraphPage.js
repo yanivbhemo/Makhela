@@ -160,7 +160,6 @@ class GraphPage extends Component {
                         </Col>
                     </Row>
                 </Content>
-                <Footer />
             </React.Fragment>
         )
     }
