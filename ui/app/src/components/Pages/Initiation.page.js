@@ -38,7 +38,8 @@ class Initiation extends Component {
           })
         .then(res => {
             if(res.status === 403){
-                this.props.history.push('/')
+                // this.props.history.push('/')
+                console.log("System not initilize")
             }
         })
     }
