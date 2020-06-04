@@ -10,3 +10,13 @@ exports.saveSearch = (req, res) => {
         console.log("Document inserted succussfully!");
       });
 }
+
+exports.getSearchName = (req, res) => {
+  Reserch.find({}) 
+    .then(docs => {
+      let names = []
+      docs.map(doc => names.push(doc.searchName))
+      res.json(names)
+    })
+    .catch(err => console.log(`query error: ${err}`))
+}

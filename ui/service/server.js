@@ -51,6 +51,7 @@ app.post('/posts_words', withAuth, postsCtl.getPostsWords);
 
 app.post('/getLeaderById', withAuth, opinionLeaderCtl.getLeaderById);
 app.post('/saveSearch', researchCtl.saveSearch);
+app.get('/getSearchName', researchCtl.getSearchName);
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
