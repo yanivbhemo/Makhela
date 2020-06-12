@@ -76,7 +76,7 @@ class GraphPage extends Component {
                                     full_name={this.state.nickName}
                                     twitter_id={this.state.leader}
                                     twitter_profile_image={this.state.twitterProfileImage}
-                                    twitter_description="desc"
+                                    twitter_description=""
                                     twitter_screen_name={this.state.nickName}
                                     level_of_certainty={10}
                                     twitter_followers_count={this.state.followers}
