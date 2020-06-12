@@ -43,11 +43,14 @@ class Suggestion_Collector:
                     if not self.check_if_person_in_blacklist(leader_to_check):
                         if not self.check_if_person_in_community(leader_to_check):
                             level_of_certainty = self.check_level_of_certainty(leader_to_check)
-                            if level_of_certainty >= int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY')):
-                                self.leaders_to_check.append({"screen_name": leader_to_check, "level_of_certainty": level_of_certainty})
-                                names_arr.append(leader_to_check)
+                            if level_of_certainty != None:
+                                if level_of_certainty >= int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY')):
+                                    self.leaders_to_check.append({"screen_name": leader_to_check, "level_of_certainty": level_of_certainty})
+                                    names_arr.append(leader_to_check)
+                                else:
+                                    self.logger.send_message_to_logfile("- Level of certainty = 0. Ignore")
                             else:
-                                self.logger.send_message_to_logfile("- Level of certainty = 0. Ignore")
+                                self.logger.send_message_to_logfile("- Issue with the profile")
                         else:
                             self.logger.send_message_to_logfile("- Person is already in the community. Ignore")
                     else:
@@ -88,34 +91,37 @@ class Suggestion_Collector:
         np_kw_array = np.array(self.keywords)
         proposed_id = twitter_id
         level_of_certainty = 0
-        person_twitter_profile = self.source_handler.get_specific_user(twitter_id)
-        if person_twitter_profile != None:
-            # First check: If leader description contains one or more internal keywords
-            # If it is it receives 'AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY' points
-            # Second check: If leader's name is the same as written in the DB
-            # If it is it receives 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
-            try:
-                proposed_description = person_twitter_profile.description.lower()
-                proposed_description = re.sub(r"[^a-zA-Z0-9]+", ' ', proposed_description)
-                np_description_array = np.array(proposed_description.split(' '))
-                if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
-                    level_of_certainty += int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY'))
-            except:
-                pass
+        try:
+            person_twitter_profile = self.source_handler.get_specific_user(twitter_id)
+            if person_twitter_profile != None:
+                # First check: If leader description contains one or more internal keywords
+                # If it is it receives 'AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY' points
+                # Second check: If leader's name is the same as written in the DB
+                # If it is it receives 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
+                try:
+                    proposed_description = person_twitter_profile.description.lower()
+                    proposed_description = re.sub(r"[^a-zA-Z0-9]+", ' ', proposed_description)
+                    np_description_array = np.array(proposed_description.split(' '))
+                    if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
+                        level_of_certainty += int(os.getenv('AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY'))
+                except:
+                    pass
 
-            # Third check: The person with the highest value of followers
-            # Will receive 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
-            if int(os.getenv('MIN_AMOUNT_OF_FOLLOWERS')) < person_twitter_profile.followers_count < int(os.getenv('MID_AMOUNT_OF_FOLLOWERS')):
-                level_of_certainty += 1
-            elif int(os.getenv('MAX_AMOUNT_OF_FOLLOWERS')) > person_twitter_profile.followers_count > int(os.getenv('MID_AMOUNT_OF_FOLLOWERS')):
-                level_of_certainty += 2
-            elif person_twitter_profile.followers_count > int(os.getenv('MAX_AMOUNT_OF_FOLLOWERS')):
-                level_of_certainty += 3
+                # Third check: The person with the highest value of followers
+                # Will receive 'AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY' points
+                if int(os.getenv('MIN_AMOUNT_OF_FOLLOWERS')) < person_twitter_profile.followers_count < int(os.getenv('MID_AMOUNT_OF_FOLLOWERS')):
+                    level_of_certainty += 1
+                elif int(os.getenv('MAX_AMOUNT_OF_FOLLOWERS')) > person_twitter_profile.followers_count > int(os.getenv('MID_AMOUNT_OF_FOLLOWERS')):
+                    level_of_certainty += 2
+                elif person_twitter_profile.followers_count > int(os.getenv('MAX_AMOUNT_OF_FOLLOWERS')):
+                    level_of_certainty += 3
 
-            # Forth check: Amount of posts
-            if person_twitter_profile.statuses_count > int(os.getenv('MIN_AMOUNT_OF_STATUSES')):
-                level_of_certainty += 1
-        return level_of_certainty
+                # Forth check: Amount of posts
+                if person_twitter_profile.statuses_count > int(os.getenv('MIN_AMOUNT_OF_STATUSES')):
+                    level_of_certainty += 1
+            return level_of_certainty
+        except:
+            return 0
 
     def add_certain_level_of_certainty_to_community(self, minimum_level):
         """ This function shifts leaders from suggestion collection
