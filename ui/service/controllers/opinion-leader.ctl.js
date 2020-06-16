@@ -24,6 +24,19 @@ exports.getAllLeadersLimited = (req, res) => {
     })
 }
 
+exports.getLeadersSorted = (req, res) => {
+    const sort_key = req.body.sort_key
+    const direction = req.body.sort_direction
+    Leader.find({}).sort({[sort_key]: direction}).limit(20)
+    .then( docs => {
+        console.log("- Request: Return all leaders sorted by", sort_key)
+        return res.status(200).json(docs)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 exports.getAllLeaders = (req, res) => {
     Leader.find({}).sort({"internal_create_date": -1})
     .then( docs => {

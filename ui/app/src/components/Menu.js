@@ -161,7 +161,7 @@ class Menu extends Component {
                             </NavLink>
                         </li>
                         <li className="sub-menu">
-                            <NavLink exact to="/blacklist">
+                            <NavLink exact to="/ignoreList">
                             <i className="fa fa-times"></i>
                             <span>Ignore List</span>
                             </NavLink>

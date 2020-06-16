@@ -54,6 +54,7 @@ app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
 app.post('/opinion_leaders/getLeadersByRange', withAuth, opinionLeaderCtl.getLeadersByRange);
 app.post('/opinion_leaders/getAllLeadersLimited', withAuth, opinionLeaderCtl.getAllLeadersLimited);
+app.post('/opinion_leaders/getLeadersSorted', withAuth, opinionLeaderCtl.getLeadersSorted);
 app.post('/opinion_leaders/getLocations', withAuth, opinionLeaderCtl.getLocations);
 app.post('/opinion_leaders/getLocations/:location', withAuth, opinionLeaderCtl.getLeadersByLocation);
 app.post('/opinion_leaders/moveToBlackList/:twitter_screen_name', withAuth, opinionLeaderCtl.MoveToBlackList);
@@ -87,6 +88,7 @@ app.post('/blacklist/moveToCommunity/:twitter_screen_name', withAuth, blackListC
 
 app.post('/posts/getSize', withAuth, postsCtl.getSize);
 app.post('/posts/getLeaderPosts/:twitter_id', withAuth, postsCtl.getLeaderPosts);
+app.post('/posts/getAllLeaderPosts/:twitter_id', withAuth, postsCtl.getAllLeaderPosts);
 
 app.post('/users/new', withAuth, userCtl.createUser);
 app.post('/users/auth2', userCtl.authenticate2);
