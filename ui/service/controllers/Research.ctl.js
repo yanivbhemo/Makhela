@@ -15,12 +15,7 @@ exports.getSearchName = (req, res) => {
     .then(docs => {
       let names = []
       docs.map(doc => names.push(doc.searchName))
-      console.log(names)
-      console.log("-----------------------------")
-      console.log(docs)
-      console.log("-----------------------------")
-      res.json({data: docs, names: names})
-      // res.json(names)
+      res.json({data: docs})
     })
     .catch(err => console.log(`query error: ${err}`))
 }
