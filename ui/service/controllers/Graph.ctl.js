@@ -35,8 +35,6 @@ exports.getLeaders = (req, res) => {
                   if(item.communityFollowing)
                     item.communityFollowing = item.communityFollowing.map(value =>  value[0].twitter_id.toString())
               })
-              console.log(docs[0])
-              console.log(data[0])
             return res.json(data)
         })
         .catch(err => console.log(`query error: ${err}`))
@@ -61,8 +59,6 @@ exports.getPosts = (req, res) => {
                 },
             )
           })
-          
-          console.log(docs)
         return res.json(data)
     })
         .catch(err => console.log(`query error: ${err}`))

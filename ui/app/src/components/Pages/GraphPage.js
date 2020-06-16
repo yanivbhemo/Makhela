@@ -21,21 +21,34 @@ class GraphPage extends Component {
             nickName: '',
             followers: '',
             following: '',
-            twitterProfileImage: ''
+            twitterProfileImage: '',
+            certainty: '',
+            id: '',
+            date: ''
           };
     this.update = this.update.bind(this)
+    this.updateDate = this.updateDate.bind(this)
     this.showPostsGraph = this.showPostsGraph.bind(this)
     }
-    update(leader, nickName, followers, following, twitterProfileImage){
+    update(leader, nickName, followers, following, twitterProfileImage, certainty, description, twitterCreatedAt, name, id){
         console.log(twitterProfileImage)
         this.setState({
             leader: leader,
             nickName: nickName,
             followers: followers,
             following: following,
-            twitterProfileImage: twitterProfileImage
+            twitterProfileImage: twitterProfileImage,
+            certainty: certainty,
+            description: description,
+            twitterCreatedAt: twitterCreatedAt,
+            name: name,
+            id: id
         })
         console.log(this.state.leader, this.state.nickName)
+    }
+
+    updateDate(date){
+        this.setState({date: date})
     }
 
     showPostsGraph(){
@@ -63,35 +76,30 @@ class GraphPage extends Component {
                                      <Posts leader={this.state.leader} leaderName={this.state.nickName}/>
                                 </div>
                                 }
-                                {/* <Network /> */}
                             </Panel>
                         </Col>
-                        {/* SWITCH TO COMPONENT */}
                         <Col className="col-lg-4">
                             {this.state.leader?  <Panel headeline="Influencer">
-                                {/* <div className="col-md-4 profile-text"> */}
                                 <LeaderPanel 
                                     key={this.state.leader}
-                                    index= {this.state.leader}
-                                    full_name={this.state.nickName}
-                                    twitter_id={this.state.leader}
+                                    index= {this.state.id}
+                                    full_name={this.state.name}
+                                    twitter_id={this.state.id}
                                     twitter_profile_image={this.state.twitterProfileImage}
-                                    twitter_description="desc"
+                                    twitter_description={this.state.description}
                                     twitter_screen_name={this.state.nickName}
-                                    level_of_certainty={10}
+                                    level_of_certainty={this.state.certainty}
                                     twitter_followers_count={this.state.followers}
-                                    twitter_created_at=""
+                                    twitter_created_at={this.state.twitterCreatedAt.substring(0,10)}
                                     // onBlackListBtn={this.moveToBlackList}
                                     newUser={true}
                                     />
                                     
                                     <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.showPostsGraph()}>Show tweets graph</button>
                                     <button className="btn btn-theme03" style={{marginRight: "10px",  marginTop:"10px"}} onClick={() => this.setState({leader:'', nickName:''})}>Close</button>
-                                {/* </div> */}
                             </Panel> : <div></div>}
                         </Col>
                         <Col className="col-lg-4">
-                             
                                 {this.state.page==='leaders'?  
                                  <Row>
                                  <Col className="col-lg-12">
@@ -107,7 +115,6 @@ class GraphPage extends Component {
                                      <span style={{color:'#a0c1f7'}}>Influencer without sufficient data</span><br/>
                                      <span style={{color:'#FF9900'}}>Influencer without significant connections to community</span>
                                      </b></p>
-                         
                                  </Panel>
                              </Col>
                          </Row>
@@ -129,22 +136,19 @@ class GraphPage extends Component {
                                 </Panel>
                             </Col>
                         </Row>
-                                 
                                 }
-
                         {this.state.page==='leaders'?
                           <Row>
                           <Col className="col-lg-12">
-                              <Panel headeline="Topics - Community tweets">
+   
+                              <Panel headeline={`Topics - Community tweets ${this.state.date?this.state.date.substring(0,10):''}`}>
                           <div className="col-md-12 profile-text">
-                              <Topics/>
+                              <Topics onChange={this.updateDate}/>
                           </div>
                               </Panel>
                           </Col>
                       </Row>
                         :<p></p>}
-                               
-                          
                         </Col>
                         
                     </Row>

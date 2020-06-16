@@ -68,10 +68,10 @@ export const ALT_LNG = "http://open.mapquestapi.com/geocoding/v1/address?"
 //Graph
 export const GET_GRAPH_LEADERS = url + "/graph/getLeaders"
 export const GET_GRAPH_POSTS = url + "/graph/getPosts"
+export const GET_TOPICS = url + "/topics/getTopics"
 
 //Research 
-export const GET_TOPICS = url + "/topics"
-export const GET_LEADER_BY_ID = url + "/getLeaderById"
-export const SAVE_SEARCH = url + "/saveSearch"
-export const POST_WORDS = url + "/posts_words" 
-export const SEARCH_NAME = url + "/getSearchName" 
+export const GET_LEADER_BY_ID = url + "/research/getLeaderById"
+export const SAVE_SEARCH = url + "/research/saveSearch"
+export const POST_WORDS = url + "/research/posts_words" 
+export const SEARCH_NAME = url + "/research/getSearchName" 

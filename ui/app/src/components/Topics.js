@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import * as CONSTS from '../consts'
+import Cookies from 'js-cookie';
 
 class Topics extends Component {
     constructor() {
         super()
         this.state = {
-            after: '',
+            topics: '',
             colors: {
                 // 0: { color: "#FF9900" },// orange 
                 0: { color: "#7c5295" },// purple
-                1: { color: "#2B7CE9" },// blue
-                2: { color: "#C5000B" },// red
+                1: { color: "#C5000B" },// blue
+                2: { color: "#2B7CE9" },// red
                 3: { color: "#FF9900" },// pink
                 4: { color: "#006400" },// green
                 5: { color: "#7D4219" },// brown
@@ -21,12 +22,10 @@ class Topics extends Component {
     }
 
     showNetwork(){
-        if(this.state.after.network)
+        if(this.state.topics.network)
             return(
                 <React.Fragment>
-                {/* <p>Network topics</p> */}
-                {this.state.after.network.map(topic =>
-                    
+                {this.state.topics.network.map(topic =>
                     <div>
                         <sapn> ❏</sapn>
                         {topic.map(item => <sapn> {item} |</sapn>)}
@@ -36,11 +35,10 @@ class Topics extends Component {
     }
 
     showCommunities(){
-        if(this.state.after.communities){
+        if(this.state.topics.communities){
         let counter = -1
             return(
-                <div>{this.state.after.communities.map(community => {
-                 
+                <div>{this.state.topics.communities.map(community => {
                     counter++
                     let curColor = this.state.colors[counter]
                     return (
@@ -52,10 +50,7 @@ class Topics extends Component {
                     </div>
                 )}
                     </span>    
-                    
                     )
-                    
-                    
                 })}</div>
             )
     }}
@@ -64,15 +59,19 @@ class Topics extends Component {
     const url = CONSTS.GET_TOPICS
 
     fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-    //   body: formBody
-    })
+        method: 'POST',
+        body: JSON.stringify({
+          "token":Cookies.get('token'),
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        this.props.onChange(data[0].date)
         this.setState({
-            after: data[1]
+            topics: data[0]
         })
     }
         
@@ -81,8 +80,6 @@ class Topics extends Component {
     }
 
     render() {
-        console.log("before", this.state.before)
-        console.log("after", this.state.after)
         return(
             <React.Fragment>
                 {this.showNetwork()}

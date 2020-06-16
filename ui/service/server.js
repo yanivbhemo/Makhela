@@ -41,17 +41,14 @@ app.use(   (req, res, next) => {
     next();
 });
 
-app.all('/graph/getLeaders', graphCtl.getLeaders);
-app.all('/graph/getPosts', graphCtl.getPosts);
+app.post('/graph/getLeaders', withAuth, graphCtl.getLeaders);
+app.post('/graph/getPosts', withAuth, graphCtl.getPosts);
+app.post('/topics/getTopics', withAuth, topics.getTopics);
 
-app.post('/topics', topics.getTopics);
-
-
-app.post('/posts_words', withAuth, postsCtl.getPostsWords);
-
-app.post('/getLeaderById', withAuth, opinionLeaderCtl.getLeaderById);
-app.post('/saveSearch', researchCtl.saveSearch);
-app.get('/getSearchName', researchCtl.getSearchName);
+app.post('/research/getLeaderById', withAuth, opinionLeaderCtl.getLeaderById);
+app.post('/research/saveSearch', withAuth, researchCtl.saveSearch);
+app.post('/research/getSearchName', withAuth, researchCtl.getSearchName);
+app.post('/research/posts_words', withAuth, postsCtl.getPostsWords);
 
 app.post('/opinion_leaders/getCommunitySize', withAuth, opinionLeaderCtl.getSize);
 app.post('/opinion_leaders/getAllLeaders', withAuth, opinionLeaderCtl.getAllLeaders);
