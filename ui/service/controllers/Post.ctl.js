@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Post = require('../models/Post')
+const natural = require('natural');
 
 exports.getSize = (req, res) => {
     Post.find({}).countDocuments(function(err, count) {
@@ -29,15 +30,16 @@ exports.getLeaderPosts = (req, res) => {
 }
 
 exports.getPostsWords = (req, res) => {
-    const words = req.body.words
-    console.log("words "+words)
+    const { question } = req.body
+    natural.PorterStemmer.attach();
+    const words = question.tokenizeAndStem()
     let resWords = []
     Post.find({})
     .then(docs => {
         if(docs){
             docs.map(
                 doc =>{
-                   let docWords = doc.full_text.toLowerCase().split(/\W+/)
+                   let docWords = doc.full_text.tokenizeAndStem()
                    let found = []
                    words.map(word => {
                     if(docWords.includes(word))
@@ -49,14 +51,13 @@ exports.getPostsWords = (req, res) => {
                             fullText: doc.full_text,
                             likes: doc.likes,
                             retweetCount: doc.retweet_count,
-                            keyWord: doc.key_word,
                             word: found,
                             date: doc.date_created,
                             leader: doc.leader_twitter_id
                         })
                 }
             )
-            return res.json(resWords)
+            return res.json({found: resWords, words: words })
         } else {
             return res.sendStatus(404)
         }
@@ -65,5 +66,4 @@ exports.getPostsWords = (req, res) => {
         console.log(err)
         res.sendStatus(500)
     })
-    // res.json({words: words})
 }

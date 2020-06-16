@@ -136,23 +136,11 @@ class Research extends Component {
   search(){
         if(this.state.question.length>0){
             this.setState({loading: true})
-            let question = this.state.question.toLowerCase()
-            let parsedQuestion = question.split(/\W+/)
-            let stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now']
-            let cleanWords = []
-            parsedQuestion.map(word => {
-            if(!stopwords.includes(word) && word.length>1)
-                cleanWords.push(word)
-            })
-            let uniqe = new Set(cleanWords)
-            cleanWords = [...uniqe]
-
-            this.setState({searchWords: cleanWords, disabled:true})
-            this.fetchPosts(cleanWords)
+            this.fetchPosts()
         }
     }
 
-    fetchPosts(cleanWords){
+    fetchPosts(){
         const url = CONSTS.POST_WORDS
 
         fetch(url, {
@@ -162,12 +150,12 @@ class Research extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                words: cleanWords,
+                question: this.state.question,
                 "token":Cookies.get('token')
             })
             })
             .then(res => res.json())
-            .then(data => this.setState({posts: data, loading:false}))
+            .then(data => this.setState({posts: data.found, searchWords:data.words, loading:false}))
             .catch(err => console.error(err));
     }
     
