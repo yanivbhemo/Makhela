@@ -22,8 +22,9 @@ def main():
     analyzer = myanalyzer.Analyzer(leaders, posts, key_words)
     leaders, posts, topics = analyzer.analyze_community()
 
-    # community.save_community(leaders, posts)
-    # community.save_topics(topics)
+    community.save_topics(topics)
+    community.save_community(leaders, posts)
+    
 
 if __name__ == "__main__":
     main()

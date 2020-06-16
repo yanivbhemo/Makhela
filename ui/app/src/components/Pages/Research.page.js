@@ -8,12 +8,10 @@ import Menu from '../Menu'
 import Footer from '../Footer'
 import ResearchPosts from '../ResearchPosts'
 import ResearchGraph from '../ResearchGraph'
-import CommunityPanel from '../Panels'
-import {PostsPanel, HealthPanel, LeaderPanel} from '../Panels'
+import { LeaderPanel } from '../Panels'
 import * as CONSTS from '../../consts'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Topics from '../Topics'
 import Cookies from 'js-cookie';
 import ModalBox from '../ModalBox'
 
@@ -23,8 +21,6 @@ class Research extends Component {
         super()
         this.state = {
             startDate: new Date(),
-            before: '',
-            after: '',
             question: '',
             searchWords : [],
             posts: '',
@@ -34,7 +30,8 @@ class Research extends Component {
             searchName: '',
             show: false,
             loading: false,
-            prevSearches: []
+            prevSearches: [],
+            prevSearchesData: []
           }
  
         this.handleSearch = this.handleSearch.bind(this)
@@ -42,17 +39,29 @@ class Research extends Component {
         this.update = this.update.bind(this)
         this.fetchLeader = this.fetchLeader.bind(this)
         this.saveSearch = this.saveSearch.bind(this)
+        this.getSearch = this.getSearch.bind(this)
+        this.search = this.search.bind(this)
+        this.fetchPrevSearches = this.fetchPrevSearches.bind(this)
     }
-    componentDidMount() {
+    fetchPrevSearches(){
         const url = CONSTS.SEARCH_NAME
         fetch(url, {
-          method: 'GET',
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+          body: JSON.stringify({"token":Cookies.get('token')})
       })
-        fetch(url)
             .then(res => res.json())
-            .then(data => this.setState({prevSearches: data}))
+            .then(data => this.setState({prevSearches: data.names, prevSearchesData: data.data }))
+
             .catch(err => console.error(err));
+    }
+    componentDidMount() {
+        this.fetchPrevSearches()
       }
+
     saveSearch(){
         const url = CONSTS.SAVE_SEARCH
         fetch(url, {
@@ -62,18 +71,27 @@ class Research extends Component {
                 'Content-Type': 'application/json',
             },
             
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                startDate: this.state.startDate,
+                question: this.state.question,
+                searchWords: this.state.searchWords,
+                disabled: false,
+                searchName: this.state.searchName,
+                show: false,
+                loading: false,
+                "token":Cookies.get('token')
+            })
             })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => this.fetchPrevSearches())
             .catch(err => console.error(err));
+            this.setState({showModal: false, searchName:''})
     }
     
 
 
     fetchLeader(){
         const url = CONSTS.GET_LEADER_BY_ID
-
         fetch(url, {
             method: 'POST',
             headers: {
@@ -88,38 +106,53 @@ class Research extends Component {
             .then(res => res.json())
             .then(data => this.setState({leaderData: data}))
             .catch(err => console.error(err));
-            console.log(this.state.leaderData)
     }
 
     update(leader){
-        console.log(leader)
         this.setState({leader: leader})
         this.fetchLeader()
     }
 
     handleChange = date => { this.setState({startDate: date}) }
 
+    getSearch(search){
+        const found = this.state.prevSearchesData.find(element => element._id === search)
+        if(found.startDate){
+            const savedDate = new Date(found.startDate)
+            this.setState({startDate: savedDate})
+        }
+        this.setState({disabled: found.disabled,
+                        question: found.question,
+                        searchName: found.searchName,
+                        searchWords: found.searchWords,
+        })
+        this.search()
+    }
 
     handleSearch(event){
         event.preventDefault();
-        this.setState({loading: true})
-        let question = this.state.question.toLowerCase()
-        let parsedQuestion = question.split(/\W+/)
-        let stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now']
-        let cleanWords = []
-        parsedQuestion.map(word => {
-        if(!stopwords.includes(word) && word.length>1)
-            cleanWords.push(word)
-        })
-        let uniqe = new Set(cleanWords)
-        cleanWords = [...uniqe]
+        this.search()
+    }
+  search(){
+        if(this.state.question.length>0){
+            this.setState({loading: true})
+            let question = this.state.question.toLowerCase()
+            let parsedQuestion = question.split(/\W+/)
+            let stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now']
+            let cleanWords = []
+            parsedQuestion.map(word => {
+            if(!stopwords.includes(word) && word.length>1)
+                cleanWords.push(word)
+            })
+            let uniqe = new Set(cleanWords)
+            cleanWords = [...uniqe]
 
-        this.setState({searchWords: cleanWords, disabled:true})
-        this.fetchPosts(cleanWords)
+            this.setState({searchWords: cleanWords, disabled:true})
+            this.fetchPosts(cleanWords)
+        }
     }
 
     fetchPosts(cleanWords){
-        console.log(this.state.searchWords)
         const url = CONSTS.POST_WORDS
 
         fetch(url, {
@@ -146,16 +179,15 @@ class Research extends Component {
                 <Menu />
                 <Content title="Research" fa="fa-pie-chart">
                 <ModalBox 
-                    show={this.state.showModal}
-                    title="Saving search"
-                    // title="Are you sure?"
-                    onClose={() => this.setState({showModal:false})}
-                    rightBtnText="Ignore list"
-                    onSubmit={() => this.saveSearch()}
-                    // type="danger"
-                    >
+                show={this.state.showModal} 
+                title="Saving search"
+                onClose={() => this.setState({showModal:false})}
+                rightBtnText="Submit"
+                onSubmit={() => this.saveSearch()}
+                // type="danger"
+                >
                     Are you sure?
-                    </ModalBox>
+                </ModalBox>
                     <Col className="col-lg-12 mt">
                             <div className="row content-panel">
                                 <div className="btn-group"  style={{marginLeft: "15px"}}>
@@ -164,8 +196,8 @@ class Research extends Component {
                                         <span className="caret"></span>
                                     </button>
                                     <ul className="dropdown-menu overflow-auto" role="menu">
-                                    
-                                        {this.state.prevSearches.map(search => <li><a>{search}</a></li>)}
+
+                                        {this.state.prevSearchesData?this.state.prevSearchesData.map(search => <li><a key={search._id} onClick={() => this.getSearch(search._id)}>{search.searchName}</a></li>): <li><a>1</a></li>}
                                         {/* <li><a>1</a></li>
                                         <li><a>2</a></li> */}
                                     </ul>
@@ -190,6 +222,7 @@ class Research extends Component {
                                                             <div className="form-group" style={{marginLeft: "10px"}}>
                                                                  <input className="form-control" style={{width: "500px"}} disabled = {(this.state.disabled)? "disabled" : ""} placeholder="Research question" type="text" 
                                                                  onChange={e => this.setState({question: e.target.value})}
+                                                                 value={this.state.question}
                                                                 />
                                                             </div>
                                                             {this.state.searchWords.length===0 ?
@@ -197,17 +230,7 @@ class Research extends Component {
                                                             :
                                                             <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={() => this.setState({question: '', searchWords : [], posts: '', disabled: false})}>New Search</button>
                                                             }
-                                                            {this.state.loading===true? <h1>Processing</h1>:<div></div>}
-                                                            {/* <div className="btn-group"  style={{marginLeft: "10px"}}>
-            
-                                                                <button type="button" className="btn btn-theme03 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                <span className="caret"></span>
-                                                                </button>
-                                                                <ul className="dropdown-menu overflow-auto" role="menu">
-                                                                    <li><a>1</a></li>
-                                                                    <li><a>2</a></li>
-                                                                </ul>
-                                                            </div> */}
+                                                            {this.state.loading===true? <h1>Processing</h1>:<div></div>} 
                                                         </form>
                                                     </Panel>
                                                 </Col>
@@ -216,11 +239,12 @@ class Research extends Component {
                                             <Row>
                                                 <Col className="col-lg-8">
                                                     <Panel headeline="Tweets">
-                                                        <ResearchPosts
+                                                    {this.state.loading===true? <div></div>:<ResearchPosts
                                                             words={this.state.searchWords}
                                                             posts={this.state.posts}
                                                             onChange={this.update}
-                                                        />
+                                                        />}
+                                                        
                                                     </Panel>
                                                 </Col>
                                                 <Col className="col-lg-4">
@@ -268,9 +292,6 @@ class Research extends Component {
                                                         </Panel>
                                                     </Row>
                                                     <Row>
-                                                        <Panel headeline="Topics - Community tweets">
-                                                            <Topics/>
-                                                        </Panel>
                                                     </Row>
                                                 </Col>
                                             </Row>
@@ -279,12 +300,11 @@ class Research extends Component {
                                 </div>
                             </div>
                         </Col>
-
                         <Col className="col-lg-12 mt">
                             <Row>
                                 <form className="form-inline" role="form">
-                                    <input onChange={e => this.setState({searchName: e.target.value})} className="form-control" style={{width: "500px"}} placeholder="Research Name" type="text" />
-                                    <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={() => this.setState({show: true})}>Save</button>
+                                    <input onChange={e => this.setState({searchName: e.target.value})} className="form-control" style={{width: "500px"}} placeholder="Research Name" type="text"/>
+                                    <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={(event) => {event.preventDefault(); this.setState({showModal: true})}}>Save</button>
                                 </form>
                             </Row>
                         </Col>

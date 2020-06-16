@@ -25,13 +25,16 @@ class Posts extends React.Component {
 
   componentDidMount() {
     this.setState({loading: true})
-    let formBody = "leader="+this.props.leader
     const url = CONSTS.GET_GRAPH_POSTS
-
     fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-      body: formBody
+      body: JSON.stringify({
+        "token":Cookies.get('token'),
+        leader: this.props.leader
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
     .then(res => res.json())
         .then(data => { 
@@ -124,7 +127,8 @@ class Posts extends React.Component {
                   getNetwork={network => {
                   }}
                 />
-              <a href={this.state.link} >{this.state.post}</a>
+              {/* <a href={this.state.link} >{this.state.post}</a> */}
+              <h4>{this.state.post}</h4>
           </React.Fragment>
   }  
   
