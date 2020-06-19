@@ -1,12 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Graph from "react-graph-vis";
-import ReactTooltip from "react-tooltip";
-import { degree, betweenness, closeness } from './ClosenessExp'
-import Col from './Col'
-import Row from './Row'
-import * as CONSTS from '../consts'
-import Cookies from 'js-cookie';
+
 
 class ResearchPosts extends React.Component {
   constructor(props) {
@@ -21,13 +15,23 @@ class ResearchPosts extends React.Component {
       let nodes = []
       let edges = []
       let i = 0
-      this.props.words.map(word =>{
-          nodes.push({id: i, label: word, title: word, group:1, value: 500})
+      this.props.words.map(word => {
+          nodes.push({id: i, label: word, 
+            title: `<div style="background-color:#e6e6e6;display:flex;flex-direction:column;align-items:center;">
+                      <p style="color:#6f38bc">${word}</p>
+                   <div/>`,
+            group:1, 
+            value: 500})
           i++
     })
     this.props.posts.map(post =>{
         try{
-            nodes.push({id: post.postId, title: post.fullText ,group:0, value: post.likes})
+            nodes.push({id: post.postId,
+               title: `<div style="background-color:#e6e6e6;display:flex;flex-direction:column;align-items:center;">
+                        <p style="color:#6f38bc">${post.fullText}</p>
+                      <div/>`,
+               group:0, 
+               value: post.likes})
         for(let i=0; i<this.props.words.length; i++){
             if(post.word.includes(this.props.words[i])){
                 edges.push({ from: i, to: post.postId})
@@ -87,7 +91,6 @@ class ResearchPosts extends React.Component {
                 const found = this.props.posts.find(element => element.postId === nodes[0]);
                 if(found){
                     this.setState({post:found})
-                    console.log(found)
                     this.props.onChange(found.leader)
                 }
                     

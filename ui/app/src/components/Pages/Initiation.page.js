@@ -90,7 +90,6 @@ class Initiation extends Component {
             })
             .then(res =>{
                 if(res.status === 200)
-                    // 
                     this.setState({
                         leaders: '',
                         keyWords: '',
@@ -116,26 +115,26 @@ class Initiation extends Component {
                 <Header />
                 <Menu />
                 <Content title="Init System" fa="fa-file">
-                <ModalBox 
-        show={this.state.showModal}
-        title="System initiation"
-        onClose={() => this.setState({showModal:false})}
-        >
-           Opinion leaders and Keywords saved.
-           <br/>
-           System began collectiong network.
-        </ModalBox>
-                <Row>
+                    <ModalBox 
+                        show={this.state.showModal}
+                        title="System initiation"
+                        onClose={() => this.setState({showModal:false})}
+                    >
+                        Influencers and Keywords saved.
+                        <br/>
+                        System began collectiong network.
+                    </ModalBox>
+                    <Row>
                         <Col className="col-lg-12">
                             <Panel>
-                            <h4>To initiate new network please fill opinion leaders and keywords</h4>
+                            <h4>To initiate new network please fill influencers and keywords</h4>
                             <p><b>Please click ENTER after each person / keyword</b></p>
                             </Panel>
                         </Col>
                     </Row>
                     <Row>
                         <Col className="col-lg-6">
-                            <Panel headeline="Opinion leaders">
+                            <Panel headeline="Influencers">
                                 <Row>
                                     <form className="form-inline" role="form">
                                         <textarea 
@@ -143,7 +142,7 @@ class Initiation extends Component {
                                             id="leaders"
                                             rows="10" 
                                             style={{width: "90%", marginLeft: "5%"}} 
-                                            placeholder="opinion leaders" 
+                                            placeholder="influencers" 
                                             value={this.state.leaders} 
                                             onChange={this.handleChange}
                                         />
@@ -163,7 +162,7 @@ class Initiation extends Component {
                                             placeholder="keywords" 
                                             value={this.state.keyWords} 
                                             onChange={this.handleChange}
-                                            />                                    
+                                        />                                    
                                     </form>
                                 </Row>
                             </Panel>

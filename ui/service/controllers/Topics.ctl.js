@@ -30,11 +30,7 @@ const returnThreeTopics = str =>{
 
 
 exports.getTopics = (req, res) => {
-
-
-    let queryDate = new Date("2020-05-22T20:14:16.171Z")
-    // console.log(queryDate)
-    Topic.find({})
+    Topic.find().sort({date:-1}).limit(1)
         .then(docs => { 
             let data = []
             docs.map(doc => {
@@ -51,7 +47,6 @@ exports.getTopics = (req, res) => {
                 item.communities = communityTopics
                 data.push(item)
         })
-            // console.log(data)
             return res.json(data);
         })
         .catch(err => console.log(`query error: ${err}`))

@@ -21,13 +21,11 @@ class ResearchGraph extends React.Component {
     const url = CONSTS.GET_GRAPH_LEADERS
     fetch(url, {
       method: 'POST',
-      // body: JSON.stringify({"token":Cookies.get('token')}),
       body: JSON.stringify({"token":Cookies.get('token')}),
       headers: {
         'Content-Type': 'application/json'
       }
   })
-    fetch(url)
         .then(res => res.json())
         .then(data => { 
           let myNodes = []
@@ -135,7 +133,6 @@ class ResearchGraph extends React.Component {
               
             }
     }
-    console.log(graph)
     return <Graph graph={graph} options={options} events={events}/>
   } 
 

@@ -27,14 +27,16 @@ class Network extends React.Component {
 
   componentDidMount() {
     const url = CONSTS.GET_GRAPH_LEADERS
+
     fetch(url, {
       method: 'POST',
-      body: JSON.stringify({"token":Cookies.get('token')}),
+      body: JSON.stringify({
+        "token":Cookies.get('token'),
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
-  })
-    fetch(url)
+    })
         .then(res => res.json())
         .then(data => { 
           let myNodes = []
@@ -116,7 +118,16 @@ class Network extends React.Component {
   }
   showLeader(leader){
     let found = this.state.leaders.find(element => element.id === leader);
-    this.props.onChange(leader,found.twitterName, found.followers, found.following, found.twitterProfileImage)
+    this.props.onChange(leader,found.twitterName, 
+      found.followers, 
+      found.following, 
+      found.twitterProfileImage, 
+      found.certainty, 
+      found.description, 
+      found.twitterCreatedAt,
+      found.name,
+      found.id
+      )
   }
 
   draw(){

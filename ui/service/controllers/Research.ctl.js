@@ -7,7 +7,6 @@ exports.saveSearch = (req, res) => {
 
     rs.save(function(err, doc) {
         if (err) return console.error(err);
-        console.log("Document inserted succussfully!");
       });
 }
 
@@ -16,7 +15,7 @@ exports.getSearchName = (req, res) => {
     .then(docs => {
       let names = []
       docs.map(doc => names.push(doc.searchName))
-      res.json(names)
+      res.json({data: docs})
     })
     .catch(err => console.log(`query error: ${err}`))
 }
