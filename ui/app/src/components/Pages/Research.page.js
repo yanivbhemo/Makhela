@@ -44,6 +44,7 @@ class Research extends Component {
         this.saveSearch = this.saveSearch.bind(this)
     }
     componentDidMount() {
+        document.title = "Research"
         const url = CONSTS.SEARCH_NAME
         fetch(url, {
           method: 'GET',

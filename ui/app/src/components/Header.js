@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {
@@ -16,7 +17,9 @@ class Header extends Component {
         return (
             <header className="header black-bg">
                 {/* logo start */}
-                <a href="index.html" className="logo"><b>Makhela</b></a>
+                <NavLink exact to="/" className="logo">
+                    <b>Makhela</b>
+                </NavLink>
                 {/* <!--logo end--> */}
                 
                 <div className="top-menu">

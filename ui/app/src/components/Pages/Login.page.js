@@ -47,8 +47,6 @@ class LoginPage extends Component {
                 )
             } else {
               this.setState({error: 'Incorrect email or password'})
-              const error = new Error(res.error);
-              throw error;
             }
           })
           .catch(err => {
