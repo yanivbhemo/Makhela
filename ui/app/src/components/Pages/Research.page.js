@@ -59,6 +59,7 @@ class Research extends Component {
             .catch(err => console.error(err));
     }
     componentDidMount() {
+        document.title = "Research"
         this.fetchPrevSearches()
       }
 

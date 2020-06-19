@@ -14,6 +14,7 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) => {
     console.log(props)
+    console.log(KEYS.MAP_GOOGLE_KEY)
     return props.lat === 0 ? (<h4>No loaction information provided</h4>) : (
         <GoogleMap
             bootstrapURLKeys={{ key:KEYS.MAP_GOOGLE_KEY }}

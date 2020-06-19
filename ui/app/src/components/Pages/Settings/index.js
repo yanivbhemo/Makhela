@@ -16,6 +16,7 @@ function SettingsPage(props) {
 
     const [users, setUsers] = useState([])
     useEffect(() => {
+        document.title = "Makhela - Settings"
         const url = CONSTS.GET_ALL_USERS
             fetch(url, {
                 method: 'POST',
