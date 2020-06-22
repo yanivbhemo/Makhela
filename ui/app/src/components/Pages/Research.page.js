@@ -9,11 +9,11 @@ import Footer from '../Footer'
 import ResearchPosts from '../ResearchPosts'
 import ResearchGraph from '../ResearchGraph'
 import { LeaderPanel } from '../Panels'
+import ModalBox from '../ModalBox'
 import * as CONSTS from '../../consts'
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import Cookies from 'js-cookie';
-import ModalBox from '../ModalBox'
+import "react-datepicker/dist/react-datepicker.css";
 
 
 class Research extends Component {
@@ -38,11 +38,15 @@ class Research extends Component {
         this.fetchPosts = this.fetchPosts.bind(this)
         this.update = this.update.bind(this)
         this.fetchLeader = this.fetchLeader.bind(this)
-        this.saveSearch = this.saveSearch.bind(this)
         this.getSearch = this.getSearch.bind(this)
+        this.saveSearch = this.saveSearch.bind(this)
         this.search = this.search.bind(this)
         this.fetchPrevSearches = this.fetchPrevSearches.bind(this)
     }
+    componentDidMount() {
+        this.fetchPrevSearches()
+      }
+
     fetchPrevSearches(){
         const url = CONSTS.SEARCH_NAME
         fetch(url, {
@@ -58,6 +62,7 @@ class Research extends Component {
 
             .catch(err => console.error(err));
     }
+
     componentDidMount() {
         document.title = "Research"
         this.fetchPrevSearches()
@@ -122,8 +127,7 @@ class Research extends Component {
             const savedDate = new Date(found.startDate)
             this.setState({startDate: savedDate})
         }
-        this.setState({disabled: found.disabled,
-                        question: found.question,
+        this.setState({ question: found.question,
                         searchName: found.searchName,
                         searchWords: found.searchWords,
         })
@@ -136,7 +140,7 @@ class Research extends Component {
     }
   search(){
         if(this.state.question.length>0){
-            this.setState({loading: true})
+            this.setState({loading: true, disabled: true})
             this.fetchPosts()
         }
     }
@@ -187,8 +191,7 @@ class Research extends Component {
                                     <ul className="dropdown-menu overflow-auto" role="menu">
 
                                         {this.state.prevSearchesData?this.state.prevSearchesData.map(search => <li><a key={search._id} onClick={() => this.getSearch(search._id)}>{search.searchName}</a></li>): <li><a>1</a></li>}
-                                        {/* <li><a>1</a></li>
-                                        <li><a>2</a></li> */}
+                                       
                                     </ul>
                                 </div>
                                 <div className="panel-heading">
@@ -207,18 +210,19 @@ class Research extends Component {
                                             <Row>
                                                 <Col className="col-lg-12">
                                                     <Panel>
-                                                        <form className="form-inline" role="form">
-                                                            <div className="form-group" style={{marginLeft: "10px"}}>
-                                                                 <input className="form-control" style={{width: "500px"}} disabled = {(this.state.disabled)? "disabled" : ""} placeholder="Research question" type="text" 
+                                                        <form className="form-inline">
+                                                            <div className="form-group" style={{marginLeft: "10px", width:"100%"}}>
+                                                                 <input className="form-control" style={{width: "80%", marginRight:"10px"}} disabled = {(this.state.disabled)? "disabled" : ""} placeholder="Research question" type="text" 
                                                                  onChange={e => this.setState({question: e.target.value})}
                                                                  value={this.state.question}
                                                                 />
-                                                            </div>
+                                                           
                                                             {this.state.searchWords.length===0 ?
-                                                            <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={event => this.handleSearch(event)}>Search</button>
+                                                            <button className="btn btn-theme03" onClick={event => this.handleSearch(event)}>Search</button>
                                                             :
                                                             <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={() => this.setState({question: '', searchWords : [], posts: '', disabled: false})}>New Search</button>
                                                             }
+                                                             </div>
                                                             {this.state.loading===true? <h1>Processing</h1>:<div></div>} 
                                                         </form>
                                                     </Panel>
@@ -291,9 +295,9 @@ class Research extends Component {
                         </Col>
                         <Col className="col-lg-12 mt">
                             <Row>
-                                <form className="form-inline" role="form">
-                                    <input onChange={e => this.setState({searchName: e.target.value})} className="form-control" style={{width: "500px"}} placeholder="Research Name" type="text"/>
-                                    <button  style={{marginLeft: "10px"}} className="btn btn-theme03" onClick={(event) => {event.preventDefault(); this.setState({showModal: true})}}>Save</button>
+                                <form className="form-inline" role="form" >
+                                    <input onChange={e => this.setState({searchName: e.target.value})} className="form-control" style={{width: "70%", marginRight:"10px"}} placeholder="Research Name" type="text"/>
+                                    <button  className="btn btn-theme03" onClick={(event) => {event.preventDefault(); this.setState({showModal: true})}}>Save</button>
                                 </form>
                             </Row>
                         </Col>

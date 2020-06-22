@@ -26,7 +26,8 @@ class ResearchPosts extends React.Component {
     })
     this.props.posts.map(post =>{
         try{
-            nodes.push({id: post.postId,
+            // nodes.push({id: post.postId,
+              nodes.push({id: post.id,
                title: `<div style="background-color:#e6e6e6;display:flex;flex-direction:column;align-items:center;">
                         <p style="color:#6f38bc">${post.fullText}</p>
                       <div/>`,
@@ -34,7 +35,8 @@ class ResearchPosts extends React.Component {
                value: post.likes})
         for(let i=0; i<this.props.words.length; i++){
             if(post.word.includes(this.props.words[i])){
-                edges.push({ from: i, to: post.postId})
+                // edges.push({ from: i, to: post.postId})
+                edges.push({ from: i, to: post.id})
 
             }
             
@@ -88,7 +90,8 @@ class ResearchPosts extends React.Component {
       select: (event) => {
               const { nodes, edges } = event;
               if(nodes[0]){
-                const found = this.props.posts.find(element => element.postId === nodes[0]);
+                // const found = this.props.posts.find(element => element.postId === nodes[0]);
+                const found = this.props.posts.find(element => element.id === nodes[0]);
                 if(found){
                     this.setState({post:found})
                     this.props.onChange(found.leader)

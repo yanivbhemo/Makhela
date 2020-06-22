@@ -64,6 +64,7 @@ exports.getPostsWords = (req, res) => {
                     })
                     if(found.length)
                         resWords.push({
+                            id: doc._id,
                             postId: doc.post_id,
                             fullText: doc.full_text,
                             likes: doc.likes,

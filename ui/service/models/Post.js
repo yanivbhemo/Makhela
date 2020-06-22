@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 
 var post = new mongoose.Schema({
+    _id: Object,
     leader_twitter_id:Number,
     post_id:Number,
     full_text:String,

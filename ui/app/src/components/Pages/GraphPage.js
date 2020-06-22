@@ -130,8 +130,8 @@ class GraphPage extends Component {
                                     <p>
                                     <b>
                                     <span style={{color:'#a0c1f7'}}>Tweet who was not analyzed yet</span><br/>
-                                    <span style={{color:'#FF9900'}}>Tweet that does not contain key word</span><br/>
-                                    <span style={{color:'#7c5295'}}>Tweet that contains key word</span> </b></p>
+                                    <span style={{color:'#FF9900'}}>Tweet that contains key word</span><br/>
+                                    <span style={{color:'#7c5295'}}>Tweet that does not contain key word</span> </b></p>
                         
                                 </Panel>
                             </Col>
