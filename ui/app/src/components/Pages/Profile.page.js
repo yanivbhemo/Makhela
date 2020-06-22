@@ -233,7 +233,7 @@ export default class ProfilePage extends Component {
         }))
         let city = this.state.information.twitter_location.replace(" ", "%20");
         let url = `${CONSTS.ALT_LNG}key=${KEYS.MAP_GOOGLE_KEY}&location=${city}`
-        
+        console.log(city, url)
                 fetch(url, {
                     method: 'GET',
                     headers: {
@@ -250,6 +250,7 @@ export default class ProfilePage extends Component {
                         })
                     })
                 .catch(err => console.log(err))
+        document.title = "Makhela - " + this.state.information.full_name
     }
 
     moveToBlackList(twitter_id){

@@ -63,6 +63,11 @@ class Research extends Component {
             .catch(err => console.error(err));
     }
 
+    componentDidMount() {
+        document.title = "Research"
+        this.fetchPrevSearches()
+      }
+
     saveSearch(){
         const url = CONSTS.SAVE_SEARCH
         fetch(url, {
