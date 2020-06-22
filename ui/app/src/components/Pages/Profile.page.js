@@ -235,13 +235,14 @@ export default class ProfilePage extends Component {
         let url = `${CONSTS.ALT_LNG}key=${KEYS.MAP_GOOGLE_KEY}&location=${city}`
         console.log(city, url)
                 fetch(url, {
-                    method: 'GET',
                     headers: {
-                      'Content-Type': 'application/json'
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*'
                     }
                 })
                 .then(res => res.json())
                     .then(data => {
+                        console.log("Test")
                         console.log(data.results[0].locations[0].displayLatLng.lat)
                         console.log(data.results[0].locations[0].displayLatLng.lng)
                         this.setState({
