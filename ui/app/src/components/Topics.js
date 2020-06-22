@@ -8,13 +8,13 @@ class Topics extends Component {
         this.state = {
             topics: '',
             colors: {
-                // 0: { color: "#FF9900" },// orange 
-                0: { color: "#7c5295" },// purple
-                1: { color: "#C5000B" },// blue
-                2: { color: "#2B7CE9" },// red
-                3: { color: "#FF9900" },// pink
-                4: { color: "#006400" },// green
-                5: { color: "#7D4219" },// brown
+                0: { color: "#FF9900" },// orange 
+                1: { color: "#7c5295" },// purple
+                2: { color: "#C5000B" },// blue
+                3: { color: "#2B7CE9" },// red
+                4: { color: "#FF9900" },// pink
+                5: { color: "#006400" },// green
+                6: { color: "#7D4219" },// brown
               },
           }
         this.showNetwork = this.showNetwork.bind(this)
@@ -40,7 +40,7 @@ class Topics extends Component {
             return(
                 <div>{this.state.topics.communities.map(community => {
                     counter++
-                    let curColor = this.state.colors[counter]
+                    let curColor = this.state.colors[this.state.topics.communitiesIndex[counter]]
                     return (
                     <span style={curColor}>
                         {community.map(topic =>

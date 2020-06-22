@@ -156,26 +156,21 @@ class Analyzer:
 
     def analyze_lda(self, data):
         def sent_to_words(sentences):
-            print("sent_to_words")
             for sentence in sentences:
                 yield (gensim.utils.simple_preprocess(str(sentence), deacc=True))  # deacc=True removes punctuations
 
         # Define functions for stopwords, bigrams, trigrams and lemmatization
 
         def remove_stopwords(texts):
-            print("remove_stopwords")
             return [[word for word in simple_preprocess(str(doc)) if word not in stop_words] for doc in texts]
 
         def make_bigrams(texts):
-            print("make_bigrams")
             return [bigram_mod[doc] for doc in texts]
 
         def make_trigrams(texts):
-            print("make_trigrams")
             return [trigram_mod[bigram_mod[doc]] for doc in texts]
 
         def lemmatization(texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
-            print("lemmatization")
             """https://spacy.io/api/annotation"""
             texts_out = []
             for sent in texts:
@@ -187,27 +182,21 @@ class Analyzer:
         data = [re.sub("\'", "", sent) for sent in data]
         data_words = list(sent_to_words(data))
         # Build the bigram and trigram models
-        print("Build the bigram and trigram models")
         bigram = gensim.models.Phrases(data_words, min_count=5, threshold=100)  # higher threshold fewer phrases.
         trigram = gensim.models.Phrases(bigram[data_words], threshold=100)
         
         # Faster way to get a sentence clubbed as a trigram/bigram
-        print("Faster way to get a sentence clubbed as a trigram/bigram")
         bigram_mod = gensim.models.phrases.Phraser(bigram)
         trigram_mod = gensim.models.phrases.Phraser(trigram)
         # Remove Stop Words
-        print("Remove Stop Words")
         data_words_nostops = remove_stopwords(data_words)
         # Form Bigrams
-        print("Form Bigrams")
         data_words_bigrams = make_bigrams(data_words_nostops)
 
         # Initialize spacy 'en' model, keeping only tagger component (for efficiency)
         # python3 -m spacy download en
-        print("spacy")
         nlp = spacy.load('en', disable=['parser', 'ner'])
         # Do lemmatization keeping only noun, adj, vb, adv
-        print("lemmatization")
         data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
 
         # Create Dictionary
@@ -215,15 +204,12 @@ class Analyzer:
         id2word = corpora.Dictionary(data_lemmatized)
 
         # Create Corpus
-        print("Create Corpus")
         texts = data_lemmatized
 
         # Term Document Frequency
-        print("Term Document Frequency")
         corpus = [id2word.doc2bow(text) for text in texts]
 
         # Build LDA model
-        print("Term Document Frequency")
         lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,id2word=id2word, num_topics=3, random_state=100, update_every=1, chunksize=100, passes=10, alpha='auto', per_word_topics=True)
 
         return lda_model.print_topics()
