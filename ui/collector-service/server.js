@@ -23,17 +23,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser());
 app.set('json spaces', 2);
 
-if(process.env.node_environment === "production")
-{
-    consumer_key = process.env.consumer_key
-    consumer_secret = process.env.consumer_secret
-    access_token = process.env.access_token
-    access_token_secret = process.env.access_token_secret
-    db_username = process.env.db_username
-    db_password = process.env.db_password
-    slack_url = process.env.slack_url
-}
-
 app.use(   (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "https://makhela.live");
     res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With, Content-Type, Accept");
@@ -42,7 +31,7 @@ app.use(   (req, res, next) => {
 });
 
 app.post('/connections/run', withAuth, (req, res) => {
-    command = "/usr/bin/docker run --rm --name connections-collection -e consumer_key=uPVsXcMAIZLfYtOdJ6J3aapIG -e consumer_secret=fAWhsif5q0Ik9JN9ecC3nrt4QoqA97Sp3lRb4HUfneFWBqRnns -e access_token=1231936499211436033-gOBdrXqzpjT28yPn2TnVoNBU9h189H -e access_token_secret=uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj -e db_username=yaniv -e db_password=Azaz123123 -e slack_url=https://hooks.slack.com/services/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 -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
+    command = "/usr/bin/docker run --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
