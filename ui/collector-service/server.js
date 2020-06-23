@@ -49,7 +49,8 @@ app.post('/connections/run', withAuth, (req, res) => {
         "> /root/logs/connections-collection"
     ]
     command = "/usr/bin/docker"
-    spawn(command,args,{detached: true})
+    const process = spawn(command,args,{detached: true})
+    process.unref();
     res.sendStatus(200)
 })
 
