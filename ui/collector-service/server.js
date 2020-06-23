@@ -51,7 +51,7 @@ app.get('/connections/health', withAuth, (req, res) => {
     res.sendStatus(200)
 })
 
-app.get('/connections/status', withAuth, (req, res) => {
+app.post('/connections/status', withAuth, (req, res) => {
     console.log("connections status")
     res.sendStatus(200)
 })
