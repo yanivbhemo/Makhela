@@ -6,7 +6,7 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
 RUN apt update -y && \
         apt install git -y && \
         /bin/bash
-COPY	/root/password.txt /tmp
+        
 CMD cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
         cd Makhela/analyzer && \
