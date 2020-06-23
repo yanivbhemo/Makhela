@@ -49,7 +49,7 @@ app.post('/connections/run', withAuth, (req, res) => {
         "> /root/logs/connections-collection"
     ]
     command = "/usr/bin/docker"
-    spawn(command,args,{stdio:'ignore', detached: true})
+    spawn(command,args,{detached: true})
     res.sendStatus(200)
 })
 
