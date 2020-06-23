@@ -46,7 +46,7 @@ app.post('/connections/run', withAuth, (req, res) => {
     });
 })
 
-app.get('/connections/health', withAuth, (req, res) => {
+app.post('/connections/health', withAuth, (req, res) => {
     console.log("connections health")
     res.sendStatus(200)
 })
@@ -61,12 +61,12 @@ app.post('/suggestions/run', withAuth, (req, res) => {
     res.sendStatus(200)
 })
 
-app.get('/suggestions/health', withAuth, (req, res) => {
+app.post('/suggestions/health', withAuth, (req, res) => {
     console.log("suggestions health")
     res.sendStatus(200)
 })
 
-app.get('/suggestions/status', withAuth, (req, res) => {
+app.post('/suggestions/status', withAuth, (req, res) => {
     console.log("suggestions status")
     res.sendStatus(200)
 })
@@ -76,12 +76,12 @@ app.post('/tweets/run', withAuth, (req, res) => {
     res.sendStatus(200)
 })
 
-app.get('/tweets/health', withAuth, (req, res) => {
+app.post('/tweets/health', withAuth, (req, res) => {
     console.log("tweets health")
     res.sendStatus(200)
 })
 
-app.get('/tweets/status', withAuth, (req, res) => {
+app.post('/tweets/status', withAuth, (req, res) => {
     console.log("tweets status")
     res.sendStatus(200)
 })
@@ -91,12 +91,12 @@ app.post('/analyzer/run', withAuth, (req, res) => {
     res.sendStatus(200)
 })
 
-app.get('/analyzer/health', withAuth, (req, res) => {
+app.post('/analyzer/health', withAuth, (req, res) => {
     console.log("analyzer health")
     res.sendStatus(200)
 })
 
-app.get('/analyzer/status', withAuth, (req, res) => {
+app.post('/analyzer/status', withAuth, (req, res) => {
     console.log("analyzer status")
     res.sendStatus(200)
 })
