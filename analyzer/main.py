@@ -2,6 +2,7 @@ from datetime import datetime
 import db_connection
 import myanalyzer
 import logger
+import os
 
 def get_password():
     if os.getenv('environment') == 'production':
