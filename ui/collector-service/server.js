@@ -9,6 +9,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const {withAuth,withAuthToken} = require('./middleware')
 const { exec } = require("child_process");
+var spawn = require("child_process").spawn;
 
 const app       = express();
 const port      = process.env.PORT || 3005;
@@ -41,9 +42,9 @@ app.post('/connections/run', withAuth, (req, res) => {
             console.log(`stderr: ${stderr}`);
             res.sendStatus(503)
         }
-        console.log(`${stdout}`);
-        res.sendStatus(200)
+        console.log(`${stdout}`);        
     });
+    res.sendStatus(200)
 })
 
 app.post('/connections/health', withAuth, (req, res) => {
