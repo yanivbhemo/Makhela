@@ -10,7 +10,7 @@ COPY	/root/password.txt /tmp
 CMD cd /tmp && \
         git clone https://github.com/yanivbhemo/Makhela.git && \
         cd Makhela/analyzer && \
-        pip install pymongo nltk numpy pandas gensim spacy networkx sklearn dnspython
-        python -m spacy download en
-        mkdir logs
-        python3 main.py $RUN_TYPE $COLLECTION
+        pip install pymongo nltk numpy pandas gensim spacy networkx sklearn dnspython && \
+        python -m spacy download en && \
+        mkdir logs && \
+        python3 main.py
