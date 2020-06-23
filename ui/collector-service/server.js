@@ -33,17 +33,7 @@ app.use(   (req, res, next) => {
 
 app.post('/connections/run', withAuth, (req, res) => {
     command = "nohup /usr/bin/docker run --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection &"
-    exec(command, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            res.sendStatus(503)
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            res.sendStatus(503)
-        }
-        console.log(`${stdout}`);        
-    });
+    spawn(command,{stdio:'ignore', detached: true})
     res.sendStatus(200)
 })
 
