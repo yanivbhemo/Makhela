@@ -32,7 +32,7 @@ app.use(   (req, res, next) => {
 });
 
 app.post('/connections/run', withAuth, (req, res) => {
-    command = "/usr/bin/docker run -d --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
+    command = "/usr/bin/docker run -it --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
@@ -75,7 +75,7 @@ app.post('/connections/status', withAuth, (req, res) => {
 
 app.post('/suggestions/run', withAuth, (req, res) => {
     console.log("suggestions run")
-    command = "/usr/bin/docker run -d --rm --name suggestions-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " makhela/suggestions_2.0.32 > /root/logs/suggestions-collection"
+    command = "/usr/bin/docker run -it --rm --name suggestions-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " makhela/suggestions_2.0.32 > /root/logs/suggestions-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
@@ -106,7 +106,7 @@ app.post('/suggestions/status', withAuth, (req, res) => {
 
 app.post('/tweets/run', withAuth, (req, res) => {
     console.log("tweets run")
-    command = "/usr/bin/docker run -d --rm --name tweets-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=tweets -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/tweets-collection"
+    command = "/usr/bin/docker run -it --rm --name tweets-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=tweets -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/tweets-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
@@ -137,7 +137,7 @@ app.post('/tweets/status', withAuth, (req, res) => {
 
 app.post('/analyzer/run', withAuth, (req, res) => {
     console.log("analyzer run")
-    command = "/usr/bin/docker run -d --rm --name analyzer -e environment=production -e db_password="+process.env.db_password+" -e db_username="+process.env.db_username+" makhela/analyzer_1.0 > /root/logs/analyzer"
+    command = "/usr/bin/docker run -it --rm --name analyzer -e environment=production -e db_password="+process.env.db_password+" -e db_username="+process.env.db_username+" makhela/analyzer_1.0 > /root/logs/analyzer"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
