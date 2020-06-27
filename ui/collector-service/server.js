@@ -58,19 +58,19 @@ app.post('/connections/status', withAuth, (req, res) => {
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                res.sendStatus(503)
+                return res.sendStatus(503)
             }
             if (stderr) {
                 console.log(`stderr: ${stderr}`);
-                res.sendStatus(503)
+                return res.sendStatus(503)
             }
             console.log(`${stdout}`);        
         });
     } catch(error) {
         console.log(error)
-        res.sendStatus(504)
+        return res.sendStatus(504)
     }
-    res.sendStatus(200)
+    return res.sendStatus(200)
 })
 
 app.post('/suggestions/run', withAuth, (req, res) => {
