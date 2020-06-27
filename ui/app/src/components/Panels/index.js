@@ -109,10 +109,10 @@ class HealthPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      suggestions_collector_status: true,
-      tweets_collector_status: true,
-      connections_collector_status: true,
-      analyzer_collector_status: true,
+      suggestions_collector_status: false,
+      tweets_collector_status: false,
+      connections_collector_status: false,
+      analyzer_collector_status: false,
     }
   }
 

@@ -25,6 +25,7 @@ class Community:
             log.send_message_to_logfile("connected")
         except:
             log.send_message_to_logfile("failed to connect")
+            exit(1)
 
     def fetch_opinion_leaders(self, log):
         log.send_message_to_logfile("fetching opinion leaders")
