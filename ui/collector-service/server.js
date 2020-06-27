@@ -53,7 +53,7 @@ app.post('/connections/run', withAuth, (req, res) => {
 
 app.post('/connections/status', withAuth, (req, res) => {
     console.log("connections status")
-    command = "docker container inspect connections-collection && echo $?"
+    command = "docker container inspect connections-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
