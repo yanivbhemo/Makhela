@@ -68,6 +68,7 @@ app.post('/connections/status', withAuth, (req, res) => {
         });
     } catch(error) {
         console.log(error)
+        res.sendStatus(504)
     }
     res.sendStatus(200)
 })
