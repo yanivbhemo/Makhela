@@ -53,7 +53,7 @@ app.post('/connections/run', withAuth, (req, res) => {
 
 app.post('/connections/status', withAuth, (req, res) => {
     console.log("connections status")
-    command = "docker ps -a | awk 'FNR>1{print $13}'"
+    command = "docker container inspect connections-collection && echo $?'"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
@@ -64,7 +64,6 @@ app.post('/connections/status', withAuth, (req, res) => {
                 console.log(`stderr: ${stderr}`);
                 res.sendStatus(503)
             }
-            if(stdout === 'connections-collection')
             console.log(`${stdout}`);        
         });
     } catch(error) {
