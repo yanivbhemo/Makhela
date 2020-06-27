@@ -58,11 +58,11 @@ app.post('/connections/status', withAuth, (req, res) => {
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
-                res.sendStatus(503)
+                res.sendStatus(204)
             }
             else if (stderr) {
                 console.log(`stderr: ${stderr}`);
-                res.sendStatus(503)
+                res.sendStatus(204)
             }
             else {
                 console.log(`${stdout}`);
