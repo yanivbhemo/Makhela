@@ -77,3 +77,14 @@ export const GET_LEADER_BY_ID = url + "/research/getLeaderById"
 export const SAVE_SEARCH = url + "/research/saveSearch"
 export const POST_WORDS = url + "/research/posts_words" 
 export const SEARCH_NAME = url + "/research/getSearchName" 
+
+//Server service
+export const CONNECTIONS_COLLECTOR_RUN = url + "/connections/run"
+export const SUGGESTIONS_COLLECTOR_RUN = url + "/suggestions/run"
+export const TWEETS_COLLECTOR_RUN = url + "/tweets/run"
+export const ANALYZER_RUN = url + "/analyzer/run"
+
+export const CONNECTIONS_COLLECTOR_STATUS = url + "/connections/status"
+export const SUGGESTIONS_COLLECTOR_STATUS = url + "/suggestions/status"
+export const TWEETS_COLLECTOR_STATUS = url + "/tweets/status"
+export const ANALYZER_STATUS = url + "/analyzer/status"
