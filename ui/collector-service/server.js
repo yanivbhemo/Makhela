@@ -32,27 +32,30 @@ app.use(   (req, res, next) => {
 });
 
 app.post('/connections/run', withAuth, (req, res) => {
-    command = "/usr/bin/docker run -it --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
+    command = "/usr/bin/docker run --rm --name connections-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " -e RUN_TYPE=connections -e COLLECTION=opinion_leaders makhela/collector_2.0.32 > /root/logs/connections-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 res.sendStatus(503)
             }
-            if (stderr) {
+            else if (stderr) {
                 console.log(`stderr: ${stderr}`);
                 res.sendStatus(503)
             }
-            console.log(`${stdout}`);        
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
         });
     } catch(error) {
         console.log(error)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
 })
 
 app.post('/connections/status', withAuth, (req, res) => {
-    console.log("connections status")
+    console.log("- connections status")
     command = "docker container inspect connections-collection"
     try{
         exec(command, (error, stdout, stderr) => {
@@ -77,33 +80,50 @@ app.post('/connections/status', withAuth, (req, res) => {
 
 app.post('/suggestions/run', withAuth, (req, res) => {
     console.log("suggestions run")
-    command = "/usr/bin/docker run -it --rm --name suggestions-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " makhela/suggestions_2.0.32 > /root/logs/suggestions-collection"
+    command = "/usr/bin/docker run --rm --name suggestions-collection -e consumer_key=" + process.env.consumer_key + " -e consumer_secret=" + process.env.consumer_secret + " -e access_token=" + process.env.access_token + " -e access_token_secret=" + process.env.access_token_secret + " -e db_username=" + process.env.db_username + " -e db_password=" + process.env.db_password + " -e slack_url=" + process.env.slack_url + " makhela/suggestions_2.0.32 > /root/logs/suggestions-collection"
     try{
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 res.sendStatus(503)
             }
-            if (stderr) {
+            else if (stderr) {
                 console.log(`stderr: ${stderr}`);
                 res.sendStatus(503)
             }
-            console.log(`${stdout}`);        
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
         });
     } catch(error) {
         console.log(error)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
-})
-
-app.post('/suggestions/health', withAuth, (req, res) => {
-    console.log("suggestions health")
-    res.sendStatus(200)
 })
 
 app.post('/suggestions/status', withAuth, (req, res) => {
-    console.log("suggestions status")
-    res.sendStatus(200)
+    console.log("- suggestions status")
+    command = "docker container inspect suggestions-collection"
+    try{
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                res.sendStatus(204)
+            }
+            else if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                res.sendStatus(204)
+            }
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
+        });
+    } catch(error) {
+        console.log(error)
+        res.sendStatus(503)
+    }
 })
 
 app.post('/tweets/run', withAuth, (req, res) => {
@@ -115,26 +135,43 @@ app.post('/tweets/run', withAuth, (req, res) => {
                 console.log(`error: ${error.message}`);
                 res.sendStatus(503)
             }
-            if (stderr) {
+            else if (stderr) {
                 console.log(`stderr: ${stderr}`);
                 res.sendStatus(503)
             }
-            console.log(`${stdout}`);        
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
         });
     } catch(error) {
         console.log(error)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
-})
-
-app.post('/tweets/health', withAuth, (req, res) => {
-    console.log("tweets health")
-    res.sendStatus(200)
 })
 
 app.post('/tweets/status', withAuth, (req, res) => {
-    console.log("tweets status")
-    res.sendStatus(200)
+    console.log("- tweets status")
+    command = "docker container inspect tweets-collection"
+    try{
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                res.sendStatus(204)
+            }
+            else if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                res.sendStatus(204)
+            }
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
+        });
+    } catch(error) {
+        console.log(error)
+        res.sendStatus(503)
+    }
 })
 
 app.post('/analyzer/run', withAuth, (req, res) => {
@@ -146,26 +183,43 @@ app.post('/analyzer/run', withAuth, (req, res) => {
                 console.log(`error: ${error.message}`);
                 res.sendStatus(503)
             }
-            if (stderr) {
+            else if (stderr) {
                 console.log(`stderr: ${stderr}`);
                 res.sendStatus(503)
             }
-            console.log(`${stdout}`);        
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
         });
     } catch(error) {
         console.log(error)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
-})
-
-app.post('/analyzer/health', withAuth, (req, res) => {
-    console.log("analyzer health")
-    res.sendStatus(200)
 })
 
 app.post('/analyzer/status', withAuth, (req, res) => {
-    console.log("analyzer status")
-    res.sendStatus(200)
+    console.log("- analyzer status")
+    command = "docker container inspect analyzer"
+    try{
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                res.sendStatus(204)
+            }
+            else if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                res.sendStatus(204)
+            }
+            else {
+                console.log(`${stdout}`);
+                res.sendStatus(200)
+            }
+        });
+    } catch(error) {
+        console.log(error)
+        res.sendStatus(503)
+    }
 })
 
 if(process.env.node_environment === "production")
