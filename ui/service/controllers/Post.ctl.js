@@ -51,7 +51,10 @@ exports.getPostsWords = (req, res) => {
     natural.PorterStemmer.attach();
     const words = question.tokenizeAndStem()
     let resWords = []
-    Post.find({})
+    var today = new Date()
+    var pastDate = today.getDate() - 7
+    today.setDate(pastDate)
+    Post.find({'date_created':{$gte: today}})
     .then(docs => {
         if(docs){
             docs.map(
