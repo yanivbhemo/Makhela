@@ -26,9 +26,9 @@ class Topics extends Component {
             return(
                 <React.Fragment>
                 {this.state.topics.network.map(topic =>
-                    <div>
-                        <sapn> ❏</sapn>
-                        {topic.map(item => <sapn> {item} |</sapn>)}
+                    <div key={`topic0${topic}`}>
+                        <span key={`topic${topic}`}> ❏</span>
+                        {topic.map(item => <span key={`item${item}`}> {item} |</span>)}
                     </div>
                 )}</React.Fragment>
             )
@@ -42,11 +42,11 @@ class Topics extends Component {
                     counter++
                     let curColor = this.state.colors[this.state.topics.communitiesIndex[counter]]
                     return (
-                    <span style={curColor}>
+                    <span key={`community${community}`} style={curColor}>
                         {community.map(topic =>
-                    <div>
-                        <sapn> ❏</sapn>
-                        {topic.map(item => <sapn> {item} |</sapn>)}
+                    <div key={`topic0${topic}`}>
+                        <span> ❏</span>
+                        {topic.map(item => <span key={`item${item}`}> {item} |</span>)}
                     </div>
                 )}
                     </span>    
