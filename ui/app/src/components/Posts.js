@@ -1,10 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Graph from "react-graph-vis";
-import ReactTooltip from "react-tooltip";
-import { degree, betweenness, closeness } from './ClosenessExp'
-import Col from './Col'
-import Row from './Row'
 import * as CONSTS from '../consts'
 import Cookies from 'js-cookie';
 

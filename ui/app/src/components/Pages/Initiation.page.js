@@ -5,11 +5,8 @@ import Col from '../Col'
 import Panel from '../Panel'
 import Header from '../Header'
 import Footer from '../Footer'
-
 import Menu from '../Menu'
 import ModalBox from '../ModalBox'
-import CommunityPanel from '../Panels'
-import {PostsPanel, HealthPanel} from '../Panels'
 import * as CONSTS from '../../consts'
 import Cookies from 'js-cookie';
 

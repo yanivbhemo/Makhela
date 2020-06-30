@@ -87,7 +87,7 @@ class LoginPage extends Component {
                     <div className="col-lg-4 col-lg-offset-4">
                         <div className="lock-screen">
                             <h2><a data-toggle="modal" href="#myModal"><i className="fa fa-lock"></i></a></h2>
-                            <p>LOGIN</p>
+                            <p style={{color:"white"}}>LOGIN</p>
                             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabIndex="-1" id="myModal" className="modal fade">
                                 <div className="modal-dialog">
                                     <div className="modal-content">
