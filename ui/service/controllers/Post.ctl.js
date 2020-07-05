@@ -52,7 +52,7 @@ exports.getPostsWords = (req, res) => {
     const words = question.tokenizeAndStem()
     let resWords = []
     var today = new Date()
-    var pastDate = today.getDate() - 7
+    var pastDate = today.getDate() - 14
     today.setDate(pastDate)
     Post.find({'date_created':{$gte: today}})
     .then(docs => {
