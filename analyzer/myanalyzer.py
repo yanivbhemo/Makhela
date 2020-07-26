@@ -250,17 +250,26 @@ class Analyzer:
 
         for key, value in self.leaders.items():
             try:
-                self.leaders[key]["deg_centrality"] = deg_centrality[key]
+                if deg_centrality[key] == 0:
+                    self.leaders[key]["deg_centrality"] = 0.5
+                else:
+                    self.leaders[key]["deg_centrality"] = deg_centrality[key]
             except:
                 log.send_message_to_logfile("exception adding deg_centrality: ", key)
                 continue
         try:
-            self.leaders[key]["betweenness_centrality"] = betweenness_centrality[key]
+            if betweenness_centrality[key] == 0:
+                    self.leaders[key]["betweenness_centrality"] = 0.5
+            else:
+                self.leaders[key]["betweenness_centrality"] = betweenness_centrality[key]
         except:
             log.send_message_to_logfile("exception adding betweenness_centrality: ", key)
             pass
         try:
-            self.leaders[key]["closeness_centrality"] = closeness_centrality[key]
+            if closeness_centrality[key] == 0:
+                    self.leaders[key]["closeness_centrality"] = 0.5
+            else:
+                self.leaders[key]["closeness_centrality"] = closeness_centrality[key]
         except:
             log.send_message_to_logfile("exception adding closeness_centrality: ", key)
             pass
@@ -272,7 +281,6 @@ class Analyzer:
             top_level_communities = next(communities_generator)
             next_level_communities = next(communities_generator)
             community_found = sorted(map(sorted, next_level_communities))
-
             counter = 1
             for community in community_found:
                 if len(community) == 1:
@@ -290,5 +298,8 @@ class Analyzer:
                             continue
                     counter += 1
         except:
+            for key, value in self.leaders.items():
+                self.leaders[key]['community'] = 0
+            
             log.send_message_to_logfile("failed analyzing community")
             
