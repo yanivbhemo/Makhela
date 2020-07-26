@@ -87,9 +87,9 @@ exports.moveToCommunity = (req, res) => {
     console.log(`Move the following twitter id into the community: ${twitter_screen_name}`)
     BlackListLeader.findOne({twitter_screen_name})
     .then( doc => {
+        console.log(doc)
         Leader.findOne({}).sort({"native_id": -1}).limit(1)
         .then(last_doc => {
-            new_id = ++last_doc.native_id
             let swap = new Leader({
                 full_name: doc.full_name,
                 new_leader: doc.new_leader,
