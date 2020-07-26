@@ -106,9 +106,86 @@ class PostsPanel extends Component {
 }
 
 class HealthPanel extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      suggestions_collector_status: false,
+      tweets_collector_status: false,
+      connections_collector_status: false,
+      analyzer_collector_status: false,
+    }
+  }
+
+  componentDidMount() {
+    let url = CONSTS.CONNECTIONS_COLLECTOR_STATUS
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res =>{
+      if(res.status===200){
+        this.setState({connections_collector_status: false})
+      } else {
+        this.setState({connections_collector_status: true})
+      }
+    })
+    .catch(err => console.log(err))
+    
+    url = CONSTS.SUGGESTIONS_COLLECTOR_STATUS
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res =>{
+      if(res.status===200){
+        this.setState({suggestions_collector_status: false})
+      } else {
+        this.setState({suggestions_collector_status: true})
+      }
+    })
+    .catch(err => console.log(err))
+
+    url = CONSTS.TWEETS_COLLECTOR_STATUS
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res =>{
+      if(res.status===200){
+        this.setState({tweets_collector_status: false})
+      } else {
+        this.setState({tweets_collector_status: true})
+      }
+    })
+    .catch(err => console.log(err))
+
+    url = CONSTS.ANALYZER_STATUS
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({"token":Cookies.get('token')}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res =>{
+      if(res.status===200){
+        this.setState({analyzer_collector_status: false})
+      } else {
+        this.setState({analyzer_collector_status: true})
+      }
+    })
+    .catch(err => console.log(err))
+
+  }
     render() {
       return (
         <div className="darkblue-panel pn">
@@ -126,19 +203,19 @@ class HealthPanel extends Component {
                       <tbody id="health-check-dashboard-tbody">
                         <tr>
                           <td>Suggestions Collector</td>
-                          <td><i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i></td>
+                          <td>{(this.state.suggestions_collector_status===true) ? <i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i> : <Loader height={15} width={15} color="#00BFFF" type="Oval" />}</td>
                         </tr>
                         <tr>
                           <td>Tweets Collector</td>
-                          <td><i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i></td>
+                          <td>{(this.state.tweets_collector_status===true) ? <i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i> : <Loader height={15} width={15} color="#00BFFF" type="Oval" />}</td>
                         </tr>
                         <tr>
                           <td>Connection Collector</td>
-                          <td><i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i></td>
+                          <td>{(this.state.connections_collector_status===true) ? <i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i> : <Loader height={15} width={15} color="#00BFFF" type="Oval" />}</td>
                         </tr>
                         <tr>
-                          <td>Community DB</td>
-                          <td><i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i></td>
+                          <td>Analyzer</td>
+                          <td>{(this.state.analyzer_collector_status===true) ? <i className="fa fa-check fa-1x" style={{color:"chartreuse"}}></i> : <Loader height={15} width={15} color="#00BFFF" type="Oval" />}</td>
                         </tr>
                       </tbody>
                     </table>

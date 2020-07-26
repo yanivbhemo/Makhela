@@ -2,8 +2,11 @@ from datetime import datetime
 import db_connection
 import myanalyzer
 import logger
+import os
 
 def get_password():
+    if os.getenv('environment') == 'production':
+        return os.getenv('db_password')
     f = open("password.txt", "r")
     pwd = f.read()
     f.close()
@@ -12,7 +15,10 @@ def get_password():
 def main():
     log = logger.logger_handler()
     now = datetime.now()
-    username = 'sveta'
+    if os.getenv('environment') == 'production':
+        username = os.getenv('db_username')
+    else:
+        username = 'sveta'
     pwd = get_password()
     log.send_message_to_logfile("Analyzer: "+str(now))
 
