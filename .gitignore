@@ -12,6 +12,7 @@ Makhela-end/consts.js
 logs/
 browser/
 .idea/workspace.xml
+analyzer/Clean.ipynb
 src/keys.js
 keys.js
 src/consts.js
