@@ -170,13 +170,21 @@ exports.addNewLeader = (req, res) => {
     Leader.findOne({$and: [{"twitter_screen_name":twitter_screen_name},{"full_name": full_name}]})
     .then( doc => {
         if(!doc){
-            Leader.findOne({}).limit(1)
-                let newLeader = new Leader({
+            var newLeader = ''
+            if(twitter_screen_name != ''){
+                newLeader = new Leader({
                     full_name: full_name,
                     twitter_screen_name: twitter_screen_name,
                     new_leader: true,
                     internal_create_date: datetime,
                 })
+            } else {
+                newLeader = new Leader({
+                    full_name: full_name,
+                    new_leader: true,
+                    internal_create_date: datetime,
+                })
+            }
                 newLeader.save((err, result) => {
                     if(err){
                         console.log(err)
@@ -185,7 +193,7 @@ exports.addNewLeader = (req, res) => {
                     else {
                         res.sendStatus(200)
                     }
-                })  
+                })
         }
         else
             return res.sendStatus(404)
