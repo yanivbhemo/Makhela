@@ -8,7 +8,7 @@ RUN apt update -y && \
         /bin/bash
         
 CMD cd /tmp && \
-        git clone https://github.com/yanivbhemo/Makhela.git && \
+        git clone git@github.com:yanivbhemo/Makhela.git && \
         cd Makhela/analyzer && \
         pip install pymongo nltk numpy pandas gensim spacy networkx sklearn dnspython && \
         python -m spacy download en && \

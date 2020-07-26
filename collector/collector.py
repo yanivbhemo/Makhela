@@ -170,7 +170,7 @@ class Collector:
                         if details.id == required_id["id"]:
                             profile_image = details.profile_image_url[0:details.profile_image_url.find(
                                 '_normal')] + "_400x400" + details.profile_image_url[details.profile_image_url.rfind('.'):len(details.profile_image_url)]
-                            if required_id["level_of_certainty"] < self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY and required_id["level_of_certainty"] >= self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY:
+                            if required_id["level_of_certainty"] <= self.AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY and required_id["level_of_certainty"] > self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY:
                                 self.db.move_leader_from_community_to_suggestions(self.collection, leader['_id'], details.id,
                                                                       details.screen_name,
                                                                       details.location, details.description,
@@ -220,6 +220,10 @@ class Collector:
             if len(np.intersect1d(np_kw_array, np_description_array)) > 0:
                 level_of_certainty += self.AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY
             if leader.name == fullName_to_search:
+                level_of_certainty += self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY
+            elif len(np.intersect1d(np.array(leader.name.split(' ')), fullName_to_search)) > 0:
+                level_of_certainty += self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY
+            elif len(np.intersect1d(np.array(leader.name.split(':')), fullName_to_search)) > 0:
                 level_of_certainty += self.AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY
             proposed_id.append({"id": leader.id, "level_of_certainty": level_of_certainty, "followers": leader.followers_count})
             level_of_certainty = 0
