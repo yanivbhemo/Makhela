@@ -8,7 +8,7 @@ RUN apt update -y && \
         /bin/bash
 
 CMD cd /tmp && \
-        git clone https://github.com/yanivbhemo/Makhela.git && \
+        git clone git@github.com:yanivbhemo/Makhela.git && \
         cd Makhela && \
         git fetch --tags && \
         latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
