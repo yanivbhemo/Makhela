@@ -138,7 +138,10 @@ class Collector:
             results_length = len(leader_info)
         else:
             leader_info = self.source_handler.search_twitter_name(leader['full_name'])
-            results_length = len(leader_info)
+            try:
+                results_length = len(leader_info)
+            except:
+                results_length = 0
         # Checks of more than 1 name came up
         if leader_info:
             if results_length == 1:
