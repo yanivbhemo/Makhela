@@ -20,9 +20,9 @@ class Footer extends Component {
                         Licensing information: https://templatemag.com/license/
                     --> */}
                     </div>
-                    <a href="blank.html#" className="go-top">
+                    {/* <a href="blank.html#" className="go-top">
                     <i className="fa fa-angle-up"></i>
-                    </a>
+                    </a> */}
                 </div>
             </footer>
         )
