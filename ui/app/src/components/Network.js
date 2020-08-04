@@ -145,8 +145,8 @@ class Network extends React.Component {
       groups: {
         0: { color: "#FF9900" },// orange 
         1: { color: "#7c5295" },// purple
-        2: { color: "#2B7CE9" },// blue
-        3: { color: "#C5000B" },// red
+        2: { color: "#C5000B" },// red
+        3: { color: "#2B7CE9" },// blue
         4: { color: "#FF9900" },// pink
         5: { color: "#006400" },// green
         6: { color: "#7D4219" },// brown
