@@ -2,13 +2,10 @@ import nltk
 
 nltk.download('stopwords')
 import re
-import numpy as np
 import pandas as pd
-from pprint import pprint
 import gensim
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
-from gensim.models import CoherenceModel
 import spacy
 from nltk.corpus import stopwords
 
