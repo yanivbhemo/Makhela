@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {AUTHENTICATION_URL, AUTH_CHECK_TOKEN} from '../../consts'
+import {AUTHENTICATION_URL, AUTH_CHECK_TOKEN, CONNECT_TO_DB} from '../../consts'
 import Cookies from 'js-cookie';
 
 class LoginPage extends Component {
@@ -9,7 +9,8 @@ class LoginPage extends Component {
         this.state = {
             username: '',
             password: '',
-            error: ''
+            error: '',
+            organization: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -56,17 +57,44 @@ class LoginPage extends Component {
     }
 
     componentDidMount() {
-        document.body.style.backgroundImage = 'url("img/login-bg.jpg")'
-        if(document.cookie) {
-            let url = AUTH_CHECK_TOKEN + Cookies.get('token')
-            fetch(url)
-            .then(res => {
-                if (res.status === 200) {
-                    window.location.href = "/"
-                }
-            })
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+        var org = ''
+        var text1 = document.location.href
+        var text1_arr = text1.split(".")
+        if(text1_arr[0] === "http://www" || text1_arr[0] === "https://www") {
+            org = text1_arr[1].toLowerCase()
+        } else {
+            text1_arr = text1.split("/")[2].split('.')
+            org = text1_arr[0].toLowerCase()
+        }
+        if(/^[a-z1-9]+$/.test(org) === true) {
+            fetch(CONNECT_TO_DB, {
+                method: 'POST',
+                body: JSON.stringify({database_name: org}),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+              })
+              .then(res => {
+                  if(res.status === 200){
+                        this.setState({organization:org})
+                        document.body.style.backgroundImage = 'url("img/login-bg.jpg")'
+                        if(document.cookie) {
+                            let url = AUTH_CHECK_TOKEN + Cookies.get('token')
+                            fetch(url)
+                            .then(res => {
+                                if (res.status === 200) {
+                                    window.location.href = "/"
+                                }
+                            })
+                            .then(data => console.log(data))
+                            .catch(err => console.log(err))
+                        }
+                    }
+                    else {
+                        window.location.href = "/404"
+                    }
+              })
         }
     }
 
@@ -97,6 +125,7 @@ class LoginPage extends Component {
                                         </div>
                                             <div className="modal-body">
                                                 <p className="centered"><img className="img-circle" width="80" src="img/unknown.jpeg" alt="user img" /></p>
+                                                <input type="text" name="organization" disabled placeholder="organization" value={this.state.organization} required className="form-control placeholder-no-fix" /><br />
                                                 <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" /><br />
                                                 <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange} required autoComplete="off" className="form-control placeholder-no-fix" />
                                                 {!this.state.error ? '' : this.handleError(this.state.error)}

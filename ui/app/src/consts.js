@@ -88,3 +88,6 @@ export const CONNECTIONS_COLLECTOR_STATUS = url + "/server/connections/status"
 export const SUGGESTIONS_COLLECTOR_STATUS = url + "/server/suggestions/status"
 export const TWEETS_COLLECTOR_STATUS = url + "/server/tweets/status"
 export const ANALYZER_STATUS = url + "/server/analyzer/status"
+
+//Checkups
+export const CONNECT_TO_DB = url + "/checkup/connectToDb"

@@ -11,6 +11,7 @@ import BlackListPage from '../components/Pages/BlackList'
 import Research from '../components/Pages/Research.page'
 import Initiation from '../components/Pages/Initiation.page'
 import SettingsPage from '../components/Pages/Settings'
+import ErrorPage from '../components/Pages/Error.page'
 
 const ReactRouter = () => {
     return (
@@ -25,6 +26,7 @@ const ReactRouter = () => {
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
             <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/404" component={ErrorPage} />
         </React.Fragment>
     )
 }

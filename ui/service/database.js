@@ -3,12 +3,12 @@ const consts = require('./consts');
 
 const { MLAB_URL, DB_USER, DB_PASS } = consts;
 const url = MLAB_URL;
-const options = {useNewUrlParser: true, // For deprecation warningsuseCreate
-useUnifiedTopology: true,
-Index: true, // For deprecation warnings
-user: DB_USER,
-pass: DB_PASS,
-autoReconnect: true,
+const options = {
+	useNewUrlParser: true, // For deprecation warningsuseCreate
+	useUnifiedTopology: true,
+	user: DB_USER,
+	pass: DB_PASS,
+	serverSelectionTimeoutMS:2000
 };
 
 mongoose.connect(url, options)   

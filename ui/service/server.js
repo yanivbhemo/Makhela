@@ -10,6 +10,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 
 const initCtl   = require('./controllers/Initiation.ctl');
+const checkupCtl   = require('./controllers/checkup.ctl');
 const opinionLeaderCtl   = require('./controllers/opinion-leader.ctl');
 const suggestionsCtl   = require('./controllers/suggestion.ctl');
 const blackListCtl = require('./controllers/Blacklist.ctl');
@@ -40,6 +41,8 @@ app.use(   (req, res, next) => {
     res.set("Content-Type", "application/json");
     next();
 });
+
+app.post('/checkup/connectToDb', checkupCtl.connectToDatabase);
 
 app.post('/graph/getLeaders', withAuth, graphCtl.getLeaders);
 app.post('/graph/getPosts', withAuth, graphCtl.getPosts);
