@@ -26,7 +26,6 @@ const ReactRouter = () => {
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
             <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/404" component={ErrorPage} />
         </React.Fragment>
     )
 }

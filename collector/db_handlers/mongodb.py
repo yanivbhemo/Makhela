@@ -1,4 +1,4 @@
-import csv
+import urllib as urllib
 from pymongo import MongoClient
 import os
 import datetime
@@ -16,8 +16,9 @@ class DataBaseHandler:
             exit(102)
         try:
             client = MongoClient(
-                "mongodb+srv://" + self.db_username + ":" + self.db_password + "@makhela-qvsh8.mongodb.net/Makhela?retryWrites=true&w=majority")
-            self.db = client.Makhela
+            "mongodb://" + self.db_username + ":" + urllib.parse.quote(self.db_password) + "@db.dev.makhela.live/" + os.getenv(
+                'db_name') + "?ssl_cert_reqs=CERT_NONE")
+            self.db = client[os.getenv('db_name')]
             self.logger.send_message_to_logfile("- DB Handler created")
         except Exception as e:
             self.logger.send_message_to_logfile("- Error: can't connect to the DB (error 101)")

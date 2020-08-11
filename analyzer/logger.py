@@ -32,7 +32,7 @@ class logger_handler:
 
     def send_message_to_logAndSlack(self, text):
         self.send_message_to_slack(text)
-        self.send_message_to_logfile(text)
+        #self.send_message_to_logfile(text)
 
     def send_message_to_logfile(self, text):
         self.fileptr.write(str(text)+"\n")

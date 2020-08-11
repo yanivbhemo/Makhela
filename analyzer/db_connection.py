@@ -1,8 +1,9 @@
+import urllib as urllib
 from pymongo import MongoClient
 import logger
 import datetime
 import json
-
+import os
 
 class Community:
 
@@ -20,8 +21,8 @@ class Community:
         try:
             log.send_message_to_logfile("connecting")
             db = MongoClient(
-                "mongodb+srv://" + self.user + ":" + self.password + "@makhela-qvsh8.mongodb.net/Makhela?ssl=true&ssl_cert_reqs=CERT_NONE")
-            self.db = db.Makhela
+                "mongodb://" + self.user + ":" + urllib.parse.quote(self.password) + "@db.dev.makhela.live/"+os.getenv('db_name')+"?ssl_cert_reqs=CERT_NONE")
+            self.db = db[os.getenv('db_name')]
             log.send_message_to_logfile("connected")
         except:
             log.send_message_to_logfile("failed to connect")

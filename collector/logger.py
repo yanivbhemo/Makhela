@@ -21,17 +21,17 @@ class logger_handler:
     # Posting to a Slack channel
     def send_message_to_slack(self, text):
         post = {"text": "{0}".format(text)}
-        try:
-            json_data = json.dumps(post)
-            req = request.Request(self.slack_url,
-                                  data=json_data.encode('ascii'),
-                                  headers={'Content-Type': 'application/json'})
-            resp = request.urlopen(req)
-        except Exception as em:
-            print("EXCEPTION: " + str(em))
+        # try:
+        #     json_data = json.dumps(post)
+        #     req = request.Request(self.slack_url,
+        #                           data=json_data.encode('ascii'),
+        #                           headers={'Content-Type': 'application/json'})
+        #     resp = request.urlopen(req)
+        # except Exception as em:
+        #     print("EXCEPTION: " + str(em))
 
     def send_message_to_logAndSlack(self, text):
-        self.send_message_to_slack(text)
+        # self.send_message_to_slack(text)
         self.send_message_to_logfile(text)
 
     def send_message_to_logfile(self, text):

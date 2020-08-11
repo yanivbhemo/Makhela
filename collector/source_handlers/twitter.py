@@ -36,9 +36,8 @@ class Twitter_handler:
 
     def search_twitter_name(self, name):
         try:
-            filtered_name = name.split(' ')[0] + " " + name.split(' ')[len(name.split(' ')) - 1]
-            result = self.api.search_users(q=filtered_name, page=1)
-            result2 = self.api.search_users(q=filtered_name, page=2)
+            result = self.api.search_users(q=name, page=1)
+            result2 = self.api.search_users(q=name, page=2)
             if(result != result2):
                 result+=result2
             if len(result) == 0:

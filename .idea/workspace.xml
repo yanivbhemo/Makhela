@@ -3,7 +3,81 @@
   <component name="ChangeListManager">
     <list default="true" id="e814b364-e8c9-4646-ab19-5effa4285493" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzer/myanalyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/myanalyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/db_connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/collection_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collection_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/db_handlers/mongodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-26_16-52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-26_16-57" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_10-4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_13-56" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_13-58" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_13-59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_15-59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_18-19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_18-7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-29_9-57" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-42" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-43" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-45" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-47" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-50" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-51" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-53" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-54" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-55" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-56" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_10-57" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_11-9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_13-11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-44" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-45" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-47" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-51" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-53" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-55" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-57" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_14-8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_15-0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_15-1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_15-11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_15-2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_15-5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_16-53" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_16-54" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-03-30_17-4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-10_11-15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/logs/2020-04-11_13-9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collector/source_handlers/twitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector/source_handlers/twitter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +104,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/analyzer/main.py" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
@@ -42,7 +116,36 @@
       <recent name="C:\Users\benhay\Desktop\Makhela\collector" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.collector_main">
+  <component name="RunManager" selected="Python.analyzer_main">
+    <configuration name="analyzer_main" type="PythonConfigurationType" factoryName="Python">
+      <module name="Makhela" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="consumer_key" value="uPVsXcMAIZLfYtOdJ6J3aapIG" />
+        <env name="consumer_secret" value="fAWhsif5q0Ik9JN9ecC3nrt4QoqA97Sp3lRb4HUfneFWBqRnns" />
+        <env name="access_token" value="1231936499211436033-gOBdrXqzpjT28yPn2TnVoNBU9h189H" />
+        <env name="access_token_secret" value="uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj" />
+        <env name="db_username" value="yaniv" />
+        <env name="db_password" value="Azaz123!@#" />
+        <env name="slack_url" value="https://hooks.slack.com/services/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" />
+        <env name="db_name" value="ben" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\benhay\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analyzer" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analyzer/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="collector_main" type="PythonConfigurationType" factoryName="Python">
       <module name="Makhela" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,8 +157,9 @@
         <env name="access_token" value="1231936499211436033-gOBdrXqzpjT28yPn2TnVoNBU9h189H" />
         <env name="access_token_secret" value="uCHzeMhvzfXIaCPYIM29fBJi0rwzj9Sga5ph2YWIT0qDj" />
         <env name="db_username" value="yaniv" />
-        <env name="db_password" value="Azaz123123" />
+        <env name="db_password" value="Azaz123!@#" />
         <env name="slack_url" value="https://hooks.slack.com/services/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" />
+        <env name="db_name" value="ben" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\benhay\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/suggestion_collector" />
@@ -101,6 +205,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.collector_main" />
+      <item itemvalue="Python.analyzer_main" />
       <item itemvalue="Python.suggestion_main" />
     </list>
   </component>
@@ -130,76 +235,75 @@
     <option name="LAST_COMMIT_MESSAGE" value="main edit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595755593020">
+    <state x="2556" y="41" width="1092" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597151465243">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="194" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1591996626476" />
     <state x="675" y="94" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150731492" />
-    <state x="2537" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595755593020" />
-    <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1587369571022">
+    <state x="2556" y="41" width="1092" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151465243" />
+    <state width="1549" height="589" key="DebuggerActiveHint" timestamp="1597151029635">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1587369571022" />
-    <state width="1519" height="589" key="DebuggerActiveHint" timestamp="1595760087999">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1274" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1587730586514" />
     <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1589786951660" />
-    <state width="1519" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595760087999" />
-    <state x="898" y="212" key="EnvironmentVariablesDialog" timestamp="1590150385397">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1549" height="589" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151029635" />
+    <state x="2817" y="212" key="EnvironmentVariablesDialog" timestamp="1597142556170">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="168" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588715346657" />
     <state x="898" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150385397" />
-    <state x="2817" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1590060720582" />
-    <state width="1515" height="254" key="GridCell.Tab.0.bottom" timestamp="1595860510687">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2817" y="212" key="EnvironmentVariablesDialog/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597142556170" />
+    <state x="2882" y="137" key="FileChooserDialogImpl" timestamp="1597151460313">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2882" y="137" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151460312" />
+    <state width="1899" height="345" key="GridCell.Tab.0.bottom" timestamp="1597151590195">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595860510687" />
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964926" />
-    <state width="1899" height="347" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767940402" />
-    <state width="1515" height="254" key="GridCell.Tab.0.center" timestamp="1595860510686">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="345" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151590195" />
+    <state width="1899" height="345" key="GridCell.Tab.0.center" timestamp="1597151590195">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595860510686" />
     <state width="1877" height="348" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964926" />
-    <state width="1899" height="347" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767940402" />
-    <state width="1515" height="254" key="GridCell.Tab.0.left" timestamp="1595860510686">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="345" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151590195" />
+    <state width="1899" height="345" key="GridCell.Tab.0.left" timestamp="1597151590195">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595860510686" />
     <state width="1877" height="348" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964926" />
-    <state width="1899" height="347" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767940402" />
-    <state width="1515" height="254" key="GridCell.Tab.0.right" timestamp="1595860510686">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="345" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151590195" />
+    <state width="1899" height="345" key="GridCell.Tab.0.right" timestamp="1597151590195">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595860510686" />
     <state width="1877" height="348" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964926" />
-    <state width="1899" height="347" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767940402" />
-    <state width="1515" height="254" key="GridCell.Tab.1.bottom" timestamp="1595860510687">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="345" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151590195" />
+    <state width="1899" height="243" key="GridCell.Tab.1.bottom" timestamp="1597151164126">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595860510687" />
     <state width="1899" height="187" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964916" />
-    <state width="1899" height="339" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767149891" />
-    <state width="1515" height="254" key="GridCell.Tab.1.center" timestamp="1595860510687">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="243" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151164126" />
+    <state width="1899" height="243" key="GridCell.Tab.1.center" timestamp="1597151164126">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1595860510687" />
     <state width="1899" height="187" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964916" />
-    <state width="1899" height="339" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767149891" />
-    <state width="1515" height="254" key="GridCell.Tab.1.left" timestamp="1595860510687">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="243" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151164126" />
+    <state width="1899" height="243" key="GridCell.Tab.1.left" timestamp="1597151164126">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1595860510687" />
     <state width="1899" height="187" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964916" />
-    <state width="1899" height="339" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767149891" />
-    <state width="1515" height="254" key="GridCell.Tab.1.right" timestamp="1595860510687">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="243" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151164126" />
+    <state width="1899" height="243" key="GridCell.Tab.1.right" timestamp="1597151164126">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1515" height="254" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1595860510687" />
     <state width="1899" height="187" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1590150964916" />
-    <state width="1899" height="339" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1595767149891" />
+    <state width="1899" height="243" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597151164126" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -211,13 +315,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/collector/collector.py</url>
-          <line>66</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/collector/collector.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="48" />
+          <line>62</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

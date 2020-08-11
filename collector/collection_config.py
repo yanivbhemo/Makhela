@@ -1,5 +1,4 @@
 import os
-import requests
 
 def load_thresholds(db_handler):
     # For the ranking system

@@ -132,12 +132,25 @@ class Collector:
                     self.logger.send_message_to_logfile(
                         "\n- Handles: {0}\n- Locked. Moving to next one.".format(leader['twitter_screen_name']))
 
+    @staticmethod
+    def dissolve_rs_duplications(rs1, rs2):
+        arr = rs2
+        for item in rs1:
+            if item not in rs2:
+                arr.append(item)
+        return arr
+
     def collect_leader_init_details(self, leader, twitter_screen_name=""):
         if twitter_screen_name:
             leader_info = self.source_handler.search_twitter_name(twitter_screen_name)
             results_length = len(leader_info)
         else:
-            leader_info = self.source_handler.search_twitter_name(leader['full_name'])
+            name_to_search = leader['full_name'].split(' ')[0] + " " + leader['full_name'].split(' ')[len(leader['full_name'].split(' ')) - 1]
+            leader_info = self.source_handler.search_twitter_name(name_to_search)
+            name_to_search = leader['full_name']
+            leader_info2 = self.source_handler.search_twitter_name(name_to_search)
+
+            leader_info = self.dissolve_rs_duplications(leader_info, leader_info2)
             try:
                 results_length = len(leader_info)
             except:
@@ -282,6 +295,8 @@ class Collector:
                             in_reply_to_status_user_id = post.in_reply_to_screen_name
                         except:
                             in_reply_to_status_user_id = post2.user.name
+                    else:
+                        in_reply_to_status_id = "None"
                 except Exception as e:
                     pass
 
