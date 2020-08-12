@@ -15,14 +15,9 @@ def get_password():
 def main():
     log = logger.logger_handler()
     now = datetime.now()
-    if os.getenv('environment') == 'production':
-        username = os.getenv('db_username')
-    else:
-        username = 'sveta'
-    pwd = get_password()
     log.send_message_to_logfile("Analyzer: "+str(now))
 
-    community = db_connection.Community(username, pwd)
+    community = db_connection.Community()
     leaders, posts, key_words = community.get_community()
 
     analyzer = myanalyzer.Analyzer(leaders, posts, key_words)

@@ -7,9 +7,9 @@ import os
 
 class Community:
 
-    def __init__(self, user, password):
-        self.user = user
-        self.password = password
+    def __init__(self):
+        self.user = os.getenv('db_username')
+        self.password = os.getenv('db_password')
         self.db = ""
         self.leaders = []
         self.posts = []

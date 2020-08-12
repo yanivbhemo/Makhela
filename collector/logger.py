@@ -13,6 +13,8 @@ class logger_handler:
         self.insert_slack_url()
         x = datetime.datetime.now()
         curr_date = str(str(x.year) + "-0" + str(x.month) + "-" + str(x.day) + "_" + str(x.hour) + "-" + str(x.minute))
+        if not os.path.exists(os.path.dirname(__file__) + "/logs"):
+            os.makedirs(os.path.dirname(__file__) + "/logs")
         self.fileptr = open(os.path.dirname(__file__) + "/logs/" + curr_date, "a")
 
     def insert_slack_url(self):
