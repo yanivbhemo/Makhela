@@ -33,7 +33,8 @@ class CommunityPage extends Component {
             end_leader_index: 20,
             hasMore: true,
             sort_options: [],
-            sort_direction: -1
+            sort_direction: -1,
+            loader_text: 'Loading'
         }
         this.addLeaders = this.addLeaders.bind(this)
         this.addAllLeaders = this.addAllLeaders.bind(this)
@@ -62,23 +63,34 @@ class CommunityPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(leader => this.addLeaders({
-            full_name: leader.full_name, 
-            twitter_id: leader.twitter_id, 
-            twitter_profile_image: leader.twitter_profile_image,
-            twitter_description: leader.twitter_description,
-            twitter_location: leader.twitter_location,
-            twitter_screen_name: leader.twitter_screen_name,
-            twitter_created_at: leader.twitter_created_at,
-            level_of_certainty: leader.level_of_certainty,
-            twitter_followers_count: leader.twitter_followers_count
-        })))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(leader => this.addLeaders({
+                    full_name: leader.full_name, 
+                    twitter_id: leader.twitter_id, 
+                    twitter_profile_image: leader.twitter_profile_image,
+                    twitter_description: leader.twitter_description,
+                    twitter_location: leader.twitter_location,
+                    twitter_screen_name: leader.twitter_screen_name,
+                    twitter_created_at: leader.twitter_created_at,
+                    level_of_certainty: leader.level_of_certainty,
+                    twitter_followers_count: leader.twitter_followers_count
+                }))
+            } else {
+                this.setState({loader_text: "No influencers"})
+            }
+        })
         .then(res => {
             var sort_options = []
-            Object.keys(this.state.leaders[0]).map((key, i) => {
-                sort_options.push(key)
-            })
-            this.setState({amount_of_leaders: res.length, sort_options: sort_options})
+            if(res) {
+                Object.keys(this.state.leaders[0]).map((key, i) => {
+                    sort_options.push(key)
+                })
+                this.setState({amount_of_leaders: res.length, sort_options: sort_options})
+            } else {
+                this.setState({amount_of_leaders: 0, sort_options: sort_options})
+            }
+            
         })
         .catch(err => console.log(err))
 
@@ -91,9 +103,9 @@ class CommunityPage extends Component {
             }
           })
         .then(res => res.json())
-        .then(data => data.map(location => this.addLocations({
-            location
-        })))
+            .then(data => {if(data.length > 0) data.map(location => this.addLocations({
+                location
+            }))})
         .catch(err => console.log(err))
 
         var url = CONSTS.GET_ALL_LEADERS
@@ -105,18 +117,23 @@ class CommunityPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(leader => this.addAllLeaders({
-            full_name: leader.full_name, 
-            twitter_id: leader.twitter_id, 
-            twitter_profile_image: leader.twitter_profile_image,
-            twitter_description: leader.twitter_description,
-            twitter_location: leader.twitter_location,
-            twitter_screen_name: leader.twitter_screen_name,
-            twitter_created_at: leader.twitter_created_at,
-            level_of_certainty: leader.level_of_certainty,
-            twitter_followers_count: leader.twitter_followers_count
-        })))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(leader => this.addAllLeaders({
+                full_name: leader.full_name, 
+                twitter_id: leader.twitter_id, 
+                twitter_profile_image: leader.twitter_profile_image,
+                twitter_description: leader.twitter_description,
+                twitter_location: leader.twitter_location,
+                twitter_screen_name: leader.twitter_screen_name,
+                twitter_created_at: leader.twitter_created_at,
+                level_of_certainty: leader.level_of_certainty,
+                twitter_followers_count: leader.twitter_followers_count
+                }))
+            }
+        })
         .catch(err => console.log(err))
+        this.setState({loadingActive: false})
     }
 
     addLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
@@ -168,7 +185,6 @@ class CommunityPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            loadingActive: false
         }))
     }
 
@@ -417,17 +433,19 @@ class CommunityPage extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <InfiniteScroll
-                        dataLength={this.state.amount_of_leaders}
-                        next={this.fetchMoreLeaders}
-                        hasMore={this.state.hasMore}
-                        loader={<h4>Loading more leaders</h4>}
-                        endMessage={
-                            <p>No more leaders</p>
-                        }
-                        >
-                        {this.state.leaders.map(this.eachLeader)}
-                        </InfiniteScroll>
+                        <Col className="col-lg-12">
+                            <InfiniteScroll
+                            dataLength={this.state.amount_of_leaders}
+                            next={this.fetchMoreLeaders}
+                            hasMore={this.state.hasMore}
+                            loader={<h4>{this.state.loader_text}</h4>}
+                            endMessage={
+                                <p>No more leaders</p>
+                            }
+                            >
+                            {this.state.leaders.map(this.eachLeader)}
+                            </InfiniteScroll>
+                        </Col>
                     </Row>
                 </Content>
                 <ModalBox 

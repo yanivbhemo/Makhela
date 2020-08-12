@@ -7,11 +7,10 @@ import withAuth from '../components/withAuth';
 import addLeader from '../components/Pages/AddLeader.page'
 import ProfilePage from '../components/Pages/Profile.page'
 import SuggestionsPage from '../components/Pages/Suggestions'
-import BlackListPage from '../components/Pages/BlackList'
+import IgnoreListPage from '../components/Pages/IgnoreList'
 import Research from '../components/Pages/Research.page'
 import Initiation from '../components/Pages/Initiation.page'
 import SettingsPage from '../components/Pages/Settings'
-import ErrorPage from '../components/Pages/Error.page'
 
 const ReactRouter = () => {
     return (
@@ -22,7 +21,7 @@ const ReactRouter = () => {
             <Route exact path="/research" component={withAuth(Research)} />
             <Route exact path="/initiation" component={withAuth(Initiation)} />
             <Route exact path="/suggestions" component={withAuth(SuggestionsPage)} />
-            <Route exact path="/ignoreList" component={withAuth(BlackListPage)} />
+            <Route exact path="/ignoreList" component={withAuth(IgnoreListPage)} />
             <Route exact path="/addLeader" component={withAuth(addLeader)} />
             <Route exact path="/settings" component={withAuth(SettingsPage)} />
             <Route exact path="/login" component={LoginPage} />

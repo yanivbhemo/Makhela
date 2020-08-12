@@ -6,42 +6,43 @@ import Panel from '../../Panel'
 import Header from '../../Header'
 import Menu from '../../Menu'
 import Footer from '../../Footer'
-import { BlackListPanel } from '../../Panels'
+import { IgnoreListPanel } from '../../Panels'
 import * as CONSTS from '../../../consts'
 import ModalBox from '../../ModalBox'
 import Cookies from 'js-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-class BlackListPage extends Component {
+class IgnoreListPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            blacklistLeaders: [],
-            blacklistLeaders_full: [],
-            filterdblacklistLeaders: [],
+            ignorelistLeaders: [],
+            ignorelistLeaders_full: [],
+            filterdignorelistLeaders: [],
             loadingActive: true,
             showModal: false,
             blackBackground: 'none',
-            id_to_blacklist: '',
-            amount_of_blacklistLeaders: '',
+            id_to_ignorelist: '',
+            amount_of_ignorelistLeaders: '',
             locations: [],
             filterByName: '',
             filterByScreenName: '',
-            start_blacklistLeader_index: 0,
-            end_blacklistLeader_index: 20,
-            hasMore: true
+            start_ignorelistLeader_index: 0,
+            end_ignorelistLeader_index: 20,
+            hasMore: true,
+            loader_text: 'Loading'
         }
-        this.addBlacklistLeaders = this.addBlacklistLeaders.bind(this)
-        this.addAllblacklistLeaders = this.addAllblacklistLeaders.bind(this)
-        this.eachBlacklistLeader = this.eachBlacklistLeader.bind(this)
+        this.addignorelistLeaders = this.addignorelistLeaders.bind(this)
+        this.addAllignorelistLeaders = this.addAllignorelistLeaders.bind(this)
+        this.eachignorelistLeader = this.eachignorelistLeader.bind(this)
         this.eachLocation = this.eachLocation.bind(this)
-        this.moveToBlackList = this.moveToBlackList.bind(this)
+        this.moveToignorelist = this.moveToignorelist.bind(this)
         this.addToCommunity = this.addToCommunity.bind(this)
         this.locationOnClick = this.locationOnClick.bind(this)
         this.filterByName = this.filterByName.bind(this)
         this.filterByScreenName = this.filterByScreenName.bind(this)
-        this.fetchMoreBlacklistLeaders = this.fetchMoreBlacklistLeaders.bind(this)
+        this.fetchMoreignorelistLeaders = this.fetchMoreignorelistLeaders.bind(this)
     }
 
     componentDidMount() {
@@ -50,24 +51,36 @@ class BlackListPage extends Component {
         var url = CONSTS.GET_ALL_BLACKLISTS_LIMITED
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_blacklistLeader_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_ignorelistLeader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
         })
         .then(res => res.json())
-        .then(data => data.map(blacklistLeader => this.addBlacklistLeaders({
-            full_name: blacklistLeader.full_name, 
-            twitter_id: blacklistLeader.twitter_id, 
-            twitter_profile_image: blacklistLeader.twitter_profile_image,
-            twitter_description: blacklistLeader.twitter_description,
-            twitter_location: blacklistLeader.twitter_location,
-            twitter_screen_name: blacklistLeader.twitter_screen_name,
-            twitter_created_at: blacklistLeader.twitter_created_at,
-            level_of_certainty: blacklistLeader.level_of_certainty,
-            twitter_followers_count: blacklistLeader.twitter_followers_count
-        })))
-        .then(res => this.setState({amount_of_blacklistLeaders: res.length}))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(leader => this.addignorelistLeaders({
+                    full_name: leader.full_name, 
+                    twitter_id: leader.twitter_id, 
+                    twitter_profile_image: leader.twitter_profile_image,
+                    twitter_description: leader.twitter_description,
+                    twitter_location: leader.twitter_location,
+                    twitter_screen_name: leader.twitter_screen_name,
+                    twitter_created_at: leader.twitter_created_at,
+                    level_of_certainty: leader.level_of_certainty,
+                    twitter_followers_count: leader.twitter_followers_count
+                }))
+            } else {
+                this.setState({loader_text: "Empty"})
+            }
+        })
+        .then(res => {
+            if(res) {
+                this.setState({amount_of_ignorelistLeaders: res.length})
+            } else {
+                this.setState({amount_of_ignorelistLeaders: 0})
+            }
+        })
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_BLACKLISTS_LOCATIONS
@@ -79,12 +92,12 @@ class BlackListPage extends Component {
             }
           })
         .then(res => res.json())
-        .then(data => data.map(location => this.addLocations({
-            location
-        })))
+            .then(data => {if(data.length > 0) data.map(location => this.addLocations({
+                location
+            }))})
         .catch(err => console.log(err))
 
-        var url = CONSTS.GET_ALL_BLACKLISTS
+        url = CONSTS.GET_ALL_BLACKLISTS
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({"token":Cookies.get('token')}),
@@ -93,24 +106,29 @@ class BlackListPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(blacklistLeader => this.addAllblacklistLeaders({
-            full_name: blacklistLeader.full_name, 
-            twitter_id: blacklistLeader.twitter_id, 
-            twitter_profile_image: blacklistLeader.twitter_profile_image,
-            twitter_description: blacklistLeader.twitter_description,
-            twitter_location: blacklistLeader.twitter_location,
-            twitter_screen_name: blacklistLeader.twitter_screen_name,
-            twitter_created_at: blacklistLeader.twitter_created_at,
-            level_of_certainty: blacklistLeader.level_of_certainty,
-            twitter_followers_count: blacklistLeader.twitter_followers_count
-        })))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(ignorelistLeader => this.addAllignorelistLeaders({
+                full_name: ignorelistLeader.full_name, 
+                twitter_id: ignorelistLeader.twitter_id, 
+                twitter_profile_image: ignorelistLeader.twitter_profile_image,
+                twitter_description: ignorelistLeader.twitter_description,
+                twitter_location: ignorelistLeader.twitter_location,
+                twitter_screen_name: ignorelistLeader.twitter_screen_name,
+                twitter_created_at: ignorelistLeader.twitter_created_at,
+                level_of_certainty: ignorelistLeader.level_of_certainty,
+                twitter_followers_count: ignorelistLeader.twitter_followers_count
+                }))
+            }
+        })
         .catch(err => console.log(err))
+        this.setState({loadingActive: false})
     }
 
-    addBlacklistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addignorelistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            blacklistLeaders: [
-                ...prevState.blacklistLeaders,
+            ignorelistLeaders: [
+                ...prevState.ignorelistLeaders,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -123,8 +141,8 @@ class BlackListPage extends Component {
                     twitter_followers_count: twitter_followers_count
                 }
             ],
-            filterdblacklistLeaders: [
-                ...prevState.filterdblacklistLeaders,
+            filterdignorelistLeaders: [
+                ...prevState.filterdignorelistLeaders,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -140,10 +158,10 @@ class BlackListPage extends Component {
         }))
     }
 
-    addAllblacklistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
+    addAllignorelistLeaders({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
         this.setState(prevState => ({
-            blacklistLeaders_full: [
-                ...prevState.blacklistLeaders_full,
+            ignorelistLeaders_full: [
+                ...prevState.ignorelistLeaders_full,
                 {
                     full_name: full_name, 
                     twitter_id: twitter_id, 
@@ -171,8 +189,8 @@ class BlackListPage extends Component {
         }))
     }
 
-    moveToBlackList(twitter_screen_name){
-        this.setState({showModal: true, blackBackground:'', id_to_blacklist:twitter_screen_name})
+    moveToignorelist(twitter_screen_name){
+        this.setState({showModal: true, blackBackground:'', id_to_ignorelist:twitter_screen_name})
     }
 
     addToCommunity(twitter_screen_name){
@@ -188,8 +206,8 @@ class BlackListPage extends Component {
         .then(res =>{
             if(res.status === 200){
                 this.setState(prevState => ({
-                    blacklistLeaders: prevState.blacklistLeaders.filter(blacklistLeader => blacklistLeader.twitter_screen_name !== twitter_screen_name),
-                    amount_of_blacklistLeaders: this.state.amount_of_blacklistLeaders - 1
+                    ignorelistLeaders: prevState.ignorelistLeaders.filter(ignorelistLeader => ignorelistLeader.twitter_screen_name !== twitter_screen_name),
+                    amount_of_ignorelistLeaders: this.state.amount_of_ignorelistLeaders - 1
                 }))
             }
             else {
@@ -205,34 +223,34 @@ class BlackListPage extends Component {
         )
     }
 
-    eachBlacklistLeader(blacklistLeader, i) {
+    eachignorelistLeader(ignorelistLeader, i) {
         var newUser = false
         var create_date=''
         var profile_pic = "img/unknown.jpeg"
-        if(blacklistLeader.twitter_created_at){
-            create_date = blacklistLeader.twitter_created_at.substring(0,10)
-            profile_pic = blacklistLeader.twitter_profile_image
+        if(ignorelistLeader.twitter_created_at){
+            create_date = ignorelistLeader.twitter_created_at.substring(0,10)
+            profile_pic = ignorelistLeader.twitter_profile_image
             newUser = true
         }
 
         return(
             <Col className="col-md-4 mb" key={`Col${i}`} >
-                <BlackListPanel 
+                <IgnoreListPanel 
                 key={`panel${i}`} 
-                index={blacklistLeader.twitter_screen_name}
-                full_name={blacklistLeader.full_name}
-                twitter_id={blacklistLeader.twitter_id}
+                index={ignorelistLeader.twitter_screen_name}
+                full_name={ignorelistLeader.full_name}
+                twitter_id={ignorelistLeader.twitter_id}
                 twitter_profile_image={profile_pic}
-                twitter_description={blacklistLeader.twitter_description}
-                twitter_screen_name={blacklistLeader.twitter_screen_name}
-                level_of_certainty={blacklistLeader.level_of_certainty}
-                twitter_followers_count={blacklistLeader.twitter_followers_count}
+                twitter_description={ignorelistLeader.twitter_description}
+                twitter_screen_name={ignorelistLeader.twitter_screen_name}
+                level_of_certainty={ignorelistLeader.level_of_certainty}
+                twitter_followers_count={ignorelistLeader.twitter_followers_count}
                 twitter_created_at={create_date}
-                onBlackListBtn={this.moveToBlackList}
+                onignorelistBtn={this.moveToignorelist}
                 onAddBtn={this.addToCommunity}
                 newUser={newUser}
                 >
-                </BlackListPanel>
+                </IgnoreListPanel>
             </Col>
         )
     }
@@ -243,66 +261,66 @@ class BlackListPage extends Component {
             url = CONSTS.GET_ALL_SUGGESTIONS_LIMITED   
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({"limitNum": this.state.end_blacklistLeader_index, "token":Cookies.get('token')}),
+            body: JSON.stringify({"limitNum": this.state.end_ignorelistLeader_index, "token":Cookies.get('token')}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
         .then(res  => res.json())
         .then(data => {
-            this.setState({blacklistLeaders:data, amount_of_blacklistLeaders:data.length})
+            this.setState({ignorelistLeaders:data, amount_of_ignorelistLeaders:data.length})
         })
         .catch(err => console.log(err))
     }
 
     filterByName(e) {
         if(e.target.value.length < this.state.filterByName.length)
-            this.setState({filterByName:'',blacklistLeaders: this.state.filterdblacklistLeaders})
+            this.setState({filterByName:'',ignorelistLeaders: this.state.filterdignorelistLeaders})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                blacklistLeaders: this.state.filterdblacklistLeaders,
+                ignorelistLeaders: this.state.filterdignorelistLeaders,
             })
         } else {
-            const {blacklistLeaders} = this.state
+            const {ignorelistLeaders} = this.state
             this.setState({
                 filterByName: e.target.value,
-                blacklistLeaders: blacklistLeaders.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                ignorelistLeaders: ignorelistLeaders.filter(item => item.full_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
     filterByScreenName(e) {
         if(e.target.value.length < this.state.filterByScreenName.length)
-            this.setState({filterByScreenName:'',blacklistLeaders: this.state.filterdblacklistLeaders})
+            this.setState({filterByScreenName:'',ignorelistLeaders: this.state.filterdignorelistLeaders})
         else if(e.target.value==="") {
             this.setState({
                 filterByName: e.target.value,
-                blacklistLeaders: this.state.filterdblacklistLeaders,
+                ignorelistLeaders: this.state.filterdignorelistLeaders,
             })
         } else {
-            const {blacklistLeaders} = this.state
+            const {ignorelistLeaders} = this.state
             this.setState({
                 filterByScreenName: e.target.value,
-                blacklistLeaders: blacklistLeaders.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                ignorelistLeaders: ignorelistLeaders.filter(item => item.twitter_screen_name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
             })
         }
     }
 
-    fetchMoreBlacklistLeaders() {
-        var endIndex = this.state.blacklistLeaders.length*2
+    fetchMoreignorelistLeaders() {
+        var endIndex = this.state.ignorelistLeaders.length*2
         var hasMore = true
-        if(this.state.blacklistLeaders.length * 2 > this.state.blacklistLeaders_full.length){
-            endIndex = this.state.blacklistLeaders.length + (this.state.blacklistLeaders_full.length - this.state.blacklistLeaders.length)
+        if(this.state.ignorelistLeaders.length * 2 > this.state.ignorelistLeaders_full.length){
+            endIndex = this.state.ignorelistLeaders.length + (this.state.ignorelistLeaders_full.length - this.state.ignorelistLeaders.length)
             hasMore = false
         }
-        this.setState({start_blacklistLeader_index: this.state.blacklistLeaders.length, end_blacklistLeader_index: endIndex})
-        var updatedblacklistLeaders = this.state.blacklistLeaders
-        var fullblacklistLeaders = this.state.blacklistLeaders_full
-        for (let i = this.state.start_blacklistLeader_index; i < this.state.end_blacklistLeader_index; i++){
-            updatedblacklistLeaders.push(fullblacklistLeaders[i])
+        this.setState({start_ignorelistLeader_index: this.state.ignorelistLeaders.length, end_ignorelistLeader_index: endIndex})
+        var updatedignorelistLeaders = this.state.ignorelistLeaders
+        var fullignorelistLeaders = this.state.ignorelistLeaders_full
+        for (let i = this.state.start_ignorelistLeader_index; i < this.state.end_ignorelistLeader_index; i++){
+            updatedignorelistLeaders.push(fullignorelistLeaders[i])
         }
-        this.setState({blacklistLeaders: updatedblacklistLeaders, amount_of_blacklistLeaders: updatedblacklistLeaders.length, hasMore: hasMore})
+        this.setState({ignorelistLeaders: updatedignorelistLeaders, amount_of_ignorelistLeaders: updatedignorelistLeaders.length, hasMore: hasMore})
     }
 
     render() {
@@ -343,21 +361,23 @@ class BlackListPage extends Component {
                     </Row>
                     <Row>
                         <Col className="col-lg-12">
-                            <h4>Display {this.state.amount_of_blacklistLeaders} out of {this.state.blacklistLeaders_full.length}</h4>
+                            <h4>Display {this.state.amount_of_ignorelistLeaders} out of {this.state.ignorelistLeaders_full.length}</h4>
                         </Col>
                     </Row>
                     <Row>
-                        <InfiniteScroll
-                        dataLength={this.state.amount_of_blacklistLeaders}
-                        next={this.fetchMoreBlacklistLeaders}
-                        hasMore={this.state.hasMore}
-                        loader={<h4>Loading more ignore list influencers</h4>}
-                        endMessage={
-                            <p>No more ignore list influencers</p>
-                        }
-                        >
-                        {this.state.blacklistLeaders.map(this.eachBlacklistLeader)}
-                        </InfiniteScroll>
+                        <Col className="col-lg-12">
+                            <InfiniteScroll
+                            dataLength={this.state.amount_of_ignorelistLeaders}
+                            next={this.fetchMoreignorelistLeaders}
+                            hasMore={this.state.hasMore}
+                            loader={<h4>{this.state.loader_text}</h4>}
+                            endMessage={
+                                <p>No more ignore list influencers</p>
+                            }
+                            >
+                            {this.state.ignorelistLeaders.map(this.eachignorelistLeader)}
+                            </InfiniteScroll>
+                        </Col>
                     </Row>
                 </Content>
                 <ModalBox 
@@ -376,4 +396,4 @@ class BlackListPage extends Component {
     }
 }
 
-export default BlackListPage;
+export default IgnoreListPage;

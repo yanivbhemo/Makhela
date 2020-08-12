@@ -25,7 +25,34 @@ exports.initSystem = (req, res) => {
                     .then(()=>{
                         Setting.updateOne({attribute: "NEW_SYSTEM"}, {$set: {value: true}})
                         .then(()=>{
-                            return res.sendStatus(200)
+                            Setting.updateOne({attribute: "MAX_LEVEL_OF_CERTAINTY"}, {$set: {value: "10"}})
+                            .then(()=>{
+                                Setting.updateOne({attribute: "AFTER_RESOLVE_MAX_LEVEL_OF_CERTAINTY"}, {$set: {value: "6"}})
+                                .then(()=>{
+                                    Setting.updateOne({attribute: "AFTER_RESOLVE_MID_LEVEL_OF_CERTAINTY"}, {$set: {value: "4"}})
+                                    .then(()=>{
+                                        Setting.updateOne({attribute: "AFTER_RESOLVE_LOW_LEVEL_OF_CERTAINTY"}, {$set: {value: "2"}})
+                                        .then(()=>{
+                                            Setting.updateOne({attribute: "MIN_LEVEL_OF_CERTAINTY"}, {$set: {value: "0"}})
+                                            .then(()=>{
+                                                Setting.updateOne({attribute: "MIN_AMOUNT_OF_FOLLOWERS"}, {$set: {value: "3000"}})
+                                                .then(()=>{
+                                                    Setting.updateOne({attribute: "MID_AMOUNT_OF_FOLLOWERS"}, {$set: {value: "6000"}})
+                                                    .then(()=>{
+                                                        Setting.updateOne({attribute: "MAX_AMOUNT_OF_FOLLOWERS"}, {$set: {value: "9000"}})
+                                                        .then(()=>{
+                                                            Setting.updateOne({attribute: "MIN_AMOUNT_OF_STATUSES"}, {$set: {value: "5000"}})
+                                                            .then(()=>{
+                                                                return res.sendStatus(200)
+                                                            })
+                                                        })  
+                                                    })  
+                                                })  
+                                            })  
+                                        })  
+                                    })
+                                })
+                            })
                         })
                         .catch(err => {
                             console.log(err)

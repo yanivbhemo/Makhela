@@ -29,7 +29,8 @@ class SuggestionsPage extends Component {
             filterByScreenName: '',
             start_suggestion_index: 0,
             end_suggestion_index: 20,
-            hasMore: true
+            hasMore: true,
+            loader_text: 'Loading'
         }
         this.addSuggestions = this.addSuggestions.bind(this)
         this.addAllsuggestions = this.addAllsuggestions.bind(this)
@@ -57,18 +58,24 @@ class SuggestionsPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(suggestion => this.addSuggestions({
-            full_name: suggestion.full_name, 
-            twitter_id: suggestion.twitter_id, 
-            twitter_profile_image: suggestion.twitter_profile_image,
-            twitter_description: suggestion.twitter_description,
-            twitter_location: suggestion.twitter_location,
-            twitter_screen_name: suggestion.twitter_screen_name,
-            twitter_created_at: suggestion.twitter_created_at,
-            level_of_certainty: suggestion.level_of_certainty,
-            twitter_followers_count: suggestion.twitter_followers_count
-        })))
-        .then(res => this.setState({amount_of_suggestions: res.length}))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(suggestion => this.addSuggestions({
+                full_name: suggestion.full_name, 
+                twitter_id: suggestion.twitter_id, 
+                twitter_profile_image: suggestion.twitter_profile_image,
+                twitter_description: suggestion.twitter_description,
+                twitter_location: suggestion.twitter_location,
+                twitter_screen_name: suggestion.twitter_screen_name,
+                twitter_created_at: suggestion.twitter_created_at,
+                level_of_certainty: suggestion.level_of_certainty,
+                twitter_followers_count: suggestion.twitter_followers_count
+                }))
+            } else {
+                this.setState({loader_text: "No Suggestions"})
+            }
+        })
+            .then(res => this.setState({amount_of_suggestions: res.length}))
         .catch(err => console.log(err))
 
         url = CONSTS.GET_ALL_SUGGESTIONS_LOCATIONS
@@ -80,9 +87,9 @@ class SuggestionsPage extends Component {
             }
           })
         .then(res => res.json())
-        .then(data => data.map(location => this.addLocations({
+        .then(data => {if(data.length > 0) data.map(location => this.addLocations({
             location
-        })))
+        }))})
         .catch(err => console.log(err))
 
         var url = CONSTS.GET_ALL_SUGGESTIONS
@@ -94,18 +101,23 @@ class SuggestionsPage extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => data.map(suggestion => this.addAllsuggestions({
-            full_name: suggestion.full_name, 
-            twitter_id: suggestion.twitter_id, 
-            twitter_profile_image: suggestion.twitter_profile_image,
-            twitter_description: suggestion.twitter_description,
-            twitter_location: suggestion.twitter_location,
-            twitter_screen_name: suggestion.twitter_screen_name,
-            twitter_created_at: suggestion.twitter_created_at,
-            level_of_certainty: suggestion.level_of_certainty,
-            twitter_followers_count: suggestion.twitter_followers_count
-        })))
+        .then(data => {
+            if(data.length > 0) {
+                data.map(leader => this.addAllLeaders({
+                full_name: leader.full_name, 
+                twitter_id: leader.twitter_id, 
+                twitter_profile_image: leader.twitter_profile_image,
+                twitter_description: leader.twitter_description,
+                twitter_location: leader.twitter_location,
+                twitter_screen_name: leader.twitter_screen_name,
+                twitter_created_at: leader.twitter_created_at,
+                level_of_certainty: leader.level_of_certainty,
+                twitter_followers_count: leader.twitter_followers_count
+                }))
+            }
+        })
         .catch(err => console.log(err))
+        this.setState({loadingActive: false})
     }
 
     addSuggestions({ event = null, full_name,twitter_id,twitter_profile_image,twitter_description,twitter_location, twitter_screen_name,twitter_created_at,level_of_certainty,twitter_followers_count}) {
@@ -377,17 +389,19 @@ class SuggestionsPage extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <InfiniteScroll
-                        dataLength={this.state.amount_of_suggestions}
-                        next={this.fetchMoreSuggestions}
-                        hasMore={this.state.hasMore}
-                        loader={<h4>Loading more suggestion</h4>}
-                        endMessage={
-                            <p>No more suggestions</p>
-                        }
-                        >
-                        {this.state.suggestions.map(this.eachSuggestion)}
-                        </InfiniteScroll>
+                        <Col className="col-lg-12">
+                            <InfiniteScroll
+                            dataLength={this.state.amount_of_suggestions}
+                            next={this.fetchMoreSuggestions}
+                            hasMore={this.state.hasMore}
+                            loader={<h4>{this.state.loader_text}</h4>}
+                            endMessage={
+                                <p>No more suggestions</p>
+                            }
+                            >
+                            {this.state.suggestions.map(this.eachSuggestion)}
+                            </InfiniteScroll>
+                        </Col>
                     </Row>
                 </Content>
                 <ModalBox 

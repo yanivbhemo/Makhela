@@ -11,7 +11,6 @@ import * as CONSTS from '../../consts'
 import Cookies from 'js-cookie';
 
 
-
 class Initiation extends Component {
     constructor() {
         super()
@@ -92,6 +91,7 @@ class Initiation extends Component {
                         keyWords: '',
                         showModal: true
                     })
+                    this.props.history.push('/')
             })
             .then(data => console.log(data))
             .catch(err => console.log(err))

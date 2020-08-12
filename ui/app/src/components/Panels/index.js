@@ -362,7 +362,7 @@ class SuggestionPanel extends Component {
   }
 }
 
-class BlackListPanel extends Component {
+class IgnoreListPanel extends Component {
   constructor(props){
     super(props)
     this.moveToBlackList = this.moveToBlackList.bind(this)
@@ -437,5 +437,5 @@ export {
   HealthPanel,
   LeaderPanel,
   SuggestionPanel,
-  BlackListPanel
+  IgnoreListPanel
 }
