@@ -44,7 +44,7 @@ path.py==12.4.0
 pickleshare==0.7.5
 prometheus-client==0.7.1
 prompt-toolkit==3.0.3
-Pygments==2.5.2
+Pygments==2.7.4
 pymongo==3.10.1
 pyrsistent==0.15.7
 PySocks==1.7.1
