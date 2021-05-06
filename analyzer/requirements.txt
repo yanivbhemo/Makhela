@@ -14,7 +14,7 @@ dnspython==1.16.0
 docutils==0.15.2
 en-core-web-sm==2.2.5
 Flask==1.1.2
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 gensim==3.8.3
 gunicorn==20.0.4
 idna==2.9
