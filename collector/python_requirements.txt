@@ -31,7 +31,7 @@ MarkupSafe==1.1.1
 mistune==0.8.4
 mock==4.0.1
 monotonic==1.5
-nameko==2.12.0
+nameko==2.14.0
 nbconvert==5.6.1
 nbformat==5.0.4
 notebook==6.0.3
