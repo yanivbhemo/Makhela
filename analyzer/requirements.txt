@@ -52,7 +52,7 @@ threadpoolctl==2.0.0
 toml==0.10.1
 tqdm==4.46.0
 urllib3==1.25.8
-waitress==1.4.4
+waitress==2.1.1
 wasabi==0.6.0
 Werkzeug==1.0.1
 wrapt==1.12.1
