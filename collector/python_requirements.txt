@@ -35,7 +35,7 @@ nameko==2.12.0
 nbconvert==5.6.1
 nbformat==5.0.4
 notebook==6.0.3
-numpy==1.18.2
+numpy==1.22.0
 oauthlib==3.1.0
 pandocfilters==1.4.2
 parso==0.6.1
