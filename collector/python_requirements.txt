@@ -28,7 +28,7 @@ jupyterlab==1.2.6
 jupyterlab-server==1.0.6
 kombu==4.6.7
 MarkupSafe==1.1.1
-mistune==0.8.4
+mistune==2.0.3
 mock==4.0.1
 monotonic==1.5
 nameko==2.12.0
