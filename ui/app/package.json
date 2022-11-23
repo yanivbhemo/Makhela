@@ -25,7 +25,7 @@
     "react-loading-bar": "0.0.7",
     "react-loading-overlay": "^1.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-tooltip": "^4.2.6",
     "universal-cookie": "^4.0.3",
     "validate-image-url": "^1.0.1"
