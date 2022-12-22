@@ -17,6 +17,6 @@
     "fs": "0.0.1-security",
     "helmet": "^3.23.1",
     "https": "^1.0.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^9.0.0"
   }
 }
